@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="logo">
+        <div class="link">
+            <img src="/assets/icons/logo.png" alt="" style="width:30px ;">
+            <p class="title">HealthCare</p>
+        </div>
+    </div>
+    <div class="link-cover" *ngFor="let route of routes">
+        <a class="link" [routerLink]="route.route" routerLinkActive="active">
+            <img class="link-icon" [src]="route.icon" alt="">
+            <p class="link-title">{{route.name}}</p>
+        </a>
+    </div>
+    <div class="copyright">
+        <div class="title"> © HealthData 2022</div>
+        <div class="text">Platform for solution of an easy studying coruse</div>
+    </div>
+</div>

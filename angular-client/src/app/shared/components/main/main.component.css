@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+}
+.container .content{
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    background-color: #F5F5F5; 
+}
+
+/*MEDIA QUERIES*/
+@media only screen and (max-width: 1024px) {
+    .container .content{
+        margin-left: 100px;
+        width: calc(100% - 100px);
+    }
+}
+@media only screen and (max-width: 768px) {
+}
+@media only screen and (max-width: 480px) {
+    .container .content{
+        margin-left: 0px;
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 300px) {
+}
