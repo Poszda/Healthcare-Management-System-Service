@@ -3,7 +3,8 @@ package com.hmss.springbootserver.entities;
 import jakarta.persistence.*;
 
 @Entity
-public class User {
+@Table(name = "user")
+public class User { //parent
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -14,13 +15,21 @@ public class User {
     private String email;
     private String password;
 
-    public User(Long id, String lastName, String firstName, String username, String email, String password) {
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY) //nu merge cu orphanRemoval // nu se aplica la baza de date ce cretin
+    private Doctor doctor;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY) //nu merge cu orphanRemoval // nu se aplica la baza de date ce cretin
+    private Patient patient;
+
+    public User(Long id, String lastName, String firstName, String username, String email, String password, Patient patient, Doctor doctor) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.doctor = doctor;
+        this.patient = patient;
     }
 
     public User() {
@@ -73,5 +82,21 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }
