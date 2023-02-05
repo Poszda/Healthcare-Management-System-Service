@@ -1,5 +1,5 @@
 package com.hmss.springbootserver.entities;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,7 +8,8 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @OneToOne(fetch = FetchType.LAZY)
+    //    @JsonIgnore
+    @OneToOne()
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_USER_PATIENT"))
     private User user;
     private String cnp;
