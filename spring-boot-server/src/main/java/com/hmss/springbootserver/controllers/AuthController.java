@@ -1,13 +1,14 @@
 package com.hmss.springbootserver.controllers;
 
+import com.hmss.springbootserver.DTOs.LoginRequestDTO;
 import com.hmss.springbootserver.entities.Patient;
 import com.hmss.springbootserver.entities.User;
 import com.hmss.springbootserver.repositories.PatientRepository;
 import com.hmss.springbootserver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +34,22 @@ public class AuthController {
     @GetMapping("/patients")
     public List<Patient> getPatients(){
         return patientRepository.findAll();
+    }
+
+    @PostMapping("/login")
+    public Object login(@RequestBody LoginRequestDTO loginRequest){
+        User user = userRepository.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
+        if(user != null){
+            if(user.getType() == 1){
+                return user.getAdmin();
+            }
+            if(user.getType() == 2){
+                return user.getPatient();
+            }
+            if(user.getType() == 3){
+                return user.getPatient();
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

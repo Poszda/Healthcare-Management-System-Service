@@ -8,7 +8,7 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    //    @JsonIgnore
+    //@JsonIgnore // de aici trebuie sters
     @OneToOne()
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_USER_PATIENT"))
     private User user;

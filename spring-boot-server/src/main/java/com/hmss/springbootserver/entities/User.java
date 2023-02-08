@@ -15,19 +15,25 @@ public class User { //parent
     private String username;
     private String email;
     private String password;
-
+    private int type; // 1 - admin , 2 - doctor, 3 - patient
     @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL) //nu merge cu orphanRemoval // nu se aplica la baza de date ce cretin
     private Patient patient;
 
-    public User(Long id, String lastName, String firstName, String username, String email, String password, Patient patient) {
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL) //nu merge cu orphanRemoval // nu se aplica la baza de date ce cretin
+    private Admin admin;
+
+    public User(Long id, String lastName, String firstName, String username, String email, String password, int type, Patient patient, Admin admin) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.type = type;
         this.patient = patient;
+        this.admin = admin;
     }
 
     public User() {
@@ -82,11 +88,27 @@ public class User { //parent
         this.id = id;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     public Patient getPatient() {
         return patient;
     }
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 }
