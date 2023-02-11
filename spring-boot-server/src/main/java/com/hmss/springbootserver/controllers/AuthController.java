@@ -44,7 +44,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    //@Transactional
+    @Transactional
     public Object login(@RequestBody LoginRequestDTO loginRequest){
         User user = userRepository.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
         if(user != null){
