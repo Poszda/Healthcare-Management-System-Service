@@ -12,7 +12,6 @@ public class User { //parent
     private Long id;
     private String lastName;
     private String firstName;
-    private String username;
     private String email;
     private String password;
     private int type; // 1 - admin , 2 - doctor, 3 - patient
@@ -24,11 +23,10 @@ public class User { //parent
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL) //nu merge cu orphanRemoval // nu se aplica la baza de date ce cretin
     private Admin admin;
 
-    public User(Long id, String lastName, String firstName, String username, String email, String password, int type, Patient patient, Admin admin) {
+    public User(Long id, String lastName, String firstName, String email, String password, int type, Patient patient, Admin admin) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
-        this.username = username;
         this.email = email;
         this.password = password;
         this.type = type;
@@ -52,10 +50,6 @@ public class User { //parent
         this.firstName = firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -66,10 +60,6 @@ public class User { //parent
 
     public String getFirstName() {
         return firstName;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public String getEmail() {

@@ -11,6 +11,7 @@ public class Admin {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @JsonIgnore
     @OneToOne()
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_USER_ADMIN"))
     private User user;
