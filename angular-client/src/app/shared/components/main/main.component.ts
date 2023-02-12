@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserType } from 'src/app/core/models/user-type.enum';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -74,9 +75,9 @@ export class MainComponent implements OnInit {
   
   getNeededRoutes(){
     const type  = this.userService.getUserType();
-    if(type === 'doctor') return this.doctorRoutes ;
-    else if(type === 'pacient') return this.pacientRoutes;
-    else if(type === 'admin') return this.adminRoutes;
+    if(type === UserType.Admin) return this.adminRoutes;
+    if(type === UserType.Doctor) return this.doctorRoutes ;
+    else if(type === UserType.Patient) return this.pacientRoutes;
   }
 
 }

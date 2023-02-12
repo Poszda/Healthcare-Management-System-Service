@@ -1,6 +1,7 @@
 package com.hmss.springbootserver.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hmss.springbootserver.DTOs.UserType;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,7 +15,10 @@ public class User { //parent
     private String firstName;
     private String email;
     private String password;
-    private int type; // 1 - admin , 2 - doctor, 3 - patient
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "ENUM('admin', 'doctor', 'patient')")
+    private UserType type;
     @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL) //nu merge cu orphanRemoval // nu se aplica la baza de date ce cretin
     private Patient patient;
@@ -23,7 +27,7 @@ public class User { //parent
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL) //nu merge cu orphanRemoval // nu se aplica la baza de date ce cretin
     private Admin admin;
 
-    public User(Long id, String lastName, String firstName, String email, String password, int type, Patient patient, Admin admin) {
+    public User(Long id, String lastName, String firstName, String email, String password, UserType type, Patient patient, Admin admin) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -78,11 +82,11 @@ public class User { //parent
         this.id = id;
     }
 
-    public int getType() {
+    public UserType getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(UserType type) {
         this.type = type;
     }
 

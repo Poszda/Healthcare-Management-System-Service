@@ -1,21 +1,7 @@
 <div class="container">
     <div class="left-container">
-      <div class="login-form">
-        <div class="section-1">
-          <p id='title'>Welcome back</p>
-          <p class='subtitle'>Welcome back! Please enter your details.</p>
-        </div>
-        <div class="section-2">
-          <p class='fieldname'>Email</p>
-          <input type="text" name='email' placeholder='Enter your email'/>
-          <p class='fieldname'>Password</p>
-          <input type="password" name='password' placeholder='Enter your password'/>
-        </div>
-        <div class="section-3">
-            <button class='form-button login'>Log In</button>
-          <p class='final-text'>Don't have an account? <b class='final-text-important'>Sign up for free!</b></p>
-        </div>
-      </div>
+      <app-login-form *ngIf="showLogInForm" (login)="login($event)" (goToSignUp)="onGoToSignUp()"></app-login-form>
+      <app-signup-form *ngIf="showSignUpForm" (signup)="signup($event)" (goToLogin)="onGoToLogIn()"></app-signup-form>
     </div>
     
     <div class="right-container">
