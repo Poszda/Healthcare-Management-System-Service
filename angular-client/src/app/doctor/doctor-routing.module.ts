@@ -7,6 +7,7 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 
 const routes: Routes = [
   { path: '', component: DoctorComponent,children:[
+    { path: '', redirectTo:'dashboard',pathMatch:'prefix'},
     {path:'dashboard', component:DashboardComponent},
     {path:'appointments', component: AppointmentsComponent},
     {path:'diagnostics', component: NothingHereComponent},
