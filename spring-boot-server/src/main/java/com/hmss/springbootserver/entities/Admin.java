@@ -12,11 +12,11 @@ public class Admin {
     private Long id;
 
     @JsonIgnore
-    @OneToOne()
+    @OneToOne(fetch = FetchType.LAZY) // last time added hope is ok
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_USER_ADMIN"))
     private User user;
     @JsonIgnore
-    @OneToOne()
+    @OneToOne(fetch = FetchType.LAZY) // last time added hope is ok
     @JoinColumn(name = "hospital_id", foreignKey = @ForeignKey(name = "FK_HOSPITAL_ADMIN"))
     private Hospital hospital;
 
