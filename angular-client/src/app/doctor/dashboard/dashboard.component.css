@@ -1,0 +1,33 @@
+.container{
+/*   margin-top: 15px;
+    margin-bottom: 15px; 
+    width:calc(100% - 30px);
+    margin-left: auto;
+    margin-right: auto;*/
+    
+    max-width: 1500px; /* for big screens */
+    margin-left: auto;
+    margin-right: auto;
+    
+    padding: 15px;
+    min-height:100vh;
+    display: grid;
+    gap:15px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      /* "zero zero zero zero zero"  */
+      "one one one two two "
+      "one one one three three"
+      "four four four three three";
+}
+
+.dot-box{
+    background-color: white;
+    border-radius:5px;
+    box-sizing: border-box;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

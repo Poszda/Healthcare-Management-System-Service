@@ -1,0 +1,10 @@
+<div class='container'>
+    <div class="header">
+        <b>{{title}}</b>
+        <div class="dots" (click)="toggle()">● ●</div>
+    </div>
+    <div>
+        <ng-content *ngIf="showFront" select="[front]"></ng-content>
+        <ng-content *ngIf="!showFront" select="[back]"></ng-content>
+    </div>
+</div>

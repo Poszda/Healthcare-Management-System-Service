@@ -23,6 +23,7 @@ export class AuthGuardService implements CanLoad, CanActivate {
 
   
   canLoad(route: Route): boolean {
+    console.log(route,'rouuute')
     console.log('canLoad called')
     if(route.path === this.authService.getUserType()){
       return true;
