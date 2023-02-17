@@ -5,6 +5,7 @@ import { MainComponent } from './components/main/main.component';
 import { RouterModule } from '@angular/router';
 import { WidgetDotContainerComponent } from './components/widgets-containers/widget-dot-container/widget-dot-container.component';
 import { WidgetLinkContainerComponent } from './components/widgets-containers/widget-link-container/widget-link-container.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { WidgetLinkContainerComponent } from './components/widgets-containers/wi
   ],
   imports: [
     CommonModule,
-    RouterModule // ??
+    RouterModule, // ??
+    MatSnackBarModule
   ],
   exports:[
     MainComponent,
