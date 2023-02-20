@@ -1,8 +1,23 @@
 <app-widget-dot-container title="Today Program">
     <div class="piechart" front>
-        Mihai are mere
+        <div class="wrapper">
+            <p-chart type="pie" [data]="chatData" [options]="chartOptions" [plugins]="pieChartPlugins"></p-chart>
+        </div>
+            <div class="legend">
+                <div class="legend-label">
+                    <div class="legend-box lf"></div>
+                    <div class="legend-text">Free</div>
+                </div>
+                <div class="legend-label">
+                    <div class="legend-box lb"></div>
+                    <div class="legend-text">Busy</div>
+                </div>
+            </div>
     </div>
     <div class="description" back>
-        Ceva
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Cumque repellat aliquam delectus aspernatur veritatis illum
+        cum dicta placeat fuga, rerum facere ratione, impedit consectetur,
+        quisquam veniam! Unde repellendus perspiciatis assumenda?
     </div>
 </app-widget-dot-container>

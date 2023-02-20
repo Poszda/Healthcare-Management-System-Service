@@ -1,0 +1,30 @@
+.piechart{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.wrapper{
+    width: 168px; 
+    height: 168px;
+}
+.legend{
+    margin-top: -2px;
+    display: flex;
+    flex-direction: column;
+}
+.legend-label{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.legend-box{
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+}
+.lf{
+    background-color: var(--color1);
+}
+.lb{
+    background-color: var(--color2);
+}

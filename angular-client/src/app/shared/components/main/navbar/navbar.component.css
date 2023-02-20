@@ -30,7 +30,7 @@
     color: grey;
 }
 .active .link-title{
-    color: #9A6AFE;
+    color: var(--color1);
 }
 .link-cover {
     height: 50px;
@@ -45,7 +45,7 @@
 }
 
 .active .link-icon {
-    filter: invert(49%) sepia(34%) saturate(5304%) hue-rotate(231deg) brightness(101%) contrast(99%);
+    filter: invert(48%) sepia(74%) saturate(3931%) hue-rotate(221deg) brightness(102%) contrast(95%);
 }
 
 .copyright {

@@ -1,6 +1,11 @@
 <div class="container">
-    <app-overallstatus-widget style="grid-area:'one';"></app-overallstatus-widget>
-    <app-program-widget style="grid-area:'two';"></app-program-widget>
-    <app-appointments-widget style="grid-area:'three';"></app-appointments-widget>
-    <app-program-widget style="grid-area:'four';"></app-program-widget>
+    <!-- <app-bar style="grid-area:'zero';"></app-bar> -->
+    <div class="left" style="width: 60%; display: flex;flex-direction: column; gap: 15px;">
+        <app-overallstatus-widget style="grid-area:'one';"></app-overallstatus-widget>        
+        <app-booking-rate-widget style="grid-area:'four';"></app-booking-rate-widget>
+    </div>
+    <div class="right" style="width: 40%; display: flex;flex-direction: column; gap:15px">
+        <app-program-widget style="grid-area:'two';"></app-program-widget>
+        <app-appointments-widget style="grid-area:'three';"></app-appointments-widget>
+    </div>
 </div>

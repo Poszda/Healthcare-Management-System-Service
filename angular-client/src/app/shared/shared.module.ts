@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { WidgetDotContainerComponent } from './components/widgets-containers/widget-dot-container/widget-dot-container.component';
 import { WidgetLinkContainerComponent } from './components/widgets-containers/widget-link-container/widget-link-container.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {ChartModule} from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -16,14 +17,17 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   ],
   imports: [
     CommonModule,
-    RouterModule, // ??
-    MatSnackBarModule
+    RouterModule, 
+    MatSnackBarModule,
+    ChartModule //prime ng
+    
   ],
   exports:[
     MainComponent,
     NavbarComponent,
     WidgetDotContainerComponent,
-    WidgetLinkContainerComponent
+    WidgetLinkContainerComponent,
+    ChartModule // should?
   ]
 })
 export class SharedModule { }

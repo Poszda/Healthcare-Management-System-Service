@@ -1,6 +1,66 @@
 <app-widget-dot-container title="Overall Status">
     <div class="status" front>
-        Acesta este overallStatus
+        <div class="container">
+            <div class="top-container">
+<!--                 <div class="left-container">
+                    <div class="line">
+                        <div class="icon-cover" style="background-color: var(--color1)">
+                            <img class="icon white" src="" alt="" />
+                        </div>
+                        <div class="text">
+                            Aritmie<br/>300
+                        </div>
+                    </div>
+                    <div class="line">
+                        <div class="icon-cover" style="background-color: var(--color2)">
+                            <img class="icon white" src="" alt="" />
+                        </div>
+                        <div class="text">
+                            Aritmie<br/>300
+                        </div>
+                    </div>
+                    <div class="line">
+                        <div class="icon-cover" style="background-color: var(--color3)">
+                            <img class="icon white" src="" alt="" />
+                        </div>
+                        <div class="text">
+                            Aritmie<br/>300
+                        </div>
+                    </div>
+                </div> -->
+                <div class="right-container">
+                    <div class="card">
+                        <p-chart type="line" [data]="lineStylesData" [options]="basicOptions"></p-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-container">
+                <div class="square" style="background-color: var(--color1);">
+                    <div class="icon-cover">
+                        <img class="icon" src="" alt="" />
+                    </div>
+                    <div class="text">
+                        24<br/>Upcoming
+                    </div>
+                </div>
+                <div class="square" style="background-color: var(--color2);">
+                    <div class="icon-cover">
+                        <img class="icon" src="" alt="" />
+                    </div>
+                    <div class="text">
+                        24<br/>Upcoming
+                    </div>
+                </div>
+                <div class="square" style="background-color: var(--color3);">
+                    <div class="icon-cover">
+                        <img class="icon" src="" alt="" />
+                    </div>
+                    <div class="text">
+                        24<br/>Upcoming
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="description" back>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.

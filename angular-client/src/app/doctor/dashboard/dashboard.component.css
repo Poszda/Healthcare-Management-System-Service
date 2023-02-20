@@ -1,25 +1,23 @@
 .container{
-/*   margin-top: 15px;
-    margin-bottom: 15px; 
-    width:calc(100% - 30px);
-    margin-left: auto;
-    margin-right: auto;*/
-    
-    max-width: 1500px; /* for big screens */
+    /* for big screens */
+/*     max-width: 1500px; 
     margin-left: auto;
     margin-right: auto;
     
     padding: 15px;
-    min-height:100vh;
     display: grid;
     gap:15px;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
     grid-template-areas: 
-      /* "zero zero zero zero zero"  */
+      "zero zero zero zero zero" 
       "one one one two two "
       "one one one three three"
-      "four four four three three";
+      "four four four three three"; */
+
+      padding: 15px;
+      display: flex;
+      gap: 15px;
 }
 
 .dot-box{

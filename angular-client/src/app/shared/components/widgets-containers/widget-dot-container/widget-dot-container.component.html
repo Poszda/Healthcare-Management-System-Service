@@ -6,6 +6,5 @@
     <div>
         <ng-content *ngIf="showFront" select="[front]"></ng-content>
         <ng-content *ngIf="!showFront" select="[back]"></ng-content>
-        <button (click)="openSnackBar('hello', 'hei')">Show snack-bar</button>
     </div>
 </div>

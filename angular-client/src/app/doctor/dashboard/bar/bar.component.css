@@ -1,0 +1,28 @@
+.container {
+    width: 100%;
+    box-sizing: border-box;
+    /* height: 80 px sau ceva */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: black;
+    cursor: pointer;
+}
+
+#profile-img {
+    width: 35px;
+    border-radius: 100%;
+}
+
+#searchbar {
+    width: 400px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+}

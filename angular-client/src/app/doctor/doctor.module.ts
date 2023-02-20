@@ -10,6 +10,8 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { ProgramWidgetComponent } from './dashboard/program-widget/program-widget.component';
 import { OverallstatusWidgetComponent } from './dashboard/overallstatus-widget/overallstatus-widget.component';
 import { AppointmentsWidgetComponent } from './dashboard/appointments-widget/appointments-widget.component';
+import { BarComponent } from './dashboard/bar/bar.component';
+import { BookingRateWidgetComponent } from './dashboard/booking-rate-widget/booking-rate-widget.component';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { AppointmentsWidgetComponent } from './dashboard/appointments-widget/app
         ProgramWidgetComponent,
         OverallstatusWidgetComponent,
         AppointmentsWidgetComponent,
+        BarComponent,
+        BookingRateWidgetComponent,
     ],
     imports: [
         CommonModule,

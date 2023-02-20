@@ -10,7 +10,7 @@ export class WidgetDotContainerComponent implements OnInit {
 
   @Input() title : string = "Default title"
   showFront : boolean = true;
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -18,9 +18,4 @@ export class WidgetDotContainerComponent implements OnInit {
   toggle(){
     this.showFront = !this.showFront
   }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
-  }
-
 }

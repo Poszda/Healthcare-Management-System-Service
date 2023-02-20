@@ -3,9 +3,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 :root {
-    --color1: #6320ee;
-    --color2: #505863;
+/*     --color1: #6320ee;
+    --color2 : #211a1d;
     --color3: #8075ff;
+    --color4: #505863; */
+    --color1 : #6D71F9;
+    --color2 : #54C1FB;
+    --color3: #272848;
+    --color4: #f7f8fc;/* EEF0F8 f7f8fc*/
+    --color5 : #FFFFFF;
+    --color6: black;
 }
 
 *{
@@ -15,6 +22,7 @@
     font-family:'Open Sans';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 14px;
 }
 a{
     text-decoration: none;

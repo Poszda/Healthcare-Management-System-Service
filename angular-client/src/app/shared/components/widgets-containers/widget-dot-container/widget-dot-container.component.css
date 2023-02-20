@@ -15,4 +15,5 @@
 }
 .dots{
     cursor: pointer;
+    user-select: none;
 }

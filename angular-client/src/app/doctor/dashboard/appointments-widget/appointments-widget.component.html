@@ -1,6 +1,15 @@
 <app-widget-link-container title="Appointments" link="../appointments">
-    <p>aici lista de appointments</p>
-    <p>aici lista de appointments</p>
-    <p>aici lista de appointments</p>
-    <p>aici lista de appointments</p>
+    <div class="container">
+        <div class='appointment-line' *ngFor="let appointment of appointments">
+            <div class="left">
+                <img class="profile-img" alt='' src="assets/images/profile.jpg">
+                <div class="text">
+                    <div class="name">Costin Galan</div>
+                    <div class="time">2:30 AM - 5:20 PM . 25 Mins</div>
+                </div>
+            </div>
+            <div class="details">Show More</div>
+        </div>
+    </div>
+    
 </app-widget-link-container>
