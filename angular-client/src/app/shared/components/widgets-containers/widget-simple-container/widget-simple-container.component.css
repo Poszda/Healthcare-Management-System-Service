@@ -1,0 +1,15 @@
+.container{
+    background-color: white;
+    border-radius:5px;
+    box-sizing: border-box;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height:100%;
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

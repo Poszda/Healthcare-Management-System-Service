@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OverallstatusWidgetComponent implements OnInit {
   lineStylesData: any;
-  basicOptions : any;
+  basicOptions: any;
 
-  constructor() { 
+  constructor() {
     this.lineStylesData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
@@ -19,8 +19,10 @@ export class OverallstatusWidgetComponent implements OnInit {
           fill: true,
           tension: .4,
           borderColor: '#6D71F9',
-          backgroundColor: '#6D71F955'
-          
+          backgroundColor: '#6D71F955',
+          pointHitRadius: 15,
+          pointHoverRadius: 8,
+
         },
         {
           label: 'Second Dataset',
@@ -53,8 +55,10 @@ export class OverallstatusWidgetComponent implements OnInit {
             fill: true,
             tension: .4,
             borderColor: '#6D71F9',
-            backgroundColor: '#6D71F955'
-            
+            backgroundColor: '#6D71F955',
+
+            //point related
+            pointHitRadius: 15,
           },
           {
             label: 'Second Dataset',
@@ -82,6 +86,23 @@ export class OverallstatusWidgetComponent implements OnInit {
           labels: {
             color: '#495057'
           }
+        },
+        //tooltip related
+        tooltip: {
+
+          backgroundColor: 'white',
+          displayColors: true, // removes unnecessary legend
+          padding: 10,
+
+          titleColor: 'black',
+          titleFont: {
+          },
+
+          bodyColor: 'black',
+          bodyFont: {
+          },
+          //borderWidth: 1,
+          //borderColor: 'grey',
         }
       },
       scales: {
@@ -101,7 +122,7 @@ export class OverallstatusWidgetComponent implements OnInit {
             color: '#ebedef'
           }
         }
-      }
+      },
     };
   }
 

@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { NothingHereComponent } from '../core/pages/nothing-here/nothing-here.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PacientComponent } from './pacient.component';
+import { PatientComponent } from './patient.component';
 
 const routes: Routes = [
-      {path: '', component: PacientComponent, children: [
+      {path: '', component: PatientComponent, children: [
       { path: '', redirectTo:'dashboard',pathMatch:'prefix'},
       { path: 'dashboard', component: DashboardComponent },
       { path: 'appointments', component: AppointmentsComponent },
@@ -20,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PacientRoutingModule { }
+export class PatientRoutingModule { }

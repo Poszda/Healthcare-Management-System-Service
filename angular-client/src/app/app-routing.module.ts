@@ -6,12 +6,12 @@ import { NothingHereComponent } from './core/pages/nothing-here/nothing-here.com
 
 const routes: Routes = [
   { path: 'admin', canActivate:[AuthGuardService], canLoad:[AuthGuardService], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
-  { path: 'patient', canActivate:[AuthGuardService], canLoad:[AuthGuardService], loadChildren: () => import('./pacient/pacient.module').then(m => m.PacientModule) },
+  { path: 'patient', canActivate:[AuthGuardService], canLoad:[AuthGuardService], loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule) },
   { path: 'doctor', canActivate:[AuthGuardService],canLoad:[AuthGuardService], loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule) },
   { path:'login', component: AuthenticationComponent},
   { path: '', redirectTo:'login', pathMatch:'full'}, // addded new
   { path: 'not-found', component:NothingHereComponent},
-  { path: '**', redirectTo:'not-found'},
+  { path: '**', redirectTo:'not-found'}
 ];
 
 @NgModule({

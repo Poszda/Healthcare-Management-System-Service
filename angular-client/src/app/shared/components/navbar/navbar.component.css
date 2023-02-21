@@ -24,7 +24,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    width: 150px;
+    width: 135px;
 }
 .link-title{
     color: grey;
@@ -50,9 +50,9 @@
 
 .copyright {
     position: absolute;
-    left: 30px;
+    left: 45px;
     bottom: 20px;
-    width: 190px;
+    right: 45px
 }
 
 .copyright .text {

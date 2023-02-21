@@ -1,0 +1,50 @@
+.container {
+    background-color: white;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.header {
+    text-align: center;
+
+}
+
+.body {
+    display: grid;
+    background-color: #F5F5F5;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1.5px;
+    grid-template-areas:
+        "age blood"
+        "height kg"
+}
+
+.box {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+    background-color: white;
+}
+
+#profile {
+    width: 80px;
+    border-radius: 100%;
+}
+
+.name {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.grey {
+    color: grey;
+    font-size: 14px;
+}

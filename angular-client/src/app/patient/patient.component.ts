@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-doctor',
-  templateUrl: './doctor.component.html',
-  styleUrls: ['./doctor.component.css']
+  selector: 'app-pacient',
+  templateUrl: './patient.component.html',
+  styleUrls: ['./patient.component.css']
 })
-export class DoctorComponent implements OnInit {
+export class PatientComponent implements OnInit {
 
-  doctorRoutes : any = [
+  pacientRoutes : any = [
     {
       name:'Dashboard',
       route:'./dashboard',
@@ -19,9 +19,9 @@ export class DoctorComponent implements OnInit {
       icon:'/assets/icons/appointment.png'
     },
     {
-      name:'Diagnostics',
+      name:'Prescriptions',
       route:'./prescriptions',
-      icon:'/assets/icons/diagnostics.png'
+      icon:'/assets/icons/prescription.png'
     },
     {
       name:'Account',
@@ -33,7 +33,6 @@ export class DoctorComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('doctor')
   }
 
 }

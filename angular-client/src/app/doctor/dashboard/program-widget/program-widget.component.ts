@@ -10,6 +10,9 @@ export class ProgramWidgetComponent implements OnInit {
   /* options */
   chartOptions = {
     plugins: {
+      tooltip: {
+        enabled: false
+      },
       legend: {
         labels: {
           color: '#495057'

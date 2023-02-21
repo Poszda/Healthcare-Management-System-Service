@@ -31,7 +31,7 @@ a{
 textarea, input[type=text],input[type=password],select{
     padding-left: 20px;
     padding-right: 20px;
-    color: var(--color2);
+    color: black;
     font-size: 14px;
     border:2px solid #e4e4e4;
     border-radius: 5px;
