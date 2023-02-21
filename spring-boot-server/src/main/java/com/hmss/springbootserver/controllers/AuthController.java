@@ -2,12 +2,10 @@ package com.hmss.springbootserver.controllers;
 
 import com.hmss.springbootserver.DTOs.LoginRequestDTO;
 import com.hmss.springbootserver.entities.Appointment;
-import com.hmss.springbootserver.entities.B;
 import com.hmss.springbootserver.entities.Patient;
 import com.hmss.springbootserver.entities.User;
 import com.hmss.springbootserver.mappers.UserMapper;
 import com.hmss.springbootserver.repositories.AppointmentRepository;
-import com.hmss.springbootserver.repositories.BRepo;
 import com.hmss.springbootserver.repositories.PatientRepository;
 import com.hmss.springbootserver.repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -27,14 +25,11 @@ public class AuthController {
 
     private final AppointmentRepository appointmentRepository;
 
-    private final BRepo bRepo;
-
     @Autowired
-    public AuthController(UserRepository userRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository, BRepo bRepo) {
+    public AuthController(UserRepository userRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository) {
         this.userRepository = userRepository;
         this.patientRepository = patientRepository;
         this.appointmentRepository = appointmentRepository;
-        this.bRepo = bRepo;
     }
 
 
@@ -74,16 +69,5 @@ public class AuthController {
             return UserMapper.toUserDTONoPassword(user);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-
-    @GetMapping("/b")
-    @Transactional
-    public B getB(){
-        //var y=bRepo.findAll();
-        var x = bRepo.findByName("un nume");
-        //x.getA();
-        x.setA(null);
-        return x;
     }
 }
