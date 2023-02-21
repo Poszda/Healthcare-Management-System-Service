@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-pacient',
+  selector: 'app-patient',
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.css']
 })
 export class PatientComponent implements OnInit {
 
-  pacientRoutes : any = [
+  patientRoutes : any = [
     {
       name:'Dashboard',
       route:'./dashboard',
