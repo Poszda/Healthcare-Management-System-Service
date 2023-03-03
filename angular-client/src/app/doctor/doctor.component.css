@@ -9,11 +9,14 @@
 }
 
 /*MEDIA QUERIES*/
-@media only screen and (max-width: 1024px) {
+/* initial: 1024 ,768 , 480, 320 */
+@media only screen and (max-width: 1200px) {
     .container .content{
         margin-left: 100px;
         width: calc(100% - 100px);
     }
+}
+@media only screen and (max-width: 1024px) {
 }
 @media only screen and (max-width: 768px) {
 }
@@ -21,6 +24,7 @@
     .container .content{
         margin-left: 0px;
         width: 100%;
+        margin-bottom: 80px;
     }
 }
 @media only screen and (max-width: 300px) {

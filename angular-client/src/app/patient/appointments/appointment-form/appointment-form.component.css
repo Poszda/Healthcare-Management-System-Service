@@ -1,0 +1,17 @@
+::ng-deep .mat-form-field {
+    font-size: 12px;
+    width: 100%;
+}
+
+.mat-mdc-form-field{
+    width: 100%;
+    font-size: 10px;
+}
+
+.mat-form-field .mat-form-field-infix {
+    height: 12px;
+ }
+
+ .mat-mdc-form-field .mat-form-field-infix {
+    height: 12px;
+ }

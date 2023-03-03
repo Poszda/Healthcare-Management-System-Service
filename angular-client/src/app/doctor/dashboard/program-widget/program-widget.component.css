@@ -28,3 +28,26 @@
 .lb{
     background-color: var(--color2);
 }
+
+/* initial: 1024 ,768 , 480, 320 */
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 1024px) {
+    .wrapper{
+        width: 200px; 
+        height: 200px;
+    }
+    .piechart{
+        justify-content: center;
+    }
+}
+@media only screen and (max-width: 768px) {
+}
+@media only screen and (max-width: 480px) {
+    .wrapper{
+    width: 168px; 
+    height: 168px;
+}
+}
+@media only screen and (max-width: 320px) {
+}

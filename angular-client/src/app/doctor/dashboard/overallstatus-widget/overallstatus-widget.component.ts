@@ -81,6 +81,8 @@ export class OverallstatusWidgetComponent implements OnInit {
     }, 4000);
 
     this.basicOptions = {
+      responsive : true, // seems that is not needed
+      maintainAspectRatio: false, // seems that is not needed even if should
       plugins: {
         legend: {
           labels: {

@@ -66,7 +66,7 @@
 
 
 /*MEDIA QUERIES*/
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1200px) {
     .container{
         width: 100px;
     }
@@ -83,6 +83,8 @@
        display: none;
     }
 }
+@media only screen and (max-width: 1024px) {
+}
 @media only screen and (max-width: 768px) {
 }
 @media only screen and (max-width: 480px) {
@@ -95,6 +97,7 @@
         justify-content: center;
         align-items: center;
         z-index: 1000;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px -1px 6px;
         }
     .logo{
         display: none;

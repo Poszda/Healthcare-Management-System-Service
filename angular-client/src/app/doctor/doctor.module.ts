@@ -8,7 +8,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { ProgramWidgetComponent } from './dashboard/program-widget/program-widget.component';
 import { OverallstatusWidgetComponent } from './dashboard/overallstatus-widget/overallstatus-widget.component';
-import { AppointmentsWidgetComponent } from './dashboard/appointments-widget/appointments-widget.component';
 import { BarComponent } from './dashboard/bar/bar.component';
 import { BookingRateWidgetComponent } from './dashboard/booking-rate-widget/booking-rate-widget.component';
 
@@ -20,7 +19,6 @@ import { BookingRateWidgetComponent } from './dashboard/booking-rate-widget/book
         AppointmentsComponent,
         ProgramWidgetComponent,
         OverallstatusWidgetComponent,
-        AppointmentsWidgetComponent,
         BarComponent,
         BookingRateWidgetComponent,
     ],

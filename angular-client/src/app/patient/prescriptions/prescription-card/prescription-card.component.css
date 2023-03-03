@@ -1,0 +1,49 @@
+.prescription-card{
+    background-color: white;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 5px;
+    box-shadow: rgba(156, 154, 154, 0.09) 0px 3px 12px;
+}
+.cover{
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+}
+.end{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.doctor-img{
+    width: 25px;
+    border-radius: 100%;
+}
+.img-text{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2px;
+}
+.grey{
+    font-size: 13px;
+    color: grey;
+}
+.title{
+    font-size: 16px;
+    font-weight: bold;
+}
+.description{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+#img-header{
+    width: 20px;
+    cursor: pointer;
+}

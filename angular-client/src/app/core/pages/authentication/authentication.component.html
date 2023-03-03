@@ -1,7 +1,7 @@
 <div class="container">
     <div class="left-container">
-      <app-login-form *ngIf="showLogInForm" (login)="login($event)" (goToSignUp)="onGoToSignUp()"></app-login-form>
-      <app-signup-form *ngIf="showSignUpForm" (signup)="signup($event)" (goToLogin)="onGoToLogIn()"></app-signup-form>
+      <app-login-form *ngIf="showLogInForm" (login)="login($event)" (goToSignUp)="onGoToSignUp()" class="form"></app-login-form>
+      <app-signup-form *ngIf="showSignUpForm" (signup)="signup($event)" (goToLogin)="onGoToLogIn()" class="form"></app-signup-form>
     </div>
     
     <div class="right-container">

@@ -4,13 +4,14 @@ import { NothingHereComponent } from '../core/pages/nothing-here/nothing-here.co
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PatientComponent } from './patient.component';
+import { PrescriptionsComponent } from './prescriptions/prescriptions.component';
 
 const routes: Routes = [
       {path: '', component: PatientComponent, children: [
       { path: '', redirectTo:'dashboard',pathMatch:'prefix'},
       { path: 'dashboard', component: DashboardComponent },
       { path: 'appointments', component: AppointmentsComponent },
-      { path: 'prescriptions', component: NothingHereComponent },
+      { path: 'prescriptions', component: PrescriptionsComponent },
       { path: 'account', component: NothingHereComponent }, //de ce ma lasa?? nu trebuia sa fie invizbil in modulul asta?
     ]
   }

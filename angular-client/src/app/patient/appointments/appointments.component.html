@@ -1,1 +1,23 @@
-<p>appointments works!</p>
+<div class="container">
+    <h1 style="color:var(--color3);font-size: 24px; margin-bottom: 15px; margin-top: 15px;">Programari Viitoare</h1>
+    <div class="appointments">
+        <div class='appointment-button'>
+            <div class='btn' (click)="openForm()">
+                <img src="assets/icons/plus.png" alt="" id="plus" />
+            </div>
+        </div>
+        <app-appointment-card></app-appointment-card>
+        <app-appointment-card></app-appointment-card>
+        <app-appointment-card></app-appointment-card>
+        <app-appointment-card></app-appointment-card>
+        <app-appointment-card></app-appointment-card>
+    </div>
+    <h1 style="color:var(--color3);font-size: 24px; margin-bottom: 15px;">Programari Anterioare</h1>
+    <div class="appointments">
+        <app-appointment-card></app-appointment-card>
+        <app-appointment-card></app-appointment-card>
+        <app-appointment-card></app-appointment-card>
+        <app-appointment-card></app-appointment-card>
+        <app-appointment-card></app-appointment-card>
+    </div>
+</div>

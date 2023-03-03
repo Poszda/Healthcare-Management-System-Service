@@ -9,6 +9,10 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { BioWidgetComponent } from './dashboard/bio-widget/bio-widget.component';
 import { PrescriptionsWidgetComponent } from './dashboard/prescriptions-widget/prescriptions-widget.component';
 import { DoctorsWidgetComponent } from './dashboard/doctors-widget/doctors-widget.component';
+import { PrescriptionsComponent } from './prescriptions/prescriptions.component';
+import { PrescriptionCardComponent } from './prescriptions/prescription-card/prescription-card.component';
+import { AppointmentCardComponent } from './appointments/appointment-card/appointment-card.component';
+import { AppointmentFormComponent } from './appointments/appointment-form/appointment-form.component';
 
 
 @NgModule({
@@ -18,7 +22,11 @@ import { DoctorsWidgetComponent } from './dashboard/doctors-widget/doctors-widge
     AppointmentsComponent,
     BioWidgetComponent,
     PrescriptionsWidgetComponent,
-    DoctorsWidgetComponent
+    DoctorsWidgetComponent,
+    PrescriptionsComponent,
+    PrescriptionCardComponent,
+    AppointmentCardComponent,
+    AppointmentFormComponent
   ],
   imports: [
     CommonModule,

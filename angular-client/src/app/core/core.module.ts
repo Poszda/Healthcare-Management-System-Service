@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { LoginFormComponent } from './pages/authentication/login-form/login-form.component';
 import { SignupFormComponent } from './pages/authentication/signup-form/signup-form.component';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SignupFormComponent } from './pages/authentication/signup-form/signup-f
   imports: [
     CommonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatInputModule
   ],
 })
 export class CoreModule { }
