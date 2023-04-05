@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { NothingHereComponent } from './pages/nothing-here/nothing-here.component';
 import { AuthenticationComponent } from './pages/authentication/authentication.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginFormComponent } from './pages/authentication/login-form/login-form.component';
 import { SignupFormComponent } from './pages/authentication/signup-form/signup-form.component';
 import {MatInputModule} from '@angular/material/input';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MatInputModule} from '@angular/material/input';
     CommonModule,
     HttpClientModule,
     FormsModule,
-    MatInputModule
+    InputTextModule,
+    ReactiveFormsModule
   ],
 })
 export class CoreModule { }

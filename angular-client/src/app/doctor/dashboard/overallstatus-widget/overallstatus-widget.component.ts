@@ -14,7 +14,7 @@ export class OverallstatusWidgetComponent implements OnInit {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
         {
-          label: 'First Dataset',
+          label: 'Pacient Visits',
           data: [0, 0, 0, 0, 0, 0, 0],
           fill: true,
           tension: .4,
@@ -60,7 +60,7 @@ export class OverallstatusWidgetComponent implements OnInit {
             //point related
             pointHitRadius: 15,
           },
-          {
+/*           {
             label: 'Second Dataset',
             data: [28, 48, 40, 19, 86, 27, 90],
             fill: true,
@@ -75,7 +75,7 @@ export class OverallstatusWidgetComponent implements OnInit {
             borderColor: '#272848',
             tension: .4,
             backgroundColor: '#27284855'
-          }
+          } */
         ]
       };
     }, 4000);

@@ -7,12 +7,19 @@ import { WidgetLinkContainerComponent } from './components/widgets-containers/wi
 import {ChartModule} from 'primeng/chart';
 import { WidgetSimpleContainerComponent } from './components/widgets-containers/widget-simple-container/widget-simple-container.component';
 import { AppointmentsWidgetComponent } from './components/widgets/appointments-widget/appointments-widget.component';
-
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
+import { CalendarModule } from 'primeng/calendar';
+import {InputTextModule} from 'primeng/inputtext';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {ToastModule} from 'primeng/toast';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {DropdownModule} from 'primeng/dropdown';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -29,11 +36,17 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     ReactiveFormsModule,
 
     ChartModule, //prime ng
-
-    MatSnackBarModule,
+    CalendarModule,
+    InputTextModule,
+    AutoCompleteModule,
+    ToastModule,
     MatDialogModule,
-    MatInputModule,
-    MatAutocompleteModule
+    MatStepperModule,
+    MultiSelectModule,
+    DropdownModule,
+    ProgressSpinnerModule,
+    MatProgressBarModule
+
     
   ],
   exports:[
@@ -44,10 +57,18 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     WidgetLinkContainerComponent,
     AppointmentsWidgetComponent,
     ChartModule,// should? it could but meh
-    MatSnackBarModule,
     MatDialogModule, // should?
-    MatInputModule,
-    MatAutocompleteModule
+    CalendarModule,
+    InputTextModule,
+    AutoCompleteModule,
+    ToastModule,
+    MatStepperModule,
+    MultiSelectModule,
+    DropdownModule,
+    ProgressSpinnerModule,
+    MatProgressBarModule
+    
+    
   ]
 })
 export class SharedModule { }

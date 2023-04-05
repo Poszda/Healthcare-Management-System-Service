@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
@@ -10,8 +11,10 @@ export class LoginFormComponent implements OnInit {
   @Output() login : EventEmitter<any> = new EventEmitter();
   @Output() goToSignUp : EventEmitter<any> = new EventEmitter();
 
-  email?: string
-  password?:string
+  form: FormGroup = new FormGroup({
+      email: new FormControl('', [Validators.required]),/* ,Validators.email */
+      password: new FormControl('', [Validators.required]),
+  });
 
   constructor() { }
 
@@ -19,7 +22,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   logIn(){
-    this.login.emit({email:this.email,password:this.password});
+    this.login.emit(this.form.getRawValue());
   }
 
   toggleForms(){

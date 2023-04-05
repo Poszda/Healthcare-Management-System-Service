@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.profile{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+#img-profile{
+    width: 80px;
+    border-radius: 100%;
+}
+.subtitle{
+    color: gray;
+    font-size: 13px;
+}
+.details{
+    display: flex;
+    gap: 30px;
+}
+.columnn{
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+}

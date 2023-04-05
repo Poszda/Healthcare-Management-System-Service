@@ -1,2 +1,19 @@
-<p>signup-form works!</p>
-<p (click)="toggleForms()">Log in here!</p>
+
+<form class="signup-form" [formGroup]="form" (submit)="signUp()">
+    <div class="section-1">
+      <p id='title'>Register</p>
+      <p class='subtitle'>Welcome! Create a new account</p>
+    </div>
+    <div class="section-2">
+      <p class='fieldname' >Email</p>
+      <input type="text" pInputText formControlName="email" placeholder='Enter your email'/>
+      <p class='fieldname'>Password</p>
+      <input type="password" pInputText formControlName="password" placeholder='Enter your password'/>
+      <p class='fieldname'>Re-type Password</p>
+      <input type="password" pInputText formControlName="rePassword" placeholder='Re-type your password'/>
+    </div>
+    <div class="section-3">
+        <button type="submit" class="form-button login" [disabled]="form.invalid" >Create account</button>
+        <p class='final-text'>Already have an account? <b style="cursor: pointer;" (click)="toggleForms()">Log in here!</b></p>
+    </div>
+  </form>

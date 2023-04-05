@@ -26,6 +26,7 @@
     border-radius: 100%;
     background-color: white;
     box-shadow: rgba(156, 154, 154, 0.09) 0px 3px 12px;
+    cursor: pointer;
 }
 #plus{
     width: 35px;
@@ -34,4 +35,14 @@
     left:50%;
     transform: translate(-50%,-50%);
     user-select: none;
+}
+
+
+::ng-deep .patient-appointment-form-dialog .mdc-dialog__surface{
+    padding: 6px;
+}
+::ng-deep .patient-appointment-form-dialog{
+    width: 80%;
+/*     max-height: 80vh;
+ */    overflow: auto;
 }

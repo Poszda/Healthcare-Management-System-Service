@@ -6,7 +6,8 @@
 /*     --color1: #6320ee;
     --color2 : #211a1d;
     --color3: #8075ff;
-    --color4: #505863; */
+    --color4: #505863; 
+    --coolor5: #F5F5F5*/
     --color1 : #6D71F9;
     --color2 : #54C1FB;
     --color3: #272848;
@@ -29,21 +30,45 @@ a{
 }
 
 textarea, input[type=text],input[type=password],select{
-    padding-left: 20px;
-    padding-right: 20px;
+/*     color: black;
+    font-size: 14px;
+    border:2px solid #e4e4e4;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px; */
+}
+.basic{
     color: black;
     font-size: 14px;
     border:2px solid #e4e4e4;
     border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.basic-input{
+    height: 45px;
 }
 
-.btn{
+/* input.p-inputtext:enabled:focus {
+    outline:none;
+    box-shadow: none;
+    border-color: var(--color1);
+} */
+
+.basic-button{
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+.basic-button.primary{
+    background-color: var(--color1);
+    color: white;
 }   
-
-
+button:disabled,
+button[disabled]{
+  background-color: #cccccc !important;
+  color: #666666 !important;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

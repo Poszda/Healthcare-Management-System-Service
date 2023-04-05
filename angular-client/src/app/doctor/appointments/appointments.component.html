@@ -1,2 +1,35 @@
 <p>appointments works!</p>
-<button (click)="openSnackBar('hello', 'hei')">Show snack-bar</button>
+<p-toast></p-toast>
+<button (click)="showSuccess()">Succes</button>
+<div class="x" style="width: 800px; height: 600px; margin: auto;background-color: red;">
+<form [formGroup]="form">
+<mat-stepper linear #stepper style="height:100%">
+    <mat-step>
+<!--         <ng-template matStepLabel>Search Appointments</ng-template>
+        <p>cee</p> -->
+      <form formGroupName="stepOne">
+        <!-- <ng-template matStepLabel>Fill out your name</ng-template> -->
+          <p>Name</p>
+          <input formControlName="firstname" placeholder="First name" required>
+          <input formControlName="lastname" placeholder="First name" required>
+        <div>
+          <button matStepperNext>Next</button>
+        </div>
+      </form>
+
+    </mat-step>
+    <mat-step >
+        <ng-template matStepLabel>Select Available Appointment</ng-template>
+        <p>Altceva</p>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+  </form>
+</div>

@@ -13,6 +13,8 @@ import { PrescriptionsComponent } from './prescriptions/prescriptions.component'
 import { PrescriptionCardComponent } from './prescriptions/prescription-card/prescription-card.component';
 import { AppointmentCardComponent } from './appointments/appointment-card/appointment-card.component';
 import { AppointmentFormComponent } from './appointments/appointment-form/appointment-form.component';
+import { AppointmentSuggestionComponent } from './appointments/appointment-form/appointment-suggestion/appointment-suggestion.component';
+import { AppointmentLastStepComponent } from './appointments/appointment-form/appointment-last-step/appointment-last-step.component';
 
 
 @NgModule({
@@ -26,12 +28,14 @@ import { AppointmentFormComponent } from './appointments/appointment-form/appoin
     PrescriptionsComponent,
     PrescriptionCardComponent,
     AppointmentCardComponent,
-    AppointmentFormComponent
+    AppointmentFormComponent,
+    AppointmentSuggestionComponent,
+    AppointmentLastStepComponent,
   ],
   imports: [
     CommonModule,
     PatientRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class PatientModule { }
