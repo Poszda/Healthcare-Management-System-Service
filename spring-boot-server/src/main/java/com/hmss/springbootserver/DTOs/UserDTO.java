@@ -1,15 +1,12 @@
 package com.hmss.springbootserver.DTOs;
 
-import com.hmss.springbootserver.entities.Admin;
-import com.hmss.springbootserver.entities.Patient;
-
 public class UserDTO {
     private Long id;
     private String lastName;
     private String firstName;
     private String email;
     private String password;
-    private UserType type; //admin ,doctor,patient
+    private PatientDTO patient;
 
     public Long getId() {
         return id;
@@ -51,11 +48,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public UserType getType() {
-        return type;
+    public PatientDTO getPatient() {
+        return patient;
     }
 
-    public void setType(UserType type) {
-        this.type = type;
+    public void setPatient(PatientDTO patient) {
+        this.patient = patient;
     }
 }

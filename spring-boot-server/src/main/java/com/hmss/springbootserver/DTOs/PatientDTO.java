@@ -1,17 +1,15 @@
 package com.hmss.springbootserver.DTOs;
 
 import com.hmss.springbootserver.entities.Appointment;
-import com.hmss.springbootserver.entities.User;
-
 
 import java.util.List;
 
 public class PatientDTO {
     private Long id;
-    private String cnp;
     private String phone;
     private UserDTO user;
-    //private List<Appointment> appointmentList;
+
+    private List<AppointmentDTO> appointments;
 
     public Long getId() {
         return id;
@@ -19,14 +17,6 @@ public class PatientDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCnp() {
-        return cnp;
-    }
-
-    public void setCnp(String cnp) {
-        this.cnp = cnp;
     }
 
     public String getPhone() {
@@ -43,5 +33,13 @@ public class PatientDTO {
 
     public void setUser(UserDTO user) {
         this.user = user;
+    }
+
+    public List<AppointmentDTO> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<AppointmentDTO> appointments) {
+        this.appointments = appointments;
     }
 }

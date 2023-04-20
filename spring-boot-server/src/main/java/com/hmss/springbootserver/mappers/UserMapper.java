@@ -1,30 +1,59 @@
 package com.hmss.springbootserver.mappers;
 
+import com.hmss.springbootserver.DTOs.AppointmentDTO;
 import com.hmss.springbootserver.DTOs.UserDTO;
 import com.hmss.springbootserver.entities.User;
-import org.springframework.stereotype.Component;
 
-@Component
+import java.util.ArrayList;
+
 public class UserMapper {
-    public static UserDTO toUserDTO(User user){
+    public static UserDTO userToDTO(User user){
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setType(user.getType());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
+        userDTO.setEmail(user.getEmail());
         userDTO.setPassword(user.getPassword());
+        var x = PatientMapper.patientToDtoNoUser(user.getPatient());
+        userDTO.setPatient(x);
         return userDTO;
     }
 
-    public static UserDTO toUserDTONoPassword(User user){
+    public static UserDTO userToDTORestricted(User user){
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setType(user.getType());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
-        userDTO.setPassword(null);
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setPatient(null);
         return userDTO;
     }
+
+    //CUSTOM METHOD
+    public static UserDTO userToDtoDepth1(User user){
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setFirstName(user.getFirstName());
+        userDTO.setLastName(user.getLastName());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setPatient(PatientMapper.patientToDtoRestricted(user.getPatient()));
+        return userDTO;
+    }
+
+    //HERE ADD ALL userToDtoNo___*attribute name* ___
+
+    public static UserDTO userToDtoNoPatient(User user){
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setFirstName(user.getFirstName());
+        userDTO.setLastName(user.getLastName());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setPatient(null);
+        return userDTO;
+    }
+
+
 }

@@ -1,36 +1,25 @@
 package com.hmss.springbootserver.entities;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@Table(name="PATIENTS")
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    private String cnp;
     private String phone;
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})  //delete this
-    @OneToOne(fetch = FetchType.LAZY) // nu merge la one to one daca e non owning side parca //delte fetch type // problema e ca inca merge
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_USER_PATIENT"))
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
-    @OneToMany(mappedBy="patient",fetch = FetchType.LAZY) // fetch functioneaza bine
-    private List<Appointment> appointmentList;
 
-
-    public Patient(Long id, User user, String cnp, String phone, List<Appointment> appointmentList) {
-        this.id = id;
-        this.user = user;
-        this.cnp = cnp;
-        this.phone = phone;
-        this.appointmentList = appointmentList;
-    }
-
-    public Patient() {
-    }
+    @OneToMany(mappedBy="patient",cascade = CascadeType.ALL) // lazy by default // bidirectional relationship because of setting mappedBy
+    private List<Appointment> appointments;
 
     public Long getId() {
         return id;
@@ -38,22 +27,6 @@ public class Patient {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getCnp() {
-        return cnp;
-    }
-
-    public void setCnp(String cnp) {
-        this.cnp = cnp;
     }
 
     public String getPhone() {
@@ -64,11 +37,19 @@ public class Patient {
         this.phone = phone;
     }
 
-    public List<Appointment> getProcedureList() {
-        return appointmentList;
+    public User getUser() {
+        return user;
     }
 
-    public void setProcedureList(List<Appointment> medicalProcedures) {
-        this.appointmentList = appointmentList;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 }
