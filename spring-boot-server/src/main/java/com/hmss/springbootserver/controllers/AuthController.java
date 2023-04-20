@@ -3,9 +3,7 @@ package com.hmss.springbootserver.controllers;
 import com.hmss.springbootserver.DTOs.AppointmentDTO;
 import com.hmss.springbootserver.DTOs.PatientDTO;
 import com.hmss.springbootserver.DTOs.UserDTO;
-import com.hmss.springbootserver.entities.Appointment;
-import com.hmss.springbootserver.entities.Patient;
-import com.hmss.springbootserver.entities.User;
+import com.hmss.springbootserver.entities.*;
 import com.hmss.springbootserver.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -74,5 +72,30 @@ public class AuthController {
     @GetMapping("/getFirstAppointmentRestricted")
     public AppointmentDTO getFirstAppointmentRestricted(){
         return this.authService.getFirstAppointmentRestricted();
+    }
+
+    @GetMapping("/hospitals")
+    public Hospital getHospitals(){
+        this.authService.getHospitals();
+        return null;
+    }
+    @GetMapping("/speciality")
+    public Speciality getSpecialities(){
+        this.authService.getSpecialities();
+        return null;
+    }
+
+    @GetMapping("/addSpecialityToHospital")
+    public boolean addSpecialityToHospital(){
+        return this.authService.addSpecialityToHospital();
+    }
+
+    @GetMapping("/addHospitalToSpeciality")
+    public boolean addHospitalToSpeciality(){
+        return this.authService.addHospitalToSpeciality();
+    }
+    @GetMapping("/removeSpecialityFromHospital")
+    public boolean removeSpecialityFromHospital(){
+        return this.authService.removeSpecialityFromHospital();
     }
 }

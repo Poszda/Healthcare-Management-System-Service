@@ -3,15 +3,11 @@ package com.hmss.springbootserver.services;
 import com.hmss.springbootserver.DTOs.AppointmentDTO;
 import com.hmss.springbootserver.DTOs.PatientDTO;
 import com.hmss.springbootserver.DTOs.UserDTO;
-import com.hmss.springbootserver.entities.Appointment;
-import com.hmss.springbootserver.entities.Patient;
-import com.hmss.springbootserver.entities.User;
+import com.hmss.springbootserver.entities.*;
 import com.hmss.springbootserver.mappers.AppointmentMapper;
 import com.hmss.springbootserver.mappers.PatientMapper;
 import com.hmss.springbootserver.mappers.UserMapper;
-import com.hmss.springbootserver.repositories.AppointmentRepository;
-import com.hmss.springbootserver.repositories.PatientRepository;
-import com.hmss.springbootserver.repositories.UserRepository;
+import com.hmss.springbootserver.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +20,16 @@ public class AuthService {
 
     private final AppointmentRepository appointmentRepository;
 
+    private final HospitalRepository hospitalRepository;
+    private final SpecialityRepository specialityRepository;
+
     @Autowired
-    public AuthService(UserRepository userRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository) {
+    public AuthService(UserRepository userRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository, HospitalRepository hospitalRepository, SpecialityRepository specialityRepository) {
         this.userRepository = userRepository;
         this.patientRepository = patientRepository;
         this.appointmentRepository = appointmentRepository;
+        this.hospitalRepository = hospitalRepository;
+        this.specialityRepository = specialityRepository;
     }
 
     public List<User> getAllUsers(){
@@ -105,5 +106,43 @@ public class AuthService {
         var x = this.appointmentRepository.getById((long)1);
         var z= AppointmentMapper.appointmentToDtoRestricted(x);
         return z;
+    }
+
+    public Hospital getHospitals(){
+        var x = this.hospitalRepository.findAll();
+        //var z = x.get(0).getSpecialitySet().size();
+        return null;
+    }
+
+    public Speciality getSpecialities(){
+        var x = this.specialityRepository.findAll();
+        //var z = x.get(0).getHospitalSet().size();
+        return null;
+    }
+
+    public boolean addSpecialityToHospital(){
+        var x = this.hospitalRepository.getById((long)1);
+        var y = new Speciality();
+        y.setName("SpecialitateDinSpital");
+        x.addSpeciality(y);
+        this.hospitalRepository.save(x);
+        return true;
+    }
+
+    public boolean addHospitalToSpeciality(){
+        var x = this.specialityRepository.getById((long)4);
+        var y = new Hospital();
+        y.setLocation("Mamaia");
+        x.addHospital(y);
+        this.specialityRepository.save(x);
+        return true;
+    }
+
+    public boolean removeSpecialityFromHospital(){
+        var x = this.hospitalRepository.getById((long)1);
+        var y = this.specialityRepository.getById((long)4);
+        x.removeSpeciality(y);
+        this.hospitalRepository.save(x);
+        return true;
     }
 }
