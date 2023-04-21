@@ -3,6 +3,7 @@ package com.hmss.springbootserver.entities;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,6 +21,8 @@ public class Hospital { //owning side //
             inverseJoinColumns = @JoinColumn(name = "procedure_id"))
     Set<Procedure> procedureSet = new HashSet<>();
 
+    @OneToMany(mappedBy="hospital",cascade = CascadeType.ALL)
+    private List<Admin> admins;
 
     public void addProcedure(Procedure procedure){
         procedureSet.add(procedure);
@@ -53,5 +56,13 @@ public class Hospital { //owning side //
 
     public void setProcedureSet(Set<Procedure> procedureSet) {
         this.procedureSet = procedureSet;
+    }
+
+    public List<Admin> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(List<Admin> admins) {
+        this.admins = admins;
     }
 }

@@ -18,11 +18,14 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserType userType;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     // fetch = FetchType.LAZY nu ar trebui sa mearga
     // bytecode enhancement daca vreau sa fie si asa lazy pacientul lazyloaded
     //@LazyToOne(LazyToOneOption.NO_PROXY)
     private Patient patient;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Admin admin;
 
     public void addPatient(Patient patient){
         this.patient = patient;
