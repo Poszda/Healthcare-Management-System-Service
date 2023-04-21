@@ -22,13 +22,22 @@ public class AuthService {
 
     private final HospitalRepository hospitalRepository;
     private final ProcedureRepository procedureRepository;
+
+    private final SpecialityRepository specialityRepository;
+
+    private final DiagnosticRepository diagnosticRepository;
+
+    private final MedicationRepository medicationRepository;
     @Autowired
-    public AuthService(UserRepository userRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository, HospitalRepository hospitalRepository, ProcedureRepository procedureRepository) {
+    public AuthService(UserRepository userRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository, HospitalRepository hospitalRepository, ProcedureRepository procedureRepository, SpecialityRepository specialityRepository, DiagnosticRepository diagnosticRepository, MedicationRepository medicationRepository) {
         this.userRepository = userRepository;
         this.patientRepository = patientRepository;
         this.appointmentRepository = appointmentRepository;
         this.hospitalRepository = hospitalRepository;
         this.procedureRepository = procedureRepository;
+        this.specialityRepository = specialityRepository;
+        this.diagnosticRepository = diagnosticRepository;
+        this.medicationRepository = medicationRepository;
     }
 
     public List<User> getAllUsers(){
@@ -43,7 +52,7 @@ public class AuthService {
 
     public List<Appointment> getAllAppointments(){
         var x = this.appointmentRepository.findAll();
-        //System.out.println(x.get(0).getPatient().getUser());
+        //System.out.println(x.get(1).getDiagnostic()); show null if doesn t exist , nice
         return null;
     }
 
@@ -115,7 +124,26 @@ public class AuthService {
 
     public Procedure getProcedures(){
         var x = this.procedureRepository.findAll();
-        var z = x.get(0).getHospitalSet().size();
+        //var z = x.get(0).getHospitalSet().size();
+        //var h = x.get(0).getSpeciality().getName();
+        return null;
+    }
+
+    public Speciality getSpecialities(){
+        var x = specialityRepository.findAll();
+        //var z = x.get(0).getProcedures().size();
+        return null;
+    }
+
+    public Diagnostic getDiagnostics(){
+        var x = diagnosticRepository.findAll();
+        //var z = x.get(0).getAppointment().getPatient();
+        return null;
+    }
+
+    public Medication getMedications(){
+        var x = medicationRepository.findAll();
+        var z = x.get(0).getDiagnostic().getName();
         return null;
     }
 

@@ -17,6 +17,10 @@ public class Procedure {
     @ManyToMany(mappedBy = "procedureSet", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     Set<Hospital> hospitalSet = new HashSet<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="speciality_id", nullable=false)
+    private Speciality speciality;
+
     public void addHospital(Hospital hospital) {
         hospitalSet.add(hospital);
         hospital.getProcedureSet().add(this);
@@ -58,5 +62,13 @@ public class Procedure {
 
     public void setHospitalSet(Set<Hospital> hospitalSet) {
         this.hospitalSet = hospitalSet;
+    }
+
+    public Speciality getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(Speciality speciality) {
+        this.speciality = speciality;
     }
 }

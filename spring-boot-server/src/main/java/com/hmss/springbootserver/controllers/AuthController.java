@@ -85,6 +85,19 @@ public class AuthController {
         return null;
     }
 
+    @GetMapping("/specialities")
+    public Speciality getSpecialities(){
+        return this.authService.getSpecialities();
+    }
+    @GetMapping("/diagnostics")
+    public Diagnostic getDiagnostics(){
+        return this.authService.getDiagnostics();
+    }
+    @GetMapping("/medications")
+    public Medication getMedications(){
+        return this.authService.getMedications();
+    }
+
     @GetMapping("/addProcedureToHospital")
     public boolean addProcedureToHospital(){
         return this.authService.addProcedureToHospital();

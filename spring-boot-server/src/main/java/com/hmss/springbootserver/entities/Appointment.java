@@ -10,9 +10,12 @@ public class Appointment {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL, optional = false) //think about cascade type
+    Diagnostic diagnostic;
     @ManyToOne(fetch = FetchType.LAZY) // by default EAGER
     @JoinColumn(name="patient_id", nullable=false)
     private Patient patient;
+
 
     public Long getId() {
         return id;
@@ -28,5 +31,13 @@ public class Appointment {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public Diagnostic getDiagnostic() {
+        return diagnostic;
+    }
+
+    public void setDiagnostic(Diagnostic diagnostic) {
+        this.diagnostic = diagnostic;
     }
 }
