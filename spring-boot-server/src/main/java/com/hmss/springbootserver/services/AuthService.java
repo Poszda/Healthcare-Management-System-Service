@@ -21,15 +21,14 @@ public class AuthService {
     private final AppointmentRepository appointmentRepository;
 
     private final HospitalRepository hospitalRepository;
-    private final SpecialityRepository specialityRepository;
-
+    private final ProcedureRepository procedureRepository;
     @Autowired
-    public AuthService(UserRepository userRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository, HospitalRepository hospitalRepository, SpecialityRepository specialityRepository) {
+    public AuthService(UserRepository userRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository, HospitalRepository hospitalRepository, ProcedureRepository procedureRepository) {
         this.userRepository = userRepository;
         this.patientRepository = patientRepository;
         this.appointmentRepository = appointmentRepository;
         this.hospitalRepository = hospitalRepository;
-        this.specialityRepository = specialityRepository;
+        this.procedureRepository = procedureRepository;
     }
 
     public List<User> getAllUsers(){
@@ -114,34 +113,35 @@ public class AuthService {
         return null;
     }
 
-    public Speciality getSpecialities(){
-        var x = this.specialityRepository.findAll();
-        //var z = x.get(0).getHospitalSet().size();
+    public Procedure getProcedures(){
+        var x = this.procedureRepository.findAll();
+        var z = x.get(0).getHospitalSet().size();
         return null;
     }
 
-    public boolean addSpecialityToHospital(){
+    public boolean addProcedureToHospital(){
         var x = this.hospitalRepository.getById((long)1);
-        var y = new Speciality();
-        y.setName("SpecialitateDinSpital");
-        x.addSpeciality(y);
+        x.getLocation();
+        var y = new Procedure();
+        y.setName("ProdceduraNUme");
+        x.addProcedure(y);
         this.hospitalRepository.save(x);
         return true;
     }
 
-    public boolean addHospitalToSpeciality(){
-        var x = this.specialityRepository.getById((long)4);
+    public boolean addHospitalToProcedure(){
+        var x = this.procedureRepository.getById((long)4);
         var y = new Hospital();
         y.setLocation("Mamaia");
         x.addHospital(y);
-        this.specialityRepository.save(x);
+        this.procedureRepository.save(x);
         return true;
     }
 
-    public boolean removeSpecialityFromHospital(){
+    public boolean removeProcedureFromHospital(){
         var x = this.hospitalRepository.getById((long)1);
-        var y = this.specialityRepository.getById((long)4);
-        x.removeSpeciality(y);
+        var y = this.procedureRepository.getById((long)4);
+        x.removeProcedure(y);
         this.hospitalRepository.save(x);
         return true;
     }

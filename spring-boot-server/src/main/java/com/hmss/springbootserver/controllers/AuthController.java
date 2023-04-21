@@ -79,23 +79,23 @@ public class AuthController {
         this.authService.getHospitals();
         return null;
     }
-    @GetMapping("/speciality")
-    public Speciality getSpecialities(){
-        this.authService.getSpecialities();
+    @GetMapping("/procedure")
+    public Procedure getProcedures(){
+        this.authService.getProcedures();
         return null;
     }
 
-    @GetMapping("/addSpecialityToHospital")
-    public boolean addSpecialityToHospital(){
-        return this.authService.addSpecialityToHospital();
+    @GetMapping("/addProcedureToHospital")
+    public boolean addProcedureToHospital(){
+        return this.authService.addProcedureToHospital();
     }
 
-    @GetMapping("/addHospitalToSpeciality")
-    public boolean addHospitalToSpeciality(){
-        return this.authService.addHospitalToSpeciality();
+    @GetMapping("/addHospitalToProcedure")
+    public boolean addHospitalToProcedure(){
+        return this.authService.addHospitalToProcedure();
     }
-    @GetMapping("/removeSpecialityFromHospital")
-    public boolean removeSpecialityFromHospital(){
-        return this.authService.removeSpecialityFromHospital();
+    @GetMapping("/removeProcedureFromHospital")
+    public boolean removeProcedureFromHospital(){
+        return this.authService.removeProcedureFromHospital();
     }
 }

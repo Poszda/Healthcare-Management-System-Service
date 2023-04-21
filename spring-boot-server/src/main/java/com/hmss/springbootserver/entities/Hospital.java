@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "hospital")
 public class Hospital { //owning side //
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,20 +15,20 @@ public class Hospital { //owning side //
     private String location;
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(
-            name = "hospital_speciality",
+            name = "hospital_procedure",
             joinColumns = @JoinColumn(name = "hospital_id"),
             inverseJoinColumns = @JoinColumn(name = "speciality_id"))
-    Set<Speciality> specialitySet = new HashSet<>();
+    Set<Procedure> procedureSet = new HashSet<>();
 
 
-    public void addSpeciality(Speciality speciality){
-        specialitySet.add(speciality);
-        speciality.getHospitalSet().add(this);
+    public void addProcedure(Procedure procedure){
+        procedureSet.add(procedure);
+        procedure.getHospitalSet().add(this);
     }
 
-    public void removeSpeciality(Speciality speciality) {
-        specialitySet.remove(speciality);
-        speciality.getHospitalSet().remove(this);
+    public void removeProcedure(Procedure procedure) {
+        procedureSet.remove(procedure);
+        procedure.getHospitalSet().remove(this);
     }
 
     public Long getId() {
@@ -46,11 +47,11 @@ public class Hospital { //owning side //
         this.location = location;
     }
 
-    public Set<Speciality> getSpecialitySet() {
-        return specialitySet;
+    public Set<Procedure> getProcedureSet() {
+        return procedureSet;
     }
 
-    public void setSpecialitySet(Set<Speciality> specialitySet) {
-        this.specialitySet = specialitySet;
+    public void setProcedureSet(Set<Procedure> procedureSet) {
+        this.procedureSet = procedureSet;
     }
 }

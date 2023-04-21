@@ -6,25 +6,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Speciality {
+@Table(name = "\"procedure\"")
+public class Procedure {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     private String name;
-    @ManyToMany(mappedBy = "specialitySet", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private float price;
+    @ManyToMany(mappedBy = "procedureSet", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     Set<Hospital> hospitalSet = new HashSet<>();
 
-    // Add a Hospital to the hospitalSet
     public void addHospital(Hospital hospital) {
         hospitalSet.add(hospital);
-        hospital.getSpecialitySet().add(this);
+        hospital.getProcedureSet().add(this);
     }
 
     // Remove a Hospital from the hospitalSet
     public void removeHospital(Hospital hospital) {
         hospitalSet.remove(hospital);
-        hospital.getSpecialitySet().remove(this);
+        hospital.getProcedureSet().remove(this);
     }
 
     public Long getId() {
@@ -41,6 +42,14 @@ public class Speciality {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public Set<Hospital> getHospitalSet() {
