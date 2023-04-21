@@ -17,7 +17,7 @@ public class Hospital { //owning side //
     @JoinTable(
             name = "hospital_procedure",
             joinColumns = @JoinColumn(name = "hospital_id"),
-            inverseJoinColumns = @JoinColumn(name = "speciality_id"))
+            inverseJoinColumns = @JoinColumn(name = "procedure_id"))
     Set<Procedure> procedureSet = new HashSet<>();
 
 

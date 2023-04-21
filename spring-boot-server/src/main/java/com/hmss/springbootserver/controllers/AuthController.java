@@ -111,4 +111,10 @@ public class AuthController {
     public boolean removeProcedureFromHospital(){
         return this.authService.removeProcedureFromHospital();
     }
+
+    @GetMapping("/customQuery")
+    public boolean customQuery(){
+        this.authService.customQuery();
+        return true;
+    }
 }

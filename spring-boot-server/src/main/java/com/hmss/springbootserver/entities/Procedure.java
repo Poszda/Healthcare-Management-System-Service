@@ -18,8 +18,11 @@ public class Procedure {
     Set<Hospital> hospitalSet = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="speciality_id", nullable=false)
+    @JoinColumn(name="speciality_id")
     private Speciality speciality;
+
+    @OneToOne(mappedBy = "procedure", cascade = CascadeType.ALL) // aici cascade trebuie verificat // nu pun optional=false
+    private Appointment appointment;
 
     public void addHospital(Hospital hospital) {
         hospitalSet.add(hospital);
@@ -70,5 +73,13 @@ public class Procedure {
 
     public void setSpeciality(Speciality speciality) {
         this.speciality = speciality;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
 }

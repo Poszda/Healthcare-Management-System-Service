@@ -16,6 +16,10 @@ public class Appointment {
     @JoinColumn(name="patient_id", nullable=false)
     private Patient patient;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "procedure_id")
+    private Procedure procedure;
+
 
     public Long getId() {
         return id;
@@ -39,5 +43,13 @@ public class Appointment {
 
     public void setDiagnostic(Diagnostic diagnostic) {
         this.diagnostic = diagnostic;
+    }
+
+    public Procedure getProcedure() {
+        return procedure;
+    }
+
+    public void setProcedure(Procedure procedure) {
+        this.procedure = procedure;
     }
 }

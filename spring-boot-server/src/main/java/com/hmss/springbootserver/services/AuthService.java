@@ -143,8 +143,13 @@ public class AuthService {
 
     public Medication getMedications(){
         var x = medicationRepository.findAll();
-        var z = x.get(0).getDiagnostic().getName();
+        //var z = x.get(0).getDiagnostic().getName();
         return null;
+    }
+
+    public void customQuery(){
+        var x = this.specialityRepository.smthCustom();
+        System.out.println(x);
     }
 
     public boolean addProcedureToHospital(){
@@ -152,6 +157,7 @@ public class AuthService {
         x.getLocation();
         var y = new Procedure();
         y.setName("ProdceduraNUme");
+        y.setPrice(100);
         x.addProcedure(y);
         this.hospitalRepository.save(x);
         return true;
@@ -159,10 +165,11 @@ public class AuthService {
 
     public boolean addHospitalToProcedure(){
         var x = this.procedureRepository.getById((long)4);
+        System.out.println(x);
         var y = new Hospital();
-        y.setLocation("Mamaia");
-        x.addHospital(y);
-        this.procedureRepository.save(x);
+         y.setLocation("Mamaia");
+         x.addHospital(y);
+         this.procedureRepository.save(x);
         return true;
     }
 
