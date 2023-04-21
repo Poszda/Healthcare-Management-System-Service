@@ -14,6 +14,7 @@ public class UserMapper {
         userDTO.setLastName(user.getLastName());
         userDTO.setEmail(user.getEmail());
         userDTO.setPassword(user.getPassword());
+        userDTO.setUserType(user.getUserType());
         var x = PatientMapper.patientToDtoNoUser(user.getPatient());
         userDTO.setPatient(x);
         return userDTO;
@@ -26,6 +27,7 @@ public class UserMapper {
         userDTO.setLastName(user.getLastName());
         userDTO.setEmail(user.getEmail());
         userDTO.setPassword(user.getPassword());
+        userDTO.setUserType(user.getUserType());
         userDTO.setPatient(null);
         return userDTO;
     }
@@ -38,6 +40,7 @@ public class UserMapper {
         userDTO.setLastName(user.getLastName());
         userDTO.setEmail(user.getEmail());
         userDTO.setPassword(user.getPassword());
+        userDTO.setUserType(user.getUserType());
         userDTO.setPatient(PatientMapper.patientToDtoRestricted(user.getPatient()));
         return userDTO;
     }
@@ -51,6 +54,7 @@ public class UserMapper {
         userDTO.setLastName(user.getLastName());
         userDTO.setEmail(user.getEmail());
         userDTO.setPassword(user.getPassword());
+        userDTO.setUserType(user.getUserType());
         userDTO.setPatient(null);
         return userDTO;
     }

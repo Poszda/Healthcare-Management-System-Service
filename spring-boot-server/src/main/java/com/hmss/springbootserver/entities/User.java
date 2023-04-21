@@ -1,11 +1,11 @@
 package com.hmss.springbootserver.entities;
 
+import com.hmss.springbootserver.enums.UserType;
 import jakarta.persistence.*;
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 
 @Entity
-@Table(name="USERS")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,8 @@ public class User {
     private String firstName;
     private String email;
     private String password;
-
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false)
     // fetch = FetchType.LAZY nu ar trebui sa mearga
     // bytecode enhancement daca vreau sa fie si asa lazy pacientul lazyloaded
@@ -73,5 +74,13 @@ public class User {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 }

@@ -3,7 +3,6 @@ package com.hmss.springbootserver.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="APPOINTMENTS")
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
