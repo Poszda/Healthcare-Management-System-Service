@@ -28,8 +28,11 @@ public class AuthService {
     private final DiagnosticRepository diagnosticRepository;
 
     private final MedicationRepository medicationRepository;
+
+    private final AdminRepository adminRepository;
+    private final DoctorRepository doctorRepository;
     @Autowired
-    public AuthService(UserRepository userRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository, HospitalRepository hospitalRepository, ProcedureRepository procedureRepository, SpecialityRepository specialityRepository, DiagnosticRepository diagnosticRepository, MedicationRepository medicationRepository) {
+    public AuthService(UserRepository userRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository, HospitalRepository hospitalRepository, ProcedureRepository procedureRepository, SpecialityRepository specialityRepository, DiagnosticRepository diagnosticRepository, MedicationRepository medicationRepository, AdminRepository adminRepository, DoctorRepository doctorRepository) {
         this.userRepository = userRepository;
         this.patientRepository = patientRepository;
         this.appointmentRepository = appointmentRepository;
@@ -38,6 +41,8 @@ public class AuthService {
         this.specialityRepository = specialityRepository;
         this.diagnosticRepository = diagnosticRepository;
         this.medicationRepository = medicationRepository;
+        this.adminRepository = adminRepository;
+        this.doctorRepository = doctorRepository;
     }
 
     public List<User> getAllUsers(){
@@ -146,6 +151,17 @@ public class AuthService {
         //var z = x.get(0).getDiagnostic().getName();
         return null;
     }
+    public Admin getAdmins() {
+        var x = adminRepository.findAll();
+        //var z = x.get(0).getHospital().getLocation();
+        return null;
+    }
+
+    public Doctor getDoctors(){
+        var x = doctorRepository.findAll();
+        //var z = x.get(0).getUser().getFirstName();
+        return null;
+    }
 
     public void customQuery(){
         var x = this.specialityRepository.smthCustom();
@@ -180,4 +196,5 @@ public class AuthService {
         this.hospitalRepository.save(x);
         return true;
     }
+
 }

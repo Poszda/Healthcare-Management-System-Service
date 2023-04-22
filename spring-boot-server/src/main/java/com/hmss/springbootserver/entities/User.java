@@ -27,6 +27,9 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Admin admin;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Doctor doctor;
+
     public void addPatient(Patient patient){
         this.patient = patient;
         this.patient.setUser(this);
@@ -86,5 +89,21 @@ public class User {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 }

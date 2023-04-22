@@ -20,9 +20,10 @@ public class Hospital { //owning side //
             joinColumns = @JoinColumn(name = "hospital_id"),
             inverseJoinColumns = @JoinColumn(name = "procedure_id"))
     Set<Procedure> procedureSet = new HashSet<>();
-
     @OneToMany(mappedBy="hospital",cascade = CascadeType.ALL)
     private List<Admin> admins;
+    @OneToMany(mappedBy="hospital",cascade = CascadeType.ALL)
+    private List<Doctor> doctors;
 
     public void addProcedure(Procedure procedure){
         procedureSet.add(procedure);
@@ -64,5 +65,13 @@ public class Hospital { //owning side //
 
     public void setAdmins(List<Admin> admins) {
         this.admins = admins;
+    }
+
+    public List<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors = doctors;
     }
 }

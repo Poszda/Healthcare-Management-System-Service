@@ -97,6 +97,14 @@ public class AuthController {
     public Medication getMedications(){
         return this.authService.getMedications();
     }
+    @GetMapping("/admins")
+    public Admin getAdmins(){
+        return this.authService.getAdmins();
+    }
+    @GetMapping("/doctors")
+    public Doctor getDoctors(){
+        return this.authService.getDoctors();
+    }
 
     @GetMapping("/addProcedureToHospital")
     public boolean addProcedureToHospital(){

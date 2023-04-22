@@ -2,6 +2,8 @@ package com.hmss.springbootserver.entities;
 
 import jakarta.persistence.*;
 
+import javax.print.Doc;
+
 @Entity
 @Table(name = "appointment")
 public class Appointment {
@@ -10,13 +12,17 @@ public class Appointment {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL, optional = false) //think about cascade type
+    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL) //think about cascade type //optiona=false?
     Diagnostic diagnostic;
     @ManyToOne(fetch = FetchType.LAZY) // by default EAGER
     @JoinColumn(name="patient_id")
     private Patient patient;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) // by default EAGER
+    @JoinColumn(name="doctor_id")
+    private Doctor doctor;
+
+    @OneToOne(fetch = FetchType.LAZY) // by default EAGER
     @JoinColumn(name = "procedure_id")
     private Procedure procedure;
 
@@ -51,5 +57,13 @@ public class Appointment {
 
     public void setProcedure(Procedure procedure) {
         this.procedure = procedure;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 }
