@@ -11,6 +11,7 @@ import com.hmss.springbootserver.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -196,5 +197,34 @@ public class AuthService {
         this.hospitalRepository.save(x);
         return true;
     }
+
+//    public void cascadeTypeTestPersist(){
+//        //PERSIST
+//        var x = new Diagnostic();
+//        var y = new Medication();
+//        var z = new Medication();
+//        var list = new ArrayList<Medication>();
+//
+//        y.setName("Nurofen");
+//        y.setDiagnostic(x);
+//
+//        z.setName("Paracetamol");
+//        z.setDiagnostic(x);
+//
+//        list.add(y);
+//        list.add(z);
+//
+//        x.setName("Diagnostic1");
+//        x.setDescription("Description1");
+//        x.setMedications(list);
+//        diagnosticRepository.save(x);
+//    }
+//
+//    public void cascadeTypeTestRemove(){
+//        //REMOVE
+//        var x = diagnosticRepository.getOne((long)1);
+//        x.removeAllMedications();
+//        diagnosticRepository.delete(x);
+//    }
 
 }

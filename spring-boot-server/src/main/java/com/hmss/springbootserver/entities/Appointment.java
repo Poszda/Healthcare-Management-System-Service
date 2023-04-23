@@ -12,7 +12,7 @@ public class Appointment {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL) //think about cascade type //optiona=false?
+    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL,orphanRemoval = true) //optional=false?
     Diagnostic diagnostic;
     @ManyToOne(fetch = FetchType.LAZY) // by default EAGER
     @JoinColumn(name="patient_id")

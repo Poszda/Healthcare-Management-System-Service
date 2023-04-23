@@ -10,12 +10,12 @@ public class Admin {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY) // by default EAGER
-    @JoinColumn(name="hospital_id") // vad cum rezolv si cu nullable ala
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name="hospital_id")
     private Hospital hospital;
 
     public Long getId() {

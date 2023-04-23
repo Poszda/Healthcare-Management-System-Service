@@ -2,6 +2,7 @@ package com.hmss.springbootserver.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,8 +16,8 @@ public class Diagnostic {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
-    @OneToMany(mappedBy="diagnostic",cascade = CascadeType.ALL)
-    private List<Medication> medications;
+    @OneToMany(mappedBy="diagnostic",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Medication> medications = new ArrayList<>();
 
     public Long getId() {
         return id;

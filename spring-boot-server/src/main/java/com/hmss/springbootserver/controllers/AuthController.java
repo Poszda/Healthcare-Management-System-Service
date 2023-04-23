@@ -125,4 +125,14 @@ public class AuthController {
         this.authService.customQuery();
         return true;
     }
+    @GetMapping("/cascadeTypeTestPersist")
+    public boolean cascadeTypeTestPersist() {
+        //this.authService.cascadeTypeTestPersist();
+        return true;
+    }
+    @GetMapping("/cascadeTypeTestRemove")
+    public boolean cascadeTypeTestRemove() {
+        //this.authService.cascadeTypeTestRemove();
+        return true;
+    }
 }
