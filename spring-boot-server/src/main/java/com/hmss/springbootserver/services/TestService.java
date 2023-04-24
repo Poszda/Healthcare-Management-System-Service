@@ -11,11 +11,10 @@ import com.hmss.springbootserver.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AuthService {
+public class TestService {
     private final UserRepository userRepository;
     private final PatientRepository patientRepository;
 
@@ -33,7 +32,7 @@ public class AuthService {
     private final AdminRepository adminRepository;
     private final DoctorRepository doctorRepository;
     @Autowired
-    public AuthService(UserRepository userRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository, HospitalRepository hospitalRepository, ProcedureRepository procedureRepository, SpecialityRepository specialityRepository, DiagnosticRepository diagnosticRepository, MedicationRepository medicationRepository, AdminRepository adminRepository, DoctorRepository doctorRepository) {
+    public TestService(UserRepository userRepository, PatientRepository patientRepository, AppointmentRepository appointmentRepository, HospitalRepository hospitalRepository, ProcedureRepository procedureRepository, SpecialityRepository specialityRepository, DiagnosticRepository diagnosticRepository, MedicationRepository medicationRepository, AdminRepository adminRepository, DoctorRepository doctorRepository) {
         this.userRepository = userRepository;
         this.patientRepository = patientRepository;
         this.appointmentRepository = appointmentRepository;

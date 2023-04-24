@@ -4,7 +4,7 @@ import com.hmss.springbootserver.DTOs.AppointmentDTO;
 import com.hmss.springbootserver.DTOs.PatientDTO;
 import com.hmss.springbootserver.DTOs.UserDTO;
 import com.hmss.springbootserver.entities.*;
-import com.hmss.springbootserver.services.AuthService;
+import com.hmss.springbootserver.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +12,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/auth")
-public class AuthController {
+public class TestController {
 
-    private final AuthService authService;
+    private final TestService authService;
     @Autowired
-    public AuthController(AuthService authService) {
+    public TestController(TestService authService) {
         this.authService = authService;
     }
 
