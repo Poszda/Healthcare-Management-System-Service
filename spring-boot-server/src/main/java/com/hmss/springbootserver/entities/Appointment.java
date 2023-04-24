@@ -3,6 +3,8 @@ package com.hmss.springbootserver.entities;
 import jakarta.persistence.*;
 
 import javax.print.Doc;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "appointment")
@@ -11,6 +13,7 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    private LocalDateTime date;
 
     @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL,orphanRemoval = true) //optional=false?
     Diagnostic diagnostic;

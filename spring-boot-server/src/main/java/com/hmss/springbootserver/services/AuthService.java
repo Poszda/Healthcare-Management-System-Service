@@ -198,6 +198,17 @@ public class AuthService {
         return true;
     }
 
+    public void conversion1() {
+        var x = new UserDTO();
+        var y = new PatientDTO();
+        x.setFirstName("Mihai");
+        y.setPhone("07722229871");
+        x.setPatient(y);
+        var z = UserMapper.userDTOtoEntity(x);
+        var hei = "gei";
+
+    }
+
 //    public void cascadeTypeTestPersist(){
 //        //PERSIST
 //        var x = new Diagnostic();

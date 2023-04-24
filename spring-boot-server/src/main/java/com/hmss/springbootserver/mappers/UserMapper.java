@@ -60,4 +60,14 @@ public class UserMapper {
     }
 
 
+
+    //DTOs to Entity
+    public static User userDTOtoEntity(UserDTO userDTO){
+        User user = new User();
+        user.setFirstName(userDTO.getFirstName());
+        user.setPatient(PatientMapper.DTOtoPatientEntity(userDTO.getPatient()));
+        return user;
+    }
+
+
 }

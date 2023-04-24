@@ -135,4 +135,8 @@ public class AuthController {
         //this.authService.cascadeTypeTestRemove();
         return true;
     }
+    @GetMapping("/conversion1")
+    public void conversion1(){
+        this.authService.conversion1();
+    }
 }

@@ -57,4 +57,11 @@ public class PatientMapper {
         patientDTO.setAppointments(null); //except appointments
         return patientDTO;
     }
+
+    //TO ENTITY
+    public static Patient DTOtoPatientEntity(PatientDTO patientDTO){
+        Patient patient = new Patient();
+        patient.setPhone(patientDTO.getPhone());
+        return patient;
+    }
 }
