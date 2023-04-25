@@ -1,15 +1,16 @@
-package com.hmss.springbootserver.DTOs;
+package com.hmss.springbootserver.DTOs.user;
 
+import com.hmss.springbootserver.DTOs.patient.PatientSimpleDTO;
 import com.hmss.springbootserver.enums.UserType;
 
-public class UserDTO {
+public class UserFullDTO {
     private Long id;
-    private String lastName;
     private String firstName;
+    private String lastName;
     private String email;
     private String password;
     private UserType userType;
-    private PatientDTO patient;
+    private PatientSimpleDTO patient;
 
     public Long getId() {
         return id;
@@ -17,14 +18,6 @@ public class UserDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getFirstName() {
@@ -51,19 +44,26 @@ public class UserDTO {
         this.password = password;
     }
 
-    public PatientDTO getPatient() {
-        return patient;
-    }
-
-    public void setPatient(PatientDTO patient) {
-        this.patient = patient;
-    }
-
     public UserType getUserType() {
         return userType;
     }
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public PatientSimpleDTO getPatient() {
+        return patient;
+    }
+
+    public void setPatient(PatientSimpleDTO patient) {
+        this.patient = patient;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

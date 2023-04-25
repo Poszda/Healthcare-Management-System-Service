@@ -1,8 +1,9 @@
 package com.hmss.springbootserver.controllers;
 
-import com.hmss.springbootserver.DTOs.AppointmentDTO;
-import com.hmss.springbootserver.DTOs.PatientDTO;
-import com.hmss.springbootserver.DTOs.UserDTO;
+import com.hmss.springbootserver.DTOs.AppointmentDTOTest;
+import com.hmss.springbootserver.DTOs.PatientDTOTest;
+import com.hmss.springbootserver.DTOs.UserDTOTest;
+import com.hmss.springbootserver.DTOs.patient.PatientSimpleDTO;
 import com.hmss.springbootserver.entities.*;
 import com.hmss.springbootserver.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/auth")
+@RequestMapping(path = "api/test")
 public class TestController {
 
     private final TestService authService;
@@ -43,34 +44,34 @@ public class TestController {
         return this.authService.createUser();
     }
     @GetMapping("/getFirstUser")
-    public UserDTO getFirstUser() {
+    public UserDTOTest getFirstUser() {
         return this.authService.getFirstUser();
     }
 
     @GetMapping("/getFirstPatient")
-    public PatientDTO getFirstPatient() {
+    public PatientDTOTest getFirstPatient() {
         return this.authService.getFirstPatient();
     }
 
     @GetMapping("/getFirstUserRestricted")
-    public UserDTO getFirstUserRestricted() {
+    public UserDTOTest getFirstUserRestricted() {
         return this.authService.getFirstUserRestricted();
     }
 
     @GetMapping("/getFirstPatientRestricted")
-    public PatientDTO getFirstPatientRestricted() {
+    public PatientDTOTest getFirstPatientRestricted() {
         return this.authService.getFirstPatientRestricted();
     }
     @GetMapping("/getCustomUser")
-    public UserDTO getCustomUser(){
+    public UserDTOTest getCustomUser(){
         return this.authService.getCustomUser();
     }
     @GetMapping("/getFirstAppointment")
-    public AppointmentDTO getFirstAppointment(){
+    public AppointmentDTOTest getFirstAppointment(){
         return this.authService.getFirstAppointment();
     }
     @GetMapping("/getFirstAppointmentRestricted")
-    public AppointmentDTO getFirstAppointmentRestricted(){
+    public AppointmentDTOTest getFirstAppointmentRestricted(){
         return this.authService.getFirstAppointmentRestricted();
     }
 

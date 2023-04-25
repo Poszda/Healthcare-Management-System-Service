@@ -1,27 +1,24 @@
 package com.hmss.springbootserver.mappers;
 
-import com.hmss.springbootserver.DTOs.AppointmentDTO;
-import com.hmss.springbootserver.DTOs.UserDTO;
+import com.hmss.springbootserver.DTOs.UserDTOTest;
 import com.hmss.springbootserver.entities.User;
 
-import java.util.ArrayList;
-
-public class UserMapper {
-    public static UserDTO userToDTO(User user){
-        UserDTO userDTO = new UserDTO();
+public class UserMapperTest {
+    public static UserDTOTest userToDTO(User user){
+        UserDTOTest userDTO = new UserDTOTest();
         userDTO.setId(user.getId());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
         userDTO.setEmail(user.getEmail());
         userDTO.setPassword(user.getPassword());
         userDTO.setUserType(user.getUserType());
-        var x = PatientMapper.patientToDtoNoUser(user.getPatient());
+        var x = PatientMapperTest.patientToDtoNoUser(user.getPatient());
         userDTO.setPatient(x);
         return userDTO;
     }
 
-    public static UserDTO userToDTORestricted(User user){
-        UserDTO userDTO = new UserDTO();
+    public static UserDTOTest userToDTORestricted(User user){
+        UserDTOTest userDTO = new UserDTOTest();
         userDTO.setId(user.getId());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
@@ -33,22 +30,22 @@ public class UserMapper {
     }
 
     //CUSTOM METHOD
-    public static UserDTO userToDtoDepth1(User user){
-        UserDTO userDTO = new UserDTO();
+    public static UserDTOTest userToDtoDepth1(User user){
+        UserDTOTest userDTO = new UserDTOTest();
         userDTO.setId(user.getId());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
         userDTO.setEmail(user.getEmail());
         userDTO.setPassword(user.getPassword());
         userDTO.setUserType(user.getUserType());
-        userDTO.setPatient(PatientMapper.patientToDtoRestricted(user.getPatient()));
+        userDTO.setPatient(PatientMapperTest.patientToDtoRestricted(user.getPatient()));
         return userDTO;
     }
 
     //HERE ADD ALL userToDtoNo___*attribute name* ___
 
-    public static UserDTO userToDtoNoPatient(User user){
-        UserDTO userDTO = new UserDTO();
+    public static UserDTOTest userToDtoNoPatient(User user){
+        UserDTOTest userDTO = new UserDTOTest();
         userDTO.setId(user.getId());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
@@ -62,10 +59,10 @@ public class UserMapper {
 
 
     //DTOs to Entity
-    public static User userDTOtoEntity(UserDTO userDTO){
+    public static User userDTOtoEntity(UserDTOTest userDTO){
         User user = new User();
         user.setFirstName(userDTO.getFirstName());
-        user.setPatient(PatientMapper.DTOtoPatientEntity(userDTO.getPatient()));
+        user.setPatient(PatientMapperTest.DTOtoPatientEntity(userDTO.getPatient()));
         return user;
     }
 

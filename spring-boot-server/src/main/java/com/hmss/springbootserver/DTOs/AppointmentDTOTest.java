@@ -1,10 +1,8 @@
 package com.hmss.springbootserver.DTOs;
 
-import com.hmss.springbootserver.entities.Patient;
-
-public class AppointmentDTO {
+public class AppointmentDTOTest {
     private Long id;
-    private PatientDTO patient;
+    private PatientDTOTest patient;
 
     public Long getId() {
         return id;
@@ -14,11 +12,11 @@ public class AppointmentDTO {
         this.id = id;
     }
 
-    public PatientDTO getPatient() {
+    public PatientDTOTest getPatient() {
         return patient;
     }
 
-    public void setPatient(PatientDTO patient) {
+    public void setPatient(PatientDTOTest patient) {
         this.patient = patient;
     }
 }

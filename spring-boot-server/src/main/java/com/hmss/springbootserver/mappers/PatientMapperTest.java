@@ -1,47 +1,47 @@
 package com.hmss.springbootserver.mappers;
 
-import com.hmss.springbootserver.DTOs.AppointmentDTO;
-import com.hmss.springbootserver.DTOs.PatientDTO;
+import com.hmss.springbootserver.DTOs.AppointmentDTOTest;
+import com.hmss.springbootserver.DTOs.PatientDTOTest;
 import com.hmss.springbootserver.entities.Appointment;
 import com.hmss.springbootserver.entities.Patient;
 
 import java.util.ArrayList;
 
 
-public class PatientMapper {
+public class PatientMapperTest {
 
     //Full DTO
-    public static PatientDTO patientToDto(Patient patient){
-        PatientDTO patientDTO = new PatientDTO();
+    public static PatientDTOTest patientToDto(Patient patient){
+        PatientDTOTest patientDTO = new PatientDTOTest();
         patientDTO.setId(patient.getId());
         patientDTO.setPhone(patient.getPhone());
-        patientDTO.setUser(UserMapper.userToDtoNoPatient(patient.getUser()));
-        var listDTO = new ArrayList<AppointmentDTO>();
+        patientDTO.setUser(UserMapperTest.userToDtoNoPatient(patient.getUser()));
+        var listDTO = new ArrayList<AppointmentDTOTest>();
         var list = patient.getAppointments();
         for (Appointment el : list) {
-            listDTO.add(AppointmentMapper.appointmentToDtoNoPatient(el));
+            listDTO.add(AppointmentMapperTest.appointmentToDtoNoPatient(el));
         }
         patientDTO.setAppointments(listDTO);
         return patientDTO;
     }
 
     // Only Table Attributes DTO
-    public static PatientDTO patientToDtoRestricted(Patient patient){
-        PatientDTO patientDTO = new PatientDTO();
+    public static PatientDTOTest patientToDtoRestricted(Patient patient){
+        PatientDTOTest patientDTO = new PatientDTOTest();
         patientDTO.setId(patient.getId());
         patientDTO.setPhone(patient.getPhone());
         return patientDTO;
     }
 
     //Full DTO Except User
-    public static PatientDTO patientToDtoNoUser(Patient patient){
-        PatientDTO patientDTO = new PatientDTO();
+    public static PatientDTOTest patientToDtoNoUser(Patient patient){
+        PatientDTOTest patientDTO = new PatientDTOTest();
         patientDTO.setId(patient.getId());
         patientDTO.setPhone(patient.getPhone());
-        var listDTO = new ArrayList<AppointmentDTO>();
+        var listDTO = new ArrayList<AppointmentDTOTest>();
         var list = patient.getAppointments();
         for (Appointment el : list) {
-            listDTO.add(AppointmentMapper.appointmentToDtoNoPatient(el));
+            listDTO.add(AppointmentMapperTest.appointmentToDtoNoPatient(el));
         }
         patientDTO.setAppointments(listDTO);
         patientDTO.setUser(null); //except user
@@ -49,17 +49,17 @@ public class PatientMapper {
     }
 
     //Full DTO Except Appointments
-    public static PatientDTO patientToDtoNoAppointments(Patient patient){
-        PatientDTO patientDTO = new PatientDTO();
+    public static PatientDTOTest patientToDtoNoAppointments(Patient patient){
+        PatientDTOTest patientDTO = new PatientDTOTest();
         patientDTO.setId(patient.getId());
         patientDTO.setPhone(patient.getPhone());
-        patientDTO.setUser(UserMapper.userToDtoNoPatient(patient.getUser()));
+        patientDTO.setUser(UserMapperTest.userToDtoNoPatient(patient.getUser()));
         patientDTO.setAppointments(null); //except appointments
         return patientDTO;
     }
 
     //TO ENTITY
-    public static Patient DTOtoPatientEntity(PatientDTO patientDTO){
+    public static Patient DTOtoPatientEntity(PatientDTOTest patientDTO){
         Patient patient = new Patient();
         patient.setPhone(patientDTO.getPhone());
         return patient;

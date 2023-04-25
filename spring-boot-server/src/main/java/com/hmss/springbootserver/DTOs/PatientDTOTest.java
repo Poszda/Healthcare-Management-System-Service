@@ -1,18 +1,16 @@
 package com.hmss.springbootserver.DTOs;
 
-import com.hmss.springbootserver.entities.Appointment;
-
 import java.util.List;
 
-public class PatientDTO {
+public class PatientDTOTest {
     private Long id;
     private String phone;
     private int age;
     private String bloodType;
     private int height;
     private int weight;
-    private UserDTO user;
-    private List<AppointmentDTO> appointments;
+    private UserDTOTest user;
+    private List<AppointmentDTOTest> appointments;
 
     public Long getId() {
         return id;
@@ -30,19 +28,19 @@ public class PatientDTO {
         this.phone = phone;
     }
 
-    public UserDTO getUser() {
+    public UserDTOTest getUser() {
         return user;
     }
 
-    public void setUser(UserDTO user) {
+    public void setUser(UserDTOTest user) {
         this.user = user;
     }
 
-    public List<AppointmentDTO> getAppointments() {
+    public List<AppointmentDTOTest> getAppointments() {
         return appointments;
     }
 
-    public void setAppointments(List<AppointmentDTO> appointments) {
+    public void setAppointments(List<AppointmentDTOTest> appointments) {
         this.appointments = appointments;
     }
 

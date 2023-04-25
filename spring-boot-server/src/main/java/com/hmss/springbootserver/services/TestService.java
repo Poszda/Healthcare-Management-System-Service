@@ -1,12 +1,12 @@
 package com.hmss.springbootserver.services;
 
-import com.hmss.springbootserver.DTOs.AppointmentDTO;
-import com.hmss.springbootserver.DTOs.PatientDTO;
-import com.hmss.springbootserver.DTOs.UserDTO;
+import com.hmss.springbootserver.DTOs.AppointmentDTOTest;
+import com.hmss.springbootserver.DTOs.PatientDTOTest;
+import com.hmss.springbootserver.DTOs.UserDTOTest;
 import com.hmss.springbootserver.entities.*;
-import com.hmss.springbootserver.mappers.AppointmentMapper;
-import com.hmss.springbootserver.mappers.PatientMapper;
-import com.hmss.springbootserver.mappers.UserMapper;
+import com.hmss.springbootserver.mappers.AppointmentMapperTest;
+import com.hmss.springbootserver.mappers.PatientMapperTest;
+import com.hmss.springbootserver.mappers.UserMapperTest;
 import com.hmss.springbootserver.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,46 +78,47 @@ public class TestService {
         return true;
     }
 
-    public UserDTO getFirstUser(){
+    public UserDTOTest getFirstUser(){
         var x = this.userRepository.getById((long)1);
-        var z= UserMapper.userToDTO(x);
+        var z= UserMapperTest.userToDTO(x);
         return z;
     }
 
-    public UserDTO getFirstUserRestricted(){
+    public UserDTOTest getFirstUserRestricted(){
         var x = this.userRepository.getById((long)1);
-        var z = UserMapper.userToDTORestricted(x);
+        var z = UserMapperTest.userToDTORestricted(x);
         return z;
 
     }
 
-    public UserDTO getCustomUser(){
+    public UserDTOTest getCustomUser(){
         var x = this.userRepository.getOne((long)1);
-        var z = UserMapper.userToDtoDepth1(x);
+        var z = UserMapperTest.userToDtoDepth1(x);
         return z;
     }
 
-    public PatientDTO getFirstPatient(){
+    public PatientDTOTest getFirstPatient(){
         var x = this.patientRepository.getById((long)1);
-        var z= PatientMapper.patientToDto(x);
+        var z= PatientMapperTest.patientToDto(x);
+        //var z = PatientMapper2.INSTANCE.patientToPatientSimpleDTO(x);
         return z;
     }
 
-    public PatientDTO getFirstPatientRestricted(){
+    public PatientDTOTest getFirstPatientRestricted(){
         var x = this.patientRepository.getById((long)1);
-        var z= PatientMapper.patientToDtoRestricted(x);
+        var z= PatientMapperTest.patientToDtoRestricted(x);
         return z;
     }
 
-    public AppointmentDTO getFirstAppointment(){
+    public AppointmentDTOTest getFirstAppointment(){
         var x = this.appointmentRepository.getById((long)1);
-        var z= AppointmentMapper.appointmentToDto(x);
+        var z= AppointmentMapperTest.appointmentToDto(x);
         return z;
     }
 
-    public AppointmentDTO getFirstAppointmentRestricted(){
+    public AppointmentDTOTest getFirstAppointmentRestricted(){
         var x = this.appointmentRepository.getById((long)1);
-        var z= AppointmentMapper.appointmentToDtoRestricted(x);
+        var z= AppointmentMapperTest.appointmentToDtoRestricted(x);
         return z;
     }
 
@@ -198,12 +199,12 @@ public class TestService {
     }
 
     public void conversion1() {
-        var x = new UserDTO();
-        var y = new PatientDTO();
+        var x = new UserDTOTest();
+        var y = new PatientDTOTest();
         x.setFirstName("Mihai");
         y.setPhone("07722229871");
         x.setPatient(y);
-        var z = UserMapper.userDTOtoEntity(x);
+        var z = UserMapperTest.userDTOtoEntity(x);
         var hei = "gei";
 
     }
