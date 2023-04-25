@@ -5,6 +5,7 @@ import com.hmss.springbootserver.DTOs.PatientDTOTest;
 import com.hmss.springbootserver.DTOs.UserDTOTest;
 import com.hmss.springbootserver.entities.*;
 import com.hmss.springbootserver.mappers.AppointmentMapperTest;
+import com.hmss.springbootserver.mappers.PatientMapper;
 import com.hmss.springbootserver.mappers.PatientMapperTest;
 import com.hmss.springbootserver.mappers.UserMapperTest;
 import com.hmss.springbootserver.repositories.*;
@@ -97,10 +98,10 @@ public class TestService {
         return z;
     }
 
-    public PatientDTOTest getFirstPatient(){
+    public Object getFirstPatient(){
         var x = this.patientRepository.getById((long)1);
-        var z= PatientMapperTest.patientToDto(x);
-        //var z = PatientMapper2.INSTANCE.patientToPatientSimpleDTO(x);
+        //var z= PatientMapperTest.patientToDto(x);
+        var z = PatientMapper.INSTANCE.patientToPatientSimpleDTO(x);
         return z;
     }
 

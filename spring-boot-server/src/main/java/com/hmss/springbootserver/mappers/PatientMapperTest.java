@@ -30,6 +30,7 @@ public class PatientMapperTest {
         PatientDTOTest patientDTO = new PatientDTOTest();
         patientDTO.setId(patient.getId());
         patientDTO.setPhone(patient.getPhone());
+        patientDTO.setUser_id(patient.getUser().getId());
         return patientDTO;
     }
 

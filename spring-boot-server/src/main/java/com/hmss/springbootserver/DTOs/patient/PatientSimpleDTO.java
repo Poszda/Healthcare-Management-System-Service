@@ -8,6 +8,8 @@ public class PatientSimpleDTO {
     private Integer height;
     private Integer weight;
 
+    private Integer userId;
+
     public Long getId() {
         return id;
     }
@@ -54,5 +56,13 @@ public class PatientSimpleDTO {
 
     public void setWeight(Integer weight) {
         this.weight = weight;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

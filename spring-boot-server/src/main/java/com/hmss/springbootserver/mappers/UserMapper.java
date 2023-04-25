@@ -7,10 +7,10 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
-@Named("UserMapper2")
-@Mapper(uses = PatientMapper2.class)
-public interface UserMapper2 {
-    UserMapper2 INSTANCE = Mappers.getMapper(UserMapper2.class);
+@Named("UserMapper")
+@Mapper(uses = PatientMapper.class)
+public interface UserMapper {
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     @Named("userToFullDTO")
     @Mapping(target = "patient" ,qualifiedByName = "patientToPatientSimpleDTO")

@@ -12,6 +12,8 @@ public class PatientDTOTest {
     private UserDTOTest user;
     private List<AppointmentDTOTest> appointments;
 
+    private Long user_id;
+
     public Long getId() {
         return id;
     }
@@ -74,5 +76,13 @@ public class PatientDTOTest {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 }

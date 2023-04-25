@@ -49,7 +49,7 @@ public class TestController {
     }
 
     @GetMapping("/getFirstPatient")
-    public PatientDTOTest getFirstPatient() {
+    public Object getFirstPatient() {
         return this.authService.getFirstPatient();
     }
 
