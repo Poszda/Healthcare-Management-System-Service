@@ -1,6 +1,6 @@
 package com.hmss.springbootserver.DTOs.patient;
 
-public class PatientSimpleDTO {
+public class PatientDTO {
     private Long id;
     private String phone;
     private Integer age;

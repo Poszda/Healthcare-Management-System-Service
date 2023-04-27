@@ -1,6 +1,7 @@
 package com.hmss.springbootserver.controllers;
 
 import com.hmss.springbootserver.DTOs.LoginRequestDTO;
+import com.hmss.springbootserver.DTOs.SignUpRequestDTO;
 import com.hmss.springbootserver.entities.Patient;
 import com.hmss.springbootserver.entities.User;
 import com.hmss.springbootserver.repositories.UserRepository;
@@ -31,7 +32,14 @@ public class AuthController {
     }
 
     @PostMapping("/login")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<Object> login(@RequestBody LoginRequestDTO loginRequest){
         return this.authService.login(loginRequest);
+    }
+
+    @PostMapping("/signup")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<Object> signUp(@RequestBody SignUpRequestDTO signUpRequest){
+        return this.authService.signUp(signUpRequest);
     }
 }

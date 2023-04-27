@@ -3,7 +3,6 @@ package com.hmss.springbootserver.controllers;
 import com.hmss.springbootserver.DTOs.AppointmentDTOTest;
 import com.hmss.springbootserver.DTOs.PatientDTOTest;
 import com.hmss.springbootserver.DTOs.UserDTOTest;
-import com.hmss.springbootserver.DTOs.patient.PatientSimpleDTO;
 import com.hmss.springbootserver.entities.*;
 import com.hmss.springbootserver.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;

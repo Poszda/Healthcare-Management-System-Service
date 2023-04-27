@@ -101,7 +101,7 @@ public class TestService {
     public Object getFirstPatient(){
         var x = this.patientRepository.getById((long)1);
         //var z= PatientMapperTest.patientToDto(x);
-        var z = PatientMapper.INSTANCE.patientToPatientSimpleDTO(x);
+        var z = PatientMapper.INSTANCE.patientToPatientDTO(x);
         return z;
     }
 

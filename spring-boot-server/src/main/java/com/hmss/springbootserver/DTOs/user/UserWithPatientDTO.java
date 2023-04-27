@@ -3,7 +3,7 @@ package com.hmss.springbootserver.DTOs.user;
 import com.hmss.springbootserver.DTOs.patient.PatientDTO;
 import com.hmss.springbootserver.enums.UserType;
 
-public class UserFullDTO {
+public class UserWithPatientDTO {
     private Long id;
     private String firstName;
     private String lastName;
