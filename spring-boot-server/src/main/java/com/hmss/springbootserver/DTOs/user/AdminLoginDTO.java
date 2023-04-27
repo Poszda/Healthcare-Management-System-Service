@@ -1,15 +1,13 @@
 package com.hmss.springbootserver.DTOs.user;
 
 import com.hmss.springbootserver.DTOs.admin.AdminDTO;
-import com.hmss.springbootserver.DTOs.doctor.DoctorDTO;
 import com.hmss.springbootserver.enums.UserType;
 
-public class UserWithAdminDTO {
+public class AdminLoginDTO {
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
     private UserType userType;
     private AdminDTO admin;
 
@@ -43,14 +41,6 @@ public class UserWithAdminDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public UserType getUserType() {

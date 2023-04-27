@@ -1,8 +1,8 @@
 package com.hmss.springbootserver.mappers;
 
-import com.hmss.springbootserver.DTOs.user.UserWithAdminDTO;
-import com.hmss.springbootserver.DTOs.user.UserWithDoctorDTO;
-import com.hmss.springbootserver.DTOs.user.UserWithPatientDTO;
+import com.hmss.springbootserver.DTOs.user.AdminLoginDTO;
+import com.hmss.springbootserver.DTOs.user.DoctorLoginDTO;
+import com.hmss.springbootserver.DTOs.user.PatientLoginDTO;
 import com.hmss.springbootserver.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,16 +14,16 @@ import org.mapstruct.factory.Mappers;
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    @Named("UserWithPatientDTO")
+    @Named("UserToPatientLoginDTO")
     @Mapping(target = "patient" ,qualifiedByName = "patientToPatientDTO")
-    UserWithPatientDTO UserWithPatientDTO(User user);
+    PatientLoginDTO UserToPatientLoginDTO(User user);
 
-    @Named("UserWithDoctorDTO")
+    @Named("UserToDoctorLoginDTO")
     @Mapping(target = "doctor" ,qualifiedByName = "doctorToDoctorDTO")
-    UserWithDoctorDTO UserWithDoctorDTO(User user);
+    DoctorLoginDTO UserToDoctorLoginDTO(User user);
 
-    @Named("UserWithAdminDTO")
+    @Named("UserToAdminLoginDTO")
     @Mapping(target = "admin" ,qualifiedByName = "adminToAdminDTO")
-    UserWithAdminDTO UserWithAdminDTO(User user);
+    AdminLoginDTO UserToAdminLoginDTO(User user);
 
 }

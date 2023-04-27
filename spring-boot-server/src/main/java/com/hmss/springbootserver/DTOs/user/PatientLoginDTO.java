@@ -3,12 +3,11 @@ package com.hmss.springbootserver.DTOs.user;
 import com.hmss.springbootserver.DTOs.patient.PatientDTO;
 import com.hmss.springbootserver.enums.UserType;
 
-public class UserWithPatientDTO {
+public class PatientLoginDTO {
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
     private UserType userType;
     private PatientDTO patient;
 
@@ -34,14 +33,6 @@ public class UserWithPatientDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public UserType getUserType() {

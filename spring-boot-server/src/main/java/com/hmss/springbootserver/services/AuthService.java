@@ -32,11 +32,11 @@ public class AuthService {
             User foundUser = user.get();
             if(Objects.equals(foundUser.getPassword(), loginRequest.getPassword())){
                 if(foundUser.getUserType() == UserType.PATIENT)
-                    return new ResponseEntity<>(UserMapper.INSTANCE.UserWithPatientDTO(foundUser),HttpStatus.OK);
+                    return new ResponseEntity<>(UserMapper.INSTANCE.UserToPatientLoginDTO(foundUser),HttpStatus.OK);
                 else if (foundUser.getUserType() == UserType.DOCTOR)
-                    return new ResponseEntity<>(UserMapper.INSTANCE.UserWithDoctorDTO(foundUser),HttpStatus.OK);
+                    return new ResponseEntity<>(UserMapper.INSTANCE.UserToDoctorLoginDTO(foundUser),HttpStatus.OK);
                 else if (foundUser.getUserType() == UserType.ADMIN)
-                    return new ResponseEntity<>(UserMapper.INSTANCE.UserWithAdminDTO(foundUser),HttpStatus.OK);
+                    return new ResponseEntity<>(UserMapper.INSTANCE.UserToAdminLoginDTO(foundUser),HttpStatus.OK);
                 else{
                     return new ResponseEntity<>("User not found",HttpStatus.NOT_FOUND);
                 }
