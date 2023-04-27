@@ -8,6 +8,7 @@ import { LoginFormComponent } from './pages/authentication/login-form/login-form
 import { SignupFormComponent } from './pages/authentication/signup-form/signup-form.component';
 import {MatInputModule} from '@angular/material/input';
 import { InputTextModule } from 'primeng/inputtext';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { InputTextModule } from 'primeng/inputtext';
     HttpClientModule,
     FormsModule,
     InputTextModule,
+    ToastModule,
     ReactiveFormsModule
   ],
 })

@@ -7,7 +7,6 @@ public class PatientSimpleDTO {
     private String bloodType;
     private Integer height;
     private Integer weight;
-
     private Integer userId;
 
     public Long getId() {

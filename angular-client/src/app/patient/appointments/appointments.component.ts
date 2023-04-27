@@ -19,6 +19,7 @@ export class AppointmentsComponent implements OnInit {
 
   openForm(){
     this.dialog.open(AppointmentFormComponent, {
+      //data: {name: this.name, animal: this.animal}
       panelClass: 'patient-appointment-form-dialog',
       maxWidth:'1000px',
       maxHeight:'80vh',

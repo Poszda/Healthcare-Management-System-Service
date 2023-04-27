@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginForm } from '../models/login-form.model';
 
 @Component({
   selector: 'app-login-form',
@@ -8,11 +9,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginFormComponent implements OnInit {
 
-  @Output() login : EventEmitter<any> = new EventEmitter();
+  @Output() login : EventEmitter<LoginForm> = new EventEmitter();
   @Output() goToSignUp : EventEmitter<any> = new EventEmitter();
 
   form: FormGroup = new FormGroup({
-      email: new FormControl('', [Validators.required]),/* ,Validators.email */
+      email: new FormControl('', [Validators.required,Validators.email]),
       password: new FormControl('', [Validators.required]),
   });
 

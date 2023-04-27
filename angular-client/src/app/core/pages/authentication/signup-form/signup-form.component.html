@@ -6,11 +6,15 @@
     </div>
     <div class="section-2">
       <p class='fieldname' >Email</p>
-      <input type="text" pInputText formControlName="email" placeholder='Enter your email'/>
+      <input type="text" pInputText formControlName="email" placeholder='Email'/>
+      <p class='fieldname' >First name</p>
+      <input type="text" pInputText formControlName="firstName" placeholder='First name'/>
+      <p class='fieldname' >Last name</p>
+      <input type="text" pInputText formControlName="lastName" placeholder='Last name'/>
       <p class='fieldname'>Password</p>
-      <input type="password" pInputText formControlName="password" placeholder='Enter your password'/>
+      <input type="password" pInputText formControlName="password" placeholder='Password'/>
       <p class='fieldname'>Re-type Password</p>
-      <input type="password" pInputText formControlName="rePassword" placeholder='Re-type your password'/>
+      <input type="password" pInputText formControlName="rePassword" placeholder='Re-type Password'/>
     </div>
     <div class="section-3">
         <button type="submit" class="form-button login" [disabled]="form.invalid" >Create account</button>

@@ -11,24 +11,22 @@ export class AuthGuardService implements CanLoad, CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-/*     console.log('canActivate called')
+    console.log('canActivate called')
     if(this.authService.isAuthenticated()){
       return true
     }
     else{
       this.router.navigate(['login'])
       return false;
-    }  */
-    return true;
+    } 
   }
 
   
   canLoad(route: Route): boolean {
-/*     if(route.path === this.authService.getUserType()){
+    if(route.path === this.authService.getUserRoute()){
       return true;
     }
     this.router.navigate(['not-found'])
-    return false; */
-    return true;
+    return false;
   }
 }

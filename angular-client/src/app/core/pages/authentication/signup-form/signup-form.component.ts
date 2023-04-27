@@ -1,5 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { SignUpForm } from 'src/app/core/pages/authentication/models/signup-form.model';
+
+/** Check if passwords are matching */
+// const passwordMatchingValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+//   const password = control.parent!.get('rePassword')?.value; //control.parent is null
+//   const rePassword = control.value;
+//   return password && rePassword && password !== rePassword ? { passwordMissmatch: true } : null;
+// };
+
 
 @Component({
   selector: 'app-signup-form',
@@ -8,23 +17,26 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class SignupFormComponent implements OnInit {
   
-  @Output() signup : EventEmitter<any> = new EventEmitter();
+  @Output() signup : EventEmitter<SignUpForm> = new EventEmitter();
   @Output() goToLogin : EventEmitter<any> = new EventEmitter();
 
   form: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required,Validators.email]),/* ,Validators.email */
-    password: new FormControl('', [Validators.required]),
-    rePassword:new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required,Validators.email]),
+    firstName:new FormControl('', [Validators.required]),
+    lastName:new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required,Validators.minLength(4)]),
+    rePassword:new FormControl('', [Validators.required,Validators.minLength(4)]),
   });
 
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.form.get('password')?.parent)
   }
 
   signUp(){
-    this.signup.emit(/* form */);
+    this.signup.emit(this.form.getRawValue());
   }
   toggleForms(){
     this.goToLogin.emit();

@@ -1,7 +1,9 @@
-export class User {
-    id?: number;
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    type?: string;
+import { UserType } from "./user-type.enum";
+
+export interface User {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    userType: UserType;
 }
