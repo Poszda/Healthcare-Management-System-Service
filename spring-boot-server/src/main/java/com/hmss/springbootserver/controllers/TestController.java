@@ -139,4 +139,12 @@ public class TestController {
     public void conversion1(){
         this.authService.conversion1();
     }
+
+    @GetMapping("/customQuery2")
+    public Object customQuery2(){
+        return this.authService.customQuery2();
+
+    }
+
+
 }

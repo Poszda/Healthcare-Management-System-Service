@@ -13,13 +13,7 @@ import org.mapstruct.factory.Mappers;
 public interface PatientMapper {
     PatientMapper INSTANCE = Mappers.getMapper(PatientMapper.class);
 
-    @Named("patientToPatientDTO")
-    @Mapping(source = "user", target = "userId", qualifiedByName = "mapUserId")
-    PatientDTO patientToPatientDTO(Patient patient);
-
-    // Map userId from User entity
-    @Named("mapUserId")
-    default Long mapUserId(User user) {
-        return user != null ? user.getId() : null;
-    }
+    @Named("toPatientDTO")
+    @Mapping(source = "user.id", target = "userId")
+    PatientDTO toPatientDTO(Patient patient);
 }

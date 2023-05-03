@@ -14,13 +14,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface AdminMapper {
     AdminMapper INSTANCE = Mappers.getMapper(AdminMapper.class);
-    @Named("adminToAdminDTO")
-    @Mapping(source = "user", target = "userId", qualifiedByName = "mapUserId")
-    AdminDTO adminToAdminDTO(Admin admin);
-
-    // Map userId from User entity
-    @Named("mapUserId")
-    default Long mapUserId(User user) {
-        return user != null ? user.getId() : null;
-    }
+    @Named("toAdminDTO")
+    @Mapping(source = "user.id", target = "userId")
+    AdminDTO toAdminDTO(Admin admin);
 }

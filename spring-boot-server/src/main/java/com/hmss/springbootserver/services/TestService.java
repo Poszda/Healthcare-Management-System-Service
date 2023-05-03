@@ -4,10 +4,7 @@ import com.hmss.springbootserver.DTOs.AppointmentDTOTest;
 import com.hmss.springbootserver.DTOs.PatientDTOTest;
 import com.hmss.springbootserver.DTOs.UserDTOTest;
 import com.hmss.springbootserver.entities.*;
-import com.hmss.springbootserver.mappers.AppointmentMapperTest;
-import com.hmss.springbootserver.mappers.PatientMapper;
-import com.hmss.springbootserver.mappers.PatientMapperTest;
-import com.hmss.springbootserver.mappers.UserMapperTest;
+import com.hmss.springbootserver.mappers.*;
 import com.hmss.springbootserver.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -101,7 +98,7 @@ public class TestService {
     public Object getFirstPatient(){
         var x = this.patientRepository.getById((long)1);
         //var z= PatientMapperTest.patientToDto(x);
-        var z = PatientMapper.INSTANCE.patientToPatientDTO(x);
+        var z = PatientMapper.INSTANCE.toPatientDTO(x);
         return z;
     }
 
@@ -166,13 +163,12 @@ public class TestService {
     }
 
     public void customQuery(){
-        var x = this.specialityRepository.smthCustom();
-        System.out.println(x);
+
     }
 
     public boolean addProcedureToHospital(){
         var x = this.hospitalRepository.getById((long)1);
-        x.getLocation();
+        x.getCounty();
         var y = new Procedure();
         y.setName("ProdceduraNUme");
         y.setPrice(100);
@@ -185,7 +181,7 @@ public class TestService {
         var x = this.procedureRepository.getById((long)4);
         System.out.println(x);
         var y = new Hospital();
-         y.setLocation("Mamaia");
+         y.setCounty("Mamaia");
          x.addHospital(y);
          this.procedureRepository.save(x);
         return true;
@@ -208,6 +204,17 @@ public class TestService {
         var z = UserMapperTest.userDTOtoEntity(x);
         var hei = "gei";
 
+    }
+
+    public Object customQuery2(){
+        var x = this.hospitalRepository.findPossibleHospitalsAndDoctorsForAppointments("Timis","Operatie ventricul");
+        //x.get(0).getProcedureSet().size();
+       // var x = this.hospitalRepository.func();
+        return HospitalMapper.INSTANCE.toHospitalWithDoctorsDTOList(x);
+    }
+    public Object firstDoctor(){
+        var x = this.doctorRepository.getById((long)1);
+        return null;
     }
 
 //    public void cascadeTypeTestPersist(){

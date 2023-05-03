@@ -13,6 +13,7 @@ public class Procedure {
     @Column(name = "id", nullable = false)
     private Long id;
     private String name;
+    private int duration; //minutes
     private float price;
     @ManyToMany(mappedBy = "procedureSet", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     Set<Hospital> hospitalSet = new HashSet<>();
@@ -57,6 +58,14 @@ public class Procedure {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public Set<Hospital> getHospitalSet() {

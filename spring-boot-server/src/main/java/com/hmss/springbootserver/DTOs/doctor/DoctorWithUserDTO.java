@@ -1,22 +1,14 @@
 package com.hmss.springbootserver.DTOs.doctor;
 
-public class DoctorDTO {
+import com.hmss.springbootserver.DTOs.user.UserDTO;
+import com.hmss.springbootserver.entities.User;
+
+public class DoctorWithUserDTO {
     private Long id;
     private String university;
     private String description;
-    private Long userId;
     private Long hospitalId;
-
-    public DoctorDTO(Long id, String university, String description, Long userId, Long hospitalId) {
-        this.id = id;
-        this.university = university;
-        this.description = description;
-        this.userId = userId;
-        this.hospitalId = hospitalId;
-    }
-
-    public DoctorDTO() {
-    }
+    private UserDTO user;
 
     public Long getId() {
         return id;
@@ -42,19 +34,19 @@ public class DoctorDTO {
         this.description = description;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public Long getHospitalId() {
         return hospitalId;
     }
 
     public void setHospitalId(Long hospitalId) {
         this.hospitalId = hospitalId;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 }

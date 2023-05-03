@@ -26,11 +26,6 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/createPatientAccount")
-    public Patient createPatientAccount(){
-        return null;
-    }
-
     @PostMapping("/login")
     @CrossOrigin(origins = "*")
     public ResponseEntity<Object> login(@RequestBody LoginRequestDTO loginRequest){

@@ -13,7 +13,9 @@ public class Hospital { //owning side //
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    private String location;
+    private String county;
+    private String locality;
+    private String name;
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(
             name = "hospital_procedure",
@@ -43,12 +45,28 @@ public class Hospital { //owning side //
         this.id = id;
     }
 
-    public String getLocation() {
-        return location;
+    public String getCounty() {
+        return county;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setCounty(String county) {
+        this.county = county;
+    }
+
+    public String getLocality() {
+        return locality;
+    }
+
+    public void setLocality(String locality) {
+        this.locality = locality;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<Procedure> getProcedureSet() {
