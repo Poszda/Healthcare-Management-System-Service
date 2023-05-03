@@ -20,8 +20,8 @@ public class AppointmentService {
         this.appointmentRepository = appointmentRepository;
     }
 
-    public List<HospitalWithDoctorsDTO> getHospitalsAndDoctorsRecommendations(String county, String procedureName){
-        var hospitals = this.hospitalRepository.findPossibleHospitalsAndDoctorsForAppointments(county,procedureName);
+    public List<HospitalWithDoctorsDTO> getHospitalsAndDoctorsRecommendations(List<String> counties, long speciality){
+        var hospitals = this.hospitalRepository.findPossibleHospitalsAndDoctorsForAppointments(counties,speciality);
         return HospitalMapper.INSTANCE.toHospitalWithDoctorsDTOList(hospitals);
     }
 

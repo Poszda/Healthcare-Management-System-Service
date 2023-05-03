@@ -18,9 +18,9 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
-    @GetMapping("/getHospitalsAndDoctorsRecommendations/{county}/{procedureName}")
+    @GetMapping("/getHospitalsAndDoctorsRecommendations/{counties}/{procedureId}")
     @CrossOrigin(origins = "*")
-    public List<HospitalWithDoctorsDTO> getHospitalsAndDoctorsRecommendations(@PathVariable("county") String county, @PathVariable("procedureName") String procedureName){
-        return this.appointmentService.getHospitalsAndDoctorsRecommendations(county,procedureName);
+    public List<HospitalWithDoctorsDTO> getHospitalsAndDoctorsRecommendations(@PathVariable("counties") List<String> counties, @PathVariable("procedureId") long procedureId){
+        return this.appointmentService.getHospitalsAndDoctorsRecommendations(counties,procedureId);
     }
 }

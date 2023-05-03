@@ -207,7 +207,7 @@ public class TestService {
     }
 
     public Object customQuery2(){
-        var x = this.hospitalRepository.findPossibleHospitalsAndDoctorsForAppointments("Timis","Operatie ventricul");
+        var x = this.hospitalRepository.findPossibleHospitalsAndDoctorsForAppointments("Timis",1);
         //x.get(0).getProcedureSet().size();
        // var x = this.hospitalRepository.func();
         return HospitalMapper.INSTANCE.toHospitalWithDoctorsDTOList(x);

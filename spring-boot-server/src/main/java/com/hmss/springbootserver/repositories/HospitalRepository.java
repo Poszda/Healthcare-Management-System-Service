@@ -17,9 +17,16 @@ public interface HospitalRepository extends JpaRepository<Hospital,Long> {
             "JOIN FETCH h.doctors d " + // should i also join fetch d.users ? it seems that generated even more queries???
             "JOIN d.speciality s " +
             "JOIN p.speciality sp " +
-            "WHERE h.county = :county AND p.name =:procedureName AND s.name = sp.name")
-    List<Hospital> findPossibleHospitalsAndDoctorsForAppointments(@Param("county") String county,@Param("procedureName") String procedureName);
+            "WHERE h.county = :county AND p.id =:procedureId AND s.id = sp.id")
+    List<Hospital> findPossibleHospitalsAndDoctorsForAppointments(@Param("county") String county,@Param("procedureId") long procedureId);
 
     @Query("SELECT DISTINCT h.county FROM Hospital h")
     List<String> findAllCounties();
+
+
+    @Query("SELECT h FROM Hospital h " +
+            "JOIN FETCH h.doctors d " +
+            "JOIN d.speciality s " +
+            "WHERE h.county IN (:counties) AND s.id = :specialityId")
+    List<Hospital> findPossibleHospitalsAndDoctorsForAppointments(@Param("counties") List<String> counties,@Param("specialityId") long specialityId);
 }
