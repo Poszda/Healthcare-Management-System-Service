@@ -119,7 +119,19 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   getSugestions() {
-    console.log('make api call to get suggestions, go next',this.formOptional.getRawValue());
+    const manadatoryForm = this.formMandatory.getRawValue();
+    const optionalForm = this.formOptional.getRawValue();
+    let doctorsIds;
+    if (optionalForm.hospitals.length > 0 && optionalForm.doctors.length === 0){ 
+      doctorsIds = this.doctorsOptions.filter((el : any) => optionalForm.hospitals.includes(el.hospitalId)).map((el:any) => el.id)
+    }
+    else{
+      doctorsIds = optionalForm.doctors
+    }
+    
+    console.log(manadatoryForm)
+    console.log(doctorsIds)
+
   }
 
   subscribeToSpecialityChange() {
