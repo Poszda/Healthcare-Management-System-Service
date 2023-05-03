@@ -101,7 +101,7 @@ export class AppointmentFormComponent implements OnInit {
   getOptionalOptions() {
     this.loading = true;
     this.formOptional.disable({ emitEvent: false });
-    this.appointmentService.getFormOptionalOptions("Timis", "Operatie ventricul").subscribe(
+    this.appointmentService.getFormOptionalOptions(this.formMandatory.get('county')?.value, this.formMandatory.get('speciality')?.value).subscribe(
       (res: any[]) => {
         setTimeout(() => {
           console.log(res)
