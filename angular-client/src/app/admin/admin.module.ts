@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { SharedModule } from '../shared/shared.module';
-import { StatsComponent } from './stats/stats.component';
-import { ManageComponent } from './manage/manage.component';
+import { StatsComponent } from './components/stats/stats.component';
+import { ManageComponent } from './components/manage/manage.component';
 
 
 @NgModule({

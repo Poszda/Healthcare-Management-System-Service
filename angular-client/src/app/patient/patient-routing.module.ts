@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NothingHereComponent } from '../core/pages/nothing-here/nothing-here.component';
-import { AppointmentsComponent } from './appointments/appointments.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AppointmentsComponent } from './components/appointments/appointments.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PatientComponent } from './patient.component';
-import { PrescriptionsComponent } from './prescriptions/prescriptions.component';
+import { PrescriptionsComponent } from './components/prescriptions/prescriptions.component';
 
 const routes: Routes = [
       {path: '', component: PatientComponent, children: [

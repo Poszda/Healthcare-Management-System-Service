@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NothingHereComponent } from '../core/pages/nothing-here/nothing-here.component';
 import { AdminComponent } from './admin.component';
-import { StatsComponent } from './stats/stats.component';
-import { ManageComponent } from './manage/manage.component';
+import { StatsComponent } from './components/stats/stats.component';
+import { ManageComponent } from './components/manage/manage.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent,children:[

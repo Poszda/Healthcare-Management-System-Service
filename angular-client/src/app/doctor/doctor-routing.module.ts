@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DoctorComponent } from './doctor.component';
 import { NothingHereComponent } from '../core/pages/nothing-here/nothing-here.component';
-import { AppointmentsComponent } from './appointments/appointments.component';
+import { AppointmentsComponent } from './components/appointments/appointments.component';
 
 const routes: Routes = [
   { path: '', component: DoctorComponent,children:[

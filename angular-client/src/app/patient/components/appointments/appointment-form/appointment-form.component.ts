@@ -3,10 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { Inject } from '@angular/core';
-import { AppointmentsService } from '../../services/appointments.service';
+import { AppointmentsService } from '../../../services/appointments.service';
 import { Doctor } from 'src/app/core/models/doctor.model';
-import { SpecialitiesService } from '../../services/specialities.service';
-import { HospitalsService } from '../../services/hospitals.service';
+import { SpecialitiesService } from '../../../services/specialities.service';
+import { HospitalsService } from '../../../services/hospitals.service';
 import { forkJoin } from 'rxjs';
 
 @Component({
