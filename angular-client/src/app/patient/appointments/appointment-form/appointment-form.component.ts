@@ -2,7 +2,12 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
-import {Inject} from '@angular/core';
+import { Inject } from '@angular/core';
+import { AppointmentsService } from '../../services/appointments.service';
+import { Doctor } from 'src/app/core/models/doctor.model';
+import { SpecialitiesService } from '../../services/specialities.service';
+import { HospitalsService } from '../../services/hospitals.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-appointment-form',
@@ -11,14 +16,14 @@ import {Inject} from '@angular/core';
 })
 export class AppointmentFormComponent implements OnInit {
   formMandatory: FormGroup = new FormGroup({
-      startDate: new FormControl('', Validators.required),
-      endDate: new FormControl('', Validators.required),
-      county: new FormControl([], Validators.required),
-      speciality: new FormControl('', Validators.required),
-      procedure: new FormControl({ value: '', disabled: true }, Validators.required),
+    startDate: new FormControl('', Validators.required),
+    endDate: new FormControl('', Validators.required),
+    county: new FormControl([], Validators.required),
+    speciality: new FormControl(null, Validators.required),
+    procedure: new FormControl({ value: null, disabled: true }, Validators.required),
   });
 
-  formOptional :FormGroup = new FormGroup({
+  formOptional: FormGroup = new FormGroup({
     doctors: new FormControl({ value: [], disabled: true }),
     hospitals: new FormControl({ value: [], disabled: true }),
   })
@@ -27,98 +32,136 @@ export class AppointmentFormComponent implements OnInit {
   specialityOptions: any = []
   procedureOptions: any = []
   filteredProcedureOptions: any = []
-  hospitalsOptions: any = []
+  hospitalsOptions: any[] = []
   doctorsOptions: any = []
+  filteredDoctorsOptions: any = []
 
-  loading : boolean = false;
-  loadingSpinner : boolean = false
+  loading: boolean = false;
+  loadingSpinner: boolean = false
 
 
   constructor(public dialogRef: MatDialogRef<AppointmentFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private appointmentService: AppointmentsService,
+    private specialitiesService: SpecialitiesService,
+    private hospitalsService: HospitalsService
+  ) { }
+
+  endDateGreaterThanStartDateValidator(control: FormControl): { [s: string]: boolean } | null{
+    const startDate = control.root.get('startDate');
+    const endDate = control.value;
+    if (startDate && endDate && new Date(startDate.value) > new Date(endDate)) {
+      return { endDateGreaterThanStartDate: true };
+    }
+    return null;
+  }
 
 
   ngOnInit(): void {
-    console.log(this.formMandatory,this.formOptional)
-    this.getMandatoryOptions();
     this.subscribeToSpecialityChange();
-  }
-  
-  getMandatoryOptions() {
-    this.loadingSpinner = true;
-    this.countiesOptions = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
-    ];
-    setTimeout(() => {
-      this.specialityOptions = [
-        { "name": "Cardiologie", "code": 1 },
-        { "name": "Dentologie", "code": 2 },
-        { "name": "Organologie", "code": 3 },
-        { "name": "Psihiatrie", "code": 4 },
-      ]
-      this.procedureOptions = [
-        { "name": "Returnare Valva", "code": 1, "specialityId": 1 },
-        { "name": "Extrac de suc", "code": 2,"specialityId": 1 },
-        { "name": "Operatie deviatie de sept", "code": 3,"specialityId": 2 },
-        { "name": "Psihopiloba", "code": 4,"specialityId": 3 },
-        { "name": "Pronostic anafilactic", "code": 4,"specialityId": 4 },
-      ]
-      this.loadingSpinner = false;
-    }, 2000);
+    this.subscribeToHospitalChange();
+    this.getMandatoryOptions();
   }
 
-/*   getOptionalOptions() {
-    this.loading = true;
-    this.form.get('mandatory')?.disable({emitEvent:false});
-    setTimeout(() => {
-      this.hospitalsOptions = [
-        { name: 'Iulius Town Hospital', code: 1 },
-        { name: 'George Dumitru Clinic', code: 2 },
-        { name: 'Senna Days', code: 3 },
-        { name: 'Regina Maria', code: 4 },
-        { name: 'Hpital Sopital', code: 5 },
-      ]
-      this.doctorsOptions = [
-        { name: "Andrei Popescu", code: 1 },
-        { name: "Ionescu Popescu", code: 2 },
-        { name: "George Gopescu", code: 3 },
-        { name: "Pandrei Copescu", code: 4 }
-      ]
-      this.loading = false;
-      this.form.get('mandatory')?.enable({emitEvent:false});
-    }, 1000);
+  getMandatoryOptions() {
+    this.loadingSpinner = true;
+    const calls = [
+      this.hospitalsService.getAllHospitalsCounties(),
+      this.specialitiesService.getSpecialitiesWithProcedures()
+    ]
+    forkJoin(calls)
+    .subscribe(
+      (res) => {
+        setTimeout(() => {
+        console.log(res)
+        this.countiesOptions = res[0].map((el:any) => ({name:el}));
+        this.specialityOptions = res[1];
+        this.procedureOptions = this.extractProceduresFromSpecialitiesArray(res[1])
+        this.filteredProcedureOptions = [];
+        this.loadingSpinner = false;
+        }, 500);
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
-  */
+
+  extractDoctorsFromHospitalArray(array: any) {
+    return array
+      .reduce((accumulator: Doctor[], hospital: any) => [...accumulator, ...hospital.doctors], [])
+      .map((el: any) => ({ ...el, name: el.user.firstName + " " + el.user.lastName }))
+  }
+
+  extractProceduresFromSpecialitiesArray(array : any){
+    return array
+    .reduce((accumulator : any,speciality : any) => [...accumulator, ...speciality.procedures],[])
+  }
+
+  getOptionalOptions() {
+    this.loading = true;
+    this.formOptional.disable({ emitEvent: false });
+    this.appointmentService.getFormOptionalOptions("Timis", "Operatie ventricul").subscribe(
+      (res: any[]) => {
+        setTimeout(() => {
+          console.log(res)
+          this.hospitalsOptions =[...res];
+          this.doctorsOptions = this.extractDoctorsFromHospitalArray(res);
+          this.filteredDoctorsOptions = [...this.doctorsOptions]
+          this.formOptional.enable({ emitEvent: false });
+          this.loading = false;
+        }, 500);
+      },
+      err => {
+        console.log(err)
+      }
+    )
+  }
+
+  getSugestions() {
+    console.log('make api call to get suggestions, go next',this.formOptional.getRawValue());
+  }
 
   subscribeToSpecialityChange() {
     this.formMandatory.get('speciality')?.valueChanges.subscribe(
       (res) => {
-        console.log('called speciality changes')
         if (this.formMandatory.get('speciality')?.valid) {
           this.filterProceduresBySpeciality(this.formMandatory.get('speciality')?.value);
           if (this.formMandatory.get('procedure')?.disabled)
-            this.formMandatory.get('procedure')?.enable({emitEvent:false})
+            this.formMandatory.get('procedure')?.enable({ emitEvent: false })
         }
         else {
-          if(this.formMandatory.get('speciality')?.value === null){
+          if (this.formMandatory.get('speciality')?.value === null) {
             this.formMandatory.get('procedure')?.reset();
           }
-          this.formMandatory.get('procedure')?.disable({emitEvent:false})
+          this.formMandatory.get('procedure')?.disable({ emitEvent: false })
         }
       }
     )
   }
 
-  filterProceduresBySpeciality(selectedSpeciality? : number){
-    if(!selectedSpeciality) this.filteredProcedureOptions = [...this.procedureOptions]
-    this.filteredProcedureOptions = this.procedureOptions.filter((el : any) => el.specialityId === selectedSpeciality)
+  subscribeToHospitalChange() {
+    this.formOptional.get('hospitals')?.valueChanges.subscribe(
+      (res) => {
+        this.formOptional.get('doctors')?.setValue([]);
+        const hospitalIds = this.formOptional.get('hospitals')?.value;
+        if (hospitalIds.length > 0) {
+          const selectedHospitals = this.hospitalsOptions.filter(el => hospitalIds.includes(el.id));
+          this.filteredDoctorsOptions = this.extractDoctorsFromHospitalArray(selectedHospitals)
+        }
+        else {
+          this.filteredDoctorsOptions = this.doctorsOptions
+        }
+      }
+    )
   }
 
-  saveAppointment(){
+  filterProceduresBySpeciality(selectedSpeciality?: number) {
+    if (!selectedSpeciality) this.filteredProcedureOptions = [...this.procedureOptions]
+    this.filteredProcedureOptions = this.procedureOptions.filter((el: any) => el.specialityId === selectedSpeciality)
+  }
+
+  saveAppointment() {
     this.loading = true;
     //make save call
     //disable buttons and dialogs

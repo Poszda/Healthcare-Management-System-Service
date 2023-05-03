@@ -22,7 +22,6 @@ export class AuthenticationComponent implements OnInit {
   }
 
   login(form : LoginForm){
-    console.log(form)
     this.userService.login(form).subscribe(
       res =>{
         this.userService.handleLogin(res);

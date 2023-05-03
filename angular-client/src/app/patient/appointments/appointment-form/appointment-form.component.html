@@ -14,12 +14,12 @@
                         <div class="column column-1">
                             <div class="form-field">
                                 <p-dropdown [style]="{'width':'100%'}" formControlName="speciality" appendTo="body"
-                                    [options]="specialityOptions" optionLabel="name" optionValue="code" [filter]="true"
+                                    [options]="specialityOptions" optionLabel="name" optionValue="id" [filter]="true"
                                     filterBy="name" [showClear]="true" placeholder="Select speciality*"></p-dropdown>
                             </div>
                             <div class="form-field">
                                 <p-dropdown [style]="{'width':'100%'}" formControlName="procedure" appendTo="body"
-                                    [options]="filteredProcedureOptions" optionLabel="name" optionValue="code"
+                                    [options]="filteredProcedureOptions" optionLabel="name" optionValue="id"
                                     [filter]="true" filterBy="name" [showClear]="true"
                                     placeholder="Select procedure*"></p-dropdown>
                             </div>
@@ -37,7 +37,7 @@
                         <div class="column column-3">
                             <div class="form-field">
                                 <p-multiSelect [style]="{'width':'100%'}" formControlName="county" appendTo="body"
-                                    [options]="countiesOptions" optionLabel="name" optionValue="code"
+                                    [options]="countiesOptions" optionLabel="name" optionValue="name"
                                     placeholder="Select counties*"></p-multiSelect><!-- styleClass="test" -->
                             </div><!-- styleClass -->
                         </div>
@@ -45,36 +45,43 @@
                 </form>
                 <button matStepperNext class="basic-button primary"
                 style="height:40px;width: 80px; align-self: flex-end;"
-                [disabled]="formMandatory.invalid || loading === true">Next</button>
+                [disabled]="formMandatory.invalid || loading === true" (click)="getOptionalOptions()">Next</button>
             </div>
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>More Details</ng-template>
             <div class="section-2">
-                <form [formGroup]="formOptional" class="form-stepone">
+                <form [formGroup]="formOptional" class="form-stepone" *ngIf="loading || hospitalsOptions.length > 0;else notice">
                     <div class="form-optional">
                         <div class="column column-1">
                             <div class="form-field">
                                 <p-multiSelect [style]="{'width':'100%'}" formControlName="hospitals" appendTo="body"
-                                    [options]="hospitalsOptions" optionLabel="name" optionValue="code"
+                                    [options]="hospitalsOptions" optionLabel="name" optionValue="id"
                                     placeholder="Select hospitals"></p-multiSelect>
                             </div>
                         </div>
                         <div class="column column-2">
                             <div class="form-field">
                                 <p-multiSelect [style]="{'width':'100%'}" formControlName="doctors" appendTo="body"
-                                    [options]="doctorsOptions" optionLabel="name" optionValue="code"
+                                    [options]="filteredDoctorsOptions" optionLabel="name" optionValue="id"
                                     placeholder="Select doctors"></p-multiSelect>
                             </div>
                         </div>
                     </div>
                     <p style="color: grey;">* This fields are optional</p>
                 </form>
+                <ng-template #notice>
+                    <div class="notice">
+                        <p style="color: grey;">No available procedure in selected area</p>
+                    </div>
+                </ng-template>
                 <div class="buttons">
+                    <button class="basic-button primary" style="height:40px;width: 80px;" 
+                    [disabled]="loading === true"
+                    matStepperPrevious >Back</button>
                     <button class="basic-button primary" style="height:40px;width: 80px;"
-                        matStepperPrevious>Back</button>
-                    <button class="basic-button primary" style="height:40px;width: 80px;"
-                        matStepperNext>Next</button>
+                    [disabled]="formOptional.invalid || loading === true || !hospitalsOptions.length"
+                    (click)="getSugestions()" matStepperNext >Next</button>
                 </div>
             </div>
         </mat-step>

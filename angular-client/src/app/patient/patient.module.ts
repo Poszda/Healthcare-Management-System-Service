@@ -15,6 +15,8 @@ import { AppointmentCardComponent } from './appointments/appointment-card/appoin
 import { AppointmentFormComponent } from './appointments/appointment-form/appointment-form.component';
 import { AppointmentSuggestionComponent } from './appointments/appointment-form/appointment-suggestion/appointment-suggestion.component';
 import { AppointmentLastStepComponent } from './appointments/appointment-form/appointment-last-step/appointment-last-step.component';
+import { AppointmentsService } from './services/appointments.service';
+import { SpecialitiesService } from './services/specialities.service';
 
 
 @NgModule({
@@ -36,6 +38,10 @@ import { AppointmentLastStepComponent } from './appointments/appointment-form/ap
     CommonModule,
     PatientRoutingModule,
     SharedModule,
+  ],
+  providers:[
+    AppointmentsService,
+    SpecialitiesService
   ]
 })
 export class PatientModule { }

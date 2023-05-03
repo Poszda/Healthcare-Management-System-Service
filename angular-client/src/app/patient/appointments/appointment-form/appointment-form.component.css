@@ -21,6 +21,12 @@
     flex-direction: column;
     gap: 10px;
 }
+.notice{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .form-madatory,
 .form-optional {

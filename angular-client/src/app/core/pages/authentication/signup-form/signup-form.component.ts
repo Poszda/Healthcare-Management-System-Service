@@ -4,7 +4,7 @@ import { SignUpForm } from 'src/app/core/pages/authentication/models/signup-form
 
 /** Check if passwords are matching */
 // const passwordMatchingValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-//   const password = control.parent!.get('rePassword')?.value; //control.parent is null
+//   const password = control.parent!.get('password')?.value; //control.parent is null
 //   const rePassword = control.value;
 //   return password && rePassword && password !== rePassword ? { passwordMissmatch: true } : null;
 // };
@@ -16,7 +16,7 @@ import { SignUpForm } from 'src/app/core/pages/authentication/models/signup-form
   styleUrls: ['./signup-form.component.css']
 })
 export class SignupFormComponent implements OnInit {
-  
+   
   @Output() signup : EventEmitter<SignUpForm> = new EventEmitter();
   @Output() goToLogin : EventEmitter<any> = new EventEmitter();
 
@@ -32,7 +32,6 @@ export class SignupFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.form.get('password')?.parent)
   }
 
   signUp(){

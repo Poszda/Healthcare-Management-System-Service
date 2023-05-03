@@ -46,8 +46,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     DropdownModule,
     ProgressSpinnerModule,
     MatProgressBarModule
-
-    
   ],
   exports:[
     FormsModule, //??
@@ -67,8 +65,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     DropdownModule,
     ProgressSpinnerModule,
     MatProgressBarModule
-    
-    
   ]
 })
 export class SharedModule { }
