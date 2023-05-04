@@ -15,12 +15,6 @@ import org.mapstruct.factory.Mappers;
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    @Named("toUserDTO")
-    @Mapping(source = "doctor.id", target = "doctorId")
-    @Mapping(source = "admin.id", target = "adminId")
-    @Mapping(source = "patient.id", target = "patientId")
-    UserDTO toUserDTO(User user);
-
     @Named("UserToPatientLoginDTO")
     @Mapping(target = "patient" ,qualifiedByName = "toPatientDTO")
     PatientLoginDTO UserToPatientLoginDTO(User user);

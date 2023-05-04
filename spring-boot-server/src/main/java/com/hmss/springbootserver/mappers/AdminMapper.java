@@ -11,7 +11,7 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 @Named("AdminMapper")
-@Mapper
+@Mapper(componentModel = "spring")
 public interface AdminMapper {
     AdminMapper INSTANCE = Mappers.getMapper(AdminMapper.class);
     @Named("toAdminDTO")

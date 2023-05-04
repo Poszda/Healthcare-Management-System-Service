@@ -1,5 +1,6 @@
 package com.hmss.springbootserver.services;
 
+import com.hmss.springbootserver.DTOs.AvailableAppointmentsRequestDTO;
 import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
 import com.hmss.springbootserver.mappers.HospitalMapper;
 import com.hmss.springbootserver.repositories.AppointmentRepository;
@@ -23,6 +24,11 @@ public class AppointmentService {
     public List<HospitalWithDoctorsDTO> getHospitalsAndDoctorsRecommendations(List<String> counties, long speciality){
         var hospitals = this.hospitalRepository.findPossibleHospitalsAndDoctorsForAppointments(counties,speciality);
         return HospitalMapper.INSTANCE.toHospitalWithDoctorsDTOList(hospitals);
+    }
+
+    public Object getAvailableAppointments(AvailableAppointmentsRequestDTO req){
+        var x = this.appointmentRepository.findAppointmentsByDoctorsInAPeriod(req.getDoctorIds(),req.getStartDate(),req.getEndDate());
+        return x;
     }
 
 }

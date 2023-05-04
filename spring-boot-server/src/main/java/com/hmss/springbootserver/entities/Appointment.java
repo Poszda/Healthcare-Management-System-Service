@@ -25,7 +25,7 @@ public class Appointment {
     @JoinColumn(name="doctor_id")
     private Doctor doctor;
 
-    @OneToOne(fetch = FetchType.LAZY) // by default EAGER
+    @ManyToOne(fetch = FetchType.LAZY) // by default EAGER
     @JoinColumn(name = "procedure_id")
     private Procedure procedure;
 

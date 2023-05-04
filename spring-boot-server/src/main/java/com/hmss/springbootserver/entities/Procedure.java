@@ -3,6 +3,7 @@ package com.hmss.springbootserver.entities;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,8 +23,8 @@ public class Procedure {
     @JoinColumn(name="speciality_id")
     private Speciality speciality;
 
-    @OneToOne(mappedBy = "procedure", cascade = CascadeType.ALL) // aici cascade trebuie verificat // nu pun optional=false
-    private Appointment appointment;
+    @OneToMany(mappedBy = "procedure", cascade = CascadeType.ALL) // aici cascade trebuie verificat // nu pun optional=false
+    private List<Appointment> appointments;
 
     public void addHospital(Hospital hospital) {
         hospitalSet.add(hospital);
@@ -84,11 +85,11 @@ public class Procedure {
         this.speciality = speciality;
     }
 
-    public Appointment getAppointment() {
-        return appointment;
+    public List<Appointment> getAppointments() {
+        return appointments;
     }
 
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 }
