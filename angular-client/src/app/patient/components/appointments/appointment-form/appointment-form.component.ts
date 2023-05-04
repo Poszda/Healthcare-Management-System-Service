@@ -87,17 +87,6 @@ export class AppointmentFormComponent implements OnInit {
     )
   }
 
-  extractDoctorsFromHospitalArray(array: any) {
-    return array
-      .reduce((accumulator: Doctor[], hospital: any) => [...accumulator, ...hospital.doctors], [])
-      .map((el: any) => ({ ...el, name: el.user.firstName + " " + el.user.lastName }))
-  }
-
-  extractProceduresFromSpecialitiesArray(array : any){
-    return array
-    .reduce((accumulator : any,speciality : any) => [...accumulator, ...speciality.procedures],[])
-  }
-
   getOptionalOptions() {
     this.loading = true;
     this.formOptional.disable({ emitEvent: false });
@@ -118,7 +107,13 @@ export class AppointmentFormComponent implements OnInit {
     )
   }
 
-  getSugestions() {
+  extractDoctorsFromHospitalArray(array: any) {
+    return array
+      .reduce((accumulator: Doctor[], hospital: any) => [...accumulator, ...hospital.doctors], [])
+      .map((el: any) => ({ ...el, name: el.user.firstName + " " + el.user.lastName }))
+  }
+
+  getAvailableAppointments() {
     const manadatoryForm = this.formMandatory.getRawValue();
     const optionalForm = this.formOptional.getRawValue();
     let doctorsIds;
@@ -128,10 +123,32 @@ export class AppointmentFormComponent implements OnInit {
     else{
       doctorsIds = optionalForm.doctors
     }
-    
-    console.log(manadatoryForm)
-    console.log(doctorsIds)
+    const req = {
+      startDate:manadatoryForm.startDate,
+      endDate:manadatoryForm.endDate,
+      doctorsIds:doctorsIds
+    }
+    req.startDate.setHours(0,0,0,0)
+    req.endDate.setHours(0,0,0,0)
+    console.log(req)
+    req.startDate = req.startDate.toISOString();
+    req.endDate = req.endDate.toISOString();
 
+
+    this.appointmentService.getAvailableAppointments(req).subscribe(
+      res =>{
+        console.log(res)
+      },
+      err =>{
+        console.log(err)
+      }
+    )
+  }
+
+
+  extractProceduresFromSpecialitiesArray(array : any){
+    return array
+    .reduce((accumulator : any,speciality : any) => [...accumulator, ...speciality.procedures],[])
   }
 
   subscribeToSpecialityChange() {

@@ -31,7 +31,7 @@
                             </div>
                             <div class="form-field">
                                 <p-calendar [style]="{'width':'100%'}" formControlName="endDate" [appendTo]="'body'"
-                                    [showIcon]="true" inputId="icon" placeholder="Start Date*"></p-calendar>
+                                    [showIcon]="true" inputId="icon" placeholder="End Date*"></p-calendar>
                             </div>
                         </div>
                         <div class="column column-3">
@@ -81,7 +81,7 @@
                     matStepperPrevious >Back</button>
                     <button class="basic-button primary" style="height:40px;width: 80px;"
                     [disabled]="formOptional.invalid || loading === true || !hospitalsOptions.length"
-                    (click)="getSugestions()" matStepperNext >Next</button>
+                    (click)="getAvailableAppointments()" matStepperNext >Next</button>
                 </div>
             </div>
         </mat-step>
