@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { SignUpForm } from './models/signup-form.model';
 import { LoginForm } from './models/login-form.model';
 import { MessageService } from 'primeng/api';
@@ -16,15 +16,15 @@ export class AuthenticationComponent implements OnInit {
   showLogInForm : boolean = true;
   showSignUpForm : boolean = false;
 
-  constructor(private userService: UserService, private messageService : MessageService) { }
+  constructor(private authService: AuthService, private messageService : MessageService) { }
 
   ngOnInit(): void {
   }
 
   login(form : LoginForm){
-    this.userService.login(form).subscribe(
+    this.authService.login(form).subscribe(
       res =>{
-        this.userService.handleLogin(res);
+        this.authService.handleLogin(res);
       },
       err =>{
         if (err.status !== 0){ //if backend works
@@ -38,7 +38,7 @@ export class AuthenticationComponent implements OnInit {
   }
 
   signup(form: SignUpForm){
-    this.userService.signUp(form).subscribe(
+    this.authService.signUp(form).subscribe(
       res =>{
         this.onGoToLogIn();
         this.showSuccess();

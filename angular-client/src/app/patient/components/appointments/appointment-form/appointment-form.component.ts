@@ -8,6 +8,10 @@ import { Doctor } from 'src/app/core/models/doctor.model';
 import { SpecialitiesService } from '../../../services/specialities.service';
 import { HospitalsService } from '../../../services/hospitals.service';
 import { forkJoin } from 'rxjs';
+import * as moment from 'moment';
+import { UserService } from 'src/app/patient/services/user.service';
+import { DoctorsAvailableHours } from 'src/app/patient/models/doctor-available-hours.model';
+import { AppointmentSuggestion } from 'src/app/patient/models/appointment-suggestion.model';
 
 @Component({
   selector: 'app-appointment-form',
@@ -39,12 +43,15 @@ export class AppointmentFormComponent implements OnInit {
   loading: boolean = false;
   loadingSpinner: boolean = false
 
+  appointmentSuggestions : AppointmentSuggestion[] = [];
+
 
   constructor(public dialogRef: MatDialogRef<AppointmentFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private appointmentService: AppointmentsService,
     private specialitiesService: SpecialitiesService,
-    private hospitalsService: HospitalsService
+    private hospitalsService: HospitalsService,
+    private userService : UserService
   ) { }
 
   endDateGreaterThanStartDateValidator(control: FormControl): { [s: string]: boolean } | null{
@@ -73,7 +80,6 @@ export class AppointmentFormComponent implements OnInit {
     .subscribe(
       (res) => {
         setTimeout(() => {
-        console.log(res)
         this.countiesOptions = res[0].map((el:any) => ({name:el}));
         this.specialityOptions = res[1];
         this.procedureOptions = this.extractProceduresFromSpecialitiesArray(res[1])
@@ -93,7 +99,6 @@ export class AppointmentFormComponent implements OnInit {
     this.appointmentService.getFormOptionalOptions(this.formMandatory.get('county')?.value, this.formMandatory.get('speciality')?.value).subscribe(
       (res: any[]) => {
         setTimeout(() => {
-          console.log(res)
           this.hospitalsOptions =[...res];
           this.doctorsOptions = this.extractDoctorsFromHospitalArray(res);
           this.filteredDoctorsOptions = [...this.doctorsOptions]
@@ -113,37 +118,79 @@ export class AppointmentFormComponent implements OnInit {
       .map((el: any) => ({ ...el, name: el.user.firstName + " " + el.user.lastName }))
   }
 
-  getAvailableAppointments() {
+  getDoctorsAvailableHours() {
     const manadatoryForm = this.formMandatory.getRawValue();
     const optionalForm = this.formOptional.getRawValue();
     let doctorsIds;
     if (optionalForm.hospitals.length > 0 && optionalForm.doctors.length === 0){ 
       doctorsIds = this.doctorsOptions.filter((el : any) => optionalForm.hospitals.includes(el.hospitalId)).map((el:any) => el.id)
     }
+    else if(optionalForm.hospitals.length === 0 && optionalForm.doctors.length === 0){
+      doctorsIds = this.doctorsOptions.map((el:any) => el.id)
+    }
     else{
       doctorsIds = optionalForm.doctors
     }
     const req = {
-      startDate:manadatoryForm.startDate,
-      endDate:manadatoryForm.endDate,
-      doctorsIds:doctorsIds
+      startDate: moment(manadatoryForm.startDate).format(),
+      endDate:moment(manadatoryForm.endDate).hour(23).minute(59).format(),
+      doctorsIds:doctorsIds,
+      procedureId:manadatoryForm.procedure
     }
-    req.startDate.setHours(0,0,0,0)
-    req.endDate.setHours(0,0,0,0)
-    console.log(req)
-    req.startDate = req.startDate.toISOString();
-    req.endDate = req.endDate.toISOString();
 
-
-    this.appointmentService.getAvailableAppointments(req).subscribe(
-      res =>{
-        console.log(res)
+    // calling apis
+    this.loading = true;
+    const calls = [
+      this.appointmentService.getDoctorsAvailableHours(req),
+      this.userService.getDoctorsWithHospitalsById(doctorsIds)
+    ]
+    forkJoin(calls)
+    .subscribe(
+      ([res1,res2]) => {
+        setTimeout(() => {
+        this.appointmentSuggestions =  this.sortAppointmentsByDate(this.createAppointmentSuggestions(res1,res2))
+        console.log(this.appointmentSuggestions);
+        this.loading = false;
+        }, 500);
       },
-      err =>{
-        console.log(err)
+      err => {
+        console.log(err);
       }
     )
   }
+
+  createAppointmentSuggestions(doctorsAvailableHours : DoctorsAvailableHours[], doctors : any[]): AppointmentSuggestion[]{
+    const list : AppointmentSuggestion[] = [];
+    doctorsAvailableHours.forEach(el => {
+      const doctorExtended = doctors.find(de => de.id === el.doctorId) // shoul be always found
+      el.dates.forEach(d => {
+        const obj : AppointmentSuggestion = {
+          doctorName: doctorExtended.user.firstName + " " + doctorExtended.user.lastName,
+          doctorSpeciality: "Speciality 1",
+          hospitalName: doctorExtended.hospital.name,
+          date: d.date,
+          hours: d.hours
+        }
+        list.push(obj)
+      });
+    });
+    return list;
+  }
+
+  sortAppointmentsByDate(appointments: AppointmentSuggestion[]): AppointmentSuggestion[] {
+    return appointments.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      if (dateA < dateB) {
+        return -1;
+      }
+      if (dateA > dateB) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+  
 
 
   extractProceduresFromSpecialitiesArray(array : any){
@@ -188,6 +235,10 @@ export class AppointmentFormComponent implements OnInit {
   filterProceduresBySpeciality(selectedSpeciality?: number) {
     if (!selectedSpeciality) this.filteredProcedureOptions = [...this.procedureOptions]
     this.filteredProcedureOptions = this.procedureOptions.filter((el: any) => el.specialityId === selectedSpeciality)
+  }
+
+  onSuggestionSelection(){
+    
   }
 
   saveAppointment() {

@@ -2,32 +2,25 @@
     <div class="profile">
         <img id="img-profile" src="assets/images/profile.jpg" alt="" />
         <div class="text">
-            <p style="font-size: 14px;">Michael A</p>
-            <p class="subtitle">Dentologie</p>
+            <p style="font-size: 14px;">{{suggestion?.doctorName}}</p>
+            <p class="subtitle">{{suggestion?.doctorSpeciality}}</p>
         </div>
     </div>
     <div class="location">
         <p class="subtitle">Location</p>
-        <p>Spitalul de Urgenta Bucuresti</p>
+        <p>{{suggestion?.hospitalName}}</p>
     </div>
     <div class="Date">
         <p class="subtitle">Date</p>
-        <p>11/12/2023</p>
+        <p>{{suggestion?.date}}</p>
     </div>
     <div class="hours">
         <p class="subtitle">Available Hours</p>
         <div class="hours-container">
-            <div class="hour">12:20</div>
-            <div class="hour">12:20</div>
-            <div class="hour">12:20</div>
-            <div class="hour">12:20</div>
-            <div class="hour">12:20</div>
-            <div class="hour">12:20</div>
-            <div class="hour">12:20</div>
-            <div class="hour">12:20</div>
-            <div class="hour">12:20</div>
-            <div class="hour">12:20</div>
-            <div class="hour">12:20</div>
+            <div class="hour" 
+            *ngFor="let hour of suggestion?.hours"
+            (click)="selectHour(hour)"
+            >{{hour | slice:0:-3}}</div>
         </div>
     </div>
 </div>

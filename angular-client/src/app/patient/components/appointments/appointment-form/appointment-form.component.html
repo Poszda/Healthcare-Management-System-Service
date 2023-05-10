@@ -81,7 +81,7 @@
                     matStepperPrevious >Back</button>
                     <button class="basic-button primary" style="height:40px;width: 80px;"
                     [disabled]="formOptional.invalid || loading === true || !hospitalsOptions.length"
-                    (click)="getAvailableAppointments()" matStepperNext >Next</button>
+                    (click)="getDoctorsAvailableHours()" matStepperNext >Next</button>
                 </div>
             </div>
         </mat-step>
@@ -89,14 +89,7 @@
             <ng-template matStepLabel>Select Available Appointment</ng-template>
             <div class="section-3">
                 <div class="suggestions-container">
-                    <app-appointment-suggestion></app-appointment-suggestion>
-                    <app-appointment-suggestion></app-appointment-suggestion>
-                    <app-appointment-suggestion></app-appointment-suggestion>
-                    <app-appointment-suggestion></app-appointment-suggestion>
-                    <app-appointment-suggestion></app-appointment-suggestion>
-                    <app-appointment-suggestion></app-appointment-suggestion>
-                    <app-appointment-suggestion></app-appointment-suggestion>
-                    <app-appointment-suggestion></app-appointment-suggestion>
+                    <app-appointment-suggestion [suggestion]="suggestion" *ngFor="let suggestion of appointmentSuggestions"></app-appointment-suggestion>
                 </div>
                 <div class="buttons">
                     <button class="basic-button primary" style="height:40px;width: 80px;"

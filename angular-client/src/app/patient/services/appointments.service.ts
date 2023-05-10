@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DoctorsAvailableHours } from '../models/doctor-available-hours.model';
 
 @Injectable()
 export class AppointmentsService {
@@ -10,10 +11,8 @@ export class AppointmentsService {
     return this.http.get<any>(`http://localhost:8080/api/appointments/getHospitalsAndDoctorsRecommendations/${county}/${procedureId}`);
   }
 
-  getAvailableAppointments(req : any){
-    console.log(req)
-    return this.http.get<any>(`http://localhost:8080/api/appointments/getAvailableAppointments/${req.doctorsIds}/${req.startDate}/${req.endDate}`);
+  getDoctorsAvailableHours(req : any){
+    return this.http.get<DoctorsAvailableHours[]>(`http://localhost:8080/api/appointments/getAvailableAppointments/${req.doctorsIds}/${req.procedureId}/${req.startDate}/${req.endDate}`);
   }
-  //const params = new HttpParams().set('startDate',req.startDate).set('endDate',req.endDate);
 
 }

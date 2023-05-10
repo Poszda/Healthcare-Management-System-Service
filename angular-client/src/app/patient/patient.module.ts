@@ -17,6 +17,8 @@ import { AppointmentSuggestionComponent } from './components/appointments/appoin
 import { AppointmentLastStepComponent } from './components/appointments/appointment-form/appointment-last-step/appointment-last-step.component';
 import { AppointmentsService } from './services/appointments.service';
 import { SpecialitiesService } from './services/specialities.service';
+import { UserService } from './services/user.service';
+import { HospitalsService } from './services/hospitals.service';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { SpecialitiesService } from './services/specialities.service';
   ],
   providers:[
     AppointmentsService,
-    SpecialitiesService
+    SpecialitiesService,
+    HospitalsService,
+    UserService
   ]
 })
 export class PatientModule { }

@@ -13,7 +13,7 @@ import { SignUpForm } from '../pages/authentication/models/signup-form.model';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AuthService {
 
   private user: User | null | undefined;
   constructor(private http: HttpClient, private router: Router) {
