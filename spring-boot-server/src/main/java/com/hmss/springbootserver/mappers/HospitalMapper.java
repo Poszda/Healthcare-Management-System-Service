@@ -1,6 +1,7 @@
 package com.hmss.springbootserver.mappers;
 
 import com.hmss.springbootserver.DTOs.doctor.DoctorDTO;
+import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
 import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
 import com.hmss.springbootserver.entities.Doctor;
 import com.hmss.springbootserver.entities.Hospital;
@@ -16,6 +17,9 @@ import java.util.List;
 @Mapper(uses = DoctorMapper.class)
 public interface HospitalMapper {
     HospitalMapper INSTANCE = Mappers.getMapper(HospitalMapper.class);
+
+    @Named("toHospitalDTO")
+    HospitalDTO toHospitalDTO(Hospital hospital);
 
     @Named("toHospitalWithDoctorsDTO")
     @Mapping(source = "doctors", target = "doctors",qualifiedByName = "toDoctorWithUserDTO")

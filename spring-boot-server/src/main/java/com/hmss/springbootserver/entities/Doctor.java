@@ -2,6 +2,9 @@ package com.hmss.springbootserver.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -13,6 +16,8 @@ public class Doctor {
     private Long id;
     private String university;
     private String description;
+    private LocalTime programStart;
+    private LocalTime programEnd;
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
@@ -82,5 +87,21 @@ public class Doctor {
 
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
+    }
+
+    public LocalTime getProgramStart() {
+        return programStart;
+    }
+
+    public void setProgramStart(LocalTime programStart) {
+        this.programStart = programStart;
+    }
+
+    public LocalTime getProgramEnd() {
+        return programEnd;
+    }
+
+    public void setProgramEnd(LocalTime programEnd) {
+        this.programEnd = programEnd;
     }
 }

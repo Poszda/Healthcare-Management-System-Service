@@ -1,14 +1,11 @@
 package com.hmss.springbootserver.controllers;
 
-import com.hmss.springbootserver.DTOs.AvailableAppointmentsRequestDTO;
 import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
-import com.hmss.springbootserver.entities.Patient;
 import com.hmss.springbootserver.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,14 +24,15 @@ public class AppointmentController {
     public List<HospitalWithDoctorsDTO> getHospitalsAndDoctorsRecommendations(@PathVariable("counties") List<String> counties, @PathVariable("procedureId") long procedureId){
         return this.appointmentService.getHospitalsAndDoctorsRecommendations(counties,procedureId);
     }
-    @GetMapping("/getAvailableAppointments/{ids}/{startDate}/{endDate}")
+    @GetMapping("/getAvailableAppointments/{ids}/{procedureId}/{startDate}/{endDate}")
     @CrossOrigin(origins = "*")
     public Object getAvailableAppointments(@PathVariable("ids") List<Long> ids,
+                                           @PathVariable("procedureId") long procedureId,
                                            @PathVariable("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
                                            @PathVariable("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
         System.out.println(startDate);
         System.out.println(endDate);
-        return null;
-        //@RequestParam List<Long> ids,
+        var x = this.appointmentService.getAvailableAppointments(ids,procedureId,startDate,endDate);
+        return x;
     }
 }
