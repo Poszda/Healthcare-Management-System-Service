@@ -9,9 +9,13 @@ import { AppointmentSuggestion } from 'src/app/patient/models/appointment-sugges
 export class AppointmentSuggestionComponent {
   @Input() suggestion: AppointmentSuggestion | undefined
   @Output() suggestionSelection : EventEmitter<any> = new EventEmitter();
-  selectedHour : string = ''
 
-  selectHour(hour : string){
-    this.selectedHour = hour;
+  selectHour(hourSelected : string){
+    const data  = {
+      time: hourSelected,
+      date: this.suggestion?.date,
+      doctorId:this.suggestion?.doctorId
+    }
+    this.suggestionSelection.emit(data);
   }
 }

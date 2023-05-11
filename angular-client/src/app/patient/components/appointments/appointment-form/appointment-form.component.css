@@ -73,6 +73,7 @@
 .suggestions-container{
     display: flex;
     flex-wrap: wrap;
+    flex-grow: 1;
     gap: 5px;
     overflow: auto;
     padding: 2.5px;

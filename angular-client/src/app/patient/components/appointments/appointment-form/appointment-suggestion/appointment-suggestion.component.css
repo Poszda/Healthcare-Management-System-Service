@@ -49,6 +49,10 @@
   font-size: 13px;
 }
 
+.active{
+  background-color: var(--color2);
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }

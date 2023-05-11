@@ -18,6 +18,7 @@
         <p class="subtitle">Available Hours</p>
         <div class="hours-container">
             <div class="hour" 
+            [ngClass]="{'active': false}"
             *ngFor="let hour of suggestion?.hours"
             (click)="selectHour(hour)"
             >{{hour | slice:0:-3}}</div>

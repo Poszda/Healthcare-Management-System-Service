@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppointmentFormComponent } from './appointment-form/appointment-form.component';
 import { MessageService } from 'primeng/api';
+import { AppointmentsService } from '../../services/appointments.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-appointments',
@@ -12,14 +14,24 @@ import { MessageService } from 'primeng/api';
 })
 export class AppointmentsComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private messageService: MessageService) { }
+  constructor(public dialog: MatDialog, 
+    private messageService: MessageService,
+    private appointmentsService : AppointmentsService,
+    private userService : UserService) { }
 
   ngOnInit(): void {
+    this.appointmentsService.getAppointmentsCards(this.userService.getPatientIdFromLocalStorage()!).subscribe(
+      res =>{
+        console.log(res)
+      },
+      err =>{
+        console.log(err)
+      }
+    )  
   }
 
   openForm(){
     this.dialog.open(AppointmentFormComponent, {
-      //data: {name: this.name, animal: this.animal}
       panelClass: 'patient-appointment-form-dialog',
       maxWidth:'1000px',
       maxHeight:'80vh',
@@ -27,10 +39,10 @@ export class AppointmentsComponent implements OnInit {
       //scrollStrategy: new NoopScrollStrategy()
     }).afterClosed().subscribe(
       succes =>{
-        if(succes){
+        if(succes === true){
           this.showSuccess();
         }
-        else{
+        else if(succes === false){
           this.showError();
         }
       }

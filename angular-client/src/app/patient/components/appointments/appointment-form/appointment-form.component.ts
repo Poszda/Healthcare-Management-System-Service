@@ -12,6 +12,8 @@ import * as moment from 'moment';
 import { UserService } from 'src/app/patient/services/user.service';
 import { DoctorsAvailableHours } from 'src/app/patient/models/doctor-available-hours.model';
 import { AppointmentSuggestion } from 'src/app/patient/models/appointment-suggestion.model';
+import { AppointmentSummary } from 'src/app/patient/models/appointment-summary.model';
+import { NewAppointment } from 'src/app/patient/models/new-appointment.model';
 
 @Component({
   selector: 'app-appointment-form',
@@ -31,6 +33,8 @@ export class AppointmentFormComponent implements OnInit {
     doctors: new FormControl({ value: [], disabled: true }),
     hospitals: new FormControl({ value: [], disabled: true }),
   })
+  sugestionSelection : any
+  appointmentSummary : AppointmentSummary | undefined;
 
   countiesOptions: any = []
   specialityOptions: any = []
@@ -39,12 +43,11 @@ export class AppointmentFormComponent implements OnInit {
   hospitalsOptions: any[] = []
   doctorsOptions: any = []
   filteredDoctorsOptions: any = []
+  selectedDoctorsExtended : any[] = []
+  appointmentSuggestions : AppointmentSuggestion[] = [];
 
   loading: boolean = false;
   loadingSpinner: boolean = false
-
-  appointmentSuggestions : AppointmentSuggestion[] = [];
-
 
   constructor(public dialogRef: MatDialogRef<AppointmentFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -53,15 +56,6 @@ export class AppointmentFormComponent implements OnInit {
     private hospitalsService: HospitalsService,
     private userService : UserService
   ) { }
-
-  endDateGreaterThanStartDateValidator(control: FormControl): { [s: string]: boolean } | null{
-    const startDate = control.root.get('startDate');
-    const endDate = control.value;
-    if (startDate && endDate && new Date(startDate.value) > new Date(endDate)) {
-      return { endDateGreaterThanStartDate: true };
-    }
-    return null;
-  }
 
 
   ngOnInit(): void {
@@ -148,8 +142,9 @@ export class AppointmentFormComponent implements OnInit {
     .subscribe(
       ([res1,res2]) => {
         setTimeout(() => {
-        this.appointmentSuggestions =  this.sortAppointmentsByDate(this.createAppointmentSuggestions(res1,res2))
-        console.log(this.appointmentSuggestions);
+        console.log(res1)
+        this.selectedDoctorsExtended = res2;
+        this.appointmentSuggestions = this.createAppointmentSuggestions(res1);
         this.loading = false;
         }, 500);
       },
@@ -159,22 +154,23 @@ export class AppointmentFormComponent implements OnInit {
     )
   }
 
-  createAppointmentSuggestions(doctorsAvailableHours : DoctorsAvailableHours[], doctors : any[]): AppointmentSuggestion[]{
+  createAppointmentSuggestions(doctorsAvailableHours : DoctorsAvailableHours[]): AppointmentSuggestion[]{
     const list : AppointmentSuggestion[] = [];
     doctorsAvailableHours.forEach(el => {
-      const doctorExtended = doctors.find(de => de.id === el.doctorId) // shoul be always found
+      const doctorExtended = this.selectedDoctorsExtended.find((de : any) => de.id === el.doctorId) // shoul be always found
       el.dates.forEach(d => {
         const obj : AppointmentSuggestion = {
+          doctorId: doctorExtended.id,
           doctorName: doctorExtended.user.firstName + " " + doctorExtended.user.lastName,
           doctorSpeciality: "Speciality 1",
           hospitalName: doctorExtended.hospital.name,
           date: d.date,
-          hours: d.hours
+          hours: d.hours,
         }
         list.push(obj)
       });
     });
-    return list;
+    return this.sortAppointmentsByDate(list);
   }
 
   sortAppointmentsByDate(appointments: AppointmentSuggestion[]): AppointmentSuggestion[] {
@@ -237,19 +233,60 @@ export class AppointmentFormComponent implements OnInit {
     this.filteredProcedureOptions = this.procedureOptions.filter((el: any) => el.specialityId === selectedSpeciality)
   }
 
-  onSuggestionSelection(){
-    
+  onSuggestionSelection(data : any){
+    this.sugestionSelection = data;
+  }
+
+  createAppointmentSummary(){
+    const doctorExtended = this.selectedDoctorsExtended.find(el => el.id === this.sugestionSelection.doctorId)
+    const procedure = this.procedureOptions.find((el : any) => el.id ===this.formMandatory.get('procedure')?.value)
+    console.log(procedure)
+
+    this.appointmentSummary = {
+      doctorName: doctorExtended.user.firstName +" "+doctorExtended.user.lastName,
+      doctorSpeciality: "Specialitate",
+      procedureName: procedure.name,
+      hospitalName: doctorExtended.hospital.name,
+      date: this.sugestionSelection.date,
+      time: this.sugestionSelection.time,
+      price: procedure.price,
+      duration:procedure.duration
+    }
+  }
+
+  resetStep2(){
+    this.formOptional.get('doctors')?.setValue([]);
+    this.formOptional.get('hospitals')?.setValue([]);
+  }
+  resetStep3(){
+  this.sugestionSelection = undefined;
   }
 
   saveAppointment() {
+    const doctorExtended = this.selectedDoctorsExtended.find(el => el.id === this.sugestionSelection.doctorId)
+    const procedure = this.procedureOptions.find((el : any) => el.id ===this.formMandatory.get('procedure')?.value)
+    const appointment : NewAppointment ={
+      date: this.sugestionSelection.date,
+      time: this.sugestionSelection.time,
+      procedureId: procedure.id,
+      doctorId: this.sugestionSelection.doctorId,
+      patientId: this.userService.getPatientIdFromLocalStorage()!
+    }
+
     this.loading = true;
+    this.appointmentService.createAppointment(appointment).subscribe(
+      res =>{
+        this.loading = false;
+        this.dialogRef.close(true);
+      },
+      err =>{
+        console.log(err)
+        this.dialogRef.close(false);
+      }
+    );
     //make save call
     //disable buttons and dialogs
     // close dialog 
-    setTimeout(() => {
-      this.loading = false
-      this.dialogRef.close(true);
-    }, 2000);
   }
 
 }

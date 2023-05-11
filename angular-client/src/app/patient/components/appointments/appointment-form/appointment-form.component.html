@@ -78,6 +78,7 @@
                 <div class="buttons">
                     <button class="basic-button primary" style="height:40px;width: 80px;" 
                     [disabled]="loading === true"
+                    (click)="resetStep2()"
                     matStepperPrevious >Back</button>
                     <button class="basic-button primary" style="height:40px;width: 80px;"
                     [disabled]="formOptional.invalid || loading === true || !hospitalsOptions.length"
@@ -89,19 +90,23 @@
             <ng-template matStepLabel>Select Available Appointment</ng-template>
             <div class="section-3">
                 <div class="suggestions-container">
-                    <app-appointment-suggestion [suggestion]="suggestion" *ngFor="let suggestion of appointmentSuggestions"></app-appointment-suggestion>
+                    <app-appointment-suggestion [suggestion]="suggestion" (suggestionSelection)="onSuggestionSelection($event)" *ngFor="let suggestion of appointmentSuggestions"></app-appointment-suggestion>
                 </div>
                 <div class="buttons">
                     <button class="basic-button primary" style="height:40px;width: 80px;"
-                        matStepperPrevious>Back</button>
-                    <button class="basic-button primary" style="height:40px;width: 80px;" matStepperNext>Next</button>
+                    (click)="resetStep3()"
+                    matStepperPrevious>Back</button>
+                    <button class="basic-button primary" style="height:40px;width: 80px;" 
+                    (click)="createAppointmentSummary()"
+                    [disabled]="!sugestionSelection || loading === true" 
+                    matStepperNext>Next</button>
                 </div>
             </div>
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>Done</ng-template>
             <div class="section-4">
-                <app-appointment-last-step></app-appointment-last-step>
+                <app-appointment-last-step [summary]="appointmentSummary"></app-appointment-last-step>
                 <div class="buttons">
                     <button [disabled]="loading" class="basic-button primary" style="height:40px;width: 80px;"
                         matStepperPrevious>Back</button>

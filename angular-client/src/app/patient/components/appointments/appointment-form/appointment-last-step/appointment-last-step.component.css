@@ -21,6 +21,9 @@
     display: flex;
     gap: 30px;
 }
+.details p{
+    min-width: 150px;
+}
 .columnn{
     display: flex;
     gap: 30px;

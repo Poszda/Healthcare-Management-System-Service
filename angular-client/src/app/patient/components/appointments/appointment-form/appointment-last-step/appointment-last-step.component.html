@@ -2,35 +2,39 @@
     <div class="profile">
         <img id="img-profile" src="assets/images/profile.jpg" alt="" />
         <div class="text">
-            <p style="font-size: 14px;">Michael A</p>
-            <p class="subtitle">Dentologie</p>
+            <p style="font-size: 14px;">{{summary?.doctorName}}</p>
+            <p class="subtitle">{{summary?.doctorSpeciality}}</p>
         </div>
     </div>
     <div class="details">
         <div class="columnn">
             <div class="procedure">
                 <p class="subtitle">Procedure</p>
-                <p>Reparatie tesut</p>
+                <p>{{summary?.procedureName}}</p>
             </div>
             <div class="price">
                 <p class="subtitle">Price</p>
-                <p>390 Euro</p>
+                <p>{{summary?.price}}Euro</p>
             </div>
         </div>
         <div class="columnn">
             <div class="date">
                 <p class="subtitle">Date</p>
-                <p>11/12/2023</p>
+                <p>{{summary?.date}}</p>
             </div>
             <div class="time">
                 <p class="subtitle">Time</p>
-                <p>11:20</p>
+                <p>{{summary?.time}}</p>
             </div>
         </div>
         <div class="columnn">
             <div class="location">
                 <p class="subtitle">Location</p>
-                <p>Spitalul de Urgenta Bucuresti</p>
+                <p>{{summary?.hospitalName}}</p>
+            </div>
+            <div class="duration">
+                <p class="subtitle">Duration</p>
+                <p>{{summary?.duration}} min</p>
             </div>
         </div>
     </div>
