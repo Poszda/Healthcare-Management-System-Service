@@ -1,9 +1,14 @@
 package com.hmss.springbootserver.controllers;
 
+import com.hmss.springbootserver.DTOs.SignUpRequestDTO;
+import com.hmss.springbootserver.DTOs.appointments.AppointmentWidgetDTO;
+import com.hmss.springbootserver.DTOs.appointments.CreateAppointmentRequestDTO;
 import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
 import com.hmss.springbootserver.services.AppointmentService;
+import com.hmss.springbootserver.utils.models.projections.AppointmentWidgetProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -34,5 +39,19 @@ public class AppointmentController {
         System.out.println(endDate);
         var x = this.appointmentService.getAvailableAppointments(ids,procedureId,startDate,endDate);
         return x;
+    }
+
+    @PostMapping("/createAppointment")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<Object> createAppointment(@RequestBody CreateAppointmentRequestDTO appointment){
+
+        System.out.println(appointment.toString());
+        return this.appointmentService.createAppointment(appointment);
+    }
+
+    @GetMapping("/getAppointmentsCards/{patientId}")
+    @CrossOrigin(origins = "*")
+    public List<AppointmentWidgetProjection> getAppointmentsCards(@PathVariable("patientId") Long patientId){
+        return this.appointmentService.getAppointmentsCards(patientId);
     }
 }
