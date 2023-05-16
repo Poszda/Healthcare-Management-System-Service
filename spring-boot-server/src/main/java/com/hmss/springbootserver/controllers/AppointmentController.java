@@ -1,11 +1,9 @@
 package com.hmss.springbootserver.controllers;
 
-import com.hmss.springbootserver.DTOs.SignUpRequestDTO;
-import com.hmss.springbootserver.DTOs.appointments.AppointmentWidgetDTO;
 import com.hmss.springbootserver.DTOs.appointments.CreateAppointmentRequestDTO;
 import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
 import com.hmss.springbootserver.services.AppointmentService;
-import com.hmss.springbootserver.utils.models.projections.AppointmentWidgetProjection;
+import com.hmss.springbootserver.utils.models.projections.AppointmentCardProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -37,8 +35,8 @@ public class AppointmentController {
                                            @PathVariable("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
         System.out.println(startDate);
         System.out.println(endDate);
-        var x = this.appointmentService.getAvailableAppointments(ids,procedureId,startDate,endDate);
-        return x;
+        return this.appointmentService.getAvailableAppointments(ids,procedureId,startDate,endDate);
+
     }
 
     @PostMapping("/createAppointment")
@@ -49,9 +47,15 @@ public class AppointmentController {
         return this.appointmentService.createAppointment(appointment);
     }
 
+    @DeleteMapping("/deleteAppointment/{id}")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<String> deleteAppointment(@PathVariable("id") Long id) {
+        return this.appointmentService.deleteAppointment(id);
+    }
+
     @GetMapping("/getAppointmentsCards/{patientId}")
     @CrossOrigin(origins = "*")
-    public List<AppointmentWidgetProjection> getAppointmentsCards(@PathVariable("patientId") Long patientId){
+    public List<AppointmentCardProjection> getAppointmentsCards(@PathVariable("patientId") Long patientId){
         return this.appointmentService.getAppointmentsCards(patientId);
     }
 }

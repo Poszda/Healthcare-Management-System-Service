@@ -16,15 +16,15 @@ public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     @Named("UserToPatientLoginDTO")
-    @Mapping(target = "patient" ,qualifiedByName = "toPatientDTO")
+    @Mapping(source = "patient.user.id", target = "patient.userId")
     PatientLoginDTO UserToPatientLoginDTO(User user);
 
     @Named("UserToDoctorLoginDTO")
-    @Mapping(target = "doctor" ,qualifiedByName = "toDoctorDTO")
+    @Mapping(source = "doctor.user.id", target = "doctor.userId")
     DoctorLoginDTO UserToDoctorLoginDTO(User user);
 
     @Named("UserToAdminLoginDTO")
-    @Mapping(target = "admin" ,qualifiedByName = "toAdminDTO")
+    @Mapping(source = "admin.user.id", target = "admin.userId")
     AdminLoginDTO UserToAdminLoginDTO(User user);
 
 }

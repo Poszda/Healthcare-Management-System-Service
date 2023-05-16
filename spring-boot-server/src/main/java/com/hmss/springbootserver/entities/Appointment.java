@@ -2,9 +2,7 @@ package com.hmss.springbootserver.entities;
 
 import jakarta.persistence.*;
 
-import javax.print.Doc;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "appointment")
@@ -28,7 +26,6 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.LAZY) // by default EAGER
     @JoinColumn(name = "procedure_id")
     private Procedure procedure;
-
 
     public Long getId() {
         return id;

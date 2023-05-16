@@ -1,6 +1,5 @@
 package com.hmss.springbootserver.services;
 
-import com.hmss.springbootserver.DTOs.appointments.AppointmentWidgetDTO;
 import com.hmss.springbootserver.DTOs.appointments.AvailableHours;
 import com.hmss.springbootserver.DTOs.appointments.CreateAppointmentRequestDTO;
 import com.hmss.springbootserver.DTOs.appointments.DoctorAvailableHours;
@@ -14,13 +13,12 @@ import com.hmss.springbootserver.repositories.*;
 import com.hmss.springbootserver.utils.models.AppointmentSimplified;
 import com.hmss.springbootserver.utils.models.DoctorProgramSimplified;
 import com.hmss.springbootserver.utils.models.FreeTimeInterval;
-import com.hmss.springbootserver.utils.models.projections.AppointmentWidgetProjection;
+import com.hmss.springbootserver.utils.models.projections.AppointmentCardProjection;
 import com.hmss.springbootserver.utils.models.projections.DoctorProgramProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -56,9 +54,9 @@ public class AppointmentService {
         return HospitalMapper.INSTANCE.toHospitalWithDoctorsDTOList(hospitals);
     }
 
-    public List<AppointmentWidgetProjection> getAppointmentsCards(Long patientId){
-        var x = this.appointmentRepository.findUserAppointmentsWidgets(1L);
-        return x;
+    public List<AppointmentCardProjection> getAppointmentsCards(Long patientId){
+        return this.appointmentRepository.findUserAppointmentsWidgets(patientId);
+
     }
 
     public ResponseEntity<Object> createAppointment(CreateAppointmentRequestDTO appointment){
@@ -88,6 +86,15 @@ public class AppointmentService {
         Appointment result = appointmentRepository.save(newAppointment);
         if(result == null) return new ResponseEntity<>("Something bad happend", HttpStatus.INTERNAL_SERVER_ERROR);
         return new ResponseEntity<>(appointment,HttpStatus.CREATED);
+    }
+    public ResponseEntity<String> deleteAppointment(Long id) {
+        this.appointmentRepository.deleteById(id);
+        if(appointmentRepository.findById(id).isEmpty()){
+            return new ResponseEntity<>("Appointment successfully deleted",HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(" Appointment deletion failed",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     public Object getAvailableAppointments(List<Long>doctorIds,Long procedureId, LocalDateTime startDate, LocalDateTime endDate){
@@ -203,6 +210,4 @@ public class AppointmentService {
         }
         return map;
     }
-
-
 }

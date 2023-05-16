@@ -1,10 +1,8 @@
 package com.hmss.springbootserver.controllers;
 
 import com.hmss.springbootserver.services.HospitalService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +20,11 @@ public class HospitalController {
     @CrossOrigin(origins = "*")
     public List<String> getAllHospitalCounties(){
         return this.hospitalService.getAllHospitalCounties();
+    }
+
+    @PostMapping("/saveHospitalProcedures/{hospitalId}")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<Object> saveHospitalProcedures(@PathVariable("hospitalId") Long hospitalId, @RequestBody List<Long> proceduresIds){
+        return this.hospitalService.saveHospitalProcedures(hospitalId ,proceduresIds);
     }
 }
