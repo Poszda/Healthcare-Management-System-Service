@@ -38,6 +38,7 @@
   gap: 2.5px;
   height: 60px;
   overflow: auto;
+  align-items: flex-start;
 }
 
 .hour {

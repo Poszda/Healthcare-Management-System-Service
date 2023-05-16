@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DoctorsAvailableHours } from '../models/doctor-available-hours.model';
 import { NewAppointment } from '../models/new-appointment.model';
+import { AppointmentCard } from '../models/appointment-card.model';
 
 @Injectable()
 export class AppointmentsService {
@@ -21,7 +22,10 @@ export class AppointmentsService {
   }
 
   getAppointmentsCards(patientId : number){
-    return this.http.get<any[]>(`http://localhost:8080/api/appointments/getAppointmentsCards/${patientId}`);
+    return this.http.get<AppointmentCard[]>(`http://localhost:8080/api/appointments/getAppointmentsCards/${patientId}`);
   }
-
+  
+  deleteAppointment(id : number){
+    return this.http.delete(`http://localhost:8080/api/appointments/deleteAppointment/${id}`,{responseType: 'text'});
+  }
 }

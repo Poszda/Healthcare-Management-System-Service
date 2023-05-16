@@ -1,0 +1,31 @@
+/* .mat-tree{
+    background-color:transparent;
+} */
+.tree{
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.subtitle{
+    color: grey;
+    font-size: 13px;
+}
+.buttons{
+    display: flex;
+    gap: 5px;
+}
+
+::ng-deep .tree-procedures .mat-mdc-checkbox-checked .mdc-checkbox__background{
+    background-color: var(--color1)!important;
+    border-color: var(--color1)!important;
+}
+
+.tree-procedures .mat-mdc-icon-button[disabled]{
+    visibility: hidden;
+}
+
+::ng-deep .tree-procedures .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background, .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control[data-indeterminate=true]:enabled~.mdc-checkbox__background{
+    background-color: var(--color1)!important;
+    border-color: var(--color1)!important;
+}

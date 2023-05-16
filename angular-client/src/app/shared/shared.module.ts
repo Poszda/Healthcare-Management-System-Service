@@ -20,6 +20,7 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -40,12 +41,13 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     InputTextModule,
     AutoCompleteModule,
     ToastModule,
+    TableModule,
     MatDialogModule,
     MatStepperModule,
     MultiSelectModule,
     DropdownModule,
     ProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   exports:[
     FormsModule, //??
@@ -60,6 +62,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     InputTextModule,
     AutoCompleteModule,
     ToastModule,
+    TableModule,
     MatStepperModule,
     MultiSelectModule,
     DropdownModule,

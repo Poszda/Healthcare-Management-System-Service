@@ -2,9 +2,10 @@ package com.hmss.springbootserver.utils.models.projections;
 
 import java.time.LocalDateTime;
 
-public interface AppointmentWidgetProjection {
+public interface AppointmentCard {
     Long getId();
     LocalDateTime getDate();
+    Long getDiagnosticId();
     String getFirstName();
     String getLastName();
     String getProcedureName();
