@@ -16,9 +16,15 @@ public interface HospitalRepository extends JpaRepository<Hospital,Long> {
     List<String> findAllCounties();
 
 
-    @Query("SELECT h FROM Hospital h " +
+//    @Query("SELECT h FROM Hospital h " +
+//            "JOIN FETCH h.doctors d " +
+//            "JOIN d.speciality s " +
+//            "WHERE h.county IN (:counties) AND s.id = :procedureId")
+    @Query("SELECT h from Hospital h " +
+            "JOIN h.procedureSet p " +
+            "JOIN p.speciality s " +
             "JOIN FETCH h.doctors d " +
-            "JOIN d.speciality s " +
-            "WHERE h.county IN (:counties) AND s.id = :specialityId")
-    List<Hospital> findPossibleHospitalsAndDoctorsForAppointments(@Param("counties") List<String> counties,@Param("specialityId") long specialityId);
+            "JOIN d.speciality sd " +
+            "WHERE h.county IN (:counties) AND p.id = :procedureId AND s.id = sd.id")
+    List<Hospital> findPossibleHospitalsAndDoctorsForAppointments(@Param("counties") List<String> counties,@Param("procedureId") long procedureId);
 }
