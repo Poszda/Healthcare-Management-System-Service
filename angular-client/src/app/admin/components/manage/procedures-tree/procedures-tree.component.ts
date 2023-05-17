@@ -4,7 +4,6 @@ import { Component, EventEmitter, Injectable, Input, OnChanges, Output, SimpleCh
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
 import { HospitalManagementService } from 'src/app/admin/services/hospital-management.service';
-import { UserService } from 'src/app/admin/services/user.service';
 
 /**
  * Node for to-do item
@@ -91,11 +90,12 @@ export class ProceduresTreeComponent implements OnChanges{
 
  @Input() checkedProceduresIds : number[] = []
  @Output() checkedProceduresIdsChange = new EventEmitter<number[]>();
+ changesMade : boolean = false;
 
  /** The selection for checklist */
  checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
 
- constructor(private _database: ChecklistDatabase, private hospitalManagementService : HospitalManagementService, private userService : UserService) {
+ constructor(private _database: ChecklistDatabase, private hospitalManagementService : HospitalManagementService) {
    this.treeFlattener = new MatTreeFlattener(
      this.transformer,
      this.getLevel,
@@ -228,7 +228,6 @@ export class ProceduresTreeComponent implements OnChanges{
  }
 
  checkHospitalAvailableProcedures(){
-  console.log(this.checkedProceduresIds)
   const nodes = this.treeControl.dataNodes.filter(el => this.checkedProceduresIds.includes(el.id!))
   if(nodes.length > 0){
     nodes.forEach(node => {
@@ -242,6 +241,16 @@ export class ProceduresTreeComponent implements OnChanges{
     //   this.checklistSelection.select(parent!);
     // });
   }
+ }
+
+ undoChanges(){
+  this.changesMade = false;
+  this.checklistSelection.deselect(...this.treeControl.dataNodes)
+  this.checkHospitalAvailableProcedures();
+ }
+
+ changesHasBeenMade(){
+  this.changesMade = true;
  }
 
  saveProcedureConfiguration(){

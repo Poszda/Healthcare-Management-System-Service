@@ -31,24 +31,25 @@ a{
     text-decoration: none;
 }
 
-textarea, input[type=text],input[type=password],select{
-/*     color: black;
-    font-size: 14px;
-    border:2px solid #e4e4e4;
-    border-radius: 5px;
-    padding-left: 10px;
-    padding-right: 10px; */
-}
-.basic{
+/* textarea, input[type=text],input[type=password],select{
     color: black;
     font-size: 14px;
     border:2px solid #e4e4e4;
     border-radius: 5px;
     padding-left: 10px;
+    padding-right: 10px; 
+} */
+
+.basic{
+    color: black;
+    font-size: 14px;
+    border:1px solid #ced4da;
+    border-radius: 6px; /* nicer if 5 */
+    padding-left: 10px;
     padding-right: 10px;
 }
 .basic-input{
-    height: 45px;
+    height: 41px; /* nicer if 45 */
 }
 
 .basic-button{

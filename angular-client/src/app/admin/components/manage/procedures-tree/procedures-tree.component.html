@@ -9,7 +9,7 @@
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
                 <button mat-icon-button disabled></button>
                 <mat-checkbox class="checklist-leaf-node" [checked]="checklistSelection.isSelected(node)"
-                    (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+                    (change)="todoLeafItemSelectionToggle(node);changesHasBeenMade()">{{node.item}}</mat-checkbox>
             </mat-tree-node>
 
             <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
@@ -20,14 +20,15 @@
                 </button>
                 <mat-checkbox [checked]="descendantsAllSelected(node)"
                     [indeterminate]="descendantsPartiallySelected(node)"
-                    (change)="todoItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+                    (change)="todoItemSelectionToggle(node);changesHasBeenMade()">{{node.item}}</mat-checkbox>
             </mat-tree-node>
         </mat-tree>
 
     </div>
     <div class="buttons">
         <button class="basic-button primary" style="height: 40px; width: 80px;"
+            [disabled]="!changesMade"
             (click)="saveProcedureConfiguration()">Save</button>
-        <button class="basic-button primary" style="height: 40px;width: 80px;">Undo</button>
+        <button class="basic-button primary" [disabled]="!changesMade" (click)="undoChanges()" style="height: 40px;width: 80px;">Undo</button>
     </div>
 </div>

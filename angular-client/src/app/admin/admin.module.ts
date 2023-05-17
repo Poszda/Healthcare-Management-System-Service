@@ -13,8 +13,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { HospitalManagementService } from './services/hospital-management.service';
 import { StatisticsService } from './services/statistics.service';
-import { UserService } from './services/user.service';
 import { ChecklistDatabase, ProceduresTreeComponent } from './components/manage/procedures-tree/procedures-tree.component';
+import { DoctorCreationFormComponent } from './components/manage/doctor-creation-form/doctor-creation-form.component';
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import { ChecklistDatabase, ProceduresTreeComponent } from './components/manage/
     AdminComponent,
     StatsComponent,
     ManageComponent,
-    ProceduresTreeComponent
+    ProceduresTreeComponent,
+    DoctorCreationFormComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +39,6 @@ import { ChecklistDatabase, ProceduresTreeComponent } from './components/manage/
   providers:[
     HospitalManagementService,
     StatisticsService,
-    UserService,
     ChecklistDatabase
   ]
 })

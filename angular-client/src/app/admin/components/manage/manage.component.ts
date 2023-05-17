@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HospitalManagementService } from "../../services/hospital-management.service";
-import { UserService } from "../../services/user.service";
 import { MessageService } from "primeng/api";
+import { newDoctor } from "../../models/new-doctor.model";
 
 @Component({
   selector: 'app-manage',
@@ -11,21 +11,37 @@ import { MessageService } from "primeng/api";
 })
 export class ManageComponent implements OnInit {
   checkedProceduresIds : number[] = []
+  hospitalSpecialities : any[] = []
   hospitalId : number = 0
-  constructor(private hospitalManagementService: HospitalManagementService, private userService: UserService, private messageService : MessageService) { }
+
+  constructor(private hospitalManagementService: HospitalManagementService, private messageService : MessageService) { }
+
   ngOnInit(): void {
-    this.hospitalId = this.userService.getHospitalFromLocalStorage().id;
+    this.hospitalId = this.hospitalManagementService.getHospitalFromLocalStorage().id;
     this.getCheckedProcedures();
+    this.getHospitalSpecialities();
+  }
+
+  getHospitalSpecialities(){
+    this.hospitalManagementService.getHospitalSpecialities(this.hospitalId).subscribe(
+      res =>{
+        console.log(res)
+        this.hospitalSpecialities = res;
+      },
+      err =>{
+        console.log(err)
+      }
+    );
   }
 
   saveHospitalProcedures(){
     this.hospitalManagementService.saveHospitalProcedures(this.hospitalId,this.checkedProceduresIds).subscribe(
       res =>{
-        console.log(res)
+        this.getHospitalSpecialities();
         this.showSuccess("Available hospital's procedures were successfully changed");
       },
       err =>{
-        if (err.status !== 0){ //if my errors
+        if (err.status !== 0){
           this.showError(err.error);
         }
         else{
@@ -33,11 +49,10 @@ export class ManageComponent implements OnInit {
         }
       }
     );
-    console.log(this.checkedProceduresIds)
   }
 
   getCheckedProcedures() {
-    this.hospitalManagementService.getProceduresIdsByHospitalId(this.userService.getHospitalFromLocalStorage().id).subscribe(
+    this.hospitalManagementService.getProceduresIdsByHospitalId(this.hospitalManagementService.getHospitalFromLocalStorage().id).subscribe(
       res => {
         this.checkedProceduresIds = res;
       },
@@ -45,6 +60,35 @@ export class ManageComponent implements OnInit {
         console.log(err)
       }
     );
+  }
+
+  onCreateDoctor(form : any){
+    const newDoctor : newDoctor = {
+      firstName: form.firstName,
+      lastName: form.lastName,
+      email:form.email,
+      password: form.password,
+      specialityId: form.speciality,
+      programEnd: form.programEnd,
+      programStart: form.programStart,
+      hospitalId: this.hospitalId
+    }
+
+    this.hospitalManagementService.createDoctor(newDoctor).subscribe(
+      res =>{
+        console.log(res)
+        this.showSuccess("Doctor created succesfully");
+      },
+      err =>{
+        console.log(err)
+        if (err.status !== 0){
+          this.showError(err.error);
+        }
+        else{
+          this.showError("Something went wrong.")
+        }
+      }
+    )
   }
 
   

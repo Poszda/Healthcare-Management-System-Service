@@ -21,4 +21,5 @@
 <p-toast></p-toast>
 <div class="container">
       <app-procedures-tree class="tree-class" [(checkedProceduresIds)]="checkedProceduresIds" (checkedProceduresIdsChange)="saveHospitalProcedures()"></app-procedures-tree>
+      <app-doctor-creation-form [specialityOptions]="hospitalSpecialities" (createDoctor)="onCreateDoctor($event)"></app-doctor-creation-form>        
 </div>
