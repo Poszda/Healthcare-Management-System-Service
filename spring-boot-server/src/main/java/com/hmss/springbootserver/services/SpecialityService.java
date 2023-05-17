@@ -1,6 +1,7 @@
 package com.hmss.springbootserver.services;
 
 import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
+import com.hmss.springbootserver.DTOs.speciality.SpecialityDTO;
 import com.hmss.springbootserver.DTOs.speciality.SpecialityWithProceduresDTO;
 import com.hmss.springbootserver.entities.Speciality;
 import com.hmss.springbootserver.mappers.HospitalMapper;
@@ -25,4 +26,7 @@ public class SpecialityService {
         return SpecialityMapper.INSTANCE.toSpecialityWithProceduresDTOList(list);
     }
 
+    public List<SpecialityDTO> getHospitalSpecialities(Long hospitalId) {
+        return SpecialityMapper.INSTANCE.toSpecialityDTOList(this.specialityRepository.findHospitalSpecialities(hospitalId));
+    }
 }

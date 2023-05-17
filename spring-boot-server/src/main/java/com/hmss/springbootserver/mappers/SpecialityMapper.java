@@ -1,6 +1,7 @@
 package com.hmss.springbootserver.mappers;
 
 import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
+import com.hmss.springbootserver.DTOs.speciality.SpecialityDTO;
 import com.hmss.springbootserver.DTOs.speciality.SpecialityWithProceduresDTO;
 import com.hmss.springbootserver.DTOs.user.UserDTO;
 import com.hmss.springbootserver.entities.Hospital;
@@ -19,6 +20,13 @@ import java.util.List;
 public interface SpecialityMapper {
 
     SpecialityMapper INSTANCE = Mappers.getMapper(SpecialityMapper.class);
+
+    @Named("toSpecialityDTO")
+    SpecialityDTO toSpecialityDTO(Speciality speciality);
+
+    @Named("toSpecialityDTOList")
+    @IterableMapping(qualifiedByName = "toSpecialityDTO")
+    List<SpecialityDTO> toSpecialityDTOList(List<Speciality> specialities);
 
     @Named("toSpecialityWithProceduresDTO")
     @Mapping(source = "procedures", target = "procedures",qualifiedByName="toProcedureDTO")

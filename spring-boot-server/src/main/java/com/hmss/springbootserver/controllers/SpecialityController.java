@@ -1,12 +1,12 @@
 package com.hmss.springbootserver.controllers;
 
+import com.hmss.springbootserver.DTOs.SignUpRequestDTO;
+import com.hmss.springbootserver.DTOs.speciality.SpecialityDTO;
 import com.hmss.springbootserver.DTOs.speciality.SpecialityWithProceduresDTO;
 import com.hmss.springbootserver.services.SpecialityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +24,11 @@ public class SpecialityController {
     @CrossOrigin(origins = "*")
     public List<SpecialityWithProceduresDTO> getSpecialitiesWithProcedures(){
         return this.specialityService.getSpecialitiesWithProcedures();
+    }
+
+    @GetMapping("/getHospitalSpecialities/{hospitalId}")
+    @CrossOrigin(origins = "*")
+    public List<SpecialityDTO> getHospitalSpecialities(@PathVariable Long hospitalId){
+        return this.specialityService.getHospitalSpecialities(hospitalId);
     }
 }
