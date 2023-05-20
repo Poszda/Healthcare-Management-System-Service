@@ -1,15 +1,33 @@
-<form class="login-form" [formGroup]="form" (submit)="create()">
-    <input type="text" pInputText formControlName="firstName" placeholder='First name*' />
-    <input type="text" pInputText formControlName="lastName" placeholder='Last name*' />
-    <p-dropdown [style]="{'width':'100%'}" formControlName="speciality" appendTo="body" [options]="specialityOptions"
-        optionLabel="name" optionValue="id" [filter]="true" filterBy="name" [showClear]="true"
-        placeholder="Select speciality*">
-    </p-dropdown>
-    <input type="text" pInputText formControlName="email" placeholder='Email*' name='email' />
-    <input type="password" pInputText formControlName="password" placeholder='Password*' name='password' />
-    Program start:
-    <input type="time" placeholder="start" class="basic basic-input" formControlName="programStart" name='programStart'>
-    Program end:
-    <input type="time" class="basic basic-input" formControlName="programEnd" name='programEnd'>
-    <button type="submit" class="basic-button primary" style="width: 80px;height: 40px;" [disabled]="form.invalid">Create</button>
+<form [formGroup]="form" (submit)="create()">
+    <div class="row row-1">
+        <input type="text" pInputText formControlName="firstName" placeholder='First name*' />
+        <input type="text" pInputText formControlName="lastName" placeholder='Last name*' />
+    </div>
+    <div #hello class="row row-2">
+        <p-dropdown [style]="{'width':'100%'}" formControlName="speciality" [appendTo]="'body'"
+            [options]="specialityOptions" optionLabel="name" optionValue="id" [filter]="true" filterBy="name"
+            [showClear]="true" placeholder="Select speciality*">
+        </p-dropdown>
+    </div>
+    <div class="row row-3">
+        <input type="text" pInputText formControlName="email" placeholder='Email*' name='email' />
+        <input type="password" pInputText formControlName="password" placeholder='Password*' name='password' />
+    </div>
+    <div class="row row-4">
+        <div class="column">
+            <p>Program start:</p>
+            <input type="time" placeholder="start" class="basic basic-input" formControlName="programStart"
+                name='programStart'>
+        </div>
+        <div class="column">
+            <p>Program end:</p>
+            <input type="time" class="basic basic-input" formControlName="programEnd" name='programEnd'>
+        </div>
+    </div>
+    <div class="buttons">
+        <button type="button" (click)="closeDialog()" class="basic-button red"
+            style="width: 80px;height: 40px; margin-top: 10px;">Cancel</button>
+        <button type="submit" class="basic-button primary" style="width: 80px;height: 40px; margin-top: 10px;"
+            [disabled]="form.invalid">Create</button>
+    </div>
 </form>

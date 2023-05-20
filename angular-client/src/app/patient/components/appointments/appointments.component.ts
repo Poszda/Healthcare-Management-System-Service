@@ -7,12 +7,12 @@ import { AppointmentsService } from '../../services/appointments.service';
 import { UserService } from '../../services/user.service';
 import { AppointmentCard } from '../../models/appointment-card.model';
 import * as moment from 'moment';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-appointments',
   templateUrl: './appointments.component.html',
   styleUrls: ['./appointments.component.css'],
-  providers: [MessageService]
 })
 export class AppointmentsComponent implements OnInit {
 
@@ -22,7 +22,8 @@ export class AppointmentsComponent implements OnInit {
   constructor(public dialog: MatDialog, 
     private messageService: MessageService,
     private appointmentsService : AppointmentsService,
-    private userService : UserService) { }
+    private userService : UserService,
+    private alertService : AlertService) { }
 
   ngOnInit(): void {
     this.getAppointments();
@@ -45,11 +46,11 @@ export class AppointmentsComponent implements OnInit {
     this.appointmentsService.deleteAppointment(id).subscribe(
       res =>{
         this.getAppointments();
-        this.showSuccess("Appointment deleted succesfully")
+        this.alertService.showSuccess("Appointment deleted succesfully")
       },
       err =>{
         console.log(err)
-        this.showError("Error when deleting appointment");
+        this.alertService.showError("Error when deleting appointment");
       }
     )
   }
@@ -69,22 +70,14 @@ export class AppointmentsComponent implements OnInit {
     }).afterClosed().subscribe(
       succes =>{
         if(succes === true){
-          this.showSuccess('Appointment registered succesfully');
+          this.alertService.showSuccess('Appointment registered succesfully');
           this.getAppointments();
         }
         else if(succes === false){
-          this.showError('We could not register your appointment');
+          this.alertService.showError('We could not register your appointment');
         }
       }
     )
-  }
-
-  showSuccess(message : string) {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail:message });
-  }
-
-  showError(message : string) {
-    this.messageService.add({ severity: 'error', summary: 'Something went wrong', detail: message});
   }
 
 }

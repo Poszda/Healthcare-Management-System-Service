@@ -1,0 +1,50 @@
+<div class="container">
+<p-table #dt 
+    [scrollable]="true" [scrollHeight]="'calc(100vh - 170px)'"
+    [value]="data"
+    [globalFilterFields]="['user.firstName','user.lastName']"
+    [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="caption">
+            <div class="caption-container">
+                <h5 class="m-0">Manage Doctors</h5>
+                <div class="right-side">
+                    <button class="round-button purple" style="height:41px; width: 41px" (click)="openFormDialog()">
+                        <i class="pi pi-plus" style="margin-top: 5px; color: white;"></i>
+                    </button>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text"  id="doctors-table-input" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+                    </span>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+                <th pSortableColumn="user.firstName">First name<p-sortIcon field="user.firstName"></p-sortIcon></th>
+                <th pSortableColumn="user.lastName">Last Name<p-sortIcon field="user.lastName"></p-sortIcon></th>
+                <th pSortableColumn="user.email">Email<p-sortIcon field="user.email"></p-sortIcon></th>
+                <th pSortableColumn="speciality.name">Speciality<p-sortIcon field="speciality.name"></p-sortIcon></th>
+                <th pSortableColumn="programStart">Program Start <p-sortIcon field="programStart"></p-sortIcon></th>
+                <th pSortableColumn="programEnd">Program End <p-sortIcon field="programEnd"></p-sortIcon></th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-doctor>
+            <tr>
+                <td>{{ doctor.id }}</td>
+                <td>{{ doctor.user.firstName }}</td>
+                <td>{{ doctor.user.lastName }}</td>
+                <td>{{ doctor.user.email }}</td>
+                <td>{{ doctor.speciality.name }}</td>
+                <td>{{ doctor.programStart }}</td>
+                <td>{{ doctor.programEnd }}</td>
+                <td>
+                <button class="round-button red delete-btn"  style="height:41px; width: 41px;" (click)="deleteDoctorData(doctor.id)">
+                    <img id="deleteIcon" src="assets/icons/trash.png" alt="">
+                </button>
+                </td>
+            </tr>
+        </ng-template>
+</p-table>
+</div>

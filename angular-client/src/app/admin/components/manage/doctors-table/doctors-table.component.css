@@ -1,0 +1,39 @@
+.container{
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    border-radius: 5px;
+    background-color: white;
+}
+.head{
+    margin-bottom: 15px;
+}
+.subtitle{
+    color: grey;
+    font-size: 13px;
+}
+.caption-container{
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+}
+.right-side{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.delete-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#deleteIcon{
+    width: 18px;
+}
+
+::ng-deep .doctor-creation-form-dialog .mdc-dialog__surface{
+    padding: 30px;
+}
+::ng-deep .doctor-creation-form-dialog{
+    overflow: auto;
+}

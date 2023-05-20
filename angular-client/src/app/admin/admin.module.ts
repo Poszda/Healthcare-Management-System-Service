@@ -15,6 +15,7 @@ import { HospitalManagementService } from './services/hospital-management.servic
 import { StatisticsService } from './services/statistics.service';
 import { ChecklistDatabase, ProceduresTreeComponent } from './components/manage/procedures-tree/procedures-tree.component';
 import { DoctorCreationFormComponent } from './components/manage/doctor-creation-form/doctor-creation-form.component';
+import { DoctorsTableComponent } from './components/manage/doctors-table/doctors-table.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DoctorCreationFormComponent } from './components/manage/doctor-creation
     StatsComponent,
     ManageComponent,
     ProceduresTreeComponent,
-    DoctorCreationFormComponent
+    DoctorCreationFormComponent,
+    DoctorsTableComponent
   ],
   imports: [
     CommonModule,

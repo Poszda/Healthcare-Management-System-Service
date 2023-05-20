@@ -19,12 +19,20 @@ export class HospitalManagementService {
     return this.http.get<any>(`http://localhost:8080/api/procedures/getProceduresIdsByHospitalId/${hospitalId}`);
   }
 
+  getDoctorsTableData(hospitalId : number){
+    return this.http.get<any>(`http://localhost:8080/api/users/getHospitalDoctorsWithSpeciality/${hospitalId}`);
+  }
+
   saveHospitalProcedures(hospitalId : number, proceduresIds : number[]){
     return this.http.post(`http://localhost:8080/api/hospitals/saveHospitalProcedures/${hospitalId}`,proceduresIds,{ responseType: 'text' });
   }
   
   createDoctor(doctor : newDoctor){
     return this.http.post(`http://localhost:8080/api/users/createDoctor`,doctor);
+  }
+
+  deleteDoctor(doctorId : number){
+    return this.http.delete(`http://localhost:8080/api/users/deleteDoctor/${doctorId}`);
   }
 
   getHospitalFromLocalStorage(){
