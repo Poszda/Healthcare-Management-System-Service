@@ -2,6 +2,7 @@ package com.hmss.springbootserver.mappers;
 
 import com.hmss.springbootserver.DTOs.doctor.DoctorDTO;
 import com.hmss.springbootserver.DTOs.doctor.DoctorWithUserAndHospitalDTO;
+import com.hmss.springbootserver.DTOs.doctor.DoctorWithUserAndSpecialityDTO;
 import com.hmss.springbootserver.DTOs.doctor.DoctorWithUserDTO;
 import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
 import com.hmss.springbootserver.DTOs.user.UserDTO;
@@ -45,6 +46,9 @@ public interface DoctorMapper {
     @Mapping(target = "user" ,qualifiedByName = "toUserDTO")
     DoctorWithUserDTO toDoctorWithUserDTO(Doctor doctor);
 
+    @Named("toDoctorWithUserAndSpecialityDTO")
+    DoctorWithUserAndSpecialityDTO toDoctorWithUserAndSpecialityDTO(Doctor doctor);
+
     @Named("toDoctorDTOList")
     @IterableMapping(qualifiedByName = "toDoctorDTO")
     List<DoctorDTO> toDoctorDTOList(List<Doctor> doctors);
@@ -52,5 +56,9 @@ public interface DoctorMapper {
     @Named("toDoctorWithUserAndHospitalDTOList")
     @IterableMapping(qualifiedByName = "toDoctorWithUserAndHospitalDTO")
     List<DoctorWithUserAndHospitalDTO> toDoctorWithUserAndHospitalDTOList(List<Doctor> doctor);
+
+    @Named("toDoctorWithUserAndSpecialityDTOList")
+    @IterableMapping(qualifiedByName = "toDoctorWithUserAndSpecialityDTO")
+    List<DoctorWithUserAndSpecialityDTO> toDoctorWithUserAndSpecialityDTOList(List<Doctor> doctors);
 
 }

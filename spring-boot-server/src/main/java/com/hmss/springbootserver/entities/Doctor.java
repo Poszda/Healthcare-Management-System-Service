@@ -22,7 +22,7 @@ public class Doctor {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy="doctor") // cascade
+    @OneToMany(mappedBy="doctor",cascade = CascadeType.ALL) // may change cascade all in the future
     private List<Appointment> appointments;
 
     @ManyToOne(fetch = FetchType.LAZY)

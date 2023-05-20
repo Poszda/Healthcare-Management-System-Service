@@ -3,6 +3,7 @@ package com.hmss.springbootserver.services;
 import com.hmss.springbootserver.DTOs.doctor.CreateDoctorRequestDTO;
 import com.hmss.springbootserver.DTOs.doctor.DoctorDTO;
 import com.hmss.springbootserver.DTOs.doctor.DoctorWithUserAndHospitalDTO;
+import com.hmss.springbootserver.DTOs.doctor.DoctorWithUserAndSpecialityDTO;
 import com.hmss.springbootserver.entities.Doctor;
 import com.hmss.springbootserver.entities.Hospital;
 import com.hmss.springbootserver.entities.Speciality;
@@ -50,6 +51,12 @@ public class UserService {
         return DoctorMapper.INSTANCE.toDoctorWithUserAndHospitalDTOList(doctors);
     }
 
+    public List<DoctorWithUserAndSpecialityDTO> getHospitalDoctorsWithSpeciality(Long hospitalId) {
+        System.out.println(hospitalId);
+        var x= this.doctorRepository.findHospitalDoctorsWithSpeciality(hospitalId);
+        return DoctorMapper.INSTANCE.toDoctorWithUserAndSpecialityDTOList(x);
+    }
+
     public ResponseEntity<Object> createDoctor(CreateDoctorRequestDTO createDoctorRequest) {
         User user = new User();
         Doctor doctor = new Doctor();
@@ -73,9 +80,17 @@ public class UserService {
         doctor.setProgramEnd(createDoctorRequest.getProgramEnd());
         doctor.setHospital(hospital);
         doctor.setSpeciality(speciality);
-        this.doctorRepository.save(doctor);
 
-        String text = "ceva";
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(DoctorMapper.INSTANCE.toDoctorDTO(this.doctorRepository.save(doctor)),HttpStatus.ACCEPTED);
+    }
+
+    public ResponseEntity<Object> deleteDoctor(Long id) {
+        this.doctorRepository.deleteById(id);
+        if(this.doctorRepository.findById(id).isEmpty()){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(" Appointment deletion failed",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

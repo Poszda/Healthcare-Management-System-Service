@@ -11,7 +11,7 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 @Named("UserMapper")
-@Mapper(uses = {PatientMapper.class,DoctorMapper.class, AdminMapper.class})
+@Mapper()
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
@@ -21,6 +21,7 @@ public interface UserMapper {
 
     @Named("UserToDoctorLoginDTO")
     @Mapping(source = "doctor.user.id", target = "doctor.userId")
+    @Mapping(source = "doctor.hospital.id", target = "doctor.hospitalId")
     DoctorLoginDTO UserToDoctorLoginDTO(User user);
 
     @Named("UserToAdminLoginDTO")

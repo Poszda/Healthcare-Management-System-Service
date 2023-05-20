@@ -3,10 +3,14 @@ package com.hmss.springbootserver.DTOs.doctor;
 import com.hmss.springbootserver.DTOs.user.UserDTO;
 import com.hmss.springbootserver.entities.User;
 
+import java.time.LocalTime;
+
 public class DoctorWithUserDTO {
     private Long id;
     private String university;
     private String description;
+    private LocalTime programStart;
+    private LocalTime programEnd;
     private Long hospitalId;
     private UserDTO user;
 
@@ -48,5 +52,21 @@ public class DoctorWithUserDTO {
 
     public void setUser(UserDTO user) {
         this.user = user;
+    }
+
+    public LocalTime getProgramStart() {
+        return programStart;
+    }
+
+    public void setProgramStart(LocalTime programStart) {
+        this.programStart = programStart;
+    }
+
+    public LocalTime getProgramEnd() {
+        return programEnd;
+    }
+
+    public void setProgramEnd(LocalTime programEnd) {
+        this.programEnd = programEnd;
     }
 }
