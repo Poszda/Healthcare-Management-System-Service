@@ -1,0 +1,38 @@
+.front{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.wrapper{
+    width: 168px; /* 168 */
+    height: 168px; /* 168 */
+}
+
+.legend{
+    margin-top: -2px;
+    display: flex;
+    flex-direction: column;
+}
+.legend-label{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.legend-box{
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+}
+.l0{
+    background-color: var(--color1);
+}
+.l1{
+    background-color: var(--color2);
+}
+.l2{
+    background-color: var(--color3);
+}
+.l3{
+    background-color: grey;
+}

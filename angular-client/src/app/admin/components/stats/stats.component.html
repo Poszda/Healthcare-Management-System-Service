@@ -1,1 +1,9 @@
-<p>stats works!</p>
+<div class="container">
+    <div class="left">
+        <app-activity-overview-widget [overview]="hospitalOverview" style="width: 100%;"></app-activity-overview-widget>
+        <app-period-overview-widget [stats]="hospitalPeriodicStats"></app-period-overview-widget>
+    </div>
+    <div class="right">
+        <app-speciality-visits-widget [frequencies]="hospitalSpecialityFrequencyPercentage" ></app-speciality-visits-widget>
+    </div>
+</div>

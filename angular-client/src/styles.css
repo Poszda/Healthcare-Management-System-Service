@@ -15,9 +15,13 @@
     --color5 : #FFFFFF;
     --color6: black;
 
-    /* buttons */
-    --buttonRedBG : #fff5f4;
-    --buttonRed : #ff7070;
+    --color7 : #ff7070;
+
+    /* secondary */
+    --secondaryColor1 : #f3f3ff;
+    --secondaryColor2 : #eef9ff;
+    --secondaryColor3 : #e1e2ef;
+    --secondaryColor7 : #fff5f4;
 }
 
 *{
@@ -63,7 +67,7 @@ button[disabled]{
     color: white;
 }
 .basic-button.red{
-    background-color: var(--buttonRed);
+    background-color: var(--color7);
     color: white;
 }
 
@@ -73,7 +77,7 @@ button[disabled]{
     cursor: pointer;
 }
 .round-button.red{
-    background-color:var(--buttonRedBG);
+    background-color:var(--secondaryColor7);
 }
 .round-button.purple{
     background-color:var(--color1);

@@ -1,0 +1,18 @@
+<app-widget-dot-container title="Patient visit by speciality">
+    <div class="front" front>
+        <div class="wrapper">
+            <p-chart type="doughnut" [data]="data" [options]="options"></p-chart>
+        </div>
+        <div class="legend">
+            <div *ngFor="let frequency of frequencies;let i=index" class="legend-label">
+                <div [class]="'legend-box l'+ i"></div>
+                <div class="legend-text">{{frequency.speciality}} - <span style="font-size: 13px;">{{frequency.percentage}}%</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="back" back>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+        Blanditiis rerum suscipit, quo corporis facere eligendi
+        nostrum sint sit officia veniam.
+    </div>
+</app-widget-dot-container>

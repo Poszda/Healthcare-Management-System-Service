@@ -21,6 +21,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { TableModule } from 'primeng/table';
+import { LegendComponent } from './components/widget-helpers/legend/legend.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { TableModule } from 'primeng/table';
     WidgetDotContainerComponent,
     WidgetLinkContainerComponent,
     WidgetSimpleContainerComponent,
-    AppointmentsWidgetComponent
+    AppointmentsWidgetComponent,
+    LegendComponent
   ],
   imports: [
     CommonModule,
@@ -55,6 +58,7 @@ import { TableModule } from 'primeng/table';
     NavbarComponent,
     WidgetDotContainerComponent,
     WidgetLinkContainerComponent,
+    WidgetSimpleContainerComponent,
     AppointmentsWidgetComponent,
     ChartModule,// should? it could but meh
     MatDialogModule, // should?

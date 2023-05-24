@@ -8,7 +8,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class WidgetDotContainerComponent implements OnInit {
 
-  @Input() title : string = "Default title"
+  @Input() title : string = ""
   showFront : boolean = true;
   constructor() { }
 

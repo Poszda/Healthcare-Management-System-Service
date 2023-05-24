@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class WidgetSimpleContainerComponent {
 
-  @Input() title : string = "Default title"
+  @Input() title : string = ""
   
   constructor(){}
   
