@@ -1,9 +1,18 @@
 package com.hmss.springbootserver.DTOs.statistics;
 
-public class HospitalOverview {
+public class HospitalOverviewDTO {
     private Long appointments;
-    private Long estimatedEarnings;
+    private Double estimatedEarnings;
     private Double averagePatientAge;
+
+    public HospitalOverviewDTO(Long appointments, Double estimatedEarnings, Double averagePatientAge) {
+        this.appointments = appointments;
+        this.estimatedEarnings = estimatedEarnings;
+        this.averagePatientAge = averagePatientAge;
+    }
+
+    public HospitalOverviewDTO() {
+    }
 
     public Long getAppointments() {
         return appointments;
@@ -13,11 +22,11 @@ public class HospitalOverview {
         this.appointments = appointments;
     }
 
-    public Long getEstimatedEarnings() {
+    public Double getEstimatedEarnings() {
         return estimatedEarnings;
     }
 
-    public void setEstimatedEarnings(Long estimatedEarnings) {
+    public void setEstimatedEarnings(Double estimatedEarnings) {
         this.estimatedEarnings = estimatedEarnings;
     }
 

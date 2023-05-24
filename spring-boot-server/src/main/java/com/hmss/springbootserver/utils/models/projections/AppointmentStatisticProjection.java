@@ -1,2 +1,10 @@
-package com.hmss.springbootserver.utils.models.projections;public interface AppointmentStatisticProjection {
+package com.hmss.springbootserver.utils.models.projections;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+public interface AppointmentStatisticProjection {
+    String getMonth();
+    Integer getAppointments();
+    Integer getTotal();
 }
