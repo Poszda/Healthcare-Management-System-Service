@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CalendarModule } from 'primeng/calendar';
 import {InputTextModule} from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {ToastModule} from 'primeng/toast';
 import {MultiSelectModule} from 'primeng/multiselect';
@@ -21,7 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { TableModule } from 'primeng/table';
-import { LegendComponent } from './components/widget-helpers/legend/legend.component';
+import { TagComponent } from './components/tag/tag.component';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { LegendComponent } from './components/widget-helpers/legend/legend.compo
     WidgetLinkContainerComponent,
     WidgetSimpleContainerComponent,
     AppointmentsWidgetComponent,
-    LegendComponent
+    TagComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +43,7 @@ import { LegendComponent } from './components/widget-helpers/legend/legend.compo
     ChartModule, //prime ng
     CalendarModule,
     InputTextModule,
+    InputTextareaModule,
     AutoCompleteModule,
     ToastModule,
     TableModule,
@@ -64,6 +66,7 @@ import { LegendComponent } from './components/widget-helpers/legend/legend.compo
     MatDialogModule, // should?
     CalendarModule,
     InputTextModule,
+    InputTextareaModule,
     AutoCompleteModule,
     ToastModule,
     TableModule,
@@ -71,7 +74,8 @@ import { LegendComponent } from './components/widget-helpers/legend/legend.compo
     MultiSelectModule,
     DropdownModule,
     ProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    TagComponent
   ]
 })
 export class SharedModule { }

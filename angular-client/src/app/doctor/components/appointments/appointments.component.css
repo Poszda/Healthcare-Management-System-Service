@@ -1,0 +1,13 @@
+.container{
+    padding: 15px;
+    /* display: flex;
+    flex-direction: column; */
+    gap: 15px;
+}
+
+::ng-deep .diagnostic-form-dialog .mdc-dialog__surface{
+    padding: 30px;
+}
+::ng-deep .diagnostic-form-dialog{
+    overflow: auto;
+}

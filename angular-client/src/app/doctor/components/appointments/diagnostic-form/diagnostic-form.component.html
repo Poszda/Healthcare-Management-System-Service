@@ -1,0 +1,30 @@
+<form [formGroup]="form" (submit)="create()">
+    <p class="title">Diagnostic / Review</p>
+    <input type="text" formControlName="diagnostic" pInputText placeholder='Diagnostic' style="width: 100%;" />
+    <textarea rows="5" cols="30" formControlName="description" pInputTextarea
+        placeholder='Please provide a detailed description of the diagnostic findings and your advice here...'
+        style="width: 100%;"></textarea>
+    <div class="medicine-buttons">
+        <button type="button" class="basic-button primary" style="width: 145px;height: 41px;" (click)="addMedication()">
+            <img class="icon-smallest" src="assets/icons/plus-white.png" alt="">
+            <p>Add medicine</p>
+        </button>
+        <button type="button" class="basic-button red" style="width: 41px;height: 41px;" (click)="removeMedication()" [disabled]="!this.medications.length">
+            <img class="icon-smaller" src="assets/icons/trash-white.png" alt="">
+        </button>
+    </div>
+    <div class="medicines" *ngIf="this.medications.length">
+        <ng-container *ngFor="let medication of medicationsControls">
+            <div class="medicine" [formGroup]="medication">
+                <input type="text" formControlName="name" pInputText placeholder='Medicine name' />
+                <input type="text" formControlName="numberOfDays" pInputText placeholder='Number of days' />
+                <input type="text" formControlName="dose" pInputText placeholder='Dose' />
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="buttons">
+        <button type="submit" class="basic-button primary" style="width: 80px;height: 40px; margin-top: 10px;"
+            [disabled]="form.invalid">Create</button>
+    </div>
+</form>

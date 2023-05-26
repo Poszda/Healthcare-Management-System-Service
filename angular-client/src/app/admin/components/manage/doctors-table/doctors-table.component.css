@@ -27,9 +27,6 @@
     align-items: center;
     justify-content: center;
 }
-#deleteIcon{
-    width: 18px;
-}
 
 ::ng-deep .doctor-creation-form-dialog .mdc-dialog__surface{
     padding: 30px;

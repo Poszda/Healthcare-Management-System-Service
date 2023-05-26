@@ -1,0 +1,56 @@
+.title{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.medicine-buttons{
+    display: flex;
+    gap: 2.5px;
+}
+
+.medicines{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-height: 135px;
+    overflow: auto;
+}
+.medicine{
+    display: flex;
+    gap: 5px;
+}
+.medicine > * {
+    width: 100%
+}
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+}
+textarea{
+    resize: none;
+}
+
+/*MEDIA QUERIES*/
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 1024px) {
+}
+@media only screen and (max-width: 768px) {
+    .medicine{
+        flex-direction: column;
+    }
+    .medicines{
+        gap: 30px;
+    }
+}
+@media only screen and (max-width: 480px) {
+}
+@media only screen and (max-width: 300px) {
+}

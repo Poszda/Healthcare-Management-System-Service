@@ -3,91 +3,140 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 :root {
-/*     --color1: #6320ee;
+    /*     --color1: #6320ee;
     --color2 : #211a1d;
     --color3: #8075ff;
     --color4: #505863; 
     --coolor5: #F5F5F5*/
-    --color1 : #6D71F9;
-    --color2 : #54C1FB;
+    --color1: #6D71F9;
+    --color2: #54C1FB;
     --color3: #272848;
-    --color4: #f7f8fc;/* EEF0F8 f7f8fc*/
-    --color5 : #FFFFFF;
+    --color4: #f7f8fc;
+    /* EEF0F8 f7f8fc*/
+    --color5: #FFFFFF;
     --color6: black;
 
-    --color7 : #ff7070;
+    --color7: #ff7070;
 
     /* secondary */
-    --secondaryColor1 : #f3f3ff;
-    --secondaryColor2 : #eef9ff;
-    --secondaryColor3 : #e1e2ef;
-    --secondaryColor7 : #fff5f4;
+    --secondaryColor1: #f3f3ff;
+    --secondaryColor2: #eef9ff;
+    --secondaryColor3: #e1e2ef;
+    --secondaryColor7: #fff5f4;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:'Open Sans';
+    font-family: 'Open Sans';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 14px;
 }
-a{
+
+a {
     text-decoration: none;
 }
 
 button:disabled,
-button[disabled]{
-  background-color: #cccccc !important;
-  color: #666666 !important;
+button[disabled] {
+    background-color: #cccccc !important;
+    color: #666666 !important;
 }
 
 /* CUSTOM APP STYLES */
 
-.basic{
+/* INPUTS */
+.basic {
     color: black;
     font-size: 14px;
-    border:1px solid #ced4da;
-    border-radius: 6px; /* nicer if 5 */
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    /* nicer if 5 */
     padding-left: 10px;
     padding-right: 10px;
 }
-.basic-input{
-    height: 41px; /* nicer if 45 */
+
+.basic-input {
+    height: 41px;
+    /* nicer if 45 */
 }
 
-.basic-button{
+
+/* BUTTONS */
+.basic-button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
-.basic-button.primary{
+
+.basic-button.primary {
     background-color: var(--color1);
     color: white;
 }
-.basic-button.red{
+
+.basic-button.red {
     background-color: var(--color7);
     color: white;
 }
 
-.round-button{
-    border : none;
+.round-button {
+    border: none;
     border-radius: 100%;
     cursor: pointer;
 }
-.round-button.red{
-    background-color:var(--secondaryColor7);
+
+.round-button.red {
+    background-color: var(--color7);
 }
-.round-button.purple{
-    background-color:var(--color1);
+
+.round-button.purple {
+    background-color: var(--color1);
 }
+
+.round-button.less-red {
+    background-color: var(--secondaryColor7);
+}
+
+.round-button.less-purple {
+    background-color: var(--secondaryColor1);
+}
+
 /* input.p-inputtext:enabled:focus {
     outline:none;
     box-shadow: none;
     border-color: var(--color1);
 } */
 
+/* ICONS */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.icon-normal {
+    width: 20px;
+}
+
+.icon-small {
+    width: 18px;
+}
+
+.icon-smaller {
+    width: 16px;
+}
+
+.icon-smallest{
+    width: 14px;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

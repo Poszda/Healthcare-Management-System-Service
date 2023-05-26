@@ -3,13 +3,14 @@
     [scrollable]="true" [scrollHeight]="'calc(100vh - 170px)'"
     [value]="data"
     [globalFilterFields]="['user.firstName','user.lastName']"
+    styleClass="p-datatable-gridlines"
     [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="caption">
             <div class="caption-container">
                 <h5 class="m-0">Manage Doctors</h5>
                 <div class="right-side">
-                    <button class="round-button purple" style="height:41px; width: 41px" (click)="openFormDialog()">
-                        <i class="pi pi-plus" style="margin-top: 5px; color: white;"></i>
+                    <button class="basic-button primary" style="height:39px; width: 41px" (click)="openFormDialog()">
+                        <img class="icon-smallest" src="assets/icons/plus-white.png" alt="">
                     </button>
                     <span class="p-input-icon-left">
                         <i class="pi pi-search"></i>
@@ -40,8 +41,8 @@
                 <td>{{ doctor.programStart }}</td>
                 <td>{{ doctor.programEnd }}</td>
                 <td>
-                <button class="round-button red delete-btn"  style="height:41px; width: 41px;" (click)="deleteDoctorData(doctor.id)">
-                    <img id="deleteIcon" src="assets/icons/trash.png" alt="">
+                <button class="round-button less-red delete-btn"  style="height:41px; width: 41px;" (click)="deleteDoctorData(doctor.id)">
+                    <img class="icon-smaller" src="assets/icons/trash.png" alt="">
                 </button>
                 </td>
             </tr>

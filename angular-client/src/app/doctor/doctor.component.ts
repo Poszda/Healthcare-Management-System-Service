@@ -19,11 +19,6 @@ export class DoctorComponent implements OnInit {
       icon:'/assets/icons/appointment.png'
     },
     {
-      name:'Diagnostics',
-      route:'./prescriptions',
-      icon:'/assets/icons/diagnostics.png'
-    },
-    {
       name:'Account',
       route:'./account',
       icon:'/assets/icons/account2.png' 

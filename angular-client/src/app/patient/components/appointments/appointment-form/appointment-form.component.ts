@@ -284,9 +284,6 @@ export class AppointmentFormComponent implements OnInit {
         this.dialogRef.close(false);
       }
     );
-    //make save call
-    //disable buttons and dialogs
-    // close dialog 
   }
 
 }

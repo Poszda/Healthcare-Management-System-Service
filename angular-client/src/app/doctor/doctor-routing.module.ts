@@ -10,7 +10,6 @@ const routes: Routes = [
     { path: '', redirectTo:'dashboard',pathMatch:'prefix'},
     {path:'dashboard', component:DashboardComponent},
     {path:'appointments', component: AppointmentsComponent},
-    {path:'diagnostics', component: NothingHereComponent},
     {path:'account', component: NothingHereComponent}, //de ce ma lasa?? nu trebuia sa fie invizbil in modulul asta?
   ]}
 ];

@@ -1,0 +1,57 @@
+<div class="container">
+    <p-table #dt [scrollable]="true" [scrollHeight]="'calc(100vh - ' + difValue + 'px)'" [value]="data"
+        [globalFilterFields]="['firstName','lastName']" styleClass="p-datatable-gridlines"
+        [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="caption">
+            <div class="caption-container">
+                <h5 class="m-0">Manage appointments</h5>
+                <div class="right-side">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" id="appointment-table-input"
+                            (input)="applyFilterGlobal($event, 'contains')" placeholder="Search..." />
+                    </span>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+                <th pSortableColumn="firstName">Patient<p-sortIcon field="firstName"></p-sortIcon></th>
+                <th pSortableColumn="procedureName">Procedure<p-sortIcon field="procedureName"></p-sortIcon></th>
+                <th pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
+                <th pSortableColumn="time">Time<p-sortIcon field="time"></p-sortIcon></th>
+                <th pSortableColumn="phone">Phone<p-sortIcon field="phone"></p-sortIcon></th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-appointment>
+            <tr>
+                <td>{{ appointment.id }}</td>
+                <td style="padding-top: 10px; padding-bottom:10px; height: 61.8px;">
+                    <div class="patient">
+                        <img class="user-icon" src="assets/icons/user.png" alt="">
+                         <div class="patient-details">
+                            <p>{{ appointment.name}}</p>
+                            <p class="subtitle">{{ appointment.age}} yrs</p>
+                         </div>
+                    </div>
+                </td>
+                <td>{{ appointment.procedureName }}</td>
+                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.time }}</td>
+                <td>{{ appointment.phone }}</td>
+                <td>
+                    <app-tag [text]="appointment.statusName" [type]="appointment.status"></app-tag>
+                </td>
+                <td style="padding-top: 10px; padding-bottom:10px; height: 61.8px;">
+                    <button class="round-button less-purple" style="height:41px; width: 41px;"
+                        (click)="openFormDialog(appointment.id)" *ngIf="appointment.status === 'IN_PROGRESS'">
+                        <img id="editIcon" src="assets/icons/edit4.png" alt="">
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

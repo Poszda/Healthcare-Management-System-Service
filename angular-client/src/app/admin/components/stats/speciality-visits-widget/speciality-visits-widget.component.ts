@@ -9,6 +9,7 @@ import { SpecialityFrequencyPercentage } from 'src/app/admin/models/speciality-f
 export class SpecialityVisitsWidgetComponent implements OnChanges{
 
   @Input() frequencies : SpecialityFrequencyPercentage[] = []
+  noVisits : boolean = false;
 
   /* BASIC OPTIONS */
   options = {
@@ -48,8 +49,13 @@ export class SpecialityVisitsWidgetComponent implements OnChanges{
   };
 
   ngOnChanges(): void {
-    this.data.datasets[0].data = this.frequencies.map(el => el.appointments)
-    this.data = JSON.parse(JSON.stringify(this.data))
+    const result = this.frequencies.map(el => el.appointments)
+    if(result.length === 0) this.noVisits = true;
+    else{
+      this.noVisits = false;
+      this.data.datasets[0].data = result
+      this.data = JSON.parse(JSON.stringify(this.data))
+    }
   }
 
   
