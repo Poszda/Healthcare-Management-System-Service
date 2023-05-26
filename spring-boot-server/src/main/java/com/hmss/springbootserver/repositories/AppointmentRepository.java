@@ -2,11 +2,13 @@ package com.hmss.springbootserver.repositories;
 
 import com.hmss.springbootserver.entities.Appointment;
 import com.hmss.springbootserver.utils.models.projections.AppointmentCardProjection;
+import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.print.Doc;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,4 +31,14 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
             "LEFT JOIN a.diagnostic di "+
             "WHERE a.patient.id =:patientId")
     List<AppointmentCardProjection> findUserAppointmentsWidgets(@Param("patientId") Long patientId);
+
+    @Query("SELECT a.id as id, a.date as date, p.name as procedureName, " +
+            "p.duration as duration, pa.id as patientId, pa.phone as phone, pa.age as age, u.firstName as firstName, u.lastName as lastName, d.id as diagnosticId " +
+            "FROM Appointment a " +
+            "JOIN a.procedure p " +
+            "LEFT JOIN a.diagnostic d " +
+            "JOIN a.patient pa " +
+            "JOIN pa.user u " +
+            "WHERE a.doctor.id =:doctorId")
+    List<DoctorAppointmentProjection> findDoctorAppointments(@Param("doctorId") Long doctorId);
 }

@@ -19,6 +19,15 @@ public class Diagnostic {
     @OneToMany(mappedBy="diagnostic",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Medication> medications = new ArrayList<>();
 
+
+    public void addMedication(Medication medication){
+        medication.setDiagnostic(this);
+        this.medications.add(medication);
+    }
+    public void removeMedication(Medication medication){
+        medication.setDiagnostic(null);
+        this.medications.remove(medication);
+    }
     public Long getId() {
         return id;
     }
@@ -34,7 +43,6 @@ public class Diagnostic {
     public void setName(String name) {
         this.name = name;
     }
-
     public String getDescription() {
         return description;
     }

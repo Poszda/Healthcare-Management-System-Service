@@ -1,21 +1,11 @@
-package com.hmss.springbootserver.entities;
+package com.hmss.springbootserver.DTOs.appointments;
 
-import jakarta.persistence.*;
+public class MedicationDTO {
 
-@Entity
-@Table(name = "medication")
-public class Medication {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
     private String name;
     private Integer numberOfDays;
     private String dose;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "diagnostic_id")
-    private Diagnostic diagnostic;
 
     public Long getId() {
         return id;
@@ -47,13 +37,5 @@ public class Medication {
 
     public void setDose(String dose) {
         this.dose = dose;
-    }
-
-    public Diagnostic getDiagnostic() {
-        return diagnostic;
-    }
-
-    public void setDiagnostic(Diagnostic diagnostic) {
-        this.diagnostic = diagnostic;
     }
 }

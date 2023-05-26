@@ -1,19 +1,17 @@
 package com.hmss.springbootserver.services;
 
-import com.hmss.springbootserver.DTOs.appointments.AvailableHours;
-import com.hmss.springbootserver.DTOs.appointments.CreateAppointmentRequestDTO;
-import com.hmss.springbootserver.DTOs.appointments.DoctorAvailableHours;
+import com.hmss.springbootserver.DTOs.appointments.*;
 import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
-import com.hmss.springbootserver.entities.Appointment;
-import com.hmss.springbootserver.entities.Doctor;
-import com.hmss.springbootserver.entities.Patient;
-import com.hmss.springbootserver.entities.Procedure;
+import com.hmss.springbootserver.entities.*;
+import com.hmss.springbootserver.enums.AppointmentStatus;
+import com.hmss.springbootserver.mappers.AppointmentMapper;
 import com.hmss.springbootserver.mappers.HospitalMapper;
 import com.hmss.springbootserver.repositories.*;
 import com.hmss.springbootserver.utils.models.AppointmentSimplified;
 import com.hmss.springbootserver.utils.models.DoctorProgramSimplified;
 import com.hmss.springbootserver.utils.models.FreeTimeInterval;
 import com.hmss.springbootserver.utils.models.projections.AppointmentCardProjection;
+import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentProjection;
 import com.hmss.springbootserver.utils.models.projections.DoctorProgramProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,15 +36,18 @@ public class AppointmentService {
     private final DoctorRepository doctorRepository;
     private final ProcedureRepository procedureRepository;
     private final PatientRepository patientRepository;
+    private final DiagnosticRepository diagnosticRepository;
 
     @Autowired
     public AppointmentService(HospitalRepository hospitalRepository, AppointmentRepository appointmentRepository, DoctorRepository doctorRepository, ProcedureRepository procedureRepository,
-                              PatientRepository patientRepository) {
+                              PatientRepository patientRepository,
+                              DiagnosticRepository diagnosticRepository) {
         this.hospitalRepository = hospitalRepository;
         this.appointmentRepository = appointmentRepository;
         this.doctorRepository = doctorRepository;
         this.procedureRepository = procedureRepository;
         this.patientRepository = patientRepository;
+        this.diagnosticRepository = diagnosticRepository;
     }
 
     public List<HospitalWithDoctorsDTO> getHospitalsAndDoctorsRecommendations(List<String> counties, long procedureId){
@@ -56,7 +57,6 @@ public class AppointmentService {
 
     public List<AppointmentCardProjection> getAppointmentsCards(Long patientId){
         return this.appointmentRepository.findUserAppointmentsWidgets(patientId);
-
     }
 
     public ResponseEntity<Object> createAppointment(CreateAppointmentRequestDTO appointment){
@@ -209,5 +209,54 @@ public class AppointmentService {
             map.put(el.getId(),d);
         }
         return map;
+    }
+
+
+    public List<DoctorAppointmentDTO> getDoctorAppointments(Long doctorId) {
+        var list = this.appointmentRepository.findDoctorAppointments(doctorId);
+        List<DoctorAppointmentDTO> doctorAppointments = list.stream().map(el -> {
+            AppointmentStatus status;
+            if(el.getDiagnosticId() == null){
+                if(LocalDateTime.now().isAfter(el.getDate())) status = AppointmentStatus.IN_PROGRESS;
+                else status = AppointmentStatus.UPCOMING;
+            }
+            else status = AppointmentStatus.REVIEWED;
+
+            DoctorAppointmentDTO a = new DoctorAppointmentDTO();
+            a.setId(el.getId());
+            a.setPatientId(el.getPatientId());
+            a.setFirstName(el.getFirstName());
+            a.setLastName(el.getLastName());
+            a.setPhone(el.getPhone());
+            a.setAge(el.getAge());
+            a.setProcedureName(el.getProcedureName());
+            a.setDate(el.getDate().toLocalDate());
+            a.setTime(el.getDate().toLocalTime());
+            a.setDuration(el.getDuration());
+            a.setStatus(status);
+            return a;
+        }).collect(Collectors.toList());
+
+        return doctorAppointments;
+    }
+
+    public ResponseEntity<Object> createDiagnostic(CreateDiagnosticRequestDTO diagnostic) {
+        Optional<Appointment> appointmentOptional = appointmentRepository.findById(diagnostic.getAppointmentId());
+        if(appointmentOptional.isEmpty())
+            return new ResponseEntity<>("Appointment not found", HttpStatus.NOT_FOUND);
+
+        Appointment appointment = appointmentOptional.get();
+        Diagnostic newDiagnostic = new Diagnostic();
+
+        newDiagnostic.setName(diagnostic.getDiagnostic());
+        newDiagnostic.setDescription(diagnostic.getDescription());
+        newDiagnostic.setAppointment(appointment);
+        List<Medication> medications = AppointmentMapper.INSTANCE.toMedicationEntityList(diagnostic.getMedications());
+        for (Medication m : medications){
+            newDiagnostic.addMedication(m);
+        }
+        this.diagnosticRepository.save(newDiagnostic);
+
+        return null;
     }
 }
