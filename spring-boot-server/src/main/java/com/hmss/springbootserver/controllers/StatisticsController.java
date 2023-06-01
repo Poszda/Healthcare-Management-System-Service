@@ -23,8 +23,8 @@ public class StatisticsController {
 
     @GetMapping("/getTodayProgram/{doctorId}")
     @CrossOrigin(origins = "*")
-    public Object getTodayProgram(){
-        return this.statisticsService.getTodayProgram();
+    public Object getTodayProgram(@PathVariable Long doctorId){
+        return this.statisticsService.getTodayProgram(doctorId);
     }
 
     @GetMapping("/getHospitalOverview/{hospitalId}")
@@ -44,4 +44,5 @@ public class StatisticsController {
     public List<SpecialityFrequencyProjection> getHospitalSpecialityFrequency(@PathVariable Long hospitalId){
         return this.statisticsService.getHospitalSpecialityFrequency(hospitalId);
     }
+
 }

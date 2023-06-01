@@ -74,5 +74,11 @@ public class AppointmentController {
         return this.appointmentService.createDiagnostic(appointment);
     }
 
+    @GetMapping("/getPatientDiagnostics/{patientId}")
+    @CrossOrigin(origins = "*")
+    public Object getPatientDiagnostics(@PathVariable("patientId") Long patientId){
+        return this.appointmentService.getPatientDiagnostics(patientId);
+    }
+
 
 }

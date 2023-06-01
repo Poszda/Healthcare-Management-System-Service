@@ -2,6 +2,7 @@ package com.hmss.springbootserver.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class Diagnostic {
     private Long id;
     private String name;
     private String description;
+    private LocalDate createdAt;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
@@ -67,5 +69,11 @@ public class Diagnostic {
         this.medications = medications;
     }
 
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
 
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+    }
 }

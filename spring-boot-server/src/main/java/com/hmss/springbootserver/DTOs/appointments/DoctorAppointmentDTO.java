@@ -18,10 +18,12 @@ public class DoctorAppointmentDTO {
     private String firstName;
     private String phone;
     private Integer age;
+    private String status;
 
-    private AppointmentStatus status;
+    public DoctorAppointmentDTO() {
+    }
 
-    public DoctorAppointmentDTO(Long id, Integer duration, LocalDate date, LocalTime time, String procedureName, Long patientId, String lastName, String firstName, String phone, Integer age, AppointmentStatus status) {
+    public DoctorAppointmentDTO(Long id, Integer duration, LocalDate date, LocalTime time, String procedureName, Long patientId, String lastName, String firstName, String phone, Integer age, String status) {
         this.id = id;
         this.duration = duration;
         this.date = date;
@@ -33,9 +35,6 @@ public class DoctorAppointmentDTO {
         this.phone = phone;
         this.age = age;
         this.status = status;
-    }
-
-    public DoctorAppointmentDTO() {
     }
 
     public Long getId() {
@@ -118,11 +117,11 @@ public class DoctorAppointmentDTO {
         this.age = age;
     }
 
-    public AppointmentStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(AppointmentStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

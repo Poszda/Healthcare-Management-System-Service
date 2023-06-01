@@ -6,6 +6,18 @@ public class MedicationDTO {
     private String name;
     private Integer numberOfDays;
     private String dose;
+    private Long diagnosticId;
+
+    public MedicationDTO() {
+    }
+
+    public MedicationDTO(Long id, Long diagnosticId,String name, Integer numberOfDays, String dose) {
+        this.diagnosticId = diagnosticId;
+        this.id = id;
+        this.name = name;
+        this.numberOfDays = numberOfDays;
+        this.dose = dose;
+    }
 
     public Long getId() {
         return id;
@@ -37,5 +49,13 @@ public class MedicationDTO {
 
     public void setDose(String dose) {
         this.dose = dose;
+    }
+
+    public Long getDiagnosticId() {
+        return diagnosticId;
+    }
+
+    public void setDiagnosticId(Long diagnosticId) {
+        this.diagnosticId = diagnosticId;
     }
 }

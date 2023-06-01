@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.print.Doc;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -41,4 +42,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
             "JOIN pa.user u " +
             "WHERE a.doctor.id =:doctorId")
     List<DoctorAppointmentProjection> findDoctorAppointments(@Param("doctorId") Long doctorId);
+
+    @Query("SELECT COALESCE(SUM(p.duration),0) FROM Appointment a " +
+            "JOIN a.procedure p " +
+            "WHERE FUNCTION('DATE', a.date) = CURRENT_DATE AND a.doctor.id = :doctorId")
+    int getSumOfTodayProcedureDuration(@Param("doctorId") Long doctorId);
 }

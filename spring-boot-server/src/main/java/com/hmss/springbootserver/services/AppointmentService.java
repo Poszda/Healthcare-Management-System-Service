@@ -37,17 +37,20 @@ public class AppointmentService {
     private final ProcedureRepository procedureRepository;
     private final PatientRepository patientRepository;
     private final DiagnosticRepository diagnosticRepository;
+    private final MedicationRepository medicationRepository;
 
     @Autowired
     public AppointmentService(HospitalRepository hospitalRepository, AppointmentRepository appointmentRepository, DoctorRepository doctorRepository, ProcedureRepository procedureRepository,
                               PatientRepository patientRepository,
-                              DiagnosticRepository diagnosticRepository) {
+                              DiagnosticRepository diagnosticRepository,
+                              MedicationRepository medicationRepository) {
         this.hospitalRepository = hospitalRepository;
         this.appointmentRepository = appointmentRepository;
         this.doctorRepository = doctorRepository;
         this.procedureRepository = procedureRepository;
         this.patientRepository = patientRepository;
         this.diagnosticRepository = diagnosticRepository;
+        this.medicationRepository = medicationRepository;
     }
 
     public List<HospitalWithDoctorsDTO> getHospitalsAndDoctorsRecommendations(List<String> counties, long procedureId){
@@ -215,12 +218,12 @@ public class AppointmentService {
     public List<DoctorAppointmentDTO> getDoctorAppointments(Long doctorId) {
         var list = this.appointmentRepository.findDoctorAppointments(doctorId);
         List<DoctorAppointmentDTO> doctorAppointments = list.stream().map(el -> {
-            AppointmentStatus status;
+            String status;
             if(el.getDiagnosticId() == null){
-                if(LocalDateTime.now().isAfter(el.getDate())) status = AppointmentStatus.IN_PROGRESS;
-                else status = AppointmentStatus.UPCOMING;
+                if(LocalDateTime.now().isAfter(el.getDate())) status = AppointmentStatus.IN_PROGRESS.getStatus();
+                else status = AppointmentStatus.UPCOMING.getStatus();
             }
-            else status = AppointmentStatus.REVIEWED;
+            else status = AppointmentStatus.REVIEWED.getStatus();
 
             DoctorAppointmentDTO a = new DoctorAppointmentDTO();
             a.setId(el.getId());
@@ -250,6 +253,7 @@ public class AppointmentService {
 
         newDiagnostic.setName(diagnostic.getDiagnostic());
         newDiagnostic.setDescription(diagnostic.getDescription());
+        newDiagnostic.setCreatedAt(LocalDate.now());
         newDiagnostic.setAppointment(appointment);
         List<Medication> medications = AppointmentMapper.INSTANCE.toMedicationEntityList(diagnostic.getMedications());
         for (Medication m : medications){
@@ -258,5 +262,25 @@ public class AppointmentService {
         this.diagnosticRepository.save(newDiagnostic);
 
         return null;
+    }
+
+    public Object getPatientDiagnostics(Long patientId) {
+       List<PatientDiagnosticExtendedDTO> diagnostics =  this.diagnosticRepository.findPatientDiagnosticsExtended(patientId);
+       List<Long> diagnosticsIds = diagnostics.stream().map(el -> el.getId()).toList();
+       List<MedicationDTO> medications = this.medicationRepository.findByDiagnosticIdIn(diagnosticsIds);
+        HashMap<Long,List<MedicationDTO>> map = new HashMap<>();
+        for (MedicationDTO medication : medications) {
+            Long diagnosticId = medication.getDiagnosticId();
+            List<MedicationDTO> medicationList = map.getOrDefault(diagnosticId, new ArrayList<>());
+            medicationList.add(medication);
+            map.put(diagnosticId, medicationList);
+        }
+
+        for (PatientDiagnosticExtendedDTO diagnostic : diagnostics) {
+            List<MedicationDTO> list = map.getOrDefault(diagnostic.getId(), new ArrayList<>());
+            diagnostic.setMedications(list);
+        }
+
+        return diagnostics;
     }
 }

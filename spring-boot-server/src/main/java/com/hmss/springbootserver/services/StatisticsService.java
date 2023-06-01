@@ -1,8 +1,11 @@
 package com.hmss.springbootserver.services;
 
+import com.hmss.springbootserver.DTOs.appointments.TodayProgramDTO;
 import com.hmss.springbootserver.DTOs.statistics.HospitalMonthStatisticDTO;
 import com.hmss.springbootserver.DTOs.statistics.HospitalOverviewDTO;
+import com.hmss.springbootserver.entities.Doctor;
 import com.hmss.springbootserver.repositories.AppointmentRepository;
+import com.hmss.springbootserver.repositories.DoctorRepository;
 import com.hmss.springbootserver.repositories.HospitalRepository;
 import com.hmss.springbootserver.utils.models.AppointmentSimplified;
 import com.hmss.springbootserver.utils.models.projections.AppointmentStatisticProjection;
@@ -10,28 +13,39 @@ import com.hmss.springbootserver.utils.models.projections.SpecialityFrequencyPro
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.print.Doc;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Service
 public class StatisticsService {
 
     private final AppointmentRepository appointmentRepository;
     private final HospitalRepository hospitalRepository;
+    private final DoctorRepository doctorRepository;
 
     @Autowired
     public StatisticsService(AppointmentRepository appointmentRepository,
-                             HospitalRepository hospitalRepository) {
+                             HospitalRepository hospitalRepository,
+                             DoctorRepository doctorRepository) {
         this.appointmentRepository = appointmentRepository;
         this.hospitalRepository = hospitalRepository;
+        this.doctorRepository = doctorRepository;
     }
 
-    public Object getTodayProgram() {
-        return null;
+    public Object getTodayProgram(Long doctorId) {
+        Optional<Doctor> doctorOptional = this.doctorRepository.findById(doctorId);
+        if(doctorOptional.isEmpty()) return null;
+
+        Doctor doctor = doctorOptional.get();
+        int totalMinutes = (int) Duration.between(doctor.getProgramStart(),doctor.getProgramEnd()).toMinutes();
+        int sum = this.appointmentRepository.getSumOfTodayProcedureDuration(doctorId);
+        TodayProgramDTO program = new TodayProgramDTO();
+        program.setBusy(Math.round((float)(sum)/totalMinutes * 100));
+        program.setFree(100 - program.getBusy());
+        return program;
     }
 
     public List<HospitalMonthStatisticDTO> getHospitalPeriodicStats(Long hospitalId) {
