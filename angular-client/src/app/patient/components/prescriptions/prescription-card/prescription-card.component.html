@@ -1,20 +1,20 @@
 <div class='prescription-card'>
     <div class="cover">
-    <p class="title">Implant/Extractie reusita</p>
-    <img id="img-header" src="assets/icons/view2.png" alt="">
+    <p class="title">{{diagnostic?.diagnostic}}</p>
+    <img (click)="openSeeMoreDialog()" id="img-header" src="assets/icons/view2.png" alt="">
     </div>
-    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ut mollitia, deserunt sed laborum consequatur. Totam quibusdam doloremque non fugit!</p>
+    <p class="description">{{diagnostic?.description}}</p>
     <div class="end">
         <div class="doctor">
-            <p class='grey'>Primary</p>
+            <p class='grey'>Doctor</p>
              <div class="img-text">
                 <img src="assets/icons/user.png" alt="" class='doctor-img' />
-                <p class='name'>Dr Mihai</p>
+                <p class='name'>{{diagnostic?.doctorLastName}}</p>
              </div>
         </div>
         <div class="last-seen">
-            <p class='grey'>Last seen</p>
-            <p class="data">11.11.1911</p>
+            <p class='grey'>Reviewed at</p>
+            <p class="data">{{diagnostic?.createdAt}}</p>
         </div>
     </div>
 </div>

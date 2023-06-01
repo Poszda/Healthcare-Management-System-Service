@@ -13,3 +13,21 @@
     flex-wrap: wrap;
     gap: 15px;
 }
+.card{
+    width: 350px;
+}
+
+/*MEDIA QUERIES*/
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 1024px) {
+}
+@media only screen and (max-width: 768px) {
+}
+@media only screen and (max-width: 480px) {
+    .card{
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 300px) {
+}

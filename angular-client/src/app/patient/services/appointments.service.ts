@@ -28,4 +28,8 @@ export class AppointmentsService {
   deleteAppointment(id : number){
     return this.http.delete(`http://localhost:8080/api/appointments/deleteAppointment/${id}`,{responseType: 'text'});
   }
+
+  getDiagnostics(patientId : number){
+    return this.http.get<any>(`http://localhost:8080/api/appointments/getPatientDiagnostics/${patientId}`);
+  }
 }

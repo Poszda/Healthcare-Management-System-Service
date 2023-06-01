@@ -1,0 +1,58 @@
+<div class="container">
+    <h1 class="title">Diagnostic/ Review</h1>
+    <div class="content">
+        <div class="information-content">
+            <div class="appointment-section">
+                <div class="profile">
+                    <img id="img-profile" src="assets/icons/user-whitebg.png" alt="" />
+                    <div class="text">
+                        <p>{{diagnostic.doctorFirstName + " " + diagnostic.doctorLastName}}</p>
+                        <p class="subtitle">{{diagnostic.speciality}}</p>
+                    </div>
+                </div>
+                <div class="date">
+                    <p class="subtitle">Date</p>
+                    <p>{{diagnostic.date | date: 'MM/dd/yyyy'}}</p>
+                </div>
+
+                <div class="procedure">
+                    <p class="subtitle">Procedure</p>
+                    <p>{{diagnostic.procedure}}</p>
+                </div>
+
+                <div class="location">
+                    <p class="subtitle">Location</p>
+                    <p>{{diagnostic.hospital}}</p>
+                </div>
+
+                <div class="reviewed">
+                    <p class="subtitle">Reviewed at</p>
+                    <p>{{diagnostic.createdAt}}</p>
+                </div>
+            </div>
+            <div class="diagnostic-section">
+                <div class="diagnostic">
+                    <p class="subtitle">Diagnostic</p>
+                    <p>{{diagnostic.diagnostic}}</p>
+                </div>
+                <div class="recommandation">
+                    <p class="subtitle">Recommandation</p>
+                    <p>{{diagnostic.description}}</p>
+                </div>
+                <div class="medicamentation">
+                    <p class="subtitle">Medicamentation</p>
+                    <div class="meds" *ngIf="diagnostic.medications.length > 0;else notice">
+                        <div class="line" *ngFor="let medication of diagnostic.medications">
+                            <div class="img-box"><img class="icon-small" src="assets/icons/capsule-white.png" alt=""></div>
+                            <div class="line-text">
+                                <p class="name">{{medication.name}}</p>
+                                <p class="subtitle">{{medication.numberOfDays}} days ,{{medication.dose}} pills</p>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #notice>-</ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

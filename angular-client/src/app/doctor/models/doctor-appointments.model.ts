@@ -24,5 +24,4 @@ export interface DoctorAppointmentTabelData{
     phone : string
     age : string
     status : AppointmentStatus 
-    statusName : string 
 }

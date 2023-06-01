@@ -1,5 +1,8 @@
 <form [formGroup]="form" (submit)="create()">
-    <p class="title">Diagnostic / Review</p>
+    <div class="head">
+        <p class="title">Diagnostic / Review</p>
+        <p style="font-size: 13px; color: grey;">{{patientText}}</p>
+    </div>
     <input type="text" formControlName="diagnostic" pInputText placeholder='Diagnostic' style="width: 100%;" />
     <textarea rows="5" cols="30" formControlName="description" pInputTextarea
         placeholder='Please provide a detailed description of the diagnostic findings and your advice here...'

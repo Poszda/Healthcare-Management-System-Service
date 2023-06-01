@@ -1,0 +1,117 @@
+.container{
+    padding: 30px;
+}
+.title{
+    margin-bottom: 15px;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.information-content{
+    display: flex;
+    gap: 15px;
+}
+.appointment-section{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    background-color: var(--color4);
+    border-radius: 5px;
+    flex: 0 0 250px; /* grow, shrink, basis */
+}
+
+.appointment-section .profile{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.appointment-section #img-profile{
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+}
+
+.diagnostic-section{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow: auto;
+    max-height: 400px;
+    flex-grow: 1;
+}
+
+.medicamentation{
+    display: flex;
+    flex-direction: column;
+    gap:2.5px;
+}
+.medicamentation .line{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.1) 0px 0.5px 3px 0.3px;
+    
+}
+.medicamentation .line .name{
+    font-size: 13px;
+    font-weight: bold;
+}
+.meds{
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.img-box{
+    border-radius: 100%;
+    background-color: var(--color1);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subtitle{
+    font-size: 13px;
+    color: grey;
+}
+
+/*MEDIA QUERIES*/
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 1024px) {
+}
+@media only screen and (max-width: 768px) {
+    .content{
+        height: calc(80vh - 60px - 15px - 20px);
+        overflow: auto;
+    }
+    .information-content{
+        flex-direction: column;
+    }
+    .diagnostic-section{
+        max-height: auto;
+        overflow: visible;
+    }
+    .appointment-section{
+        background-color: transparent;
+    }
+}
+@media only screen and (max-width: 480px) {
+}
+@media only screen and (max-width: 300px) {
+}
+

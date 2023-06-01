@@ -15,21 +15,24 @@ export class TagComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['type']) {
       switch (this.type) {
-        case 'IN_PROGRESS':
+        case 'In progress':
           this.color = 'white';
           this.bgColor = '#6D71F9'
           break;
-        case 'UPCOMING':
+        case 'Upcoming':
           this.color = 'white';
           this.bgColor = '#54C1FB'
           break;
-        case 'REVIEWED':
+        case 'Reviewed':
           this.color = 'white';
           this.bgColor = '#272848'
           break;
 
         default:
           break;
+      }
+      if (changes['text']) {
+        this.text = this.text.toUpperCase();
       }
     }
   }

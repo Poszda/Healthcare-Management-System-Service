@@ -59,7 +59,4 @@ export class DoctorCreationFormComponent implements OnInit{
       }
     )
   }
-  closeDialog(){
-    this.dialogRef.close()
-  }
 }

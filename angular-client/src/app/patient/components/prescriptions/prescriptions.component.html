@@ -1,10 +1,5 @@
 <div class="container">
     <div class="prescriptions-list">
-        <app-prescription-card style="width: 350px;"></app-prescription-card>
-        <app-prescription-card style="width: 350px;"></app-prescription-card>
-        <app-prescription-card style="width: 350px;"></app-prescription-card>
-        <app-prescription-card style="width: 350px;"></app-prescription-card>
-        <app-prescription-card style="width: 350px;"></app-prescription-card>
-        <app-prescription-card style="width: 350px;"></app-prescription-card>
+        <app-prescription-card *ngFor="let diagnostic of diagnostics" [diagnostic]="diagnostic" class="card" (seeMore)="openPrescriptionDialog(diagnostic)"></app-prescription-card>
     </div>
 </div>

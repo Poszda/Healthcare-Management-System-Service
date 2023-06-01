@@ -27,7 +27,6 @@ export class AppointmentsComponent implements OnInit {
   getDoctorAppointments(){
     this.appointmentsService.getDoctorAppointments(this.doctorId).subscribe(
       (res : DoctorAppointment[]) =>{
-        console.log(res)
         this.appointmentsData = this.transformAppointmentData(res);
       },
       err =>{
@@ -48,7 +47,6 @@ export class AppointmentsComponent implements OnInit {
      phone: el.phone,
      age: el.age,
      status : el.status,
-     statusName: this.getAppointmentStatusName(el.status)
      }
      return x
     })
@@ -56,35 +54,20 @@ export class AppointmentsComponent implements OnInit {
     return result;
   }
 
-  getAppointmentStatusName(status : AppointmentStatus) : string{
-    let statusName;
-     switch (status) {
-      case AppointmentStatus.IN_PROGRESS:
-        statusName = "IN PROGRESS"
-        break;
-      case AppointmentStatus.REVIEWED:
-        statusName = "REVIEWED"
-        break;
-      case AppointmentStatus.UPCOMING:
-        statusName = "UPCOMING"
-        break;
-     }
-     return statusName
-  }
-
   getInterval(time : string, duration : number){
     return `${moment(time, 'HH:mm').format('HH:mm')} - ${moment(time, 'HH:mm').add(duration,'minutes').format('HH:mm')}`
   }
 
-  openForm(appointmentId : number){
+  openForm(appointment : DoctorAppointmentTabelData){
     this.dialog.open(DiagnosticFormComponent, {
       panelClass: 'diagnostic-form-dialog',
       maxHeight:'80vh',
       width:'500px',
+      data : appointment
     }).afterClosed().subscribe(
       (diagnostic) =>{
         if(diagnostic){
-          diagnostic.appointmentId = appointmentId
+          diagnostic.appointmentId = appointment.id 
           this.createDiagnostic(diagnostic);
         }
       }
@@ -92,7 +75,6 @@ export class AppointmentsComponent implements OnInit {
   }
 
   createDiagnostic(diagnostic : newDiagnostic){
-    console.log(diagnostic)
     this.appointmentsService.createDiagnostic(diagnostic).subscribe(
       res =>{
         console.log(res)

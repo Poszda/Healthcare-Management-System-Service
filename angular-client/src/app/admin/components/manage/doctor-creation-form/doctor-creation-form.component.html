@@ -1,4 +1,5 @@
 <form [formGroup]="form" (submit)="create()">
+    <p class="title">Add Doctor</p>
     <div class="row row-1">
         <input type="text" pInputText formControlName="firstName" placeholder='First name*' />
         <input type="text" pInputText formControlName="lastName" placeholder='Last name*' />
@@ -25,8 +26,6 @@
         </div>
     </div>
     <div class="buttons">
-        <button type="button" (click)="closeDialog()" class="basic-button red"
-            style="width: 80px;height: 40px; margin-top: 10px;">Cancel</button>
         <button type="submit" class="basic-button primary" style="width: 80px;height: 40px; margin-top: 10px;"
             [disabled]="form.invalid">Create</button>
     </div>

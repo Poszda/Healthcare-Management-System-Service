@@ -23,6 +23,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { TableModule } from 'primeng/table';
 import { TagComponent } from './components/tag/tag.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { TagComponent } from './components/tag/tag.component';
     WidgetSimpleContainerComponent,
     AppointmentsWidgetComponent,
     TagComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     CommonModule,

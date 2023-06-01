@@ -13,14 +13,12 @@
     display: flex; 
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 5px;
+    gap: 10px;
 }
-.right-side{
+.filters{
     display: flex;
     gap: 5px;
     align-items: center;
-    flex-wrap: wrap;
 }
 #editIcon{
     width: 13px;
@@ -43,4 +41,32 @@
 .subtitle{
     color: grey;
     font-size: 13px;
+}
+
+.form-field{
+    width: 180px;
+}
+
+/*MEDIA QUERIES*/
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 1024px) {
+    .caption-container{
+        flex-direction: column;
+    }
+    .filters{
+        width: 100%;
+    }
+    .form-field{
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .filters{
+        flex-direction: column;
+    }
+}
+@media only screen and (max-width: 480px) {
+}
+@media only screen and (max-width: 300px) {
 }

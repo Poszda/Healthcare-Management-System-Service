@@ -19,6 +19,7 @@ import { AppointmentsService } from './services/appointments.service';
 import { SpecialitiesService } from './services/specialities.service';
 import { UserService } from './services/user.service';
 import { HospitalsService } from './services/hospitals.service';
+import { PrescriptionDialogComponent } from './components/prescriptions/prescription-dialog/prescription-dialog.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { HospitalsService } from './services/hospitals.service';
     AppointmentFormComponent,
     AppointmentSuggestionComponent,
     AppointmentLastStepComponent,
+    PrescriptionDialogComponent,
   ],
   imports: [
     CommonModule,
