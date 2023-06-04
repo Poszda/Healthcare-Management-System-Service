@@ -1,11 +1,14 @@
 package com.hmss.springbootserver.DTOs;
 
+import java.time.LocalDate;
+
 public class SignUpRequestDTO {
     String email;
     String firstName;
     String lastName;
     String password;
     String rePassword;
+    LocalDate birthDate;
 
     public String getEmail() {
         return email;
@@ -45,5 +48,13 @@ public class SignUpRequestDTO {
 
     public void setRePassword(String rePassword) {
         this.rePassword = rePassword;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 }

@@ -24,48 +24,39 @@ public interface HospitalRepository extends JpaRepository<Hospital,Long> {
             "WHERE h.county IN (:counties) AND p.id = :procedureId AND s.id = sd.id")
     List<Hospital> findPossibleHospitalsAndDoctorsForAppointments(@Param("counties") List<String> counties,@Param("procedureId") long procedureId);
 
-
     @Query("SELECT COUNT(a) FROM Appointment a " +
             "JOIN a.doctor.hospital h " +
-            "WHERE FUNCTION('MONTH', a.date) = :month AND h.id = :hospitalId")
-    Long findAppointmentsNumberByMonth(@Param("hospitalId")Long hospitalId,@Param("month")int month);
+            "WHERE MONTH(a.date) = :month AND YEAR(a.date) = :year AND h.id = :hospitalId")
+    Long findAppointmentsNumberByMonth(@Param("hospitalId")Long hospitalId,@Param("month")int month,@Param("year")int year);
 
-    @Query(" SELECT AVG(age) FROM " +
-            "(SELECT p.age as age FROM Appointment a " +
+    @Query("SELECT p.birthDate as birthDate FROM Appointment a " +
             "JOIN a.patient p " +
             "JOIN a.doctor.hospital h " +
-            "WHERE FUNCTION('MONTH', a.date) = :month AND h.id = :hospitalId " +
-            "GROUP BY a.patient)")
-    Double findAveragePatientAgeByMonth(@Param("hospitalId")Long hospitalId,@Param("month")int month);
+            "WHERE MONTH(a.date) = :month AND YEAR(a.date) = :year AND h.id = :hospitalId " +
+            "GROUP BY a.patient")
+    List<LocalDate> findPatientsAges(@Param("hospitalId")Long hospitalId,@Param("month")int month,@Param("year")int year);
 
     @Query("SELECT SUM(p.price) from Appointment a " +
             "JOIN a.procedure p " +
             "JOIN a.doctor.hospital h " +
-            "WHERE FUNCTION('MONTH', a.date) = :month AND h.id = :hospitalId ")
-    Double findEstimatedEarningsByMonth(@Param("hospitalId")Long hospitalId,@Param("month")int month);
+            "WHERE MONTH(a.date) = :month AND YEAR(a.date) = :year AND h.id = :hospitalId ")
+    Double findEstimatedEarningsByMonth(@Param("hospitalId")Long hospitalId,@Param("month")int month,@Param("year")int year);
 
-//    @Query("SELECT s.name as speciality,COUNT(a.id) as appointments from Appointment a " +
-//            "JOIN a.doctor d " +
-//            "JOIN d.hospital h " +
-//            "JOIN a.procedure p " +
-//            "RIGHT JOIN p.speciality s " +
-//            "WHERE (FUNCTION('MONTH', a.date) = :month AND h.id = :hospitalId) OR h.id IS NULL " +
-//            "group by s.id, s.name")
     @Query("SELECT s.name as speciality,COUNT(a.id) as appointments from Appointment a " +
             "JOIN a.doctor d " +
             "JOIN d.hospital h " +
             "JOIN a.procedure p " +
             "JOIN p.speciality s " +
-            "WHERE FUNCTION('MONTH', a.date) = :month AND h.id = :hospitalId " +
+            "WHERE MONTH(a.date) = :month AND YEAR(a.date) = :year AND h.id = :hospitalId " +
             "group by s.id")
-    List<SpecialityFrequencyProjection> findPatientVisitBySpeciality(@Param("hospitalId")Long hospitalId, @Param("month")int month);
+    List<SpecialityFrequencyProjection> findPatientVisitBySpeciality(@Param("hospitalId")Long hospitalId, @Param("month")int month,@Param("year")int year);
 
     @Query("SELECT FUNCTION('MONTHNAME',a.date) as month,COUNT(a) as appointments, SUM(p.price) as total from Appointment a " +
             "JOIN a.procedure p "+
             "JOIN a.doctor.hospital h " +
-            "WHERE FUNCTION('DATE',a.date) >= :startDate AND FUNCTION('MONTH', a.date) <= FUNCTION('MONTH', CURRENT_DATE) AND h.id = :hospitalId " +
-            "GROUP BY FUNCTION('MONTH',a.date)")
-    List<AppointmentStatisticProjection> findAppointmentsLast6Months(@Param("hospitalId")Long hospitalId, @Param("startDate")LocalDate startDate);
+            "WHERE DATE(a.date) >= :startDate AND DATE(a.date) <= :endDate AND h.id = :hospitalId " +
+            "GROUP BY MONTH(a.date)")
+    List<AppointmentStatisticProjection> findAppointmentsLast6Months(@Param("hospitalId")Long hospitalId, @Param("startDate")LocalDate startDate,@Param("endDate")LocalDate endDate);
 
 }
 

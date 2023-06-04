@@ -2,6 +2,7 @@ package com.hmss.springbootserver.utils.models.projections;
 
 import com.hmss.springbootserver.entities.Procedure;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface DoctorAppointmentProjection {
@@ -11,7 +12,7 @@ public interface DoctorAppointmentProjection {
     Integer getDuration();
     Long getPatientId();
     String getPhone();
-    Integer getAge();
+    LocalDate getBirthDate();
     String getFirstName();
     String getLastName();
     Integer getDiagnosticId();

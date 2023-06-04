@@ -3,9 +3,9 @@ package com.hmss.springbootserver.DTOs.statistics;
 public class HospitalOverviewDTO {
     private Long appointments;
     private Double estimatedEarnings;
-    private Double averagePatientAge;
+    private Float averagePatientAge;
 
-    public HospitalOverviewDTO(Long appointments, Double estimatedEarnings, Double averagePatientAge) {
+    public HospitalOverviewDTO(Long appointments, Double estimatedEarnings, Float averagePatientAge) {
         this.appointments = appointments;
         this.estimatedEarnings = estimatedEarnings;
         this.averagePatientAge = averagePatientAge;
@@ -30,11 +30,11 @@ public class HospitalOverviewDTO {
         this.estimatedEarnings = estimatedEarnings;
     }
 
-    public Double getAveragePatientAge() {
+    public Float getAveragePatientAge() {
         return averagePatientAge;
     }
 
-    public void setAveragePatientAge(Double averagePatientAge) {
+    public void setAveragePatientAge(Float averagePatientAge) {
         this.averagePatientAge = averagePatientAge;
     }
 }

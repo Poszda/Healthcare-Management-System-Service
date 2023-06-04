@@ -65,6 +65,7 @@ public class AuthService {
         user.setPassword(signUpRequest.getPassword());
         user.setUserType(UserType.PATIENT);
         user.setPatient(patient);
+        patient.setBirthDate(signUpRequest.getBirthDate());
         patient.setUser(user);
         User createdUser = userRepository.save(user);
         if(createdUser == null){

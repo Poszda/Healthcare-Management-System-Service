@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -216,7 +217,7 @@ public class AppointmentService {
 
 
     public List<DoctorAppointmentDTO> getDoctorAppointments(Long doctorId) {
-        var list = this.appointmentRepository.findDoctorAppointments(doctorId);
+        List<DoctorAppointmentProjection> list = this.appointmentRepository.findDoctorAppointments(doctorId);
         List<DoctorAppointmentDTO> doctorAppointments = list.stream().map(el -> {
             String status;
             if(el.getDiagnosticId() == null){
@@ -231,7 +232,7 @@ public class AppointmentService {
             a.setFirstName(el.getFirstName());
             a.setLastName(el.getLastName());
             a.setPhone(el.getPhone());
-            a.setAge(el.getAge());
+            a.setAge(Period.between(el.getBirthDate(),LocalDate.now()).getYears());
             a.setProcedureName(el.getProcedureName());
             a.setDate(el.getDate().toLocalDate());
             a.setTime(el.getDate().toLocalTime());

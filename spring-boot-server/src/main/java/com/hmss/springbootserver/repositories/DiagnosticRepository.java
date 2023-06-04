@@ -20,7 +20,6 @@ public interface DiagnosticRepository extends JpaRepository<Diagnostic,Long> {
 
 // A MERS CU NESTED PROJECTION DAR A TREBUIT SA FAC UN ALT CONSTRUCTOR...HMM
 
-//m.id, m.name, m.numberOfDays, m.dose
     @Query("SELECT new com.hmss.springbootserver.DTOs.appointments.PatientDiagnosticExtendedDTO(d.id, d.name, d.createdAt, u.firstName, u.lastName, d.description, a.date, p.name,s.name, h.name) " +
             "FROM Diagnostic d " +
             "JOIN d.appointment a " +

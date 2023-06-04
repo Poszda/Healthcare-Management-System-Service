@@ -1,9 +1,9 @@
 package com.hmss.springbootserver.controllers;
 
 import com.hmss.springbootserver.DTOs.speciality.SpecialityWithProceduresDTO;
-import com.hmss.springbootserver.DTOs.statistics.HospitalMonthStatisticDTO;
-import com.hmss.springbootserver.DTOs.statistics.HospitalOverviewDTO;
+import com.hmss.springbootserver.DTOs.statistics.*;
 import com.hmss.springbootserver.services.StatisticsService;
+import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentsCounterByStatusProjection;
 import com.hmss.springbootserver.utils.models.projections.SpecialityFrequencyProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +43,24 @@ public class StatisticsController {
     @CrossOrigin(origins = "*")
     public List<SpecialityFrequencyProjection> getHospitalSpecialityFrequency(@PathVariable Long hospitalId){
         return this.statisticsService.getHospitalSpecialityFrequency(hospitalId);
+    }
+
+    @GetMapping("/getDoctorPatientsVisitsByAgeGroup/{doctorId}")
+    @CrossOrigin(origins = "*")
+    public List<DoctorPatientsVisitsByAgeGroupDTO> getDoctorPatientsVisitsByAgeGroup(@PathVariable Long doctorId){
+        return this.statisticsService.getDoctorPatientsVisitsByAgeGroup(doctorId);
+    }
+
+    @GetMapping("/getDoctorAppointmentsCountsByStatus/{doctorId}")
+    @CrossOrigin(origins = "*")
+    public List<DoctorAppointmentsCounterByStatusDTO> getDoctorAppointmentsCountsByStatus(@PathVariable Long doctorId){
+        return this.statisticsService.getDoctorAppointmentsCountsByStatus(doctorId);
+    }
+
+    @GetMapping("/getDoctorInterventionsByCountProcedure/{doctorId}")
+    @CrossOrigin(origins = "*")
+    public List<DoctorInterventionsCountByProcedureDTO> getDoctorInterventionsByCountProcedure(@PathVariable Long doctorId){
+        return this.statisticsService.getDoctorInterventionsByCountProcedure(doctorId);
     }
 
 }

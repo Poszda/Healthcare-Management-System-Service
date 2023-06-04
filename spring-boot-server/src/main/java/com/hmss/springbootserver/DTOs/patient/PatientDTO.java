@@ -1,9 +1,12 @@
 package com.hmss.springbootserver.DTOs.patient;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class PatientDTO {
     private Long id;
     private String phone;
-    private Integer age;
+    private LocalDate birthDate;
     private String bloodType;
     private Integer height;
     private Integer weight;
@@ -25,12 +28,12 @@ public class PatientDTO {
         this.phone = phone;
     }
 
-    public Integer getAge() {
-        return age;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getBloodType() {

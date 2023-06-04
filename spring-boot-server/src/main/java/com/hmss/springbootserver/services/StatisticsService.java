@@ -1,22 +1,20 @@
 package com.hmss.springbootserver.services;
 
 import com.hmss.springbootserver.DTOs.appointments.TodayProgramDTO;
-import com.hmss.springbootserver.DTOs.statistics.HospitalMonthStatisticDTO;
-import com.hmss.springbootserver.DTOs.statistics.HospitalOverviewDTO;
+import com.hmss.springbootserver.DTOs.statistics.*;
 import com.hmss.springbootserver.entities.Doctor;
-import com.hmss.springbootserver.repositories.AppointmentRepository;
-import com.hmss.springbootserver.repositories.DoctorRepository;
-import com.hmss.springbootserver.repositories.HospitalRepository;
-import com.hmss.springbootserver.utils.models.AppointmentSimplified;
-import com.hmss.springbootserver.utils.models.projections.AppointmentStatisticProjection;
-import com.hmss.springbootserver.utils.models.projections.SpecialityFrequencyProjection;
+import com.hmss.springbootserver.entities.ProcedureCounterDTO;
+import com.hmss.springbootserver.enums.AppointmentStatus;
+import com.hmss.springbootserver.repositories.*;
+import com.hmss.springbootserver.utils.models.projections.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.print.Doc;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.TextStyle;
+import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
 @Service
@@ -25,14 +23,20 @@ public class StatisticsService {
     private final AppointmentRepository appointmentRepository;
     private final HospitalRepository hospitalRepository;
     private final DoctorRepository doctorRepository;
+    private final PatientRepository patientRepository;
+    private final ProcedureRepository procedureRepository;
 
     @Autowired
     public StatisticsService(AppointmentRepository appointmentRepository,
                              HospitalRepository hospitalRepository,
-                             DoctorRepository doctorRepository) {
+                             DoctorRepository doctorRepository,
+                             PatientRepository patientRepository,
+                             ProcedureRepository procedureRepository) {
         this.appointmentRepository = appointmentRepository;
         this.hospitalRepository = hospitalRepository;
         this.doctorRepository = doctorRepository;
+        this.patientRepository = patientRepository;
+        this.procedureRepository = procedureRepository;
     }
 
     public Object getTodayProgram(Long doctorId) {
@@ -49,8 +53,10 @@ public class StatisticsService {
     }
 
     public List<HospitalMonthStatisticDTO> getHospitalPeriodicStats(Long hospitalId) {
-        LocalDate fiveMonthsAgo = LocalDate.now().minusMonths(5).withDayOfMonth(1);
-        List<AppointmentStatisticProjection> list = this.hospitalRepository.findAppointmentsLast6Months(hospitalId,fiveMonthsAgo);
+        LocalDate startDate = LocalDate.now().minusMonths(5).withDayOfMonth(1);
+        LocalDate endDate = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
+        System.out.println(endDate);
+        List<AppointmentStatisticProjection> list = this.hospitalRepository.findAppointmentsLast6Months(hospitalId,startDate,endDate);
         List<HospitalMonthStatisticDTO> periodicStatistics = new ArrayList<>();
 
         LocalDate x = LocalDate.now().minusMonths(5);
@@ -75,19 +81,106 @@ public class StatisticsService {
 
     public List<SpecialityFrequencyProjection> getHospitalSpecialityFrequency(Long hospitalId) {
         int month = LocalDate.now().getMonthValue();
-        return this.hospitalRepository.findPatientVisitBySpeciality(hospitalId,month);
+        int year = LocalDate.now().getYear();
+        return this.hospitalRepository.findPatientVisitBySpeciality(hospitalId,month,year);
     }
 
     public HospitalOverviewDTO getHospitalOverview(Long hospitalId) {
         int month = LocalDate.now().getMonthValue();
-        Long appointments = this.hospitalRepository.findAppointmentsNumberByMonth(hospitalId,month);
-        Double earnings = this.hospitalRepository.findEstimatedEarningsByMonth(hospitalId,month);
-        Double avgAge = this.hospitalRepository.findAveragePatientAgeByMonth(hospitalId,month);
+        int year = LocalDate.now().getYear();
+        Long appointments = this.hospitalRepository.findAppointmentsNumberByMonth(hospitalId,month,year);
+        Double earnings = this.hospitalRepository.findEstimatedEarningsByMonth(hospitalId,month,year);
+        List<LocalDate> birthDates = this.hospitalRepository.findPatientsAges(hospitalId,month,year);
+
+        int sum = 0;
+        for(LocalDate birthDate : birthDates){
+            sum += Period.between(birthDate,LocalDate.now()).getYears();
+        }
 
         return new HospitalOverviewDTO(
                 appointments != null?appointments:0,
                 earnings != null ?earnings :0,
-                avgAge != null?avgAge :0
+                birthDates.size() != 0? (float)(sum)/birthDates.size() : 0
         );
+    }
+
+    public List<DoctorPatientsVisitsByAgeGroupDTO> getDoctorPatientsVisitsByAgeGroup(Long doctorId) {
+        LocalDate startDate = LocalDate.now().minusMonths(5).withDayOfMonth(1);
+        LocalDate endDate  = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
+        List<DoctorPatientsVisitsProjection> youngsters = this.patientRepository.countDoctorPatientsVisitsLast6Months(doctorId,startDate,endDate,0,25);
+        List<DoctorPatientsVisitsProjection> adults = this.patientRepository.countDoctorPatientsVisitsLast6Months(doctorId,startDate,endDate,25,65);
+        List<DoctorPatientsVisitsProjection> elders = this.patientRepository.countDoctorPatientsVisitsLast6Months(doctorId,startDate,endDate,65,150);
+
+        //don t need to bother with years since we can have only appointments
+        //from last year to the current year on this 6 months statistic
+        List<DoctorPatientsVisitsByAgeGroupDTO> list = new ArrayList<>();
+        for(int i=0;i<6;i++){
+            int month = startDate.getMonth().getValue();
+            String monthName = startDate.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
+            Optional<DoctorPatientsVisitsProjection> optionalStatsYoung = youngsters.stream().filter(el -> el.getMonth().equals(month)).findFirst();
+            Optional<DoctorPatientsVisitsProjection> optionalStatsAdults = adults.stream().filter(el -> el.getMonth().equals(month)).findFirst();
+            Optional<DoctorPatientsVisitsProjection> optionalStatsElders = elders.stream().filter(el -> el.getMonth().equals(month)).findFirst();
+
+            DoctorPatientsVisitsByAgeGroupDTO statistic = new DoctorPatientsVisitsByAgeGroupDTO(monthName,0,0,0);
+            if(optionalStatsYoung.isPresent()){
+                statistic.setYoungPatients(optionalStatsYoung.get().getPatients());
+            }
+            if(optionalStatsAdults.isPresent()){
+                statistic.setAdultPatients(optionalStatsAdults.get().getPatients());
+            }
+            if(optionalStatsElders.isPresent()){
+                statistic.setOldPatients(optionalStatsElders.get().getPatients());
+            }
+            list.add(statistic);
+            startDate = startDate.plusMonths(1);
+        }
+        return list;
+    }
+
+
+    public List<DoctorAppointmentsCounterByStatusDTO> getDoctorAppointmentsCountsByStatus(Long doctorId) {
+        List<DoctorAppointmentsCounterByStatusProjection> results =  this.appointmentRepository.countDoctorAppointmentsByStatus(doctorId);
+        List<DoctorAppointmentsCounterByStatusDTO> list = Arrays.asList(
+                new DoctorAppointmentsCounterByStatusDTO(
+                        AppointmentStatus.UPCOMING.getStatus(),
+                        0
+                ),
+                new DoctorAppointmentsCounterByStatusDTO(
+                        AppointmentStatus.IN_PROGRESS.getStatus(),
+                        0
+                ),
+                new DoctorAppointmentsCounterByStatusDTO(
+                        AppointmentStatus.REVIEWED.getStatus(),
+                        0
+                )
+        );
+
+        for(DoctorAppointmentsCounterByStatusDTO stat : list){
+            Optional<DoctorAppointmentsCounterByStatusProjection> itemOptional =  results.stream().filter(el -> el.getStatus().equals(stat.getStatus())).findFirst();
+            if(itemOptional.isPresent()){
+                stat.setCounter(itemOptional.get().getCounter());
+            }
+        }
+        return list;
+    }
+
+    public List<DoctorInterventionsCountByProcedureDTO> getDoctorInterventionsByCountProcedure(Long doctorId) {
+        LocalDate startDate = LocalDate.now().withDayOfMonth(1);
+        LocalDate endDate = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
+        List<DoctorInterventionsCountByProcedureDTO> list = new ArrayList<>();
+        for(int i=0;i<12;i++){
+            List<ProcedureCounterDTO> procedureCounters =
+                    this.procedureRepository.countDoctorInterventionsByProcedure(doctorId,startDate,endDate)
+                    .stream().map(el -> new ProcedureCounterDTO(el.getId(),el.getName(),el.getTotal())).toList();
+
+            DoctorInterventionsCountByProcedureDTO d = new DoctorInterventionsCountByProcedureDTO();
+            d.setMonth(startDate.getMonth().getDisplayName(TextStyle.FULL,Locale.getDefault()));
+            d.setProcedures(procedureCounters);
+            list.add(d);
+            startDate = startDate.minusMonths(1);
+            endDate = endDate.minusMonths(1);
+        }
+        Collections.reverse(list);
+        return list;
     }
 }

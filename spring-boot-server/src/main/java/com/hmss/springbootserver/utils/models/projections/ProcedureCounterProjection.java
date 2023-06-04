@@ -1,6 +1,6 @@
 package com.hmss.springbootserver.utils.models.projections;
 
-public interface ProcedureCounter {
+public interface ProcedureCounterProjection {
     long getId();
     String getName();
     int getTotal();

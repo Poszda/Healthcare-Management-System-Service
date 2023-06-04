@@ -16,11 +16,6 @@ public interface DoctorRepository extends JpaRepository<Doctor,Long> {
             "WHERE d.id IN :doctorsIds")
     List<DoctorProgramProjection> findDoctorsPrograms(@Param("doctorsIds") List<Long> doctorsIds);
 
-//    @Query("SELECT h.doctors,d.speciality from Hospital h " +
-//            "JOIN h.doctors d " +
-//            "JOIN FETCH d.speciality s " +
-//            "WHERE h.id =:hospitalId")
-
     @Query("SELECT d from Doctor d " +
             "JOIN FETCH d.speciality s " +
             "JOIN FETCH d.user u " +
