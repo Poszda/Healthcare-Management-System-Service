@@ -10,6 +10,9 @@
       <input type="text" pInputText formControlName="lastName" placeholder='Last name'/>
       <input type="password" pInputText formControlName="password" placeholder='Password'/>
       <input type="password" pInputText formControlName="rePassword" placeholder='Re-type Password'/>
+      <p-calendar formControlName="birthDate" [style]="{'width':'100%','height':'45px'}" [appendTo]="'body'"
+      [showIcon]="true" [defaultDate]="defaultDate" [maxDate]="maxDate" inputId="icon" placeholder="Start Date*"></p-calendar>
+
     </div>
     <div class="section-3">
         <button type="submit" class="form-button login" [disabled]="form.invalid" >Create account</button>

@@ -3,7 +3,7 @@
         <div class="top-container">
             <div class="right-container">
                 <div class="wrapper">
-                    <p-chart type="line" [data]="lineStylesData" [options]="basicOptions" [width]="'100%'" [height]="'100%'"></p-chart>
+                    <p-chart type="line" [data]="data" [options]="options" [width]="'100%'" [height]="'100%'"></p-chart>
                 </div>
             </div>
         </div>
@@ -13,7 +13,7 @@
                     <img class="icon" src="assets/icons/charity.png" alt="" />
                 </div>
                 <div class="text">
-                    24<br />Upcoming
+                    {{upcoming}}<br />Upcoming
                 </div>
             </div>
             <div class="square two" style="background-color: var(--color2);">
@@ -21,7 +21,7 @@
                     <img class="icon" src="assets/icons/love.png" alt="" />
                 </div>
                 <div class="text">
-                    24<br />In Progress
+                    {{inProgress}}<br />In Progress
                 </div>
             </div>
             <div class="square three" style="background-color: var(--color3);">
@@ -29,7 +29,7 @@
                     <img class="icon" src="assets/icons/check.png" alt="" />
                 </div>
                 <div class="text">
-                    24<br />Reviewed
+                    {{reviewed}}<br />Reviewed
                 </div>
             </div>
         </div>

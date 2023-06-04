@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { SignUpForm } from 'src/app/core/pages/authentication/models/signup-form.model';
 
 /** Check if passwords are matching */
@@ -19,6 +20,8 @@ export class SignupFormComponent implements OnInit {
    
   @Output() signup : EventEmitter<SignUpForm> = new EventEmitter();
   @Output() goToLogin : EventEmitter<any> = new EventEmitter();
+  defaultDate : Date = moment('2000/01/01').toDate();
+  maxDate : Date = moment().toDate()
 
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required,Validators.email]),
@@ -26,6 +29,7 @@ export class SignupFormComponent implements OnInit {
     lastName:new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required,Validators.minLength(4)]),
     rePassword:new FormControl('', [Validators.required,Validators.minLength(4)]),
+    birthDate : new FormControl('', [Validators.required])
   });
 
 

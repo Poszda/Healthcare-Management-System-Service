@@ -28,7 +28,6 @@ export class SpecialityVisitsWidgetComponent implements OnChanges{
 
   /* BASIC PATTERN */
   data : any = {
-    // labels: ['Free', 'Busy'],
     datasets: [
       {
         data: [1,0,0,0],
@@ -54,8 +53,12 @@ export class SpecialityVisitsWidgetComponent implements OnChanges{
     else{
       this.noVisits = false;
       this.data.datasets[0].data = result
-      this.data = JSON.parse(JSON.stringify(this.data))
+      this.refreshChart();
     }
+  }
+
+  refreshChart(){
+    this.data = JSON.parse(JSON.stringify(this.data))
   }
 
   

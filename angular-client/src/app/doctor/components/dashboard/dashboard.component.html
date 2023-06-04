@@ -2,11 +2,11 @@
     <app-bar></app-bar>
     <div class="widgets">
         <div class="left">
-            <app-overallstatus-widget></app-overallstatus-widget>
-            <app-booking-rate-widget></app-booking-rate-widget>
+            <app-overallstatus-widget [patientsStatistic]="patientsVisitsStatistic" [appointmentsStatus]="appointmentsCountsByStatus"></app-overallstatus-widget>
+            <app-procedure-trends-widget [trends]="procedureTrends"></app-procedure-trends-widget>
         </div>
         <div class="right">
-            <app-program-widget></app-program-widget>
+            <app-program-widget [program]="todayProgramStatistic"></app-program-widget>
             <app-appointments-widget></app-appointments-widget>
         </div>
     </div>

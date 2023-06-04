@@ -11,8 +11,8 @@ export class PeriodOverviewWidgetComponent implements OnInit,OnChanges {
 
   /* BASIC OPTIONS */
   basicOptions = {
-    responsive: true, // seems that is not needed
-    maintainAspectRatio: false, // seems that is not needed even if should
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         labels: {
@@ -22,7 +22,7 @@ export class PeriodOverviewWidgetComponent implements OnInit,OnChanges {
 
       tooltip: {
         backgroundColor: 'white',
-        displayColors: true, // removes unnecessary legend
+        displayColors: true,
         padding: 10,
         titleColor: 'black',
         titleFont: {
@@ -59,26 +59,25 @@ export class PeriodOverviewWidgetComponent implements OnInit,OnChanges {
     labels: [], //'January', 'February', 'March', 'April', 'May', 'June'
     datasets: [
       {
-        label: 'Appointments',
-        data: [], //0, 2, 0, 20, 0, 10
-        fill: true,
-        tension: .4,
-        borderColor: '#6D71F9',
-        backgroundColor: '#6D71F955',
-        pointHitRadius: 15,
-        pointHoverRadius: 8,
-
-      },
-      {
         label: 'Earnings',
-        data: [], //0, 0, 0, 20, 0, 0
+        data: [],
         fill: true,
         tension: .4,
         borderColor: '#54C1FB',
         backgroundColor: '#54c1fb55',
         pointHitRadius: 15,
         pointHoverRadius: 8,
-      }
+      },
+   // {
+      //   label: 'Appointments',
+      //   data: [], //0, 2, 0, 20, 0, 10
+      //   fill: true,
+      //   tension: .4,
+      //   borderColor: '#6D71F9',
+      //   backgroundColor: '#6D71F955',
+      //   pointHitRadius: 15,
+      //   pointHoverRadius: 8,
+      // },
     ]
   };
 
@@ -87,16 +86,12 @@ export class PeriodOverviewWidgetComponent implements OnInit,OnChanges {
 
   ngOnChanges(changes : SimpleChanges): void {
     this.lineStylesData.labels = this.stats.map(el => el.month) 
-    this.lineStylesData.datasets[0].data = this.stats.map(el => el.appointments) 
-    this.lineStylesData.datasets[1].data = this.stats.map(el => el.total) 
+    this.lineStylesData.datasets[0].data = this.stats.map(el => el.total) 
+    //this.lineStylesData.datasets[1].data = this.stats.map(el => el.appointments) 
     this.lineStylesData = JSON.parse(JSON.stringify(this.lineStylesData))
   }
 
   ngOnInit(): void {
-  }
-
-  extractLabels(){
-    //this.stats.map(el => el.month)
   }
 
 

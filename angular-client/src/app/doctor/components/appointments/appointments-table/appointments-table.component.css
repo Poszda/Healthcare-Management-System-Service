@@ -47,6 +47,11 @@
     width: 180px;
 }
 
+::ng-deep .p-datatable.p-datatable-gridlines .p-datatable-header{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
 /*MEDIA QUERIES*/
 @media only screen and (max-width: 1200px) {
 }

@@ -24,7 +24,7 @@ export class AppointmentsTableComponent implements OnChanges, OnInit, OnDestroy 
 
   filter: { status: string, period: null | [Date | null, Date | null] } = {
     status: "All",
-    period: [moment().startOf('day').subtract(30, 'days').toDate(), moment().startOf('day').add(30, 'days').toDate()] //null to the second one
+    period: [moment().startOf('day').subtract(60, 'days').toDate(), moment().startOf('day').add(60, 'days').toDate()] //null to the second one
   }
 
 

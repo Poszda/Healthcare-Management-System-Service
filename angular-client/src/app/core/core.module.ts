@@ -9,6 +9,7 @@ import { SignupFormComponent } from './pages/authentication/signup-form/signup-f
 import {MatInputModule} from '@angular/material/input';
 import { InputTextModule } from 'primeng/inputtext';
 import {ToastModule} from 'primeng/toast';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -21,9 +22,10 @@ import {ToastModule} from 'primeng/toast';
     CommonModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     InputTextModule,
+    CalendarModule,
     ToastModule,
-    ReactiveFormsModule
   ],
 })
 export class CoreModule { }

@@ -21,9 +21,9 @@ export class StatsComponent implements OnInit {
 
   ngOnInit(): void {
     this.hospitalId = this.hospitalManagementService.getHospitalFromLocalStorage().id;
-    this.getHospitalOverview();
-    this.getHospitalPeriodicStats();
-    this.getHospitalSpecialityFrequency();
+      this.getHospitalOverview();
+      this.getHospitalPeriodicStats();
+      this.getHospitalSpecialityFrequency();
   }
 
   getHospitalOverview(){

@@ -4,4 +4,5 @@ export interface SignUpForm{
     lastName : string;
     password : string;
     rePassword: string;
+    birthDate : string;
 }
