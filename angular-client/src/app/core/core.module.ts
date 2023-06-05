@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginFormComponent } from './pages/authentication/login-form/login-form.component';
 import { SignupFormComponent } from './pages/authentication/signup-form/signup-form.component';
-import {MatInputModule} from '@angular/material/input';
 import { InputTextModule } from 'primeng/inputtext';
 import {ToastModule} from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';

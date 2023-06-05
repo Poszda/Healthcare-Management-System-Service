@@ -20,6 +20,8 @@ import { SpecialitiesService } from './services/specialities.service';
 import { UserService } from './services/user.service';
 import { HospitalsService } from './services/hospitals.service';
 import { PrescriptionDialogComponent } from './components/prescriptions/prescription-dialog/prescription-dialog.component';
+import { AccountProfileComponent } from './components/account-profile/account-profile.component';
+import { EditProfileFormComponent } from './components/account-profile/edit-profile-form/edit-profile-form.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { PrescriptionDialogComponent } from './components/prescriptions/prescrip
     AppointmentSuggestionComponent,
     AppointmentLastStepComponent,
     PrescriptionDialogComponent,
+    AccountProfileComponent,
+    EditProfileFormComponent,
   ],
   imports: [
     CommonModule,

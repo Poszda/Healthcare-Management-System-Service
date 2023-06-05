@@ -17,6 +17,9 @@ import {LayoutModule} from '@angular/cdk/layout';
 import { DiagnosticFormComponent } from './components/appointments/diagnostic-form/diagnostic-form.component';
 import { ProcedureTrendsWidgetComponent } from './components/dashboard/procedure-trends-widget/procedure-trends-widget.component';
 
+import { AccountProfileComponent } from './components/account-profile/account-profile.component';
+import { EditProfileFormComponent } from './components/account-profile/edit-profile-form/edit-profile-form.component';
+
 @NgModule({
     declarations: [
         DoctorComponent,
@@ -28,6 +31,8 @@ import { ProcedureTrendsWidgetComponent } from './components/dashboard/procedure
         ProcedureTrendsWidgetComponent,
         AppointmentsTableComponent,
         DiagnosticFormComponent,
+        AccountProfileComponent,
+        EditProfileFormComponent,
     ],
     imports: [
         CommonModule,

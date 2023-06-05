@@ -24,6 +24,13 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { TableModule } from 'primeng/table';
 import { TagComponent } from './components/tag/tag.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { DoctorProfileComponent } from './pages/doctor-profile/doctor-profile.component';
+import { PatientProfileComponent } from './pages/patient-profile/patient-profile.component';
+import { ProfileAboutMeComponent } from './components/profile-about-me/profile-about-me.component';
+import { ProfileSummaryComponent } from './components/profile-summary/profile-summary.component';
+import { ProfileInformationCardComponent } from './components/profile-information-card/profile-information-card.component';
+import { ProfileMedicalHistoryComponent } from './components/profile-medical-history/profile-medical-history.component';
+import { ProfileTreatmentsHistoryComponent } from './components/profile-treatments-history/profile-treatments-history.component';
 
 
 @NgModule({
@@ -35,6 +42,13 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     AppointmentsWidgetComponent,
     TagComponent,
     ConfirmationDialogComponent,
+    DoctorProfileComponent,
+    PatientProfileComponent,
+    ProfileAboutMeComponent,
+    ProfileSummaryComponent,
+    ProfileInformationCardComponent,
+    ProfileMedicalHistoryComponent,
+    ProfileTreatmentsHistoryComponent,
   ],
   imports: [
     CommonModule,
@@ -77,7 +91,14 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     DropdownModule,
     ProgressSpinnerModule,
     MatProgressBarModule,
-    TagComponent
+    TagComponent,
+    DoctorProfileComponent,
+    PatientProfileComponent,
+    ProfileAboutMeComponent,
+    ProfileSummaryComponent,
+    ProfileInformationCardComponent,
+    ProfileMedicalHistoryComponent,
+    ProfileTreatmentsHistoryComponent,
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,11 @@
+<form [formGroup]="form" (submit)="edit()">
+    <h1 class="title">Edit profile</h1>
+    <input type="text" formControlName="university" pInputText placeholder='University' style="width: 100%;" />
+    <textarea rows="5" cols="30" formControlName="description" pInputTextarea
+        placeholder='Please provide a brief summary of your professional background, areas of expertise, and any additional relevant medical information....'
+        style="width: 100%;"></textarea>
+    <div class="buttons">
+        <button type="submit" class="basic-button primary" style="width: 80px;height: 40px; margin-top: 10px;"
+            [disabled]="form.invalid">Save</button>
+    </div>
+</form>
