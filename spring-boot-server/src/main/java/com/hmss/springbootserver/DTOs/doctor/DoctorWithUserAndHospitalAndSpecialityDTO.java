@@ -3,13 +3,14 @@ package com.hmss.springbootserver.DTOs.doctor;
 import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
 import com.hmss.springbootserver.DTOs.speciality.SpecialityDTO;
 import com.hmss.springbootserver.DTOs.user.UserDTO;
+import com.hmss.springbootserver.DTOs.user.UserNoPasswordDTO;
 import com.hmss.springbootserver.entities.Speciality;
 
 public class DoctorWithUserAndHospitalAndSpecialityDTO {
     private Long id;
     private String university;
     private String description;
-    private UserDTO user;
+    private UserNoPasswordDTO user;
     private HospitalDTO hospital;
     private SpecialityDTO speciality;
 
@@ -37,11 +38,11 @@ public class DoctorWithUserAndHospitalAndSpecialityDTO {
         this.description = description;
     }
 
-    public UserDTO getUser() {
+    public UserNoPasswordDTO getUser() {
         return user;
     }
 
-    public void setUser(UserDTO user) {
+    public void setUser(UserNoPasswordDTO user) {
         this.user = user;
     }
 

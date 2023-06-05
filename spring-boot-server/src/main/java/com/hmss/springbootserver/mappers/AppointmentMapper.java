@@ -23,35 +23,7 @@ import java.util.List;
 public interface AppointmentMapper {
     AppointmentMapper INSTANCE = Mappers.getMapper(AppointmentMapper.class);
 
-    @Named("toUserDTO")
-    @Mapping(source = "doctor.id", target = "doctorId")
-    @Mapping(source = "admin.id", target = "adminId")
-    @Mapping(source = "patient.id", target = "patientId")
-    UserDTO toUserDTO(User user);
-
-    @Named("toPatientDTO")
-    @Mapping(source = "user.id", target = "userId")
-    PatientDTO toPatientDTO(Patient patient);
-
-    @Named("toDoctorDTO")
-    @Mapping(source = "user.id", target = "userId")
-    @Mapping(source = "hospital.id", target = "hospitalId")
-    DoctorDTO toDoctorDTO(Doctor doctor);
-
-    @Named("toSpecialityDTO")
-    SpecialityDTO toSpecialityDTO(Speciality speciality);
-
-    @Named("toHospitalDTO")
-    HospitalDTO toHospitalDTO(Hospital hospital);
-
-    @Named("toProcedureDTO")
-    @Mapping(source = "speciality.id", target = "specialityId")
-    ProcedureDTO toProcedureDTO(Procedure procedure);
-
     @Named("toDoctorWithUserAndHospitalAndSpecialityDTO")
-    @Mapping(target = "hospital", qualifiedByName = "toHospitalDTO")
-    @Mapping(target = "user" ,qualifiedByName = "toUserDTO")
-    @Mapping(target = "speciality" ,qualifiedByName = "toSpecialityDTO")
     DoctorWithUserAndHospitalAndSpecialityDTO toDoctorWithUserAndHospitalAndSpecialityDTO(Doctor doctor);
 
     @Named("toMedicationEntity")
@@ -60,8 +32,4 @@ public interface AppointmentMapper {
     @Named("toMedicationEntityList")
     @IterableMapping(qualifiedByName = "toMedicationEntity")
     List<Medication> toMedicationEntityList(List<MedicationDTO> medicationDTOs);
-
-
-
-
 }
