@@ -12,6 +12,7 @@ public class PatientDiagnosticExtendedDTO {
     private Long id;
     private String diagnostic;
     private LocalDate createdAt;
+    private Long doctorId;
     private String doctorFirstName;
     private String doctorLastName;
     private String description;
@@ -39,12 +40,13 @@ public class PatientDiagnosticExtendedDTO {
         this.medications = medications;
     }
 
-    public PatientDiagnosticExtendedDTO(Long id, String diagnostic, LocalDate createdAt, String doctorFirstName, String doctorLastName, String description, LocalDateTime date, String procedure, String speciality, String hospital){
+    public PatientDiagnosticExtendedDTO(Long id, String diagnostic, LocalDate createdAt, String doctorFirstName, String doctorLastName, Long doctorId, String description, LocalDateTime date, String procedure, String speciality, String hospital){
         this.id = id;
         this.diagnostic = diagnostic;
         this.createdAt = createdAt;
         this.doctorFirstName = doctorFirstName;
         this.doctorLastName = doctorLastName;
+        this.doctorId = doctorId;
         this.description = description;
         this.date = date;
         this.procedure = procedure;
@@ -138,5 +140,13 @@ public class PatientDiagnosticExtendedDTO {
 
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Long getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 }

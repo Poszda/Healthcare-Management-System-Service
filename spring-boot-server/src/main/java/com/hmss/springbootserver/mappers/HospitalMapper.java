@@ -28,9 +28,4 @@ public interface HospitalMapper {
     @Named("toHospitalWithDoctorsDTOList")
     @IterableMapping(qualifiedByName = "toHospitalWithDoctorsDTO")
     List<HospitalWithDoctorsDTO> toHospitalWithDoctorsDTOList(List<Hospital> hospitals);
-
-//    @Mapping(source = "hospital.id", target = "hospitalId")
-//    @Mapping(source = "user.id", target = "userId")
-//    DoctorDTO toDoctorDTO(Doctor doctor);
-
 }

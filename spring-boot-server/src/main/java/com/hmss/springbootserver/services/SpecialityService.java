@@ -21,6 +21,9 @@ public class SpecialityService {
     public SpecialityService(SpecialityRepository specialityRepository) {
         this.specialityRepository = specialityRepository;
     }
+    public List<SpecialityDTO> getSpecialities() {
+        return SpecialityMapper.INSTANCE.toSpecialityDTOList(specialityRepository.findAll());
+    }
     public List<SpecialityWithProceduresDTO> getSpecialitiesWithProcedures(){
         var list = this.specialityRepository.findAll();
         return SpecialityMapper.INSTANCE.toSpecialityWithProceduresDTOList(list);
@@ -29,4 +32,5 @@ public class SpecialityService {
     public List<SpecialityDTO> getHospitalSpecialities(Long hospitalId) {
         return SpecialityMapper.INSTANCE.toSpecialityDTOList(this.specialityRepository.findHospitalSpecialities(hospitalId));
     }
+
 }

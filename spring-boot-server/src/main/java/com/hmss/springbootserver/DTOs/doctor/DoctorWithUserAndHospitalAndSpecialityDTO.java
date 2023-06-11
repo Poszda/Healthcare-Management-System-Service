@@ -6,10 +6,14 @@ import com.hmss.springbootserver.DTOs.user.UserDTO;
 import com.hmss.springbootserver.DTOs.user.UserNoPasswordDTO;
 import com.hmss.springbootserver.entities.Speciality;
 
+import java.time.LocalTime;
+
 public class DoctorWithUserAndHospitalAndSpecialityDTO {
     private Long id;
     private String university;
     private String description;
+    private LocalTime programStart;
+    private LocalTime programEnd;
     private UserNoPasswordDTO user;
     private HospitalDTO hospital;
     private SpecialityDTO speciality;
@@ -60,5 +64,21 @@ public class DoctorWithUserAndHospitalAndSpecialityDTO {
 
     public void setSpeciality(SpecialityDTO speciality) {
         this.speciality = speciality;
+    }
+
+    public LocalTime getProgramStart() {
+        return programStart;
+    }
+
+    public void setProgramStart(LocalTime programStart) {
+        this.programStart = programStart;
+    }
+
+    public LocalTime getProgramEnd() {
+        return programEnd;
+    }
+
+    public void setProgramEnd(LocalTime programEnd) {
+        this.programEnd = programEnd;
     }
 }

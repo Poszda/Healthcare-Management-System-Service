@@ -18,18 +18,9 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Named("DoctorMapper")
-@Mapper()
+@Mapper
 public interface DoctorMapper {
     DoctorMapper INSTANCE = Mappers.getMapper(DoctorMapper.class);
-
-    @Named("toUserDTO")
-    @Mapping(source = "doctor.id", target = "doctorId")
-    @Mapping(source = "admin.id", target = "adminId")
-    @Mapping(source = "patient.id", target = "patientId")
-    UserDTO toUserDTO(User user);
-
-    @Named("toHospitalDTO")
-    HospitalDTO toHospitalDTO(Hospital hospital);
 
     @Named("toDoctorDTO")
     @Mapping(source = "user.id", target = "userId")
@@ -37,13 +28,12 @@ public interface DoctorMapper {
     DoctorDTO toDoctorDTO(Doctor doctor);
 
     @Named("toDoctorWithUserAndHospitalDTO")
-    @Mapping(target = "user", qualifiedByName = "toUserDTO")
-    @Mapping(target = "hospital" ,qualifiedByName = "toHospitalDTO")
+    @Mapping(source = "user.doctor.id", target = "user.doctorId")
     DoctorWithUserAndHospitalDTO toDoctorWithUserAndHospitalDTO(Doctor doctor);
 
     @Named("toDoctorWithUserDTO")
     @Mapping(source = "hospital.id", target = "hospitalId")
-    @Mapping(target = "user" ,qualifiedByName = "toUserDTO")
+    @Mapping(source = "user.doctor.id", target = "user.doctorId")
     DoctorWithUserDTO toDoctorWithUserDTO(Doctor doctor);
 
     @Named("toDoctorWithUserAndSpecialityDTO")
@@ -53,6 +43,9 @@ public interface DoctorMapper {
     @IterableMapping(qualifiedByName = "toDoctorDTO")
     List<DoctorDTO> toDoctorDTOList(List<Doctor> doctors);
 
+    @Named("toDoctorWithUserDTOList")
+    @IterableMapping(qualifiedByName = "toDoctorWithUserDTO")
+    List<DoctorWithUserDTO> toDoctorWithUserDTOList(List<Doctor> doctor);
     @Named("toDoctorWithUserAndHospitalDTOList")
     @IterableMapping(qualifiedByName = "toDoctorWithUserAndHospitalDTO")
     List<DoctorWithUserAndHospitalDTO> toDoctorWithUserAndHospitalDTOList(List<Doctor> doctor);

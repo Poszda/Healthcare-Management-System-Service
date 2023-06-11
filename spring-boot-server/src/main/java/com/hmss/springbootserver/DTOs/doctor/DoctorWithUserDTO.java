@@ -1,6 +1,7 @@
 package com.hmss.springbootserver.DTOs.doctor;
 
 import com.hmss.springbootserver.DTOs.user.UserDTO;
+import com.hmss.springbootserver.DTOs.user.UserNoPasswordDTO;
 import com.hmss.springbootserver.entities.User;
 
 import java.time.LocalTime;
@@ -12,7 +13,7 @@ public class DoctorWithUserDTO {
     private LocalTime programStart;
     private LocalTime programEnd;
     private Long hospitalId;
-    private UserDTO user;
+    private UserNoPasswordDTO user;
 
     public Long getId() {
         return id;
@@ -46,11 +47,11 @@ public class DoctorWithUserDTO {
         this.hospitalId = hospitalId;
     }
 
-    public UserDTO getUser() {
+    public UserNoPasswordDTO getUser() {
         return user;
     }
 
-    public void setUser(UserDTO user) {
+    public void setUser(UserNoPasswordDTO user) {
         this.user = user;
     }
 

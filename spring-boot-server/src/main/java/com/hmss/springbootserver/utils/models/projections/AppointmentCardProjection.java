@@ -6,6 +6,7 @@ public interface AppointmentCardProjection {
     Long getId();
     LocalDateTime getDateTime();
     Long getDiagnosticId();
+    Long getDoctorId();
     String getDoctorFirstName();
     String getDoctorLastName();
     String getProcedureName();

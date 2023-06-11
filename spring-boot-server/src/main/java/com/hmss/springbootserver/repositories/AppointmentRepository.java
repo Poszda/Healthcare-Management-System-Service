@@ -2,6 +2,7 @@ package com.hmss.springbootserver.repositories;
 
 import com.hmss.springbootserver.entities.Appointment;
 import com.hmss.springbootserver.utils.models.projections.AppointmentCardProjection;
+import com.hmss.springbootserver.utils.models.projections.AppointmentNextProjection;
 import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentProjection;
 import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentsCounterByStatusProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import javax.print.Doc;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Repository
@@ -22,7 +24,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
     List<Appointment> findAppointmentsByDoctorsInAPeriod(@Param("doctorsIds") List<Long> doctorsIds,
                                                          @Param("startDate") LocalDateTime startDate,
                                                          @Param("endDate") LocalDateTime endDate);
-    @Query("SELECT a.id as id, a.date as dateTime, u.firstName as doctorFirstName, u.lastName as doctorLastName, " +
+    @Query("SELECT a.id as id, a.date as dateTime, u.firstName as doctorFirstName, u.lastName as doctorLastName, d.id as doctorId, " +
             "p.name as procedureName, p.price as price, p.duration as duration, s.name as doctorSpeciality,h.name as hospitalName, di.id as diagnosticId " +
             "FROM Appointment a " +
             "JOIN a.doctor d "+
@@ -62,4 +64,26 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
             "WHERE dr.id = :doctorId AND MONTH(a.date) = MONTH(CURRENT_DATE) AND YEAR(a.date) = YEAR(CURRENT_DATE) "+
             "GROUP BY status")
     List<DoctorAppointmentsCounterByStatusProjection> countDoctorAppointmentsByStatus(@Param("doctorId") Long doctorId);
+
+    @Query("SELECT a.id as id, a.date as dateTime, u.firstName as firstName, u.lastName as lastName, p.id as otherId, pr.duration as duration " +
+            "FROM Appointment a " +
+            "JOIN a.patient p " +
+            "JOIN a.doctor d " +
+            "JOIN p.user u " +
+            "JOIN a.procedure pr " +
+            "WHERE d.id = :doctorId AND DATE(a.date) = CURRENT_DATE AND a.date > :dateTime " +
+            "ORDER BY a.date " +
+            "LIMIT :limit ")
+    List<AppointmentNextProjection> findDoctorTodayAppointments(@Param("doctorId") Long doctorId, @Param("dateTime") LocalDateTime dateTime, @Param("limit") int limit);
+
+    @Query("SELECT a.id as id, a.date as dateTime, u.firstName as firstName, u.lastName as lastName, d.id as otherId, pr.duration as duration " +
+            "FROM Appointment a " +
+            "JOIN a.patient p " +
+            "JOIN a.doctor d " +
+            "JOIN d.user u " +
+            "JOIN a.procedure pr " +
+            "WHERE p.id = :patientId AND a.date > :dateTime " +
+            "ORDER BY a.date " +
+            "LIMIT :limit ")
+    List<AppointmentNextProjection> findPatientNextAppointments(@Param("patientId") Long patientId, @Param("dateTime") LocalDateTime dateTime, @Param("limit") int limit);
 }

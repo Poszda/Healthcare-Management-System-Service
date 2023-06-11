@@ -6,6 +6,7 @@ import com.hmss.springbootserver.DTOs.appointments.DoctorAppointmentDTO;
 import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
 import com.hmss.springbootserver.services.AppointmentService;
 import com.hmss.springbootserver.utils.models.projections.AppointmentCardProjection;
+import com.hmss.springbootserver.utils.models.projections.AppointmentNextProjection;
 import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -78,6 +79,17 @@ public class AppointmentController {
     @CrossOrigin(origins = "*")
     public Object getPatientDiagnostics(@PathVariable("patientId") Long patientId){
         return this.appointmentService.getPatientDiagnostics(patientId);
+    }
+
+    @GetMapping("/getDoctorTodayNextAppointments/{doctorId}")
+    @CrossOrigin(origins = "*")
+    public List<AppointmentNextProjection> getDoctorTodayNextAppointments(@PathVariable("doctorId") Long doctorId){
+        return this.appointmentService.getDoctorTodayNextAppointments(doctorId);
+    }
+    @GetMapping("/getPatientNextAppointments/{patientId}")
+    @CrossOrigin(origins = "*")
+    public List<AppointmentNextProjection> getPatientNextAppointments(@PathVariable("patientId") Long patientId){
+        return this.appointmentService.getPatientNextAppointments(patientId);
     }
 
 

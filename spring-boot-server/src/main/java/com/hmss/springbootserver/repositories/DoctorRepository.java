@@ -21,4 +21,10 @@ public interface DoctorRepository extends JpaRepository<Doctor,Long> {
             "JOIN FETCH d.user u " +
             "WHERE d.hospital.id =:hospitalId")
     List<Doctor> findHospitalDoctorsWithSpeciality(@Param("hospitalId") Long hospitalId);
+
+    @Query("SELECT d " +
+            "FROM Doctor d " +
+            "JOIN d.user u " +
+            "WHERE d.speciality.id = :specialityId AND (:name IS NULL OR (u.firstName LIKE CONCAT('%', :name, '%') OR u.lastName LIKE CONCAT('%', :name, '%')))")
+    List<Doctor> findDoctorByNameAndSpeciality(@Param("name") String name,@Param("specialityId") Long specialityId);
 }

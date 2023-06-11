@@ -20,6 +20,11 @@ public class SpecialityController {
         this.specialityService = specialityService;
     }
 
+    @GetMapping("/getSpecialities")
+    @CrossOrigin(origins = "*")
+    public List<SpecialityDTO> getSpecialities(){
+        return this.specialityService.getSpecialities();
+    }
     @GetMapping("/getSpecialitiesWithProcedures")
     @CrossOrigin(origins = "*")
     public List<SpecialityWithProceduresDTO> getSpecialitiesWithProcedures(){

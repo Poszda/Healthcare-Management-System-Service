@@ -1,6 +1,7 @@
 package com.hmss.springbootserver.mappers;
 
 import com.hmss.springbootserver.DTOs.patient.PatientDTO;
+import com.hmss.springbootserver.DTOs.patient.PatientWithUserDTO;
 import com.hmss.springbootserver.entities.Patient;
 import com.hmss.springbootserver.entities.User;
 import org.mapstruct.Mapper;
@@ -16,4 +17,7 @@ public interface PatientMapper {
     @Named("toPatientDTO")
     @Mapping(source = "user.id", target = "userId")
     PatientDTO toPatientDTO(Patient patient);
+
+    @Named("toPatientWithUserDTO")
+    PatientWithUserDTO toPatientWithUserDTO(Patient patient);
 }

@@ -11,6 +11,7 @@ import com.hmss.springbootserver.utils.models.AppointmentSimplified;
 import com.hmss.springbootserver.utils.models.DoctorProgramSimplified;
 import com.hmss.springbootserver.utils.models.FreeTimeInterval;
 import com.hmss.springbootserver.utils.models.projections.AppointmentCardProjection;
+import com.hmss.springbootserver.utils.models.projections.AppointmentNextProjection;
 import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentProjection;
 import com.hmss.springbootserver.utils.models.projections.DoctorProgramProjection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -283,5 +284,13 @@ public class AppointmentService {
         }
 
         return diagnostics;
+    }
+
+    public List<AppointmentNextProjection> getDoctorTodayNextAppointments(Long doctorId) {
+        return this.appointmentRepository.findDoctorTodayAppointments(doctorId,LocalDateTime.now(),10);
+    }
+
+    public List<AppointmentNextProjection> getPatientNextAppointments(Long patientId) {
+        return this.appointmentRepository.findPatientNextAppointments(patientId,LocalDateTime.now(),10);
     }
 }

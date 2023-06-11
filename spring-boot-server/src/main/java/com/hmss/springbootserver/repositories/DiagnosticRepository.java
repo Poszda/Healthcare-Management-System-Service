@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -20,7 +21,7 @@ public interface DiagnosticRepository extends JpaRepository<Diagnostic,Long> {
 
 // A MERS CU NESTED PROJECTION DAR A TREBUIT SA FAC UN ALT CONSTRUCTOR...HMM
 
-    @Query("SELECT new com.hmss.springbootserver.DTOs.appointments.PatientDiagnosticExtendedDTO(d.id, d.name, d.createdAt, u.firstName, u.lastName, d.description, a.date, p.name,s.name, h.name) " +
+    @Query("SELECT new com.hmss.springbootserver.DTOs.appointments.PatientDiagnosticExtendedDTO(d.id, d.name, d.createdAt, u.firstName, u.lastName, dr.id, d.description, a.date, p.name,s.name, h.name) " +
             "FROM Diagnostic d " +
             "JOIN d.appointment a " +
             "JOIN a.procedure p " +
@@ -31,4 +32,9 @@ public interface DiagnosticRepository extends JpaRepository<Diagnostic,Long> {
             "JOIN dr.hospital h " +
             "WHERE pt.id = :patientId")
     List<PatientDiagnosticExtendedDTO> findPatientDiagnosticsExtended(@Param("patientId") Long patientId);
+
+    @Query("SELECT DISTINCT d.name FROM Diagnostic d " +
+            "INNER JOIN d.appointment a " +
+            "WHERE a.patient.id = :patientId and DATE(d.createdAt) >= :startDate AND DATE(d.createdAt) <= CURRENT_DATE")
+    List<String> findPatientDiagnosticsName(@Param("patientId") Long patientId, @Param("startDate") LocalDate startDate);
 }
