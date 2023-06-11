@@ -15,8 +15,8 @@ export class AppointmentsTableComponent implements OnChanges, OnInit, OnDestroy 
   @Input() data: DoctorAppointmentTabelData[] = []
   @Output() addDiagnostic: EventEmitter<DoctorAppointmentTabelData> = new EventEmitter();
   @ViewChild('dt') dt: Table | undefined;
-  maxDate: Date = moment().add(90, 'days').toDate();
-  minDate: Date = moment().subtract(90, 'days').toDate();
+  maxDate: Date = moment().add(180, 'days').toDate();
+  minDate: Date = moment().subtract(180, 'days').toDate();
 
   dataFiltered: DoctorAppointmentTabelData[] = []
   periodOptions: string[] = [];
@@ -27,11 +27,9 @@ export class AppointmentsTableComponent implements OnChanges, OnInit, OnDestroy 
     period: [moment().startOf('day').subtract(60, 'days').toDate(), moment().startOf('day').add(60, 'days').toDate()] //null to the second one
   }
 
-
   subscription: Subscription = new Subscription();
   appointmentStatus = AppointmentStatus;
   difValue: number = 100;
-
 
   constructor(private breakpointObserver: BreakpointObserver) {
   }

@@ -1,4 +1,5 @@
 import { Component,EventEmitter,Input,Output,OnChanges, SimpleChanges } from '@angular/core';
+import { ProfileSummary } from '../../models/profile-summary.model';
 
 @Component({
   selector: 'app-profile-summary',
@@ -7,22 +8,20 @@ import { Component,EventEmitter,Input,Output,OnChanges, SimpleChanges } from '@a
 })
 export class ProfileSummaryComponent implements OnChanges{
   @Input() allowEdit : boolean = false;
+  @Input() summary : ProfileSummary | undefined;
   @Output() editProfile : EventEmitter<any> = new EventEmitter();
   @Output() logOut : EventEmitter<any> = new EventEmitter();
 
   triggerEditProfile(){
-    console.log('emiiterd')
     this.editProfile.emit();
   }
 
   triggerLogOut(){
-    console.log('emiiterd')
     this.logOut.emit();
   }
 
   ngOnChanges(changes : SimpleChanges){
     if(changes['allowEdit']){
-      console.log('changed')
     }
   }
 }

@@ -5,7 +5,7 @@
     </div>
     <div class="card-content">
         <div class="doctor">
-            <img id="img-doc" src="assets/icons/user.png" alt="" />
+            <img id="img-doc" src="assets/icons/user.png" alt="" [routerLink]="['/patient/doctors/' + appointment?.doctorId]"/>
             <div class="text">
                 <p id="name">{{appointment?.doctorFirstName + " " + appointment?.doctorLastName}}</p>
                 <p id="specialisation">{{appointment?.doctorSpeciality}}</p>

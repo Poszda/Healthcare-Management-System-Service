@@ -21,7 +21,7 @@ form{
     display: flex;
     flex-direction: column;
     gap: 5px;
-    max-height: 135px;
+    max-height: 133px;
     overflow: auto;
 }
 .medicine{

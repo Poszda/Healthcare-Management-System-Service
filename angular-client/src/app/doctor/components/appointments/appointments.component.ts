@@ -77,7 +77,6 @@ export class AppointmentsComponent implements OnInit {
   createDiagnostic(diagnostic : newDiagnostic){
     this.appointmentsService.createDiagnostic(diagnostic).subscribe(
       res =>{
-        console.log(res)
         this.getDoctorAppointments();
       },
       err =>{

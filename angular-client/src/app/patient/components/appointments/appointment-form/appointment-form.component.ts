@@ -9,11 +9,11 @@ import { SpecialitiesService } from '../../../services/specialities.service';
 import { HospitalsService } from '../../../services/hospitals.service';
 import { forkJoin } from 'rxjs';
 import * as moment from 'moment';
-import { UserService } from 'src/app/patient/services/user.service';
 import { DoctorsAvailableHours } from 'src/app/patient/models/doctor-available-hours.model';
 import { AppointmentSuggestion } from 'src/app/patient/models/appointment-suggestion.model';
 import { AppointmentSummary } from 'src/app/patient/models/appointment-summary.model';
 import { NewAppointment } from 'src/app/patient/models/new-appointment.model';
+import { UserService } from 'src/app/patient/services/user.service';
 
 @Component({
   selector: 'app-appointment-form',
@@ -142,7 +142,6 @@ export class AppointmentFormComponent implements OnInit {
     .subscribe(
       ([res1,res2]) => {
         setTimeout(() => {
-        console.log(res1)
         this.selectedDoctorsExtended = res2;
         this.appointmentSuggestions = this.createAppointmentSuggestions(res1);
         this.loading = false;
@@ -240,7 +239,6 @@ export class AppointmentFormComponent implements OnInit {
   createAppointmentSummary(){
     const doctorExtended = this.selectedDoctorsExtended.find(el => el.id === this.sugestionSelection.doctorId)
     const procedure = this.procedureOptions.find((el : any) => el.id ===this.formMandatory.get('procedure')?.value)
-    console.log(procedure)
 
     this.appointmentSummary = {
       doctorName: doctorExtended.user.firstName +" "+doctorExtended.user.lastName,

@@ -1,10 +1,18 @@
-<div class="container">
-    <p>doctors-widget works!</p>
-    <p>doctors-widget works!</p>
-    <p>doctors-widget works!</p>
-    <p>doctors-widget works!</p>
-    <p>doctors-widget works!</p>
-    <p>doctors-widget works!</p>
-    <p>doctors-widget works!</p>
-</div>
+<app-widget-simple-container title="Search doctors">
+    <div class="container">
+        <div class="filters">
+            <input type="text" pInputText [(ngModel)]="form.name" placeholder='Search...' style="width: 100%;" />
+            <p-dropdown [style]="{'width':'100%'}" appendTo="body" [(ngModel)]="form.specialityId" [options]="specialities" optionLabel="name" optionValue="id" [filter]="true"
+                [showClear]="true" placeholder="Speciality"></p-dropdown>
+        <button (click)="searchDoctors()" class="basic-button primary" style="width: 150px;height: 41px;" [disabled]="!form.specialityId">Search</button>
+        </div>
+        <div class="content" *ngIf="!notice">
+            <div class="row" *ngFor="let doctor of doctors" [routerLink]="['/patient/doctors/' + doctor.id]">
+                <img src="assets/icons/user.png"  class=" ico" alt="">
+                <p class="text">{{doctor.user.firstName + " " + doctor.user.lastName}}</p>
+            </div>
+        </div>
+        <p *ngIf="notice" style="text-align: center;">No doctors found</p>
 
+    </div>
+</app-widget-simple-container>

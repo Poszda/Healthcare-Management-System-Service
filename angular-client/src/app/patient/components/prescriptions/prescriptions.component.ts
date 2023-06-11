@@ -29,7 +29,6 @@ export class PrescriptionsComponent implements OnInit,OnDestroy{
       maxHeight:'80vh',
       width:'900px',
       data : diagnostic
-      //scrollStrategy: new NoopScrollStrategy()
     })
   }
 
@@ -37,7 +36,6 @@ export class PrescriptionsComponent implements OnInit,OnDestroy{
     this.appointmentsService.getDiagnostics(this.userService.getPatientIdFromLocalStorage()!).subscribe(
       res =>{
         this.diagnostics = res;
-        console.log(res)
       },
       err =>{
         console.log(err)

@@ -4,6 +4,7 @@ export interface DiagnosticExtended{
     id : number
     diagnostic : string,
     createdAt : string
+    doctorId : string,
     doctorFirstName: string
     doctorLastName: string
     description: string

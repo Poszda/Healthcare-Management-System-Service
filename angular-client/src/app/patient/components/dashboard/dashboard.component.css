@@ -25,7 +25,7 @@
     flex-direction: column;
     gap: 15px;
     flex-grow: 1;
-    min-width: 350px;
+    min-width: 300px;
 
 }
 .bio{
@@ -34,9 +34,9 @@
 }
 .doctors{
  width: calc(100% - 300px - 15px);
- background-color: blue;
  flex-grow: 1;
- min-width: 200px;
+ min-width: 300px;
+ min-height: 350px;
 }
 .prescriptions{
  width: 100%;

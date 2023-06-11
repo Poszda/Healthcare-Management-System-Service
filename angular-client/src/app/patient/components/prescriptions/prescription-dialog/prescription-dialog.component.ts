@@ -13,4 +13,8 @@ export class PrescriptionDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: DiagnosticExtended){
       this.diagnostic = data;
     }
+
+    close(){
+      this.dialogRef.close();
+    }
 }

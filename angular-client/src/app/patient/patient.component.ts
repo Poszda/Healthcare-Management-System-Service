@@ -29,7 +29,7 @@ export class PatientComponent implements OnInit {
     {
       name:'Account',
       route:'./account',
-      icon:'/assets/icons/account2.png' 
+      icon:'/assets/icons/account.png' 
     }
   ]
   

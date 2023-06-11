@@ -31,6 +31,8 @@ import { ProfileSummaryComponent } from './components/profile-summary/profile-su
 import { ProfileInformationCardComponent } from './components/profile-information-card/profile-information-card.component';
 import { ProfileMedicalHistoryComponent } from './components/profile-medical-history/profile-medical-history.component';
 import { ProfileTreatmentsHistoryComponent } from './components/profile-treatments-history/profile-treatments-history.component';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 
 @NgModule({
@@ -69,6 +71,7 @@ import { ProfileTreatmentsHistoryComponent } from './components/profile-treatmen
     DropdownModule,
     ProgressSpinnerModule,
     MatProgressBarModule,
+    RadioButtonModule,
   ],
   exports:[
     FormsModule, //??
@@ -84,6 +87,7 @@ import { ProfileTreatmentsHistoryComponent } from './components/profile-treatmen
     InputTextModule,
     InputTextareaModule,
     AutoCompleteModule,
+    RadioButtonModule,
     ToastModule,
     TableModule,
     MatStepperModule,

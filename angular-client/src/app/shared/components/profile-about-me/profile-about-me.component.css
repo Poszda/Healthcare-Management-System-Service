@@ -5,16 +5,14 @@
     gap: 30px;
     flex-direction: column;
     border-radius: 5px;
-
-}
-
-.content{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+    box-shadow: rgba(156, 154, 154, 0.09) 0px 3px 12px;
 }
 
 .line{
     display: flex;
     gap: 5px;
+}
+
+.description{
+    white-space: pre-wrap;
 }

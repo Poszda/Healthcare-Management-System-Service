@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 
 @Component({
   selector: 'app-profile-medical-history',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile-medical-history.component.css']
 })
 export class ProfileMedicalHistoryComponent {
+@Input() data : string[] | undefined
 
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,Input} from '@angular/core';
+import { ProfileInformationCard } from '../../models/profile-information-card.model';
 
 @Component({
   selector: 'app-profile-information-card',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile-information-card.component.css']
 })
 export class ProfileInformationCardComponent {
-
+  @Input() data : ProfileInformationCard |undefined
 }

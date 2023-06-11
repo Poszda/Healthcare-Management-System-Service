@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DoctorsAvailableHours } from '../models/doctor-available-hours.model';
 import { NewAppointment } from '../models/new-appointment.model';
 import { AppointmentCard } from '../models/appointment-card.model';
+import { AppointmentNext } from 'src/app/shared/models/appointment-next.model';
 
 @Injectable()
 export class AppointmentsService {
@@ -31,5 +32,9 @@ export class AppointmentsService {
 
   getDiagnostics(patientId : number){
     return this.http.get<any>(`http://localhost:8080/api/appointments/getPatientDiagnostics/${patientId}`);
+  }
+
+  getNextAppointments(patientId : number){
+    return this.http.get<AppointmentNext[]>(`http://localhost:8080/api/appointments/getPatientNextAppointments/${patientId}`);
   }
 }

@@ -1,1 +1,12 @@
-<p>profile-medical-history works!</p>
+<div class="container">
+    <h1>Medical history</h1>
+    <ul *ngIf="data?.length;else notice">
+        <li *ngFor="let el of data">{{el}}</li>
+    </ul>
+
+    <ng-template #notice>
+        <div class="notice">
+            No diagnostics in the last 6 months
+        </div>
+    </ng-template>
+</div>

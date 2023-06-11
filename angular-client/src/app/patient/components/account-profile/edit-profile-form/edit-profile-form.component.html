@@ -1,1 +1,34 @@
-<p>edit-profile-form works!</p>
+<form [formGroup]="form" (submit)="edit()">
+    <h1 class="title">Edit profile</h1>
+    <div class="row">
+        <input type="text" pInputText formControlName="firstName" placeholder='First name*' style="width: 100%;" />
+        <input type="text" pInputText formControlName="lastName" placeholder='Last name*' style="width: 100%;" />
+    </div>
+    <div class="row">
+        <input type="text" pInputText formControlName="height" placeholder='Height (cm)' style="width: 33.33%;" />
+        <input type="text" pInputText formControlName="weight" placeholder='Weight (kg)' style="width: 33.33%;" />
+        <div class="form-field" style="width:33.33%">
+            <p-dropdown [style]="{'width':'100%'}" formControlName="bloodType" appendTo="body" [options]="bloodOptions"
+                [showClear]="true" placeholder="Blood type"></p-dropdown>
+        </div>
+    </div>
+    <div class="row">
+        <input type="text" pInputText formControlName="phone" placeholder='Phone' style="width: 100%;" />
+        <div class="form-field" style="width:100%">
+            <p-calendar formControlName="birthDate" [style]="{'width':'100%','height':'41px'}" [appendTo]="'body'"
+            [showIcon]="true" [defaultDate]="defaultDate" [maxDate]="maxDate" inputId="icon"
+            placeholder="Start Date*"></p-calendar>
+        </div>
+    </div>
+    <!-- <div class="radios">
+        <p-radioButton name="sex" value="Male" formControlName="sex"></p-radioButton>
+        <label for="sex">Male</label>
+        <p-radioButton name="sex" value="Female" formControlName="sex"></p-radioButton>
+        <label for="sex">Female</label>
+    </div> -->
+    <p class="subtitle">*Only some fields are mandatory</p>
+    <div class="buttons">
+        <button type="submit" class="basic-button primary" style="width: 80px;height: 40px; margin-top: 10px;"
+            [disabled]="form.invalid">Save</button>
+    </div>
+</form>

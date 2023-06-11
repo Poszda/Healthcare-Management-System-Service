@@ -56,6 +56,8 @@ button[disabled] {
     /* nicer if 5 */
     padding-left: 10px;
     padding-right: 10px;
+    outline: none;
+    font-size: 14px;
 }
 
 .basic-input {
@@ -117,18 +119,22 @@ button[disabled] {
 
 .icon-normal {
     width: 20px;
+    height: 20px;
 }
 
 .icon-small {
     width: 18px;
+    height: 18px;
 }
 
 .icon-smaller {
     width: 16px;
+    height: 16px;
 }
 
 .icon-smallest{
     width: 14px;
+    height: 14px;
 }
 
 html,

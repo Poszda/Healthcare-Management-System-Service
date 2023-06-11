@@ -3,6 +3,7 @@
     background-color: white;
     border-radius: 10px;
     box-sizing: border-box;
+    box-shadow: rgba(156, 154, 154, 0.09) 0px 3px 12px;
 }
 .top{
     position: relative;

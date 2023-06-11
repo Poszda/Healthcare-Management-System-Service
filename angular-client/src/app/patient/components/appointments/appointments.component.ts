@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AppointmentFormComponent } from './appointment-form/appointment-form.component';
 import { MessageService } from 'primeng/api';
 import { AppointmentsService } from '../../services/appointments.service';
-import { UserService } from '../../services/user.service';
+import {UserService } from '../../services/user.service';
 import { AppointmentCard } from '../../models/appointment-card.model';
 import * as moment from 'moment';
 import { AlertService } from 'src/app/core/services/alert.service';

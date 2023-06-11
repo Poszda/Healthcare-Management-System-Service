@@ -1,1 +1,15 @@
-<p>profile-treatments-history works!</p>
+<div class="container">
+    <h1>Treataments History</h1>
+    <div class="content">
+        <p>Last 3 months</p>
+        <ul *ngIf="!showEmptyLine1;else notice1">
+            <li *ngFor="let el of data?.medicationsLastThreeMonths">{{el}}</li>
+        </ul>
+        <ng-template #notice1>-</ng-template>
+        <p>Last 6 months</p>
+        <ul *ngIf="!showEmptyLine2;else notice2">
+            <li *ngFor="let el of data?.medicationsLastSixMonths">{{el}}</li>
+        </ul>
+        <ng-template #notice2>-</ng-template>
+    </div>
+</div>

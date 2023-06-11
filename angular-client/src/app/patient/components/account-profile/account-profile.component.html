@@ -1,1 +1,11 @@
-<p>account-profile works!</p>
+<div class="container">
+    <div class="left">
+        <app-profile-summary [allowEdit]="true" [summary]="summary" (editProfile)="editProfile()" (logOut)="logOut()"></app-profile-summary>
+        <app-profile-medical-history [data]="medicalHistory"></app-profile-medical-history>
+        <app-profile-treatments-history [data]="tratamentsHistory"></app-profile-treatments-history>
+    </div>
+    <div class="right">
+        <app-profile-information-card [data]="physicalInformation"></app-profile-information-card>
+        <app-profile-information-card  [data]="contactInformation"></app-profile-information-card>
+    </div>
+</div>

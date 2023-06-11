@@ -1,17 +1,9 @@
 <div class="container">
-    <h1 class="title">Physical Charateristics</h1>
+    <h1 class="title">{{data?.title}}</h1>
     <div class="content">
-        <div class="line">
-            <img class="icon-normal" src="assets/icons/phone.png" alt="">
-            <p>Height</p>
-        </div>
-        <div class="line">
-            <img class="icon-normal" src="assets/icons/phone.png" alt="">
-            <p>Weight</p>
-        </div>
-        <div class="line">
-            <img class="icon-normal" src="assets/icons/phone.png" alt="">
-            <p>Age</p>
+        <div *ngFor="let row of data?.rows" class="line">
+            <img class="icon-smaller" [src]="row.icon" alt="">
+            <p>{{row.value}}</p>
         </div>
     </div>
 </div>

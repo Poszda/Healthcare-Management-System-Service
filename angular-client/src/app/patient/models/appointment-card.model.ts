@@ -1,5 +1,6 @@
 export interface AppointmentCard{
     id : number,
+    doctorId : number,
     doctorFirstName : string,
     doctorLastName : string,
     doctorSpeciality: string,

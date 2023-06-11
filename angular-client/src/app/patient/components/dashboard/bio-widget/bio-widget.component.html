@@ -1,31 +1,31 @@
 <div class='container'>
     <div class="header">
-      <img id='profile' src="assets/icons/user.png" alt="" />
-      <p class="name">Costin Galan</p>
+      <img id='profile' src="assets/icons/user.png" alt=""/>
+      <p class="name">{{user.firstName + " " +user.lastName}}</p>
       <p class="user-type grey">Patient</p>
     </div>
     <div class="body">
       <div class="box">
         <div class="age">
-          <p>18</p>
+          <p>{{getAge(data?.birthDate)}}</p>
           <p class='grey'>Age</p>
         </div>
       </div>
       <div class="box">
         <div class="blood">
-          <p>B+</p>
+          <p>{{data?.bloodType?data?.bloodType:'-'}}</p>
           <p class='grey'>Blood</p>
         </div>
       </div>
       <div class="box hieght">
         <div class="height">
-          <p>183</p>
+          <p>{{data?.height?data?.height:'-'}}</p>
           <p class='grey'>Height</p>
         </div>
       </div>
       <div class="box">
         <div class="weight">
-          <p>72</p>
+          <p>{{data?.weight?data?.weight:'-'}}</p>
           <p class='grey'>Weight</p>
         </div>
       </div>

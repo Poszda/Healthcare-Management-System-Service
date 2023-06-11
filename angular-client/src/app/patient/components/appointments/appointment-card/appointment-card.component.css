@@ -50,6 +50,7 @@
 #img-doc{
  width: 40px;
  border-radius: 100%;
+ cursor: pointer;
 }
  #specialisation{
     color: grey;

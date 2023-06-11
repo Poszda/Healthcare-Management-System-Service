@@ -1,6 +1,9 @@
 <app-widget-link-container title="Recent prescriptions" link="../prescriptions">
     <div class="container">
-        <app-prescription-card></app-prescription-card>
-        <app-prescription-card></app-prescription-card>
+        <ng-container *ngIf="diagnostics.length;else notice">
+            <app-prescription-card class="card" *ngFor="let diagnostic of diagnostics" [diagnostic]="diagnostic"
+                (seeMore)="openExtendedDiagnostic(diagnostic)"></app-prescription-card>
+        </ng-container>
+        <ng-template #notice><p class="notice">No diagnostics found</p></ng-template>
     </div>
 </app-widget-link-container>

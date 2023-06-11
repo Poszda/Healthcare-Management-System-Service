@@ -4,7 +4,7 @@
         <div class="information-content">
             <div class="appointment-section">
                 <div class="profile">
-                    <img id="img-profile" src="assets/icons/user-whitebg.png" alt="" />
+                    <img id="img-profile" (click)="close()" [routerLink]="['/patient/doctors/' + diagnostic.doctorId]" src="assets/icons/user-whitebg.png" alt="" />
                     <div class="text">
                         <p>{{diagnostic.doctorFirstName + " " + diagnostic.doctorLastName}}</p>
                         <p class="subtitle">{{diagnostic.speciality}}</p>

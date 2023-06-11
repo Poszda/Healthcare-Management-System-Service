@@ -1,0 +1,19 @@
+.container{
+    background-color: white;
+    display: flex;
+    padding: 30px;
+    gap: 30px;
+    flex-direction: column;
+    border-radius: 5px;
+    box-shadow: rgba(156, 154, 154, 0.09) 0px 3px 12px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+li{
+    margin-left: 15px;
+}

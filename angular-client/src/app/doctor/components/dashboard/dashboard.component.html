@@ -6,8 +6,8 @@
             <app-procedure-trends-widget [trends]="procedureTrends"></app-procedure-trends-widget>
         </div>
         <div class="right">
-            <app-program-widget [program]="todayProgramStatistic"></app-program-widget>
-            <app-appointments-widget></app-appointments-widget>
+            <app-program-widget [program]="todayProgramStatistic" ></app-program-widget>
+            <app-appointments-widget title="Today Next Appointments" [appointments]="todayNextAppointments"></app-appointments-widget>
         </div>
     </div>
 </div>
