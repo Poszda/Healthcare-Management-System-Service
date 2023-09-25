@@ -50,7 +50,7 @@ export class AppointmentsTableComponent implements OnChanges, OnInit, OnDestroy 
 
   filterAppointments() {
     this.dataFiltered = this.data.filter(el =>
-      el.status === this.filter.status || this.filter.status === "All" &&
+      (el.status === this.filter.status || this.filter.status === "All") &&
       this.filterByDate(el.date)
     )
   }
@@ -59,6 +59,7 @@ export class AppointmentsTableComponent implements OnChanges, OnInit, OnDestroy 
     const x = moment(date);
     const startDate = this.filter.period && this.filter.period[0] ? moment(this.filter.period[0]) : null
     const endDate = this.filter.period && this.filter.period[1] ? moment(this.filter.period[1]) : null
+    console.log(startDate,endDate)
     if (startDate && endDate && (x.isBetween(startDate, endDate))) return true
     if (startDate && startDate.isSame(x, 'day')) return true;
     if (endDate && endDate.isSame(x, 'day')) return true;

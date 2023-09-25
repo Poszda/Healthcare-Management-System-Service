@@ -35,6 +35,7 @@
 .profile-img{
     position: absolute;
     width: 150px;
+    height: 150px;
     border-radius: 100%;
     border: 3px solid white;
     bottom: 0;
