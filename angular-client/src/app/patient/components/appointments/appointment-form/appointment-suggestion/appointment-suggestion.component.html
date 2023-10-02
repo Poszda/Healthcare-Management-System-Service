@@ -18,9 +18,9 @@
         <p class="subtitle">Available Hours</p>
         <div class="hours-container" *ngIf="suggestion && suggestion.hours.length > 0; else notice">
             <div class="hour" 
-            [ngClass]="{'active': false}"
-            *ngFor="let hour of suggestion?.hours"
-            (click)="selectHour(hour)"
+            *ngFor="let hour of suggestion?.hours;let i=index"
+            [ngClass]="{'active': selectedButtonIndex === i}"
+            (click)="selectHour(hour,i)"
             >{{hour | slice:0:-3}}</div>
         </div>
         <ng-template #notice>-</ng-template>

@@ -90,7 +90,11 @@
             <ng-template matStepLabel>Select Available Appointment</ng-template>
             <div class="section-3">
                 <div class="suggestions-container">
-                    <app-appointment-suggestion [suggestion]="suggestion" (suggestionSelection)="onSuggestionSelection($event)" *ngFor="let suggestion of appointmentSuggestions"></app-appointment-suggestion>
+                    <app-appointment-suggestion 
+                    *ngFor="let suggestion of appointmentSuggestions;let i = index"
+                    [suggestion]="suggestion" 
+                    [componentIndex]="i"
+                    (suggestionSelection)="onSuggestionSelection($event)"></app-appointment-suggestion>
                 </div>
                 <div class="buttons">
                     <button class="basic-button primary" style="height:40px;width: 80px;"

@@ -4,10 +4,13 @@ import { DoctorsAvailableHours } from '../models/doctor-available-hours.model';
 import { NewAppointment } from '../models/new-appointment.model';
 import { AppointmentCard } from '../models/appointment-card.model';
 import { AppointmentNext } from 'src/app/shared/models/appointment-next.model';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class AppointmentsService {
 
+  resetButtonsColorExcept : Subject<any> = new Subject<any>();
+  
   constructor(private http: HttpClient) { }
 
   getFormOptionalOptions(county : string, procedureId : number){

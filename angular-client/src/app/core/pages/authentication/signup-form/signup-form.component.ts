@@ -39,7 +39,9 @@ export class SignupFormComponent implements OnInit {
   }
 
   signUp(){
-    this.signup.emit(this.form.getRawValue());
+    const form : SignUpForm = this.form.getRawValue();
+    form.birthDate = moment(form.birthDate).format('YYYY-MM-DD');
+    this.signup.emit(form);
   }
   toggleForms(){
     this.goToLogin.emit();

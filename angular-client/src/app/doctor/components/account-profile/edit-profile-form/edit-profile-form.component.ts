@@ -8,17 +8,20 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./edit-profile-form.component.css']
 })
 export class EditProfileFormComponent{
-  
+
+  maxlength = 2000;
   constructor(public dialogRef: MatDialogRef<EditProfileFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { university: string | undefined, description: string | undefined }) {
   }
 
   form: FormGroup = new FormGroup({
-    university: new FormControl(this.data.university, Validators.required),
-    description: new FormControl(this.data.description, Validators.required),
+    university: new FormControl(this.data.university),
+    description: new FormControl(this.data.description),
   });
 
   edit() {
+    console.log(this.form.get('description')?.value?.length)
     this.dialogRef.close(this.form.getRawValue())
   }
+
 }

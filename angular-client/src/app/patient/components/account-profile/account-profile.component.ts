@@ -74,7 +74,7 @@ export class AccountProfileComponent implements OnInit{
         },
         {
           icon:'assets/icons/phone-purple.png',
-          value:data.patient.phone
+          value:data.patient.phone?data.patient.phone:'-'
         },
       ]
       const result : ProfileInformationCard = {
@@ -85,23 +85,23 @@ export class AccountProfileComponent implements OnInit{
     }
 
     obtainPhysicalInformation(data : any){ //age blood height weight
-      const age = data.patient.birthDate?moment().diff(moment(data.patient.birthDate),'years'): null;
+      const age = data.patient.birthDate?moment().diff(moment(data.patient.birthDate),'years'): '-';
       const list = [
         {
           icon:'assets/icons/age-purple.png',
-          value:age?age + " years": null
+          value:age?age + " years": '-'
         },
         {
           icon:'assets/icons/blood-purple.png',
-          value:data.patient.bloodType
+          value:data.patient.bloodType?data.patient.bloodType:'-'
         },
         {
           icon:'assets/icons/height-purple.png',
-          value:data.patient.height?data.patient.height + " cm" : null
+          value:data.patient.height?data.patient.height + " cm" : '-'
         },
         {
           icon:'assets/icons/weight-purple.png',
-          value:data.patient.weight?data.patient.weight + " kg" : null
+          value:data.patient.weight?data.patient.weight + " kg" : '-'
         },
       ]
       const result : ProfileInformationCard = {

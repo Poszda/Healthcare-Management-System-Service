@@ -14,7 +14,7 @@
             </div>
             <div class="price">
                 <p class="subtitle">Price</p>
-                <p>{{summary?.price}}Euro</p>
+                <p>{{summary?.price}} Euro</p>
             </div>
         </div>
         <div class="columnn">
@@ -24,7 +24,7 @@
             </div>
             <div class="time">
                 <p class="subtitle">Time</p>
-                <p>{{summary?.time}}</p>
+                <p>{{summary?.time | slice:0:-3}}</p>
             </div>
         </div>
         <div class="columnn">

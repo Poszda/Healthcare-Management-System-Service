@@ -256,6 +256,7 @@ export class AppointmentFormComponent implements OnInit {
     this.formOptional.get('doctors')?.setValue([]);
     this.formOptional.get('hospitals')?.setValue([]);
   }
+
   resetStep3(){
   this.sugestionSelection = undefined;
   }
