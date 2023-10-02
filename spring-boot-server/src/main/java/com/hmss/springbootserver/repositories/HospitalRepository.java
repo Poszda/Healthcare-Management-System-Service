@@ -51,6 +51,9 @@ public interface HospitalRepository extends JpaRepository<Hospital,Long> {
             "group by s.id")
     List<SpecialityFrequencyProjection> findPatientVisitBySpeciality(@Param("hospitalId")Long hospitalId, @Param("month")int month,@Param("year")int year);
 
+
+    //ql_mode=only_full_group_by changed
+    //SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
     @Query("SELECT FUNCTION('MONTHNAME',a.date) as month,COUNT(a) as appointments, SUM(p.price) as total from Appointment a " +
             "JOIN a.procedure p "+
             "JOIN a.doctor.hospital h " +

@@ -15,6 +15,7 @@ public class Doctor {
     @Column(name = "id", nullable = false)
     private Long id;
     private String university;
+    @Column(length = 2000)
     private String description;
     private LocalTime programStart;
     private LocalTime programEnd;
