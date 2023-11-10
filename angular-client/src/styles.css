@@ -35,7 +35,19 @@
     font-size: 14px;
 }
 
-a {
+/* GENERAL */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+a{
     text-decoration: none;
 }
 
@@ -50,7 +62,6 @@ button[disabled] {
 /* INPUTS */
 .basic {
     color: black;
-    font-size: 14px;
     border: 1px solid #ced4da;
     border-radius: 6px;
     /* nicer if 5 */
@@ -135,14 +146,4 @@ button[disabled] {
 .icon-smallest{
     width: 14px;
     height: 14px;
-}
-
-html,
-body {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
 }

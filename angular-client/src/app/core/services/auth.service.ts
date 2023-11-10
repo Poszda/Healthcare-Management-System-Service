@@ -77,7 +77,7 @@ export class AuthService {
   logout() {
     this.user = null;
     this.clearUser();
-    this.router.navigate(['login']);
+    this.router.navigate(['authentication']);
   }
 
   clearUser() {

@@ -22,27 +22,6 @@
     flex-direction: column;
     gap:5px;
 }
-input{
-    width: 100%;
-    height: 45px;
-}
-
-input:focus{
-    outline: none;
-}
-.input[type=text]{
-    padding-left: 30px;
-    padding-right: 30px;
-}
-.form-button{
-    border: none;
-    width: 100%;
-    height: 45px;
-    border-radius: 5px;
-    background-color: var(--color1);
-    color: white;
-    cursor: pointer;
-}
 #title{
     font-size: 32px;
     font-weight: bold;

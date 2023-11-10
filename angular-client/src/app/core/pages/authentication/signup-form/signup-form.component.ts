@@ -1,15 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import {FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { SignUpForm } from 'src/app/core/pages/authentication/models/signup-form.model';
-
-/** Check if passwords are matching */
-// const passwordMatchingValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-//   const password = control.parent!.get('password')?.value; //control.parent is null
-//   const rePassword = control.value;
-//   return password && rePassword && password !== rePassword ? { passwordMissmatch: true } : null;
-// };
-
+import { passwordMatch} from 'src/app/shared/utils/validators/password-match.validator';
 
 @Component({
   selector: 'app-signup-form',
@@ -17,33 +10,41 @@ import { SignUpForm } from 'src/app/core/pages/authentication/models/signup-form
   styleUrls: ['./signup-form.component.css']
 })
 export class SignupFormComponent implements OnInit {
-   
-  @Output() signup : EventEmitter<SignUpForm> = new EventEmitter();
-  @Output() goToLogin : EventEmitter<any> = new EventEmitter();
-  defaultDate : Date = moment('2000/01/01').toDate();
-  maxDate : Date = moment().toDate()
+
+  @Output() signup: EventEmitter<SignUpForm> = new EventEmitter();
+  @Output() goToLogin: EventEmitter<any> = new EventEmitter();
+  defaultDate: Date = moment('2000/01/01').toDate();
+  maxDate: Date = moment().toDate()
 
   form: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required,Validators.email]),
-    firstName:new FormControl('', [Validators.required]),
-    lastName:new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required,Validators.minLength(4)]),
-    rePassword:new FormControl('', [Validators.required,Validators.minLength(4)]),
-    birthDate : new FormControl('', [Validators.required])
-  });
+    email: new FormControl('', [Validators.required, Validators.email]),
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    birthDate: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    rePassword: new FormControl('', [Validators.required]),
+  }, { validators: [passwordMatch('password','rePassword')] });
 
+  get email() {return this.form.get('email');}
+  get firstName() {return this.form.get('firstName');}
+  get lastName() {return this.form.get('lastName');}
+  get password() {return this.form.get('password');}
+  get rePassword() {return this.form.get('rePassword');}
 
   constructor() { }
 
   ngOnInit(): void {
+    setInterval(()=>{
+      console.log(this.rePassword?.errors,'rePass')
+    },5000)
   }
 
-  signUp(){
-    const form : SignUpForm = this.form.getRawValue();
+  signUp() {
+    const form: SignUpForm = this.form.getRawValue();
     form.birthDate = moment(form.birthDate).format('YYYY-MM-DD');
     this.signup.emit(form);
   }
-  toggleForms(){
+  toggleForms() {
     this.goToLogin.emit();
   }
 
