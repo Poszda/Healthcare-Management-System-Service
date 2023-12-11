@@ -1,8 +1,6 @@
 package com.hmss.springbootserver.DTOs.user;
 
-import com.hmss.springbootserver.DTOs.admin.AdminDTO;
 import com.hmss.springbootserver.DTOs.admin.AdminWithHospitalDTO;
-import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
 import com.hmss.springbootserver.enums.UserType;
 
 public class AdminLoginDTO {
