@@ -15,6 +15,7 @@ public class PatientDiagnosticExtendedDTO {
     private Long doctorId;
     private String doctorFirstName;
     private String doctorLastName;
+    private String doctorProfileImage;
     private String description;
     private LocalDateTime date;
     private String procedure;
@@ -40,13 +41,14 @@ public class PatientDiagnosticExtendedDTO {
         this.medications = medications;
     }
 
-    public PatientDiagnosticExtendedDTO(Long id, String diagnostic, LocalDate createdAt, String doctorFirstName, String doctorLastName, Long doctorId, String description, LocalDateTime date, String procedure, String speciality, String hospital){
+    public PatientDiagnosticExtendedDTO(Long id, String diagnostic, LocalDate createdAt, String doctorFirstName, String doctorLastName, Long doctorId, String doctorProfileImage, String description, LocalDateTime date, String procedure, String speciality, String hospital){
         this.id = id;
         this.diagnostic = diagnostic;
         this.createdAt = createdAt;
         this.doctorFirstName = doctorFirstName;
         this.doctorLastName = doctorLastName;
         this.doctorId = doctorId;
+        this.doctorProfileImage = doctorProfileImage;
         this.description = description;
         this.date = date;
         this.procedure = procedure;
@@ -149,4 +151,13 @@ public class PatientDiagnosticExtendedDTO {
     public void setDoctorId(Long doctorId) {
         this.doctorId = doctorId;
     }
+
+    public String getDoctorProfileImage() {
+        return doctorProfileImage;
+    }
+
+    public void setDoctorProfileImage(String doctorProfileImage) {
+        this.doctorProfileImage = doctorProfileImage;
+    }
+
 }

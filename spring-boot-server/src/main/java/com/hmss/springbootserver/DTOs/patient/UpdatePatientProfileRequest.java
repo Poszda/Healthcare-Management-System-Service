@@ -1,5 +1,7 @@
 package com.hmss.springbootserver.DTOs.patient;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.time.LocalDate;
 
 public class UpdatePatientProfileRequest {
@@ -10,11 +12,12 @@ public class UpdatePatientProfileRequest {
     private String bloodType;
     private String phone;
     private LocalDate birthDate;
+    private MultipartFile profileImage;
 
     public UpdatePatientProfileRequest() {
     }
 
-    public UpdatePatientProfileRequest(String firstName, String lastName, Integer height, Integer weight, String bloodType, String phone, LocalDate birthDate) {
+    public UpdatePatientProfileRequest(String firstName, String lastName, Integer height, Integer weight, String bloodType, String phone, LocalDate birthDate, MultipartFile file, MultipartFile profileImage) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.height = height;
@@ -22,6 +25,8 @@ public class UpdatePatientProfileRequest {
         this.bloodType = bloodType;
         this.phone = phone;
         this.birthDate = birthDate;
+
+        this.profileImage = profileImage;
     }
 
     public String getFirstName() {
@@ -78,5 +83,13 @@ public class UpdatePatientProfileRequest {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public MultipartFile getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(MultipartFile profileImage) {
+        this.profileImage = profileImage;
     }
 }

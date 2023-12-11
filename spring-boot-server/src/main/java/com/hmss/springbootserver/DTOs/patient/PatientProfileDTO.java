@@ -4,26 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PatientProfileDTO {
-    PatientWithUserDTO patient;
-    List<String> diagnostics = new ArrayList<>();
-    List<String> medicationsLastThreeMonths = new ArrayList<>();
-    List<String> medicationsLastSixMonths = new ArrayList<>();
+    PatientWithUserWithFileMetadataDTO patient;
+    List<String> diagnostics;
+    List<String> medicationsLastThreeMonths;
+    List<String> medicationsLastSixMonths;
 
-    public PatientProfileDTO() {
-    }
-
-    public PatientProfileDTO(PatientWithUserDTO patient, List<String> diagnostics, List<String> medicationsLastThreeMonths, List<String> medicationsLastSixMonths) {
+    public PatientProfileDTO(PatientWithUserWithFileMetadataDTO patient, List<String> diagnostics, List<String> medicationsLastThreeMonths, List<String> medicationsLastSixMonths) {
         this.patient = patient;
         this.diagnostics = diagnostics;
         this.medicationsLastThreeMonths = medicationsLastThreeMonths;
         this.medicationsLastSixMonths = medicationsLastSixMonths;
     }
 
-    public PatientWithUserDTO getPatient() {
+    public PatientWithUserWithFileMetadataDTO getPatient() {
         return patient;
     }
 
-    public void setPatient(PatientWithUserDTO patient) {
+    public void setPatient(PatientWithUserWithFileMetadataDTO patient) {
         this.patient = patient;
     }
 

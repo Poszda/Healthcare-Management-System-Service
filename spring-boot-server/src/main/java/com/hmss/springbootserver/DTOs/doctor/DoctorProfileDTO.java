@@ -2,19 +2,18 @@ package com.hmss.springbootserver.DTOs.doctor;
 
 import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
 import com.hmss.springbootserver.DTOs.speciality.SpecialityDTO;
-import com.hmss.springbootserver.DTOs.user.UserDTO;
 import com.hmss.springbootserver.DTOs.user.UserNoPasswordDTO;
-import com.hmss.springbootserver.entities.Speciality;
+import com.hmss.springbootserver.DTOs.user.UserWithFileMetadataDTO;
 
 import java.time.LocalTime;
 
-public class DoctorWithUserAndHospitalAndSpecialityDTO {
+public class DoctorProfileDTO {
     private Long id;
     private String university;
     private String description;
     private LocalTime programStart;
     private LocalTime programEnd;
-    private UserNoPasswordDTO user;
+    private UserWithFileMetadataDTO user;
     private HospitalDTO hospital;
     private SpecialityDTO speciality;
 
@@ -42,11 +41,27 @@ public class DoctorWithUserAndHospitalAndSpecialityDTO {
         this.description = description;
     }
 
-    public UserNoPasswordDTO getUser() {
+    public LocalTime getProgramStart() {
+        return programStart;
+    }
+
+    public void setProgramStart(LocalTime programStart) {
+        this.programStart = programStart;
+    }
+
+    public LocalTime getProgramEnd() {
+        return programEnd;
+    }
+
+    public void setProgramEnd(LocalTime programEnd) {
+        this.programEnd = programEnd;
+    }
+
+    public UserWithFileMetadataDTO getUser() {
         return user;
     }
 
-    public void setUser(UserNoPasswordDTO user) {
+    public void setUser(UserWithFileMetadataDTO user) {
         this.user = user;
     }
 
@@ -64,21 +79,5 @@ public class DoctorWithUserAndHospitalAndSpecialityDTO {
 
     public void setSpeciality(SpecialityDTO speciality) {
         this.speciality = speciality;
-    }
-
-    public LocalTime getProgramStart() {
-        return programStart;
-    }
-
-    public void setProgramStart(LocalTime programStart) {
-        this.programStart = programStart;
-    }
-
-    public LocalTime getProgramEnd() {
-        return programEnd;
-    }
-
-    public void setProgramEnd(LocalTime programEnd) {
-        this.programEnd = programEnd;
     }
 }

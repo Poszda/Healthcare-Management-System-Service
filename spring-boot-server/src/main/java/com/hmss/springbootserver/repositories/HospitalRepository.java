@@ -20,8 +20,10 @@ public interface HospitalRepository extends JpaRepository<Hospital,Long> {
             "JOIN h.procedureSet p " +
             "JOIN p.speciality s " +
             "JOIN FETCH h.doctors d " +
+            "JOIN d.user u " +
+            "JOIN u.fileMetadataList f " +
             "JOIN d.speciality sd " +
-            "WHERE h.county IN (:counties) AND p.id = :procedureId AND s.id = sd.id")
+            "WHERE h.county IN (:counties) AND p.id = :procedureId AND s.id = sd.id AND f.type = 'PROFILE_IMAGE' ")
     List<Hospital> findPossibleHospitalsAndDoctorsForAppointments(@Param("counties") List<String> counties,@Param("procedureId") long procedureId);
 
     @Query("SELECT COUNT(a) FROM Appointment a " +

@@ -16,4 +16,5 @@ public interface DoctorAppointmentProjection {
     String getFirstName();
     String getLastName();
     Integer getDiagnosticId();
+    String getProfileImage();
 }

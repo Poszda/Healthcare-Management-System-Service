@@ -40,12 +40,13 @@ public class AppointmentService {
     private final PatientRepository patientRepository;
     private final DiagnosticRepository diagnosticRepository;
     private final MedicationRepository medicationRepository;
+    private final FileService fileService;
 
     @Autowired
     public AppointmentService(HospitalRepository hospitalRepository, AppointmentRepository appointmentRepository, DoctorRepository doctorRepository, ProcedureRepository procedureRepository,
                               PatientRepository patientRepository,
                               DiagnosticRepository diagnosticRepository,
-                              MedicationRepository medicationRepository) {
+                              MedicationRepository medicationRepository, FileService fileService) {
         this.hospitalRepository = hospitalRepository;
         this.appointmentRepository = appointmentRepository;
         this.doctorRepository = doctorRepository;
@@ -53,15 +54,21 @@ public class AppointmentService {
         this.patientRepository = patientRepository;
         this.diagnosticRepository = diagnosticRepository;
         this.medicationRepository = medicationRepository;
+        this.fileService = fileService;
     }
 
     public List<HospitalWithDoctorsDTO> getHospitalsAndDoctorsRecommendations(List<String> counties, long procedureId){
-        var hospitals = this.hospitalRepository.findPossibleHospitalsAndDoctorsForAppointments(counties,procedureId);
+         List<Hospital> hospitals = this.hospitalRepository.findPossibleHospitalsAndDoctorsForAppointments(counties,procedureId);
         return HospitalMapper.INSTANCE.toHospitalWithDoctorsDTOList(hospitals);
     }
 
-    public List<AppointmentCardProjection> getAppointmentsCards(Long patientId){
-        return this.appointmentRepository.findUserAppointmentsWidgets(patientId);
+    public List<AppointmentCardDTO> getAppointmentsCards(Long patientId){
+        List<AppointmentCardProjection> list = this.appointmentRepository.findUserAppointmentsWidgets(patientId);
+        List<AppointmentCardDTO> result = AppointmentMapper.INSTANCE.toAppointmentCardDTOList(list).stream().map(el -> {
+            el.setProfileImage(fileService.getFullPath(el.getProfileImage()));
+            return el;
+        }).collect(Collectors.toList());
+        return result;
     }
 
     public ResponseEntity<Object> createAppointment(CreateAppointmentRequestDTO appointment){
@@ -239,6 +246,7 @@ public class AppointmentService {
             a.setTime(el.getDate().toLocalTime());
             a.setDuration(el.getDuration());
             a.setStatus(status);
+            a.setProfileImage(fileService.getFullPath(el.getProfileImage()));
             return a;
         }).collect(Collectors.toList());
 
@@ -266,8 +274,13 @@ public class AppointmentService {
         return null;
     }
 
-    public Object getPatientDiagnostics(Long patientId) {
-       List<PatientDiagnosticExtendedDTO> diagnostics =  this.diagnosticRepository.findPatientDiagnosticsExtended(patientId);
+    public List<PatientDiagnosticExtendedDTO> getPatientDiagnostics(Long patientId) {
+       List<PatientDiagnosticExtendedDTO> diagnostics =  this.diagnosticRepository.findPatientDiagnosticsExtended(patientId)
+               .stream().map(el-> {
+                   el.setDoctorProfileImage(fileService.getFullPath(el.getDoctorProfileImage()));
+                   return el;
+               }).collect(Collectors.toList());
+
        List<Long> diagnosticsIds = diagnostics.stream().map(el -> el.getId()).toList();
        List<MedicationDTO> medications = this.medicationRepository.findByDiagnosticIdIn(diagnosticsIds);
         HashMap<Long,List<MedicationDTO>> map = new HashMap<>();
@@ -290,7 +303,13 @@ public class AppointmentService {
         return this.appointmentRepository.findDoctorTodayAppointments(doctorId,LocalDateTime.now(),10);
     }
 
-    public List<AppointmentNextProjection> getPatientNextAppointments(Long patientId) {
-        return this.appointmentRepository.findPatientNextAppointments(patientId,LocalDateTime.now(),10);
+    public List<AppointmentNextDTO> getPatientNextAppointments(Long patientId) {
+        List<AppointmentNextProjection> list = this.appointmentRepository.findPatientNextAppointments(patientId,LocalDateTime.now(),10);
+        List<AppointmentNextDTO> result = AppointmentMapper.INSTANCE.toAppointmentNextDTOList(list).stream().map(el -> {
+            el.setProfileImage(fileService.getFullPath(el.getProfileImage()));
+            return el;
+        }).collect(Collectors.toList());
+
+        return result;
     }
 }

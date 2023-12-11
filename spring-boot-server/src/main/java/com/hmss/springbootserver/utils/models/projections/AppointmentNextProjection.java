@@ -9,4 +9,5 @@ public interface AppointmentNextProjection {
     int getDuration();
     Long getOtherId();
     Long getId();
+    String getProfileImage();
 }

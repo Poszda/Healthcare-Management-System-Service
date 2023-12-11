@@ -1,8 +1,6 @@
 package com.hmss.springbootserver.controllers;
 
-import com.hmss.springbootserver.DTOs.appointments.CreateAppointmentRequestDTO;
-import com.hmss.springbootserver.DTOs.appointments.CreateDiagnosticRequestDTO;
-import com.hmss.springbootserver.DTOs.appointments.DoctorAppointmentDTO;
+import com.hmss.springbootserver.DTOs.appointments.*;
 import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
 import com.hmss.springbootserver.services.AppointmentService;
 import com.hmss.springbootserver.utils.models.projections.AppointmentCardProjection;
@@ -59,7 +57,7 @@ public class AppointmentController {
 
     @GetMapping("/getAppointmentsCards/{patientId}")
     @CrossOrigin(origins = "*")
-    public List<AppointmentCardProjection> getAppointmentsCards(@PathVariable("patientId") Long patientId){
+    public List<AppointmentCardDTO> getAppointmentsCards(@PathVariable("patientId") Long patientId){
         return this.appointmentService.getAppointmentsCards(patientId);
     }
 
@@ -77,7 +75,7 @@ public class AppointmentController {
 
     @GetMapping("/getPatientDiagnostics/{patientId}")
     @CrossOrigin(origins = "*")
-    public Object getPatientDiagnostics(@PathVariable("patientId") Long patientId){
+    public List<PatientDiagnosticExtendedDTO> getPatientDiagnostics(@PathVariable("patientId") Long patientId){
         return this.appointmentService.getPatientDiagnostics(patientId);
     }
 
@@ -88,7 +86,7 @@ public class AppointmentController {
     }
     @GetMapping("/getPatientNextAppointments/{patientId}")
     @CrossOrigin(origins = "*")
-    public List<AppointmentNextProjection> getPatientNextAppointments(@PathVariable("patientId") Long patientId){
+    public List<AppointmentNextDTO> getPatientNextAppointments(@PathVariable("patientId") Long patientId){
         return this.appointmentService.getPatientNextAppointments(patientId);
     }
 

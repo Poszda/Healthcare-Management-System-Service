@@ -1,6 +1,6 @@
 package com.hmss.springbootserver.DTOs.statistics;
 
-import com.hmss.springbootserver.entities.ProcedureCounterDTO;
+import com.hmss.springbootserver.DTOs.procedure.ProcedureCounterDTO;
 
 import java.util.List;
 

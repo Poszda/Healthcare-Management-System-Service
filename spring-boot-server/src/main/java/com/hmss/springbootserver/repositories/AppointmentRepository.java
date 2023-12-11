@@ -25,7 +25,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
                                                          @Param("startDate") LocalDateTime startDate,
                                                          @Param("endDate") LocalDateTime endDate);
     @Query("SELECT a.id as id, a.date as dateTime, u.firstName as doctorFirstName, u.lastName as doctorLastName, d.id as doctorId, " +
-            "p.name as procedureName, p.price as price, p.duration as duration, s.name as doctorSpeciality,h.name as hospitalName, di.id as diagnosticId " +
+            "p.name as procedureName, p.price as price, p.duration as duration, s.name as doctorSpeciality,h.name as hospitalName, di.id as diagnosticId, f.path as profileImage " +
             "FROM Appointment a " +
             "JOIN a.doctor d "+
             "JOIN d.user u " +
@@ -33,16 +33,18 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
             "JOIN d.speciality s "+
             "JOIN d.hospital h "+
             "LEFT JOIN a.diagnostic di "+
+            "LEFT JOIN (SELECT fm.user.id as userId, fm.path as path FROM FileMetadata fm WHERE fm.type = 'PROFILE_IMAGE') f ON u.id = f.userId " +
             "WHERE a.patient.id =:patientId")
     List<AppointmentCardProjection> findUserAppointmentsWidgets(@Param("patientId") Long patientId);
 
     @Query("SELECT a.id as id, a.date as date, p.name as procedureName, " +
-            "p.duration as duration, pa.id as patientId, pa.phone as phone, pa.birthDate as birthDate, u.firstName as firstName, u.lastName as lastName, d.id as diagnosticId " +
+            "p.duration as duration, pa.id as patientId, pa.phone as phone, pa.birthDate as birthDate, u.firstName as firstName, u.lastName as lastName, d.id as diagnosticId, f.path as profileImage " +
             "FROM Appointment a " +
             "JOIN a.procedure p " +
             "LEFT JOIN a.diagnostic d " +
             "JOIN a.patient pa " +
             "JOIN pa.user u " +
+            "LEFT JOIN (SELECT fm.user.id as userId, fm.path as path FROM FileMetadata fm WHERE fm.type = 'PROFILE_IMAGE') f ON u.id = f.userId " +
             "WHERE a.doctor.id =:doctorId")
     List<DoctorAppointmentProjection> findDoctorAppointments(@Param("doctorId") Long doctorId);
 
@@ -76,13 +78,14 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
             "LIMIT :limit ")
     List<AppointmentNextProjection> findDoctorTodayAppointments(@Param("doctorId") Long doctorId, @Param("dateTime") LocalDateTime dateTime, @Param("limit") int limit);
 
-    @Query("SELECT a.id as id, a.date as dateTime, u.firstName as firstName, u.lastName as lastName, d.id as otherId, pr.duration as duration " +
+    @Query("SELECT a.id as id, a.date as dateTime, u.firstName as firstName, u.lastName as lastName, d.id as otherId, pr.duration as duration, f.path as profileImage " +
             "FROM Appointment a " +
             "JOIN a.patient p " +
             "JOIN a.doctor d " +
             "JOIN d.user u " +
             "JOIN a.procedure pr " +
-            "WHERE p.id = :patientId AND a.date > :dateTime " +
+            "JOIN u.fileMetadataList f " +
+            "WHERE p.id = :patientId AND a.date > :dateTime AND f.type = 'PROFILE_IMAGE' " +
             "ORDER BY a.date " +
             "LIMIT :limit ")
     List<AppointmentNextProjection> findPatientNextAppointments(@Param("patientId") Long patientId, @Param("dateTime") LocalDateTime dateTime, @Param("limit") int limit);

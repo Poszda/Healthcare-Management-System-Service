@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -29,6 +32,9 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Doctor doctor;
+
+    @OneToMany(mappedBy="user",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<FileMetadata> fileMetadataList = new ArrayList<>();
 
     public void addPatient(Patient patient){
         this.patient = patient;
@@ -105,5 +111,13 @@ public class User {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
+    }
+
+    public List<FileMetadata> getFileMetadataList() {
+        return fileMetadataList;
+    }
+
+    public void setFileMetadataList(List<FileMetadata> fileMetadataList) {
+        this.fileMetadataList = fileMetadataList;
     }
 }

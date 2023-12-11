@@ -21,7 +21,7 @@ public interface DiagnosticRepository extends JpaRepository<Diagnostic,Long> {
 
 // A MERS CU NESTED PROJECTION DAR A TREBUIT SA FAC UN ALT CONSTRUCTOR...HMM
 
-    @Query("SELECT new com.hmss.springbootserver.DTOs.appointments.PatientDiagnosticExtendedDTO(d.id, d.name, d.createdAt, u.firstName, u.lastName, dr.id, d.description, a.date, p.name,s.name, h.name) " +
+    @Query("SELECT new com.hmss.springbootserver.DTOs.appointments.PatientDiagnosticExtendedDTO(d.id, d.name, d.createdAt, u.firstName, u.lastName, dr.id, f.path, d.description, a.date, p.name,s.name, h.name) " +
             "FROM Diagnostic d " +
             "JOIN d.appointment a " +
             "JOIN a.procedure p " +
@@ -30,6 +30,7 @@ public interface DiagnosticRepository extends JpaRepository<Diagnostic,Long> {
             "JOIN dr.user u " +
             "JOIN dr.speciality s " +
             "JOIN dr.hospital h " +
+            "LEFT JOIN (SELECT fm.user.id as userId, fm.path as path FROM FileMetadata fm WHERE fm.type = 'PROFILE_IMAGE') f ON u.id = f.userId " +
             "WHERE pt.id = :patientId")
     List<PatientDiagnosticExtendedDTO> findPatientDiagnosticsExtended(@Param("patientId") Long patientId);
 

@@ -1,4 +1,4 @@
-package com.hmss.springbootserver.entities;
+package com.hmss.springbootserver.DTOs.procedure;
 
 import com.hmss.springbootserver.utils.models.projections.ProcedureCounterProjection;
 

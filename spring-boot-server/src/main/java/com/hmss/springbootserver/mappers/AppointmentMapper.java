@@ -1,18 +1,14 @@
 package com.hmss.springbootserver.mappers;
 
-import com.hmss.springbootserver.DTOs.appointments.AppointmentWidgetDTO;
+
+import com.hmss.springbootserver.DTOs.appointments.AppointmentCardDTO;
+import com.hmss.springbootserver.DTOs.appointments.AppointmentNextDTO;
 import com.hmss.springbootserver.DTOs.appointments.MedicationDTO;
-import com.hmss.springbootserver.DTOs.doctor.DoctorDTO;
-import com.hmss.springbootserver.DTOs.doctor.DoctorWithUserAndHospitalAndSpecialityDTO;
-import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
-import com.hmss.springbootserver.DTOs.patient.PatientDTO;
-import com.hmss.springbootserver.DTOs.procedure.ProcedureDTO;
-import com.hmss.springbootserver.DTOs.speciality.SpecialityDTO;
-import com.hmss.springbootserver.DTOs.user.UserDTO;
 import com.hmss.springbootserver.entities.*;
+import com.hmss.springbootserver.utils.models.projections.AppointmentCardProjection;
+import com.hmss.springbootserver.utils.models.projections.AppointmentNextProjection;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
@@ -23,13 +19,24 @@ import java.util.List;
 public interface AppointmentMapper {
     AppointmentMapper INSTANCE = Mappers.getMapper(AppointmentMapper.class);
 
-    @Named("toDoctorWithUserAndHospitalAndSpecialityDTO")
-    DoctorWithUserAndHospitalAndSpecialityDTO toDoctorWithUserAndHospitalAndSpecialityDTO(Doctor doctor);
-
     @Named("toMedicationEntity")
     Medication toMedicationEntity(MedicationDTO medicationDTO);
+
+    @Named("toAppointmentNextDTO")
+    AppointmentNextDTO toAppointmentNextDTO(AppointmentNextProjection appointment);
+
+    @Named("toAppointmentCardDTO")
+    AppointmentCardDTO toAppointmentCardDTO(AppointmentCardProjection appointment);
 
     @Named("toMedicationEntityList")
     @IterableMapping(qualifiedByName = "toMedicationEntity")
     List<Medication> toMedicationEntityList(List<MedicationDTO> medicationDTOs);
+
+    @Named("toAppointmentNextDTOList")
+    @IterableMapping(qualifiedByName = "toAppointmentNextDTO")
+    List<AppointmentNextDTO> toAppointmentNextDTOList(List<AppointmentNextProjection> appointments);
+
+    @Named("toAppointmentCardDTOList")
+    @IterableMapping(qualifiedByName = "toAppointmentCardDTO")
+    List<AppointmentCardDTO> toAppointmentCardDTOList(List<AppointmentCardProjection> appointments);
 }

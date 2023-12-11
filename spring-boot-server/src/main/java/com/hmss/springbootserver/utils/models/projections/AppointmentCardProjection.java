@@ -14,4 +14,5 @@ public interface AppointmentCardProjection {
     float getPrice();
     int getDuration();
     String getDoctorSpeciality();
+    String getProfileImage();
 }

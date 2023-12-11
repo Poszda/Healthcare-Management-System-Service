@@ -1,18 +1,13 @@
 package com.hmss.springbootserver.mappers;
 
-import com.hmss.springbootserver.DTOs.doctor.DoctorDTO;
-import com.hmss.springbootserver.DTOs.doctor.DoctorWithUserAndHospitalDTO;
-import com.hmss.springbootserver.DTOs.doctor.DoctorWithUserAndSpecialityDTO;
-import com.hmss.springbootserver.DTOs.doctor.DoctorWithUserDTO;
+import com.hmss.springbootserver.DTOs.doctor.*;
 import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
 import com.hmss.springbootserver.DTOs.user.UserDTO;
 import com.hmss.springbootserver.entities.Doctor;
 import com.hmss.springbootserver.entities.Hospital;
 import com.hmss.springbootserver.entities.User;
-import org.mapstruct.IterableMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import com.hmss.springbootserver.utils.models.projections.DoctorSearchProjection;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -39,9 +34,15 @@ public interface DoctorMapper {
     @Named("toDoctorWithUserAndSpecialityDTO")
     DoctorWithUserAndSpecialityDTO toDoctorWithUserAndSpecialityDTO(Doctor doctor);
 
+    @Named("toDoctorProfile")
+    DoctorProfileDTO toDoctorProfileDTO(Doctor doctor);
+
     @Named("toDoctorDTOList")
     @IterableMapping(qualifiedByName = "toDoctorDTO")
     List<DoctorDTO> toDoctorDTOList(List<Doctor> doctors);
+
+    @Named("toDoctorSearchDTO")
+    DoctorSearchDto toDoctorDTOList(DoctorSearchProjection doctors);
 
     @Named("toDoctorWithUserDTOList")
     @IterableMapping(qualifiedByName = "toDoctorWithUserDTO")
@@ -53,5 +54,9 @@ public interface DoctorMapper {
     @Named("toDoctorWithUserAndSpecialityDTOList")
     @IterableMapping(qualifiedByName = "toDoctorWithUserAndSpecialityDTO")
     List<DoctorWithUserAndSpecialityDTO> toDoctorWithUserAndSpecialityDTOList(List<Doctor> doctors);
+
+    @Named("toDoctorSearchDTOList")
+    @IterableMapping(qualifiedByName = "toDoctorSearchDTO")
+    List<DoctorSearchDto> toDoctorSearchDTOList(List<DoctorSearchProjection> doctors);
 
 }

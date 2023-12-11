@@ -3,10 +3,13 @@ package com.hmss.springbootserver.controllers;
 import com.hmss.springbootserver.DTOs.doctor.*;
 import com.hmss.springbootserver.DTOs.patient.UpdatePatientProfileRequest;
 import com.hmss.springbootserver.services.UserService;
+import com.hmss.springbootserver.utils.models.projections.DoctorSearchProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -57,7 +60,7 @@ public class UserController {
 
     @GetMapping("/getPatientProfile/{patientId}")
     @CrossOrigin(origins = "*")
-    public Object getPatientProfile(@PathVariable ("patientId") Long patientId){
+    public ResponseEntity<Object> getPatientProfile(@PathVariable ("patientId") Long patientId){
         return this.userService.getPatientProfile(patientId);
     }
     @GetMapping("/getPatient/{patientId}")
@@ -66,24 +69,37 @@ public class UserController {
         return this.userService.getPatient(patientId);
     }
 
-    @PutMapping("/updateDoctorUniversityAndDescription/{doctorId}")
+    @PutMapping("/updateDoctorProfile/{doctorId}")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<Object> updateDoctorUniversityAndDescription(@PathVariable("doctorId") Long doctorId,@RequestBody UpdateDoctorUniversityAndDescriptionRequest request){
-        return this.userService.updateDoctorUniversityAndDescription(doctorId,request);
+    public ResponseEntity<Object> updateDoctorProfile(@PathVariable("doctorId") Long doctorId,
+                                                      @RequestParam(value="profileImage",required = false) MultipartFile profileImage,
+                                                      @RequestParam("university") String university,
+                                                      @RequestParam("description") String description){
+        return this.userService.updateDoctorProfile(doctorId,profileImage,university,description);
     }
 
     @PutMapping("/updatePatientProfile/{patientId}")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<Object> updatePatientProfile(@PathVariable("patientId") Long patientId,@RequestBody UpdatePatientProfileRequest request){
-        return this.userService.updatePatientProfile(patientId,request);
+    public ResponseEntity<Object> updatePatientProfile(@PathVariable("patientId") Long patientId,
+                                                       @RequestParam("firstName") String firstName,
+                                                       @RequestParam("lastName") String lastName,
+                                                       @RequestParam("height") String heightStr,
+                                                       @RequestParam("weight") String weightStr,
+                                                       @RequestParam("bloodType") String bloodType,
+                                                       @RequestParam("phone") String phone,
+                                                       @RequestParam("birthDate") LocalDate birthDate,
+                                                       @RequestParam(value="profileImage",required = false) MultipartFile profileImage){
+
+        Integer height = heightStr.equals("") ? null : Integer.valueOf(heightStr);
+        Integer weight = weightStr.equals("") ? null : Integer.valueOf(weightStr);
+        return this.userService.updatePatientProfile(patientId,firstName,lastName,height,weight,bloodType,phone,birthDate,profileImage);
     }
 
     @PostMapping("/getSearchedDoctors")
     @CrossOrigin(origins = "*")
-    public List<DoctorWithUserDTO> getSearchedDoctors(@RequestBody SearchDataRequest data){
-        String name = data.getName();
+    public List<DoctorSearchDto> getSearchedDoctors(@RequestBody SearchDataRequest data){
         Long specialityId = data.getSpecialityId();
-        if(data.getName() == "") name = null;
+        String name = data.getName() == "" ?null:data.getName();
         return this.userService.getSearchedDoctors(name,specialityId);
     }
 

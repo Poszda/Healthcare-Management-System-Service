@@ -1,10 +1,6 @@
 package com.hmss.springbootserver.DTOs.appointments;
 
-import com.hmss.springbootserver.enums.AppointmentStatus;
-import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentProjection;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class DoctorAppointmentDTO {
@@ -19,11 +15,12 @@ public class DoctorAppointmentDTO {
     private String phone;
     private Integer age;
     private String status;
+    private String profileImage;
 
     public DoctorAppointmentDTO() {
     }
 
-    public DoctorAppointmentDTO(Long id, Integer duration, LocalDate date, LocalTime time, String procedureName, Long patientId, String lastName, String firstName, String phone, Integer age, String status) {
+    public DoctorAppointmentDTO(Long id, Integer duration, LocalDate date, LocalTime time, String procedureName, Long patientId, String lastName, String firstName, String phone, Integer age, String status, String profileImage) {
         this.id = id;
         this.duration = duration;
         this.date = date;
@@ -35,6 +32,7 @@ public class DoctorAppointmentDTO {
         this.phone = phone;
         this.age = age;
         this.status = status;
+        this.profileImage = profileImage;
     }
 
     public Long getId() {
@@ -123,5 +121,13 @@ public class DoctorAppointmentDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }

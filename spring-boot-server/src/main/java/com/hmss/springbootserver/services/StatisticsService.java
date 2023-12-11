@@ -3,7 +3,7 @@ package com.hmss.springbootserver.services;
 import com.hmss.springbootserver.DTOs.appointments.TodayProgramDTO;
 import com.hmss.springbootserver.DTOs.statistics.*;
 import com.hmss.springbootserver.entities.Doctor;
-import com.hmss.springbootserver.entities.ProcedureCounterDTO;
+import com.hmss.springbootserver.DTOs.procedure.ProcedureCounterDTO;
 import com.hmss.springbootserver.enums.AppointmentStatus;
 import com.hmss.springbootserver.repositories.*;
 import com.hmss.springbootserver.utils.models.projections.*;
