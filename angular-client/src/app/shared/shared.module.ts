@@ -33,6 +33,7 @@ import { ProfileMedicalHistoryComponent } from './components/profile-medical-his
 import { ProfileTreatmentsHistoryComponent } from './components/profile-treatments-history/profile-treatments-history.component';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { UploadFileComponent } from './components/upload-file/upload-file.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ProfileInformationCardComponent,
     ProfileMedicalHistoryComponent,
     ProfileTreatmentsHistoryComponent,
+    UploadFileComponent,
   ],
   imports: [
     CommonModule,
@@ -62,6 +64,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     CalendarModule,
     InputTextModule,
     InputTextareaModule,
+    InputNumberModule,
     AutoCompleteModule,
     ToastModule,
     TableModule,
@@ -86,6 +89,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     CalendarModule,
     InputTextModule,
     InputTextareaModule,
+    InputNumberModule,
     AutoCompleteModule,
     RadioButtonModule,
     ToastModule,
@@ -103,6 +107,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ProfileInformationCardComponent,
     ProfileMedicalHistoryComponent,
     ProfileTreatmentsHistoryComponent,
+    UploadFileComponent
   ]
 })
 export class SharedModule { }

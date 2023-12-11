@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DoctorSearch } from 'src/app/patient/models/doctor-search.model';
 import { SpecialitiesService } from 'src/app/patient/services/specialities.service';
 import { UserService } from 'src/app/patient/services/user.service';
 
@@ -9,7 +10,7 @@ import { UserService } from 'src/app/patient/services/user.service';
 })
 export class DoctorsWidgetComponent implements OnInit {
   specialities: any[] = []
-  doctors : any[] = []
+  doctors : DoctorSearch[] = []
   notice = false;
 
 

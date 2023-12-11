@@ -9,7 +9,9 @@
     <div class="bottom">
         <div class="text">
             <p class="profile-name">{{summary?.name}}</p>
-            <p *ngFor="let row of summary?.rows" class="subtitle">{{row}}</p>
+            <ng-container *ngFor="let row of summary?.rows">
+                <p *ngIf="row" class="subtitle">{{row}}</p>
+            </ng-container>
         </div>
     </div>
 </div>

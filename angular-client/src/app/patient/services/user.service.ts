@@ -1,6 +1,9 @@
+import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 import { Patient } from 'src/app/core/models/patient.model';
+import { DoctorSearch } from '../models/doctor-search.model';
 
 @Injectable()
 export class UserService {
@@ -28,11 +31,21 @@ export class UserService {
   }
 
   updatePatientProfile(patientId : number,data : any){
-    return this.http.put<any>(`http://localhost:8080/api/users/updatePatientProfile/${patientId}`,data);
+    const formData: FormData = new FormData();
+    formData.append('firstName',data.firstName != null?data.firstName:'')
+    formData.append('lastName',data.lastName != null?data.lastName:'')
+    formData.append('height',data.height != null?data.height:'')
+    formData.append('weight',data.weight != null?data.weight:'')
+    formData.append('bloodType',data.bloodType != null?data.bloodType:'')
+    formData.append('phone',data.phone != null ?data.phone:'')
+    formData.append('birthDate',data.birthDate != null ? moment(data.birthDate).format('YYYY-MM-DD'):'')
+    formData.append('profileImage',data.profileImage != null ?data.profileImage:'')
+
+   return this.http.put<any>(`http://localhost:8080/api/users/updatePatientProfile/${patientId}`,formData);
   }
 
   getSearchedDoctors(data : any){
-    return this.http.post<any>(`http://localhost:8080/api/users/getSearchedDoctors`,data);
+    return this.http.post<DoctorSearch[]>(`http://localhost:8080/api/users/getSearchedDoctors`,data);
   }
   
 }

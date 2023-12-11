@@ -4,8 +4,9 @@
     <textarea rows="5" cols="30" [maxlength]="maxlength" formControlName="description" pInputTextarea
         [placeholder]="'Please provide a brief summary ' + '(max ' + maxlength + ' characters) of your professional background, areas of expertise, and any additional relevant medical information....'"
         style="width: 100%;"></textarea>
+    <app-upload-file buttonMessage="Upload image" (fileUpload)="onFileUpload($event)"></app-upload-file>
     <div class="buttons">
-        <button type="submit" class="basic-button primary" style="width: 80px;height: 40px; margin-top: 10px;"
+        <button type="submit" class="basic-button primary" style="width: 80px;height: 40px;"
             [disabled]="form.invalid">Save</button>
     </div>
 </form>

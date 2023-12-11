@@ -15,13 +15,19 @@ export class EditProfileFormComponent{
   }
 
   form: FormGroup = new FormGroup({
-    university: new FormControl(this.data.university),
-    description: new FormControl(this.data.description),
+    university: new FormControl(this.data.university || ''),
+    description: new FormControl(this.data.description|| ''),
+    profileImage: new FormControl(null)
   });
 
   edit() {
-    console.log(this.form.get('description')?.value?.length)
+    console.log(this.form.getRawValue())
+    this.form.get('description')
     this.dialogRef.close(this.form.getRawValue())
+  }
+
+  onFileUpload($data : File){
+    this.form.get('profileImage')?.setValue($data);
   }
 
 }

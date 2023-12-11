@@ -38,7 +38,6 @@ export class AccountProfileComponent implements OnInit {
   getDoctorProfile(){
     this.userGlobalService.getDoctorProfile(this.doctorId).subscribe(
       res =>{
-        console.log(res);
         this.locationInformation = this.obtainLocationInformation(res);
         this.programAndContactInformation = this.obtainProgramAndContact(res);
         this.summary = this.obtainSummary(res);
@@ -135,8 +134,8 @@ export class AccountProfileComponent implements OnInit {
     }).afterClosed().subscribe(
       data =>{
         if(data){
-          console.log(data)
-          this.doctorService.updateDoctorUniversityAndDescription(this.doctorId,data).subscribe(
+          console.log(data,'totul')
+          this.doctorService.updateDoctorProfile(this.doctorId,data).subscribe(
             res =>{
               console.log(res)
               this.description = res.description

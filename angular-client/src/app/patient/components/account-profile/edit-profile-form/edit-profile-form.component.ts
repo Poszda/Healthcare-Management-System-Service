@@ -10,6 +10,7 @@ import { BloodType } from 'src/app/shared/models/blood-type.enum';
   styleUrls: ['./edit-profile-form.component.css']
 })
 export class EditProfileFormComponent {
+
   constructor(public dialogRef: MatDialogRef<EditProfileFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {}) {
       this.form.patchValue(data)
@@ -28,9 +29,14 @@ export class EditProfileFormComponent {
     bloodType: new FormControl(null),
     phone: new FormControl(null,),
     birthDate: new FormControl(null, Validators.required),
+    profileImage: new FormControl(null)
   });
 
   edit() {
     this.dialogRef.close(this.form.getRawValue())
+  }
+
+  onFileUpload($data: File) {
+    this.form.get('profileImage')?.setValue($data);
   }
 }

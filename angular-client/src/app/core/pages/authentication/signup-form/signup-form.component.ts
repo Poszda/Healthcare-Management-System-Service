@@ -34,9 +34,6 @@ export class SignupFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    setInterval(()=>{
-      console.log(this.rePassword?.errors,'rePass')
-    },5000)
   }
 
   signUp() {
