@@ -13,14 +13,6 @@ import java.util.List;
 @Repository
 public interface DiagnosticRepository extends JpaRepository<Diagnostic,Long> {
 
-//    @Query("SELECT new com.hmss.springbootserver.DTOs.appointments.PatientDiagnosticExtendedDTO(d.id, d.name, d.description, m.id, m.name, m.numberOfDays, m.dose) " +
-//            "FROM Diagnostic d " +
-//            "LEFT JOIN d.medications m " +
-//            "WHERE d.id = 1")
-//    PatientDiagnosticExtendedDTO anExampleMethod();
-
-// A MERS CU NESTED PROJECTION DAR A TREBUIT SA FAC UN ALT CONSTRUCTOR...HMM
-
     @Query("SELECT new com.hmss.springbootserver.DTOs.appointments.PatientDiagnosticExtendedDTO(d.id, d.name, d.createdAt, u.firstName, u.lastName, dr.id, f.path, d.description, a.date, p.name,s.name, h.name) " +
             "FROM Diagnostic d " +
             "JOIN d.appointment a " +

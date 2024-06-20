@@ -1,15 +1,11 @@
 package com.hmss.springbootserver.services;
 
 import com.hmss.springbootserver.DTOs.doctor.*;
-import com.hmss.springbootserver.DTOs.files.FileMetadataDTO;
 import com.hmss.springbootserver.DTOs.patient.PatientProfileDTO;
-import com.hmss.springbootserver.DTOs.patient.PatientWithUserWithFileMetadataDTO;
-import com.hmss.springbootserver.DTOs.patient.UpdatePatientProfileRequest;
-import com.hmss.springbootserver.DTOs.user.UserWithFileMetadataDTO;
+import com.hmss.springbootserver.DTOs.patient.PatientWithUserDTO;
 import com.hmss.springbootserver.entities.*;
 import com.hmss.springbootserver.enums.AppFileType;
 import com.hmss.springbootserver.enums.UserType;
-import com.hmss.springbootserver.mappers.AppointmentMapper;
 import com.hmss.springbootserver.mappers.DoctorMapper;
 import com.hmss.springbootserver.mappers.PatientMapper;
 import com.hmss.springbootserver.repositories.*;
@@ -37,6 +33,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final DiagnosticRepository diagnosticRepository;
     private final MedicationRepository medicationRepository;
+    private final FileMetadataRepository fileMetadataRepository;
     private final FileService fileService;
 
     public UserService(DoctorRepository doctorRepository, PatientRepository patientRepository, AdminRepository adminRepository,
@@ -45,7 +42,7 @@ public class UserService {
                        UserRepository userRepository,
                        DiagnosticRepository diagnosticRepository,
                        MedicationRepository medicationRepository,
-                       FileService fileService) {
+                       FileMetadataRepository fileMetadataRepository, FileService fileService) {
         this.doctorRepository = doctorRepository;
         this.patientRepository = patientRepository;
         this.adminRepository = adminRepository;
@@ -54,6 +51,7 @@ public class UserService {
         this.userRepository = userRepository;
         this.diagnosticRepository = diagnosticRepository;
         this.medicationRepository = medicationRepository;
+        this.fileMetadataRepository = fileMetadataRepository;
         this.fileService = fileService;
     }
 
@@ -62,9 +60,10 @@ public class UserService {
         return DoctorMapper.INSTANCE.toDoctorDTOList(doctors);
     }
 
-    public List<DoctorWithUserAndHospitalDTO> getDoctorsWithUsersAndHospitalsById(List<Long> ids) {
-        List<Doctor> doctors = this.doctorRepository.findAllById(ids);
-        return DoctorMapper.INSTANCE.toDoctorWithUserAndHospitalDTOList(doctors);
+    public List<DoctorSuggestionInfoDTO> getDoctorsSuggestionInfo(List<Long> ids) {
+        List<DoctorSuggestionInfoDTO> doctors = DoctorMapper.INSTANCE.toDoctorSuggestionInfoDTOList(doctorRepository.findDoctorsSuggestionInfo(ids));
+        doctors.stream().forEach(el -> el.setProfileImage(fileService.getFullPath(el.getProfileImage())));
+        return doctors;
     }
 
     public List<DoctorWithUserAndSpecialityDTO> getHospitalDoctorsWithSpeciality(Long hospitalId) {
@@ -111,11 +110,14 @@ public class UserService {
     }
 
     public ResponseEntity<Object> getDoctorProfile(Long doctorId) {
-        Optional<Doctor> doctorOptional = doctorRepository.findDoctorAndProfileImage(doctorId);
+        Optional<Doctor> doctorOptional = doctorRepository.findById(doctorId);
         if(doctorOptional.isEmpty())  return new ResponseEntity<>("Doctor not found", HttpStatus.NOT_FOUND);
-        DoctorProfileDTO doctorProfileDTO = DoctorMapper.INSTANCE.toDoctorProfileDTO(doctorOptional.get());
-        updateUserProfileImageLink(doctorProfileDTO.getUser());
-        return new ResponseEntity<>(doctorProfileDTO,HttpStatus.OK);
+        String profileImagePath = this.fileMetadataRepository.findByUserIdAndType(doctorOptional.get().getUser().getId(),AppFileType.PROFILE_IMAGE)
+                .map(FileMetadata::getPath)
+                .orElse(null);
+
+        DoctorProfileDTO doctorDTO = DoctorMapper.INSTANCE.toDoctorProfileDTO(doctorOptional.get(), this.fileService.getFullPath(profileImagePath));
+        return new ResponseEntity<>(doctorDTO,HttpStatus.OK);
     }
 
     public ResponseEntity<Object> updateDoctorProfile(Long doctorId, MultipartFile profileImage, String university, String description) {
@@ -126,22 +128,28 @@ public class UserService {
         doctor.setUniversity(university);
         try {
             if(profileImage != null) {
-                this.fileService.saveFileAndMetadata(profileImage,doctor.getUser(), AppFileType.PROFILE_IMAGE,true);
+               this.fileService.saveFileAndMetadata(profileImage,doctor.getUser(), AppFileType.PROFILE_IMAGE,true);
             }
             Doctor updatedDoctor = this.doctorRepository.save(doctor);
-            return new ResponseEntity<>(new UpdateDoctorUniversityAndDescriptionRequest(updatedDoctor.getUniversity(), updatedDoctor.getDescription(), null), HttpStatus.OK);
+            String profileImagePath = this.fileMetadataRepository.findByUserIdAndType(updatedDoctor.getUser().getId(), AppFileType.PROFILE_IMAGE)
+                    .map(FileMetadata::getPath)
+                    .orElse(null);
+            return new ResponseEntity<>(new UpdatedDoctorProfile(updatedDoctor.getUniversity(), updatedDoctor.getDescription(), this.fileService.getFullPath(profileImagePath)), HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<>("Failed to update doctor profile picture: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     public ResponseEntity<Object> getPatientProfile(Long patientId) {
-        Optional<Patient> patientOptional = this.patientRepository.findPatientAndProfileImage(patientId);
+        Optional<Patient> patientOptional = this.patientRepository.findById(patientId);
         if(patientOptional.isEmpty())  return new ResponseEntity<>("Patient not found", HttpStatus.NOT_FOUND);
         Patient patient = patientOptional.get();
 
-        PatientWithUserWithFileMetadataDTO patientDTO = PatientMapper.INSTANCE.toPatientWithUserWithFileMetadataDTO(patient);
-        updateUserProfileImageLink(patientDTO.getUser());
+        PatientWithUserDTO patientDTO = PatientMapper.INSTANCE.toPatientWithUserDTO(patient);
+        String fileMetadata = this.fileMetadataRepository.findByUserIdAndType(patient.getUser().getId(),AppFileType.PROFILE_IMAGE)
+                .map(FileMetadata::getPath)
+                .orElse(null);
+
         List<String> diagnosticsName = this.diagnosticRepository.findPatientDiagnosticsName(patientId,LocalDate.now().minusMonths(6));
         List<String> medicationsName3Months = this.medicationRepository.findPatientMedicationsName(patientId,LocalDate.now().minusMonths(3),LocalDate.now());
         List<String> medicationsName6Months = this.medicationRepository.findPatientMedicationsName(patientId,LocalDate.now().minusMonths(6),LocalDate.now().minusMonths(3));
@@ -150,7 +158,8 @@ public class UserService {
                 patientDTO,
                 diagnosticsName,
                 medicationsName3Months,
-                medicationsName6Months
+                medicationsName6Months,
+                this.fileService.getFullPath(fileMetadata)
         );
 
         return new ResponseEntity<>(patientProfile,HttpStatus.OK);
@@ -182,28 +191,21 @@ public class UserService {
 
     }
 
-    public ResponseEntity<Object> getPatient(Long patientId) {
+    public ResponseEntity<Object> getPatientBio(Long patientId) {
         Optional<Patient> patientOptional = this.patientRepository.findById(patientId);
         if(patientOptional.isEmpty()) return new ResponseEntity<>("Patient not found", HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(PatientMapper.INSTANCE.toPatientDTO(patientOptional.get()),HttpStatus.OK);
+        String profileImagePath = this.fileMetadataRepository.findByUserIdAndType(patientOptional.get().getUser().getId(),AppFileType.PROFILE_IMAGE).map(FileMetadata::getPath).orElse(null);
+        return new ResponseEntity<>(PatientMapper.INSTANCE.toPatientBioDTO(patientOptional.get(),this.fileService.getFullPath(profileImagePath)),HttpStatus.OK);
     }
 
-    public List<DoctorSearchDto> getSearchedDoctors(String name,Long specialityId) {
+    public List<DoctorSearchDTO> getSearchedDoctors(String name, Long specialityId) {
         List<DoctorSearchProjection> list = this.doctorRepository.findSearchedDoctors(name,specialityId);
-        List<DoctorSearchDto> listDTO = DoctorMapper.INSTANCE.toDoctorSearchDTOList(list).stream()
+        List<DoctorSearchDTO> listDTO = DoctorMapper.INSTANCE.toDoctorSearchDTOList(list).stream()
                 .map(el ->{
                     el.setProfileImage(fileService.getFullPath(el.getProfileImage()));
                     return el;
                 }).collect(Collectors.toList());
 
         return listDTO;
-    }
-
-    private void updateUserProfileImageLink(UserWithFileMetadataDTO user){
-        Optional<FileMetadataDTO> profileImageOptional =  user.getFileMetadataList().stream().filter(el -> AppFileType.PROFILE_IMAGE == el.getType()).findFirst();
-        if(profileImageOptional.isPresent()){
-            FileMetadataDTO profileImage = profileImageOptional.get();
-            profileImage.setPath(fileService.getFullPath(profileImage.getPath()));
-        }
     }
 }

@@ -1,6 +1,8 @@
 package com.hmss.springbootserver.repositories;
 
+import com.hmss.springbootserver.entities.Doctor;
 import com.hmss.springbootserver.entities.Hospital;
+import com.hmss.springbootserver.entities.User;
 import com.hmss.springbootserver.utils.models.projections.AppointmentStatisticProjection;
 import com.hmss.springbootserver.utils.models.projections.SpecialityFrequencyProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,15 +18,22 @@ public interface HospitalRepository extends JpaRepository<Hospital,Long> {
     @Query("SELECT DISTINCT h.county FROM Hospital h")
     List<String> findAllCounties();
 
+    //you cannot fetch multiple collections (except sets) - MultipleBagFetchException
     @Query("SELECT h from Hospital h " +
             "JOIN h.procedureSet p " +
             "JOIN p.speciality s " +
-            "JOIN FETCH h.doctors d " +
+            "JOIN h.doctors d " +
             "JOIN d.user u " +
-            "JOIN u.fileMetadataList f " +
             "JOIN d.speciality sd " +
-            "WHERE h.county IN (:counties) AND p.id = :procedureId AND s.id = sd.id AND f.type = 'PROFILE_IMAGE' ")
-    List<Hospital> findPossibleHospitalsAndDoctorsForAppointments(@Param("counties") List<String> counties,@Param("procedureId") long procedureId);
+            "WHERE h.county IN (:counties) AND p.id = :procedureId AND s.id = sd.id")
+    List<Hospital> findHospitalOptions(@Param("counties") List<String> counties,@Param("procedureId") long procedureId);
+
+
+//    @Query("SELECT h from Hospital h " +
+//            "JOIN h.procedureSet p " +
+//            "WHERE h.id= 1 AND p.id BETWEEN 1 AND 4")
+//    Hospital findNeededProcedures();
+
 
     @Query("SELECT COUNT(a) FROM Appointment a " +
             "JOIN a.doctor.hospital h " +

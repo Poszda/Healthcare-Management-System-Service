@@ -1,9 +1,8 @@
 package com.hmss.springbootserver.controllers;
 
 import com.hmss.springbootserver.DTOs.doctor.*;
-import com.hmss.springbootserver.DTOs.patient.UpdatePatientProfileRequest;
 import com.hmss.springbootserver.services.UserService;
-import com.hmss.springbootserver.utils.models.projections.DoctorSearchProjection;
+import com.hmss.springbootserver.utils.models.projections.DoctorSuggestionInfoProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +27,10 @@ public class UserController {
         return this.userService.getDoctorsById(ids);
     }
 
-    @GetMapping("/getDoctorsWithUsersAndHospitalsById/{ids}")
+    @GetMapping("/getDoctorsSuggestionInfo/{ids}")
     @CrossOrigin(origins = "*")
-    public List<DoctorWithUserAndHospitalDTO> getDoctorsWithUsersAndHospitalsById(@PathVariable ("ids") List<Long> ids){
-        return this.userService.getDoctorsWithUsersAndHospitalsById(ids);
+    public List<DoctorSuggestionInfoDTO> getDoctorsSuggestionInfo(@PathVariable ("ids") List<Long> ids){
+        return this.userService.getDoctorsSuggestionInfo(ids);
     }
 
     @GetMapping("/getHospitalDoctorsWithSpeciality/{hospitalId}")
@@ -63,10 +62,10 @@ public class UserController {
     public ResponseEntity<Object> getPatientProfile(@PathVariable ("patientId") Long patientId){
         return this.userService.getPatientProfile(patientId);
     }
-    @GetMapping("/getPatient/{patientId}")
+    @GetMapping("/getPatientBio/{patientId}")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<Object> getPatient(@PathVariable ("patientId") Long patientId){
-        return this.userService.getPatient(patientId);
+    public ResponseEntity<Object> getPatientBio(@PathVariable ("patientId") Long patientId){
+        return this.userService.getPatientBio(patientId);
     }
 
     @PutMapping("/updateDoctorProfile/{doctorId}")
@@ -97,7 +96,7 @@ public class UserController {
 
     @PostMapping("/getSearchedDoctors")
     @CrossOrigin(origins = "*")
-    public List<DoctorSearchDto> getSearchedDoctors(@RequestBody SearchDataRequest data){
+    public List<DoctorSearchDTO> getSearchedDoctors(@RequestBody SearchDataRequest data){
         Long specialityId = data.getSpecialityId();
         String name = data.getName() == "" ?null:data.getName();
         return this.userService.getSearchedDoctors(name,specialityId);

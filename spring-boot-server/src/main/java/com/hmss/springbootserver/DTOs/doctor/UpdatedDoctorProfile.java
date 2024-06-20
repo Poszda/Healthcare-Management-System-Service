@@ -1,17 +1,17 @@
 package com.hmss.springbootserver.DTOs.doctor;
-import org.springframework.web.multipart.MultipartFile;
-public class UpdateDoctorUniversityAndDescriptionRequest {
+
+public class UpdatedDoctorProfile {
     private String university;
     private String description;
     private String profileImage;
 
-    public UpdateDoctorUniversityAndDescriptionRequest(String university, String description, String profileImage) {
+    public UpdatedDoctorProfile(String university, String description, String profileImage) {
         this.university = university;
         this.description = description;
         this.profileImage = profileImage;
     }
 
-    public UpdateDoctorUniversityAndDescriptionRequest() {
+    public UpdatedDoctorProfile() {
     }
 
     public String getUniversity() {

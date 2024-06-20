@@ -14,6 +14,4 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User,Long> {
     Optional<User> findByEmail(String email);
 
-    @Query("SELECT u FROM User u JOIN FETCH u.fileMetadataList f WHERE u.id = :userId AND f.type = 'PROFILE_IMAGE'")
-    Optional<User> findUserAndProfileImage(@Param("userId") int userId);
 }

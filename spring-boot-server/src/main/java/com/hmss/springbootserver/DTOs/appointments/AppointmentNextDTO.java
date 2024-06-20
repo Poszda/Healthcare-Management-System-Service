@@ -3,67 +3,67 @@ package com.hmss.springbootserver.DTOs.appointments;
 import java.time.LocalDateTime;
 
 public class AppointmentNextDTO {
-    String FirstName;
-    String LastName;
-    LocalDateTime DateTime;
-    int Duration;
-    Long OtherId;
-    Long Id;
-    String ProfileImage;
+    String firstName;
+    String lastName;
+    LocalDateTime dateTime;
+    int duration;
+    Long otherId;
+    Long id;
+    String profileImage;
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
-        FirstName = firstName;
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     public LocalDateTime getDateTime() {
-        return DateTime;
+        return dateTime;
     }
 
     public void setDateTime(LocalDateTime dateTime) {
-        DateTime = dateTime;
+        this.dateTime = dateTime;
     }
 
     public int getDuration() {
-        return Duration;
+        return duration;
     }
 
     public void setDuration(int duration) {
-        Duration = duration;
+        this.duration = duration;
     }
 
     public Long getOtherId() {
-        return OtherId;
+        return otherId;
     }
 
     public void setOtherId(Long otherId) {
-        OtherId = otherId;
+        this.otherId = otherId;
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getProfileImage() {
-        return ProfileImage;
+        return profileImage;
     }
 
     public void setProfileImage(String profileImage) {
-        ProfileImage = profileImage;
+        this.profileImage = profileImage;
     }
 }

@@ -1,8 +1,8 @@
 package com.hmss.springbootserver.mappers;
 
+import com.hmss.springbootserver.DTOs.patient.PatientBioDTO;
 import com.hmss.springbootserver.DTOs.patient.PatientDTO;
 import com.hmss.springbootserver.DTOs.patient.PatientWithUserDTO;
-import com.hmss.springbootserver.DTOs.patient.PatientWithUserWithFileMetadataDTO;
 import com.hmss.springbootserver.entities.Patient;
 import com.hmss.springbootserver.entities.User;
 import org.mapstruct.Mapper;
@@ -19,9 +19,10 @@ public interface PatientMapper {
     @Mapping(source = "user.id", target = "userId")
     PatientDTO toPatientDTO(Patient patient);
 
+    @Named("toPatientBioDTO")
+    @Mapping(source = "profileImage", target = "profileImage")
+    PatientBioDTO toPatientBioDTO(Patient patient, String profileImage);
+
     @Named("toPatientWithUserDTO")
     PatientWithUserDTO toPatientWithUserDTO(Patient patient);
-
-    @Named("toPatientWithUserWithFileMetadataDTO")
-    PatientWithUserWithFileMetadataDTO toPatientWithUserWithFileMetadataDTO(Patient patient);
 }

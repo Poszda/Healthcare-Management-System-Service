@@ -1,12 +1,9 @@
 package com.hmss.springbootserver.mappers;
 
 import com.hmss.springbootserver.DTOs.doctor.*;
-import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
-import com.hmss.springbootserver.DTOs.user.UserDTO;
 import com.hmss.springbootserver.entities.Doctor;
-import com.hmss.springbootserver.entities.Hospital;
-import com.hmss.springbootserver.entities.User;
 import com.hmss.springbootserver.utils.models.projections.DoctorSearchProjection;
+import com.hmss.springbootserver.utils.models.projections.DoctorSuggestionInfoProjection;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -22,10 +19,6 @@ public interface DoctorMapper {
     @Mapping(source = "hospital.id", target = "hospitalId")
     DoctorDTO toDoctorDTO(Doctor doctor);
 
-    @Named("toDoctorWithUserAndHospitalDTO")
-    @Mapping(source = "user.doctor.id", target = "user.doctorId")
-    DoctorWithUserAndHospitalDTO toDoctorWithUserAndHospitalDTO(Doctor doctor);
-
     @Named("toDoctorWithUserDTO")
     @Mapping(source = "hospital.id", target = "hospitalId")
     @Mapping(source = "user.doctor.id", target = "user.doctorId")
@@ -35,21 +28,22 @@ public interface DoctorMapper {
     DoctorWithUserAndSpecialityDTO toDoctorWithUserAndSpecialityDTO(Doctor doctor);
 
     @Named("toDoctorProfile")
-    DoctorProfileDTO toDoctorProfileDTO(Doctor doctor);
+    @Mapping(source = "profileImage", target = "profileImage")
+    DoctorProfileDTO toDoctorProfileDTO(Doctor doctor, String profileImage);
+
+    @Named("toDoctorSearchDTO")
+    DoctorSearchDTO toDoctorSearchDTO(DoctorSearchProjection doctor);
+
+    @Named("toDoctorSuggestionInfoDTO")
+    DoctorSuggestionInfoDTO toDoctorSuggestionInfoDTO(DoctorSuggestionInfoProjection doctor);
 
     @Named("toDoctorDTOList")
     @IterableMapping(qualifiedByName = "toDoctorDTO")
     List<DoctorDTO> toDoctorDTOList(List<Doctor> doctors);
 
-    @Named("toDoctorSearchDTO")
-    DoctorSearchDto toDoctorDTOList(DoctorSearchProjection doctors);
-
     @Named("toDoctorWithUserDTOList")
     @IterableMapping(qualifiedByName = "toDoctorWithUserDTO")
     List<DoctorWithUserDTO> toDoctorWithUserDTOList(List<Doctor> doctor);
-    @Named("toDoctorWithUserAndHospitalDTOList")
-    @IterableMapping(qualifiedByName = "toDoctorWithUserAndHospitalDTO")
-    List<DoctorWithUserAndHospitalDTO> toDoctorWithUserAndHospitalDTOList(List<Doctor> doctor);
 
     @Named("toDoctorWithUserAndSpecialityDTOList")
     @IterableMapping(qualifiedByName = "toDoctorWithUserAndSpecialityDTO")
@@ -57,6 +51,8 @@ public interface DoctorMapper {
 
     @Named("toDoctorSearchDTOList")
     @IterableMapping(qualifiedByName = "toDoctorSearchDTO")
-    List<DoctorSearchDto> toDoctorSearchDTOList(List<DoctorSearchProjection> doctors);
+    List<DoctorSearchDTO> toDoctorSearchDTOList(List<DoctorSearchProjection> doctors);
 
+    @Named("toDoctorSuggestionInfoDTOList")
+    List<DoctorSuggestionInfoDTO> toDoctorSuggestionInfoDTOList(List<DoctorSuggestionInfoProjection> doctors);
 }

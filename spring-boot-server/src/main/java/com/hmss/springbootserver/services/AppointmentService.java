@@ -1,10 +1,11 @@
 package com.hmss.springbootserver.services;
 
 import com.hmss.springbootserver.DTOs.appointments.*;
-import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
+import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
 import com.hmss.springbootserver.entities.*;
 import com.hmss.springbootserver.enums.AppointmentStatus;
 import com.hmss.springbootserver.mappers.AppointmentMapper;
+import com.hmss.springbootserver.mappers.DoctorMapper;
 import com.hmss.springbootserver.mappers.HospitalMapper;
 import com.hmss.springbootserver.repositories.*;
 import com.hmss.springbootserver.utils.models.AppointmentSimplified;
@@ -57,9 +58,14 @@ public class AppointmentService {
         this.fileService = fileService;
     }
 
-    public List<HospitalWithDoctorsDTO> getHospitalsAndDoctorsRecommendations(List<String> counties, long procedureId){
-         List<Hospital> hospitals = this.hospitalRepository.findPossibleHospitalsAndDoctorsForAppointments(counties,procedureId);
-        return HospitalMapper.INSTANCE.toHospitalWithDoctorsDTOList(hospitals);
+    public AppointmentOptionalsDTO getAppointmentOptionals(List<String> counties, long procedureId){
+         List<Hospital> hospitals = this.hospitalRepository.findHospitalOptions(counties,procedureId);
+         List<Long> hospitalIds = hospitals.stream().map(el -> el.getId()).collect(Collectors.toList());
+         List<Doctor> doctors = this.doctorRepository.findDoctorOptions(hospitalIds,procedureId);
+         AppointmentOptionalsDTO result = new AppointmentOptionalsDTO();
+         result.setHospitals(HospitalMapper.INSTANCE.toHospitalDTOList(hospitals));
+         result.setDoctors(DoctorMapper.INSTANCE.toDoctorWithUserDTOList(doctors));
+         return result;
     }
 
     public List<AppointmentCardDTO> getAppointmentsCards(Long patientId){
@@ -299,8 +305,13 @@ public class AppointmentService {
         return diagnostics;
     }
 
-    public List<AppointmentNextProjection> getDoctorTodayNextAppointments(Long doctorId) {
-        return this.appointmentRepository.findDoctorTodayAppointments(doctorId,LocalDateTime.now(),10);
+    public List<AppointmentNextDTO> getDoctorTodayNextAppointments(Long doctorId) {
+        var list = this.appointmentRepository.findDoctorTodayAppointments(doctorId,LocalDateTime.now(),10);
+        List<AppointmentNextDTO> result = AppointmentMapper.INSTANCE.toAppointmentNextDTOList(list).stream().map(el -> {
+            el.setProfileImage(fileService.getFullPath(el.getProfileImage()));
+            return el;
+        }).collect(Collectors.toList());
+        return result;
     }
 
     public List<AppointmentNextDTO> getPatientNextAppointments(Long patientId) {

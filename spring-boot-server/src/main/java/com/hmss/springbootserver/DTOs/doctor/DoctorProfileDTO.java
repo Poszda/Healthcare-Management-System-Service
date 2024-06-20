@@ -2,6 +2,7 @@ package com.hmss.springbootserver.DTOs.doctor;
 
 import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
 import com.hmss.springbootserver.DTOs.speciality.SpecialityDTO;
+import com.hmss.springbootserver.DTOs.user.UserDTO;
 import com.hmss.springbootserver.DTOs.user.UserNoPasswordDTO;
 import com.hmss.springbootserver.DTOs.user.UserWithFileMetadataDTO;
 
@@ -13,9 +14,10 @@ public class DoctorProfileDTO {
     private String description;
     private LocalTime programStart;
     private LocalTime programEnd;
-    private UserWithFileMetadataDTO user;
+    private UserDTO user;
     private HospitalDTO hospital;
     private SpecialityDTO speciality;
+    private String profileImage;
 
     public Long getId() {
         return id;
@@ -57,11 +59,11 @@ public class DoctorProfileDTO {
         this.programEnd = programEnd;
     }
 
-    public UserWithFileMetadataDTO getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(UserWithFileMetadataDTO user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
@@ -79,5 +81,13 @@ public class DoctorProfileDTO {
 
     public void setSpeciality(SpecialityDTO speciality) {
         this.speciality = speciality;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }

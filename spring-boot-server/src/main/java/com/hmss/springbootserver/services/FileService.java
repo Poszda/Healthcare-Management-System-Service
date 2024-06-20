@@ -24,8 +24,8 @@ import java.util.stream.Collectors;
 @Service
 public class FileService {
 
-    @Value("${system.file.path}")
-    private String systemFilePath;
+    @Value("${file.system.path}")
+    private String fileSystemPath;
 
     @Value("${file.profile-images.path}")
     private String profileImagesPath;
@@ -45,9 +45,11 @@ public class FileService {
     public void saveFileAndMetadata(MultipartFile file, User user, AppFileType type,boolean isUnique) throws IOException{
         //find the right path
         String uploadDirPath;
+        String fileDirPath;
         switch (type){
             case PROFILE_IMAGE:
-                uploadDirPath = systemFilePath + profileImagesPath;
+                uploadDirPath = fileSystemPath + profileImagesPath;
+                fileDirPath = profileImagesPath;
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + type);
@@ -55,7 +57,7 @@ public class FileService {
 
         // save to the filesystem
         String path = this.saveFileToFileSystem(file,uploadDirPath);
-        String subPath = profileImagesPath + extractFileName(path);
+        String subPath = fileDirPath + extractFileName(path);
 
         //save to db
         FileMetadata fileMetadata = new FileMetadata();
@@ -68,10 +70,10 @@ public class FileService {
 
         //delete old records if needed
         if(isUnique){
-            List<FileMetadata> fileMetadataForDeletion = fileMetadataRepository.findByUserIdAndType(user.getId(),type).stream().filter(el->el.getId() != fileMetadata.getId()).collect(Collectors.toList());
+            List<FileMetadata> fileMetadataForDeletion = fileMetadataRepository.findAllByUserIdAndType(user.getId(),type).stream().filter(el->el.getId() != fileMetadata.getId()).collect(Collectors.toList());
             fileMetadataForDeletion.forEach(el->{
                 try {
-                    this.deleteFileFromFileSystem(systemFilePath + el.getPath());
+                    this.deleteFileFromFileSystem(fileSystemPath + el.getPath());
                     fileMetadataRepository.delete(el);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
@@ -87,14 +89,9 @@ public class FileService {
         }
 
         try {
-            // Create the uploads directory if it doesn't exist
-            File uploadDir = new File(path);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-
             // Save the file to the uploads directory
-            File destFile = new File(uploadDir.getAbsolutePath() + File.separator + System.currentTimeMillis() + file.getOriginalFilename());
+            File uploadDir = new File(path);
+            File destFile = new File(uploadDir.getAbsolutePath() + File.separator + System.currentTimeMillis() + file.getOriginalFilename().replaceAll("\\s", ""));
             file.transferTo(destFile);
             return destFile.getAbsolutePath();
         } catch (IOException e) {
@@ -116,6 +113,7 @@ public class FileService {
     }
 
     public String getFullPath(String filePath){
+        if(filePath == null) return null;
         return "http://" + serverAddress + ":" + serverPort + "/" + filePath;
     }
 }

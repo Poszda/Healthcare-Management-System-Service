@@ -1,12 +1,9 @@
 package com.hmss.springbootserver.mappers;
 
-import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
+
 import com.hmss.springbootserver.DTOs.speciality.SpecialityDTO;
 import com.hmss.springbootserver.DTOs.speciality.SpecialityWithProceduresDTO;
-import com.hmss.springbootserver.DTOs.user.UserDTO;
-import com.hmss.springbootserver.entities.Hospital;
 import com.hmss.springbootserver.entities.Speciality;
-import com.hmss.springbootserver.entities.User;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

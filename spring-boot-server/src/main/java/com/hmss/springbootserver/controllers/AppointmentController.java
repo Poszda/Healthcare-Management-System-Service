@@ -1,11 +1,8 @@
 package com.hmss.springbootserver.controllers;
 
 import com.hmss.springbootserver.DTOs.appointments.*;
-import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
-import com.hmss.springbootserver.services.AppointmentService;
-import com.hmss.springbootserver.utils.models.projections.AppointmentCardProjection;
+import com.hmss.springbootserver.services.AppointmentService;;
 import com.hmss.springbootserver.utils.models.projections.AppointmentNextProjection;
-import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +21,10 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
-    @GetMapping("/getHospitalsAndDoctorsRecommendations/{counties}/{procedureId}")
+    @GetMapping("/getAppointmentOptionals/{counties}/{procedureId}")
     @CrossOrigin(origins = "*")
-    public List<HospitalWithDoctorsDTO> getHospitalsAndDoctorsRecommendations(@PathVariable("counties") List<String> counties, @PathVariable("procedureId") long procedureId){
-        return this.appointmentService.getHospitalsAndDoctorsRecommendations(counties,procedureId);
+    public AppointmentOptionalsDTO getAppointmentOptionals(@PathVariable("counties") List<String> counties, @PathVariable("procedureId") long procedureId){
+        return this.appointmentService.getAppointmentOptionals(counties,procedureId);
     }
     @GetMapping("/getAvailableAppointments/{ids}/{procedureId}/{startDate}/{endDate}")
     @CrossOrigin(origins = "*")
@@ -81,7 +78,7 @@ public class AppointmentController {
 
     @GetMapping("/getDoctorTodayNextAppointments/{doctorId}")
     @CrossOrigin(origins = "*")
-    public List<AppointmentNextProjection> getDoctorTodayNextAppointments(@PathVariable("doctorId") Long doctorId){
+    public List<AppointmentNextDTO> getDoctorTodayNextAppointments(@PathVariable("doctorId") Long doctorId){
         return this.appointmentService.getDoctorTodayNextAppointments(doctorId);
     }
     @GetMapping("/getPatientNextAppointments/{patientId}")

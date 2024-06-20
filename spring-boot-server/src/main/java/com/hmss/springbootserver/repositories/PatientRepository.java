@@ -25,7 +25,4 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
             "GROUP BY MONTH(a.date) " +
             "ORDER BY year, month")
     List<DoctorPatientsVisitsProjection> countDoctorPatientsVisitsLast6Months(@Param("doctorId") Long doctorId,@Param("startDate") LocalDate startDate,@Param("endDate") LocalDate endDate,@Param("ageStart") int ageStart, @Param("ageEnd") int ageEnd);
-
-    @Query("SELECT p FROM Patient p JOIN FETCH p.user.fileMetadataList f WHERE p.id = :patientId AND f.type = 'PROFILE_IMAGE'")
-    Optional<Patient> findPatientAndProfileImage(@Param("patientId") long patientId);
 }

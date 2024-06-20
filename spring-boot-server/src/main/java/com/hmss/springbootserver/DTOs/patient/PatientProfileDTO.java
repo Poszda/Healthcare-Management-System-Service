@@ -4,23 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PatientProfileDTO {
-    PatientWithUserWithFileMetadataDTO patient;
+    PatientWithUserDTO patient;
     List<String> diagnostics;
     List<String> medicationsLastThreeMonths;
     List<String> medicationsLastSixMonths;
+    String profileImage;
 
-    public PatientProfileDTO(PatientWithUserWithFileMetadataDTO patient, List<String> diagnostics, List<String> medicationsLastThreeMonths, List<String> medicationsLastSixMonths) {
+    public PatientProfileDTO(PatientWithUserDTO patient, List<String> diagnostics, List<String> medicationsLastThreeMonths, List<String> medicationsLastSixMonths, String profileImage) {
         this.patient = patient;
         this.diagnostics = diagnostics;
         this.medicationsLastThreeMonths = medicationsLastThreeMonths;
         this.medicationsLastSixMonths = medicationsLastSixMonths;
+        this.profileImage = profileImage;
     }
 
-    public PatientWithUserWithFileMetadataDTO getPatient() {
+    public PatientWithUserDTO getPatient() {
         return patient;
     }
 
-    public void setPatient(PatientWithUserWithFileMetadataDTO patient) {
+    public void setPatient(PatientWithUserDTO patient) {
         this.patient = patient;
     }
 
@@ -34,6 +36,14 @@ public class PatientProfileDTO {
 
     public List<String> getMedicationsLastThreeMonths() {
         return medicationsLastThreeMonths;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
     public void setMedicationsLastThreeMonths(List<String> medicationsLastThreeMonths) {

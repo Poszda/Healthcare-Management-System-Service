@@ -1,10 +1,7 @@
 package com.hmss.springbootserver.services;
 
-import com.hmss.springbootserver.DTOs.hospital.HospitalWithDoctorsDTO;
 import com.hmss.springbootserver.DTOs.speciality.SpecialityDTO;
 import com.hmss.springbootserver.DTOs.speciality.SpecialityWithProceduresDTO;
-import com.hmss.springbootserver.entities.Speciality;
-import com.hmss.springbootserver.mappers.HospitalMapper;
 import com.hmss.springbootserver.mappers.SpecialityMapper;
 import com.hmss.springbootserver.repositories.SpecialityRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,6 @@
 package com.hmss.springbootserver.DTOs.doctor;
 
-import com.hmss.springbootserver.utils.models.projections.DoctorSearchProjection;
-
-public class DoctorSearchDto {
+public class DoctorSearchDTO {
     String firstName;
     String lastName;
     String id;

@@ -67,11 +67,12 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
             "GROUP BY status")
     List<DoctorAppointmentsCounterByStatusProjection> countDoctorAppointmentsByStatus(@Param("doctorId") Long doctorId);
 
-    @Query("SELECT a.id as id, a.date as dateTime, u.firstName as firstName, u.lastName as lastName, p.id as otherId, pr.duration as duration " +
+    @Query("SELECT a.id as id, a.date as dateTime, u.firstName as firstName, u.lastName as lastName, p.id as otherId, pr.duration as duration, f.path as profileImage " +
             "FROM Appointment a " +
             "JOIN a.patient p " +
             "JOIN a.doctor d " +
             "JOIN p.user u " +
+            "LEFT JOIN u.fileMetadataList f ON f.user.id = u.id AND f.type = 'PROFILE_IMAGE' " +
             "JOIN a.procedure pr " +
             "WHERE d.id = :doctorId AND DATE(a.date) = CURRENT_DATE AND a.date > :dateTime " +
             "ORDER BY a.date " +
@@ -82,10 +83,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
             "FROM Appointment a " +
             "JOIN a.patient p " +
             "JOIN a.doctor d " +
-            "JOIN d.user u " +
             "JOIN a.procedure pr " +
-            "JOIN u.fileMetadataList f " +
-            "WHERE p.id = :patientId AND a.date > :dateTime AND f.type = 'PROFILE_IMAGE' " +
+            "JOIN d.user u " +
+            "LEFT JOIN u.fileMetadataList f ON f.user.id = u.id AND f.type = 'PROFILE_IMAGE'" +
+            "WHERE p.id = :patientId AND a.date > :dateTime " +
             "ORDER BY a.date " +
             "LIMIT :limit ")
     List<AppointmentNextProjection> findPatientNextAppointments(@Param("patientId") Long patientId, @Param("dateTime") LocalDateTime dateTime, @Param("limit") int limit);
