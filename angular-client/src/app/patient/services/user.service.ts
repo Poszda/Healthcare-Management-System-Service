@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { Patient } from 'src/app/core/models/patient.model';
 import { DoctorSearch } from '../models/doctor-search.model';
+import { DoctorSuggestionInfo } from '../models/doctor-suggestion-info.model';
+import { PatientBio } from '../models/patient-bio.model';
 
 @Injectable()
 export class UserService {
@@ -18,16 +20,16 @@ export class UserService {
     return localStorage.getItem('patient')? JSON.parse(localStorage.getItem('user')!) : null;
   }
 
-  getPatient(patientId : number){
-    return this.http.get<Patient>(`http://localhost:8080/api/users/getPatient/${patientId}`);
+  getPatientBio(patientId : number){
+    return this.http.get<PatientBio>(`http://localhost:8080/api/users/getPatientBio/${patientId}`);
   }
 
   getDoctorsById(ids : number[]){
     return this.http.get<any>(`http://localhost:8080/api/users/getDoctorsById/${ids}`);
   }
 
-  getDoctorsWithHospitalsById(ids : number[]){
-    return this.http.get<any>(`http://localhost:8080/api/users/getDoctorsWithUsersAndHospitalsById/${ids}`);
+  getDoctorsSuggestionInfo(ids : number[]){
+    return this.http.get<DoctorSuggestionInfo[]>(`http://localhost:8080/api/users/getDoctorsSuggestionInfo/${ids}`);
   }
 
   updatePatientProfile(patientId : number,data : any){

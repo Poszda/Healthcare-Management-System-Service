@@ -21,6 +21,7 @@
     border-radius: 10px;
     width: 22px;
     height: 22px;
+    object-fit: cover;
 }
 .text{
     font-size: 13px;

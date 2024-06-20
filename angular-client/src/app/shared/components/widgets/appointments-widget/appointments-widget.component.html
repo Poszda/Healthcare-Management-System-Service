@@ -2,7 +2,7 @@
     <div class="container" *ngIf="appointments.length;else notice">
         <div class='appointment-line' *ngFor="let appointment of appointments">
             <div class="left">
-                <img class="profile-img" alt='' src="assets/icons/user.png" (click)="navigate(appointment.otherId)">
+                <img class="profile-img" alt='' [src]="appointment.profileImage?appointment.profileImage:'assets/icons/user.png'" (click)="navigate(appointment.otherId)">
                 <div class="text">
                     <div class="name">{{appointment.firstName + " " +appointment.lastName}}</div>
                     <div class="time">{{getTimeInterval(appointment.dateTime, appointment.duration)}}</div>

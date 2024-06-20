@@ -8,7 +8,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AppointmentsComponent } from './components/appointments/appointments.component';
 import { ProgramWidgetComponent } from './components/dashboard/program-widget/program-widget.component';
 import { OverallstatusWidgetComponent } from './components/dashboard/overallstatus-widget/overallstatus-widget.component';
-import { BarComponent } from './components/dashboard/bar/bar.component';
 import { AppointmentsTableComponent } from './components/appointments/appointments-table/appointments-table.component';
 import { AppointmentsService } from './services/appointments.service';
 import { StatisticsService } from './services/statistics.service';
@@ -27,7 +26,6 @@ import { EditProfileFormComponent } from './components/account-profile/edit-prof
         AppointmentsComponent,
         ProgramWidgetComponent,
         OverallstatusWidgetComponent,
-        BarComponent,
         ProcedureTrendsWidgetComponent,
         AppointmentsTableComponent,
         DiagnosticFormComponent,

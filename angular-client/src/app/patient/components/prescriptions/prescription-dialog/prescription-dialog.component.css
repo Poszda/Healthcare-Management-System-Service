@@ -34,6 +34,7 @@
     border-radius: 100%;
     outline: none;
     cursor: pointer;
+    object-fit: cover;
 }
 
 .diagnostic-section{

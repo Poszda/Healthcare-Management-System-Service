@@ -27,7 +27,6 @@ export class AppointmentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAppointments();
-
   }
 
   getAppointments(){

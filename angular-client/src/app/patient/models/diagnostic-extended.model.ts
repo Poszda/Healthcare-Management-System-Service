@@ -12,5 +12,6 @@ export interface DiagnosticExtended{
     procedure: string
     speciality: string
     hospital: string
+    doctorProfileImage?: string
     medications : Medication[]
 }

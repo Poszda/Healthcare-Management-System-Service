@@ -7,4 +7,5 @@ export interface AppointmentSummary{
     time : string,
     price : number,
     duration:number
+    profileImage?: string;
 }

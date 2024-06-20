@@ -56,7 +56,8 @@ export class DoctorProfileComponent implements OnInit {
     
     const result : ProfileSummary = {
       name: data.user.firstName + " " + data.user.lastName,
-      rows: list
+      rows: list,
+      profileImage: data.profileImage
     }
     return result;
   }

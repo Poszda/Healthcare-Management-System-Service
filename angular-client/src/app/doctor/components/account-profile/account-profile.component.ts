@@ -22,6 +22,7 @@ export class AccountProfileComponent implements OnInit {
   summary : ProfileSummary | undefined
   description : string | undefined
   university : string | undefined
+  profileImage : string | undefined | null
 
   constructor(
     private dialog : MatDialog, 
@@ -43,6 +44,7 @@ export class AccountProfileComponent implements OnInit {
         this.summary = this.obtainSummary(res);
         this.description = res.description
         this.university = res.university
+        this.profileImage = res.profileImage
       },
       err =>{
         console.log(err)
@@ -59,7 +61,8 @@ export class AccountProfileComponent implements OnInit {
     
     const result : ProfileSummary = {
       name: data.user.firstName + " " + data.user.lastName,
-      rows: list
+      rows: list,
+      profileImage: data.profileImage
     }
     return result;
   }
@@ -134,12 +137,12 @@ export class AccountProfileComponent implements OnInit {
     }).afterClosed().subscribe(
       data =>{
         if(data){
-          console.log(data,'totul')
           this.doctorService.updateDoctorProfile(this.doctorId,data).subscribe(
             res =>{
               console.log(res)
               this.description = res.description
-              this.updateUniveristy(res.university);
+              this.updateUniversity(res.university);
+              this.updateProfileImage(res.profileImage);
               this.alertService.showSuccess('Profile updated succesfully');
             },
             err =>{
@@ -153,8 +156,13 @@ export class AccountProfileComponent implements OnInit {
     )
   }
 
-  updateUniveristy(university : string){
-    if(this.summary)this.summary.rows[1] = university;
+  updateUniversity(university : string){
+    if(this.summary)this.summary.rows[1] = `Graduated from "${university}"`;
     this.university = university;
+  }
+
+  updateProfileImage(profileImage : string){
+    if(this.summary)this.summary.profileImage = profileImage;
+    this.profileImage = profileImage;
   }
 }

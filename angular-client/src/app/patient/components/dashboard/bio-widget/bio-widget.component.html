@@ -1,6 +1,6 @@
 <div class='container'>
     <div class="header">
-      <img id='profile' src="assets/icons/user.png" alt=""/>
+      <img id="profile" [src]="(data?.profileImage)?(data?.profileImage): 'assets/icons/user.png'" alt=""/>
       <p class="name">{{user.firstName + " " +user.lastName}}</p>
       <p class="user-type grey">Patient</p>
     </div>

@@ -4,10 +4,11 @@ export interface AppointmentCard{
     doctorFirstName : string,
     doctorLastName : string,
     doctorSpeciality: string,
+    profileImage? : string,
     procedureName : string,
     hospitalName : string,
     dateTime :string,
     price : number,
-    duration:number
+    duration : number,
     diagnosticId? : number
 }

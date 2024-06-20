@@ -1,10 +1,10 @@
 <div class="container">
-    <h1 class="title">Diagnostic/ Review</h1>
+    <h1 class="title">Diagnostic / Review</h1>
     <div class="content">
         <div class="information-content">
             <div class="appointment-section">
                 <div class="profile">
-                    <img id="img-profile" (click)="close()" [routerLink]="['/patient/doctors/' + diagnostic.doctorId]" src="assets/icons/user-whitebg.png" alt="" />
+                    <img id="img-profile" (click)="close()" [routerLink]="['/patient/doctors/' + diagnostic.doctorId]" [src]="diagnostic.doctorProfileImage?diagnostic.doctorProfileImage:'assets/icons/user-whitebg.png'" alt="" />
                     <div class="text">
                         <p>{{diagnostic.doctorFirstName + " " + diagnostic.doctorLastName}}</p>
                         <p class="subtitle">{{diagnostic.speciality}}</p>

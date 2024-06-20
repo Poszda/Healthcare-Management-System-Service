@@ -37,7 +37,7 @@ export class AppointmentsComponent implements OnInit {
 
   transformAppointmentData(res : DoctorAppointment[]) : DoctorAppointmentTabelData[]{
     const result = res.map(el => {
-     const x : DoctorAppointmentTabelData ={
+     const appointment : DoctorAppointmentTabelData ={
      id: el.id,
      date : el.date,
      time: this.getInterval(el.time,el.duration),
@@ -47,8 +47,9 @@ export class AppointmentsComponent implements OnInit {
      phone: el.phone,
      age: el.age,
      status : el.status,
+     profileImage:el.profileImage 
      }
-     return x
+     return appointment
     })
 
     return result;

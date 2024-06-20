@@ -61,7 +61,8 @@ export class AccountProfileComponent implements OnInit{
 
       const result : ProfileSummary = {
         name: data.patient.user.firstName + " " + data.patient.user.lastName,
-        rows: list
+        rows: list,
+        profileImage: data.profileImage
       }
       return result;
     }

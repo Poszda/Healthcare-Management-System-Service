@@ -4,5 +4,6 @@ export interface AppointmentNext {
     firstName: string;
     lastName: string
     dateTime: string;
-    duration : string
+    duration : string;
+    profileImage: string;
 }

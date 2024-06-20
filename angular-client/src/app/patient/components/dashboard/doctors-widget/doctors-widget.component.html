@@ -8,7 +8,7 @@
         </div>
         <div class="content" *ngIf="!notice">
             <div class="row" *ngFor="let doctor of doctors" [routerLink]="['/patient/doctors/' + doctor.id]">
-                <img [src]="doctor.profileImage?doctor.profileImage:'assets/icons/user.png'"  class="ico" alt="">
+                <img [src]="doctor.profileImage?doctor.profileImage:'assets/icons/user.png'" class="ico" alt="">
                 <p class="text">{{doctor.firstName + " " + doctor.lastName}}</p>
             </div> 
         </div>

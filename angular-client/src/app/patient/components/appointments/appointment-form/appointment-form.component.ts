@@ -14,6 +14,7 @@ import { AppointmentSuggestion } from 'src/app/patient/models/appointment-sugges
 import { AppointmentSummary } from 'src/app/patient/models/appointment-summary.model';
 import { NewAppointment } from 'src/app/patient/models/new-appointment.model';
 import { UserService } from 'src/app/patient/services/user.service';
+import { DoctorSuggestionInfo } from 'src/app/patient/models/doctor-suggestion-info.model';
 
 @Component({
   selector: 'app-appointment-form',
@@ -43,7 +44,7 @@ export class AppointmentFormComponent implements OnInit {
   hospitalsOptions: any[] = []
   doctorsOptions: any = []
   filteredDoctorsOptions: any = []
-  selectedDoctorsExtended : any[] = []
+  selectedDoctorsInfo : DoctorSuggestionInfo[] = []
   appointmentSuggestions : AppointmentSuggestion[] = [];
 
   loading: boolean = false;
@@ -90,11 +91,12 @@ export class AppointmentFormComponent implements OnInit {
   getOptionalOptions() {
     this.loading = true;
     this.formOptional.disable({ emitEvent: false });
-    this.appointmentService.getFormOptionalOptions(this.formMandatory.get('county')?.value, this.formMandatory.get('procedure')?.value).subscribe(
-      (res: any[]) => {
+    this.appointmentService.getAppointmentOptionals(this.formMandatory.get('county')?.value, this.formMandatory.get('procedure')?.value).subscribe(
+      (res: any) => {
+        //set timeout for short loading effect
         setTimeout(() => {
-          this.hospitalsOptions =[...res];
-          this.doctorsOptions = this.extractDoctorsFromHospitalArray(res);
+          this.hospitalsOptions = res.hospitals;
+          this.doctorsOptions = res.doctors.map((el: any) => ({...el, name: el.user.firstName + " " + el.user.lastName}));
           this.filteredDoctorsOptions = [...this.doctorsOptions]
           this.formOptional.enable({ emitEvent: false });
           this.loading = false;
@@ -104,12 +106,6 @@ export class AppointmentFormComponent implements OnInit {
         console.log(err)
       }
     )
-  }
-
-  extractDoctorsFromHospitalArray(array: any) {
-    return array
-      .reduce((accumulator: Doctor[], hospital: any) => [...accumulator, ...hospital.doctors], [])
-      .map((el: any) => ({ ...el, name: el.user.firstName + " " + el.user.lastName }))
   }
 
   getDoctorsAvailableHours() {
@@ -136,14 +132,14 @@ export class AppointmentFormComponent implements OnInit {
     this.loading = true;
     const calls = [
       this.appointmentService.getDoctorsAvailableHours(req),
-      this.userService.getDoctorsWithHospitalsById(doctorsIds)
+      this.userService.getDoctorsSuggestionInfo(doctorsIds)
     ]
     forkJoin(calls)
     .subscribe(
       ([res1,res2]) => {
         setTimeout(() => {
-        this.selectedDoctorsExtended = res2;
-        this.appointmentSuggestions = this.createAppointmentSuggestions(res1);
+        this.selectedDoctorsInfo = res2 as DoctorSuggestionInfo[];
+        this.appointmentSuggestions = this.createAppointmentSuggestions(res1 as DoctorsAvailableHours[]);
         this.loading = false;
         }, 500);
       },
@@ -156,13 +152,14 @@ export class AppointmentFormComponent implements OnInit {
   createAppointmentSuggestions(doctorsAvailableHours : DoctorsAvailableHours[]): AppointmentSuggestion[]{
     const list : AppointmentSuggestion[] = [];
     doctorsAvailableHours.forEach(el => {
-      const doctorExtended = this.selectedDoctorsExtended.find((de : any) => de.id === el.doctorId) // shoul be always found
+      const doctorInfo = this.selectedDoctorsInfo.find((de : any) => de.id === el.doctorId) // should be always found
       el.dates.forEach(d => {
         const obj : AppointmentSuggestion = {
-          doctorId: doctorExtended.id,
-          doctorName: doctorExtended.user.firstName + " " + doctorExtended.user.lastName,
-          doctorSpeciality: "Speciality 1",
-          hospitalName: doctorExtended.hospital.name,
+          doctorId: doctorInfo!.id,
+          doctorName: doctorInfo!.firstName + " " + doctorInfo!.lastName,
+          doctorSpeciality: doctorInfo!.speciality,
+          hospitalName: doctorInfo!.hospital,
+          profileImage : doctorInfo!.profileImage,
           date: d.date,
           hours: d.hours,
         }
@@ -185,8 +182,6 @@ export class AppointmentFormComponent implements OnInit {
       return 0;
     });
   }
-  
-
 
   extractProceduresFromSpecialitiesArray(array : any){
     return array
@@ -215,10 +210,9 @@ export class AppointmentFormComponent implements OnInit {
     this.formOptional.get('hospitals')?.valueChanges.subscribe(
       (res) => {
         this.formOptional.get('doctors')?.setValue([]);
-        const hospitalIds = this.formOptional.get('hospitals')?.value;
-        if (hospitalIds.length > 0) {
-          const selectedHospitals = this.hospitalsOptions.filter(el => hospitalIds.includes(el.id));
-          this.filteredDoctorsOptions = this.extractDoctorsFromHospitalArray(selectedHospitals)
+        const selectedHospitalsIds = this.formOptional.get('hospitals')?.value;
+        if (selectedHospitalsIds.length > 0) {
+          this.filteredDoctorsOptions = this.doctorsOptions.filter((el: any) => selectedHospitalsIds.includes(el.hospitalId));
         }
         else {
           this.filteredDoctorsOptions = this.doctorsOptions
@@ -237,14 +231,15 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   createAppointmentSummary(){
-    const doctorExtended = this.selectedDoctorsExtended.find(el => el.id === this.sugestionSelection.doctorId)
+    const doctorInfo = this.selectedDoctorsInfo.find(el => el.id === this.sugestionSelection.doctorId)
     const procedure = this.procedureOptions.find((el : any) => el.id ===this.formMandatory.get('procedure')?.value)
 
     this.appointmentSummary = {
-      doctorName: doctorExtended.user.firstName +" "+doctorExtended.user.lastName,
-      doctorSpeciality: "Specialitate",
+      doctorName: doctorInfo!.firstName + " " +doctorInfo!.lastName,
+      doctorSpeciality: doctorInfo!.speciality,
       procedureName: procedure.name,
-      hospitalName: doctorExtended.hospital.name,
+      hospitalName: doctorInfo!.hospital,
+      profileImage: doctorInfo?.profileImage,
       date: this.sugestionSelection.date,
       time: this.sugestionSelection.time,
       price: procedure.price,
@@ -262,7 +257,7 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   saveAppointment() {
-    const doctorExtended = this.selectedDoctorsExtended.find(el => el.id === this.sugestionSelection.doctorId)
+    const doctorExtended = this.selectedDoctorsInfo.find(el => el.id === this.sugestionSelection.doctorId)
     const procedure = this.procedureOptions.find((el : any) => el.id ===this.formMandatory.get('procedure')?.value)
     const appointment : NewAppointment ={
       date: this.sugestionSelection.date,

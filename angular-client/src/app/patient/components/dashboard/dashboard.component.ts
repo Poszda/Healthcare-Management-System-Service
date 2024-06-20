@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AppointmentsService } from '../../services/appointments.service';
 import { AppointmentNext } from 'src/app/shared/models/appointment-next.model';
 import { UserService } from '../../services/user.service';
-import { Patient } from 'src/app/core/models/patient.model';
 import { DiagnosticExtended } from '../../models/diagnostic-extended.model';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { PrescriptionDialogComponent } from '../prescriptions/prescription-dialog/prescription-dialog.component';
 import { SpecialitiesService } from '../../services/specialities.service';
+import { PatientBio } from '../../models/patient-bio.model';
 
 
 @Component({
@@ -18,7 +18,7 @@ import { SpecialitiesService } from '../../services/specialities.service';
 export class DashboardComponent implements OnInit {
   patientId: number = 0;
   todayNextAppointments : AppointmentNext[] = []
-  patient : Patient | undefined;
+  patient : PatientBio | undefined;
   diagnostics : DiagnosticExtended[] = [];
   constructor(private appointmentsService : AppointmentsService, private userService : UserService, private specialitiesService : SpecialitiesService, private dialog : MatDialog) { }
 
@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
     this.appointmentsService.getDiagnostics(this.patientId).subscribe(
       res => {
         this.diagnostics = res.sort(this.compareDates).slice(0,2)
-        console.log(res)
+        console.log(res,'aici')
       },
       err => {
         console.log(err)
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getPatient(){
-    this.userService.getPatient(this.patientId).subscribe(
+    this.userService.getPatientBio(this.patientId).subscribe(
       res => {
         this.patient = res
       },

@@ -8,7 +8,7 @@
         <div class="doctor">
             <p class='grey'>Doctor</p>
              <div class="img-text">
-                <img src="assets/icons/user.png" [routerLink]="['/patient/doctors/' + diagnostic?.doctorId]" alt="" class='doctor-img' />
+                <img [src]="(diagnostic?.doctorProfileImage)?(diagnostic?.doctorProfileImage):'assets/icons/user.png'" [routerLink]="['/patient/doctors/' + diagnostic?.doctorId]" alt="" class='doctor-img' />
                 <p class='name'>{{diagnostic?.doctorLastName}}</p>
              </div>
         </div>

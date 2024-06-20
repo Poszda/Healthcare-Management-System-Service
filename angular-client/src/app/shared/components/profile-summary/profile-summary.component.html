@@ -4,7 +4,7 @@
             <img src="assets/icons/edit5.png" (click)="triggerEditProfile()" class="icon-normal" alt="">
             <img src="assets/icons/log-out-white.png" (click)="triggerLogOut()" class="icon-normal" alt="">
         </div>
-        <img src="assets/icons/user.png" alt="" class="profile-img" />
+        <img [src]="(summary?.profileImage)?(summary?.profileImage):'assets/icons/user.png'" alt="" class="profile-img" />
     </div>
     <div class="bottom">
         <div class="text">

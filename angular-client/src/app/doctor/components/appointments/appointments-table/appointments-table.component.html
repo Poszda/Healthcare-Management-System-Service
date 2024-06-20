@@ -43,7 +43,7 @@
                 <td>{{ appointment.id }}</td>
                 <td style="padding-top: 10px; padding-bottom:10px; height: 61.8px;">
                     <div class="patient">
-                        <img class="user-icon" src="assets/icons/user.png" alt="" [routerLink]="['/doctor/patients/' + appointment.patientId]">
+                        <img class="user-icon" [src]="appointment.profileImage?appointment.profileImage:'assets/icons/user.png'" alt="" [routerLink]="['/doctor/patients/' + appointment.patientId]">
                         <div class="patient-details">
                             <p>{{ appointment.name}}</p>
                             <p class="subtitle">{{ appointment.age}} yrs</p>

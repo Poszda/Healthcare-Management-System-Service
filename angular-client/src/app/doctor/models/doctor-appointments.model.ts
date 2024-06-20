@@ -12,6 +12,7 @@ export interface DoctorAppointment{
     phone : string
     age : string
     status : AppointmentStatus
+    profileImage : string;
 }
 
 export interface DoctorAppointmentTabelData{
@@ -23,5 +24,6 @@ export interface DoctorAppointmentTabelData{
     name : string 
     phone : string
     age : string
-    status : AppointmentStatus 
+    status : AppointmentStatus,
+    profileImage : string; 
 }

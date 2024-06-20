@@ -1,6 +1,4 @@
 <div class="container">
-    <app-bar></app-bar>
-    <div class="widgets">
         <div class="left">
             <app-overallstatus-widget [patientsStatistic]="patientsVisitsStatistic" [appointmentsStatus]="appointmentsCountsByStatus"></app-overallstatus-widget>
             <app-procedure-trends-widget [trends]="procedureTrends"></app-procedure-trends-widget>
@@ -9,5 +7,4 @@
             <app-program-widget [program]="todayProgramStatistic" ></app-program-widget>
             <app-appointments-widget title="Today Next Appointments" [appointments]="todayNextAppointments"></app-appointments-widget>
         </div>
-    </div>
 </div>
