@@ -1,8 +1,5 @@
 package com.hmss.springbootserver.DTOs.appointments;
 
-import com.hmss.springbootserver.entities.Appointment;
-import com.hmss.springbootserver.entities.Medication;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

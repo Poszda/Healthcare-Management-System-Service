@@ -1,8 +1,6 @@
 package com.hmss.springbootserver.DTOs.files;
 
-import com.hmss.springbootserver.entities.User;
 import com.hmss.springbootserver.enums.AppFileType;
-import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 

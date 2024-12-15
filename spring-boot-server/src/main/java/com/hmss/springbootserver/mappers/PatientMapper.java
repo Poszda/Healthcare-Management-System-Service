@@ -4,7 +4,6 @@ import com.hmss.springbootserver.DTOs.patient.PatientBioDTO;
 import com.hmss.springbootserver.DTOs.patient.PatientDTO;
 import com.hmss.springbootserver.DTOs.patient.PatientWithUserDTO;
 import com.hmss.springbootserver.entities.Patient;
-import com.hmss.springbootserver.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

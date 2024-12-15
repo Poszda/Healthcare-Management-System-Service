@@ -1,9 +1,6 @@
 package com.hmss.springbootserver.repositories;
 
-import com.hmss.springbootserver.entities.Doctor;
 import com.hmss.springbootserver.entities.Patient;
-import com.hmss.springbootserver.utils.models.projections.AppointmentStatisticProjection;
-import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentProjection;
 import com.hmss.springbootserver.utils.models.projections.DoctorPatientsVisitsProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient,Long> {

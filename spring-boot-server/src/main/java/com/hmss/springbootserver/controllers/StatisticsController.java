@@ -1,9 +1,7 @@
 package com.hmss.springbootserver.controllers;
 
-import com.hmss.springbootserver.DTOs.speciality.SpecialityWithProceduresDTO;
 import com.hmss.springbootserver.DTOs.statistics.*;
 import com.hmss.springbootserver.services.StatisticsService;
-import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentsCounterByStatusProjection;
 import com.hmss.springbootserver.utils.models.projections.SpecialityFrequencyProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

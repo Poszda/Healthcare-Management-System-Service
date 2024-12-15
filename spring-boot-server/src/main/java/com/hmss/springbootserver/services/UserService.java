@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-    @Autowired
+
     private final DoctorRepository doctorRepository;
     private final PatientRepository patientRepository;
     private final AdminRepository adminRepository;
@@ -36,6 +36,7 @@ public class UserService {
     private final FileMetadataRepository fileMetadataRepository;
     private final FileService fileService;
 
+    @Autowired
     public UserService(DoctorRepository doctorRepository, PatientRepository patientRepository, AdminRepository adminRepository,
                        HospitalRepository hospitalRepository,
                        SpecialityRepository specialityRepository,

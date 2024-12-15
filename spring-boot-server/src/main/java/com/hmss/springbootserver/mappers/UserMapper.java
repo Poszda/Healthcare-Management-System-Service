@@ -3,7 +3,6 @@ package com.hmss.springbootserver.mappers;
 import com.hmss.springbootserver.DTOs.user.AdminLoginDTO;
 import com.hmss.springbootserver.DTOs.user.DoctorLoginDTO;
 import com.hmss.springbootserver.DTOs.user.PatientLoginDTO;
-import com.hmss.springbootserver.DTOs.user.UserDTO;
 import com.hmss.springbootserver.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,7 +10,7 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 @Named("UserMapper")
-@Mapper()
+@Mapper
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 

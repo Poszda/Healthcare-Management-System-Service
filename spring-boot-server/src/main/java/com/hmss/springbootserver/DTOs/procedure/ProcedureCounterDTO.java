@@ -1,7 +1,5 @@
 package com.hmss.springbootserver.DTOs.procedure;
 
-import com.hmss.springbootserver.utils.models.projections.ProcedureCounterProjection;
-
 public class ProcedureCounterDTO{
     private long id;
     private String name;

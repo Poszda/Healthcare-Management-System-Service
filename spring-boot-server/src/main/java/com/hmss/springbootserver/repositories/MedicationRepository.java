@@ -2,7 +2,6 @@ package com.hmss.springbootserver.repositories;
 
 import com.hmss.springbootserver.DTOs.appointments.MedicationDTO;
 import com.hmss.springbootserver.entities.Medication;
-import com.hmss.springbootserver.entities.Speciality;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

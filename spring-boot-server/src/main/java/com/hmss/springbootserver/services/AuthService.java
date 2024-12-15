@@ -2,7 +2,6 @@ package com.hmss.springbootserver.services;
 
 import com.hmss.springbootserver.DTOs.LoginRequestDTO;
 import com.hmss.springbootserver.DTOs.SignUpRequestDTO;
-import com.hmss.springbootserver.DTOs.patient.PatientDTO;
 import com.hmss.springbootserver.entities.Patient;
 import com.hmss.springbootserver.entities.User;
 import com.hmss.springbootserver.enums.UserType;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -68,9 +66,6 @@ public class AuthService {
         patient.setBirthDate(signUpRequest.getBirthDate());
         patient.setUser(user);
         User createdUser = userRepository.save(user);
-        if(createdUser == null){
-            return new ResponseEntity<>("Unknown error",HttpStatus.SERVICE_UNAVAILABLE);
-        }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

@@ -2,8 +2,6 @@ package com.hmss.springbootserver.entities;
 
 import com.hmss.springbootserver.enums.UserType;
 import jakarta.persistence.*;
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
 
 import java.util.ArrayList;
 import java.util.List;

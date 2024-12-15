@@ -1,8 +1,6 @@
 package com.hmss.springbootserver.DTOs.speciality;
 
 import com.hmss.springbootserver.DTOs.procedure.ProcedureDTO;
-import com.hmss.springbootserver.entities.Procedure;
-import jakarta.persistence.OneToMany;
 
 import java.util.List;
 

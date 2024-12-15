@@ -3,8 +3,6 @@ package com.hmss.springbootserver.DTOs.doctor;
 import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
 import com.hmss.springbootserver.DTOs.speciality.SpecialityDTO;
 import com.hmss.springbootserver.DTOs.user.UserDTO;
-import com.hmss.springbootserver.DTOs.user.UserNoPasswordDTO;
-import com.hmss.springbootserver.DTOs.user.UserWithFileMetadataDTO;
 
 import java.time.LocalTime;
 

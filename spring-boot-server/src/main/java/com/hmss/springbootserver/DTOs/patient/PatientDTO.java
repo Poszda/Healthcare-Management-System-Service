@@ -1,7 +1,6 @@
 package com.hmss.springbootserver.DTOs.patient;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class PatientDTO {
     private Long id;

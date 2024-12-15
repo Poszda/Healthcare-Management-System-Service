@@ -4,7 +4,7 @@ package com.hmss.springbootserver.mappers;
 import com.hmss.springbootserver.DTOs.appointments.AppointmentCardDTO;
 import com.hmss.springbootserver.DTOs.appointments.AppointmentNextDTO;
 import com.hmss.springbootserver.DTOs.appointments.MedicationDTO;
-import com.hmss.springbootserver.entities.*;
+import com.hmss.springbootserver.entities.Medication;
 import com.hmss.springbootserver.utils.models.projections.AppointmentCardProjection;
 import com.hmss.springbootserver.utils.models.projections.AppointmentNextProjection;
 import org.mapstruct.IterableMapping;
@@ -15,7 +15,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Named("AppointmentMapper")
-@Mapper()
+@Mapper
 public interface AppointmentMapper {
     AppointmentMapper INSTANCE = Mappers.getMapper(AppointmentMapper.class);
 

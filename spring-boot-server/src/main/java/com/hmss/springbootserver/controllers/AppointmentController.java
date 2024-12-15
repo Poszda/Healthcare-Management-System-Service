@@ -1,8 +1,7 @@
 package com.hmss.springbootserver.controllers;
 
 import com.hmss.springbootserver.DTOs.appointments.*;
-import com.hmss.springbootserver.services.AppointmentService;;
-import com.hmss.springbootserver.utils.models.projections.AppointmentNextProjection;
+import com.hmss.springbootserver.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;

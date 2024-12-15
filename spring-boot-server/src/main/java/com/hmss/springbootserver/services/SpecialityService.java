@@ -7,7 +7,6 @@ import com.hmss.springbootserver.repositories.SpecialityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,9 +17,11 @@ public class SpecialityService {
     public SpecialityService(SpecialityRepository specialityRepository) {
         this.specialityRepository = specialityRepository;
     }
+
     public List<SpecialityDTO> getSpecialities() {
         return SpecialityMapper.INSTANCE.toSpecialityDTOList(specialityRepository.findAll());
     }
+
     public List<SpecialityWithProceduresDTO> getSpecialitiesWithProcedures(){
         var list = this.specialityRepository.findAll();
         return SpecialityMapper.INSTANCE.toSpecialityWithProceduresDTOList(list);

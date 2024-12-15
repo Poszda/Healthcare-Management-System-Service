@@ -1,12 +1,15 @@
 package com.hmss.springbootserver.services;
 
 import com.hmss.springbootserver.DTOs.appointments.TodayProgramDTO;
+import com.hmss.springbootserver.DTOs.procedure.ProcedureCounterDTO;
 import com.hmss.springbootserver.DTOs.statistics.*;
 import com.hmss.springbootserver.entities.Doctor;
-import com.hmss.springbootserver.DTOs.procedure.ProcedureCounterDTO;
 import com.hmss.springbootserver.enums.AppointmentStatus;
 import com.hmss.springbootserver.repositories.*;
-import com.hmss.springbootserver.utils.models.projections.*;
+import com.hmss.springbootserver.utils.models.projections.AppointmentStatisticProjection;
+import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentsCounterByStatusProjection;
+import com.hmss.springbootserver.utils.models.projections.DoctorPatientsVisitsProjection;
+import com.hmss.springbootserver.utils.models.projections.SpecialityFrequencyProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -4,7 +4,10 @@ import com.hmss.springbootserver.DTOs.doctor.*;
 import com.hmss.springbootserver.entities.Doctor;
 import com.hmss.springbootserver.utils.models.projections.DoctorSearchProjection;
 import com.hmss.springbootserver.utils.models.projections.DoctorSuggestionInfoProjection;
-import org.mapstruct.*;
+import org.mapstruct.IterableMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;

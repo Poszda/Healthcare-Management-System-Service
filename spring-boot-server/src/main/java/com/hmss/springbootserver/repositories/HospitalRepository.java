@@ -1,8 +1,6 @@
 package com.hmss.springbootserver.repositories;
 
-import com.hmss.springbootserver.entities.Doctor;
 import com.hmss.springbootserver.entities.Hospital;
-import com.hmss.springbootserver.entities.User;
 import com.hmss.springbootserver.utils.models.projections.AppointmentStatisticProjection;
 import com.hmss.springbootserver.utils.models.projections.SpecialityFrequencyProjection;
 import org.springframework.data.jpa.repository.JpaRepository;

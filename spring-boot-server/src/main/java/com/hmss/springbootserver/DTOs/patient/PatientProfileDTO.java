@@ -1,6 +1,5 @@
 package com.hmss.springbootserver.DTOs.patient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PatientProfileDTO {

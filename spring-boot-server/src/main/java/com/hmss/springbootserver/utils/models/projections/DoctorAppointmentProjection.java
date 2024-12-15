@@ -1,7 +1,5 @@
 package com.hmss.springbootserver.utils.models.projections;
 
-import com.hmss.springbootserver.entities.Procedure;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

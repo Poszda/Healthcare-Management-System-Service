@@ -1,7 +1,5 @@
 package com.hmss.springbootserver.DTOs.user;
 
-import com.hmss.springbootserver.entities.Patient;
-
 public class UserDTO {
     private Long id;
     private String lastName;

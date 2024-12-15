@@ -1,8 +1,6 @@
 package com.hmss.springbootserver.DTOs.doctor;
 
-import com.hmss.springbootserver.DTOs.user.UserDTO;
 import com.hmss.springbootserver.DTOs.user.UserNoPasswordDTO;
-import com.hmss.springbootserver.entities.User;
 
 import java.time.LocalTime;
 

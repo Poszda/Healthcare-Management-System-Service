@@ -1,7 +1,6 @@
 package com.hmss.springbootserver.services;
 
 import com.hmss.springbootserver.DTOs.appointments.*;
-import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
 import com.hmss.springbootserver.entities.*;
 import com.hmss.springbootserver.enums.AppointmentStatus;
 import com.hmss.springbootserver.mappers.AppointmentMapper;
@@ -108,10 +107,10 @@ public class AppointmentService {
     public ResponseEntity<String> deleteAppointment(Long id) {
         this.appointmentRepository.deleteById(id);
         if(appointmentRepository.findById(id).isEmpty()){
-            return new ResponseEntity<>("Appointment successfully deleted",HttpStatus.OK);
+            return new ResponseEntity<>("Appointment successfully deleted", HttpStatus.OK);
         }
         else{
-            return new ResponseEntity<>(" Appointment deletion failed",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(" Appointment deletion failed", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -277,7 +276,7 @@ public class AppointmentService {
         }
         this.diagnosticRepository.save(newDiagnostic);
 
-        return null;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     public List<PatientDiagnosticExtendedDTO> getPatientDiagnostics(Long patientId) {
@@ -311,6 +310,7 @@ public class AppointmentService {
             el.setProfileImage(fileService.getFullPath(el.getProfileImage()));
             return el;
         }).collect(Collectors.toList());
+
         return result;
     }
 

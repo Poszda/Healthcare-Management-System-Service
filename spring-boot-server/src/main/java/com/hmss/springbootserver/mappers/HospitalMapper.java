@@ -1,18 +1,16 @@
 package com.hmss.springbootserver.mappers;
 
 import com.hmss.springbootserver.DTOs.hospital.HospitalDTO;
-import com.hmss.springbootserver.entities.Doctor;
 import com.hmss.springbootserver.entities.Hospital;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
 @Named("HospitalMapper")
-@Mapper(uses = DoctorMapper.class)
+@Mapper
 public interface HospitalMapper {
     HospitalMapper INSTANCE = Mappers.getMapper(HospitalMapper.class);
 

@@ -2,7 +2,6 @@ package com.hmss.springbootserver.controllers;
 
 import com.hmss.springbootserver.DTOs.doctor.*;
 import com.hmss.springbootserver.services.UserService;
-import com.hmss.springbootserver.utils.models.projections.DoctorSuggestionInfoProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping(path = "api/users")
@@ -98,7 +98,7 @@ public class UserController {
     @CrossOrigin(origins = "*")
     public List<DoctorSearchDTO> getSearchedDoctors(@RequestBody SearchDataRequest data){
         Long specialityId = data.getSpecialityId();
-        String name = data.getName() == "" ?null:data.getName();
+        String name = Objects.equals(data.getName(), "") ? null:data.getName();
         return this.userService.getSearchedDoctors(name,specialityId);
     }
 
