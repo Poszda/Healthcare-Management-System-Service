@@ -60,7 +60,7 @@ export class AccountProfileComponent implements OnInit {
     if(!data.university) list.pop();
     
     const result : ProfileSummary = {
-      name: data.user.firstName + " " + data.user.lastName,
+      name: "Dr. " + data.user.firstName + " " + data.user.lastName,
       rows: list,
       profileImage: data.profileImage
     }
@@ -139,7 +139,6 @@ export class AccountProfileComponent implements OnInit {
         if(data){
           this.doctorService.updateDoctorProfile(this.doctorId,data).subscribe(
             res =>{
-              console.log(res)
               this.description = res.description
               this.updateUniversity(res.university);
               this.updateProfileImage(res.profileImage);

@@ -34,7 +34,6 @@ export class DashboardComponent implements OnInit {
     this.appointmentsService.getDiagnostics(this.patientId).subscribe(
       res => {
         this.diagnostics = res.sort(this.compareDates).slice(0,2)
-        console.log(res,'aici')
       },
       err => {
         console.log(err)

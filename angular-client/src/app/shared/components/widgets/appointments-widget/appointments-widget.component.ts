@@ -25,7 +25,6 @@ export class AppointmentsWidgetComponent {
     let link;
     if(this.type === 'doctor') link = '/doctor/patients/'
     else link = 'patient/doctors/'
-    console.log(link + id)
     this.router.navigateByUrl(link + id);
   }
 

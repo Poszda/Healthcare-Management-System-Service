@@ -55,7 +55,7 @@ export class DoctorProfileComponent implements OnInit {
     if(!data.university) list.pop();
     
     const result : ProfileSummary = {
-      name: data.user.firstName + " " + data.user.lastName,
+      name: "Dr. " + data.user.firstName + " " + data.user.lastName,
       rows: list,
       profileImage: data.profileImage
     }

@@ -42,7 +42,6 @@ export class ChecklistDatabase {
   initialize() {
     this.hospitalManagementService.getSpecialitiesWithProcedures().subscribe(
       res =>{
-        console.log(res)
         const data = this.buildFileTree(res);
         this.dataChange.next(data);
       },
