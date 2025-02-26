@@ -9,7 +9,21 @@ public class DoctorLoginDTO {
     private String lastName;
     private String email;
     private UserType userType;
+    private String jwtToken;
     private DoctorDTO doctor;
+
+    public DoctorLoginDTO() {
+    }
+
+    public DoctorLoginDTO(Long id, String firstName, String lastName, String email, UserType userType, String jwtToken, DoctorDTO doctor) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.userType = userType;
+        this.jwtToken = jwtToken;
+        this.doctor = doctor;
+    }
 
     public Long getId() {
         return id;
@@ -57,5 +71,13 @@ public class DoctorLoginDTO {
 
     public void setDoctor(DoctorDTO doctor) {
         this.doctor = doctor;
+    }
+
+    public String getJwtToken() {
+        return jwtToken;
+    }
+
+    public void setJwtToken(String jwtToken) {
+        this.jwtToken = jwtToken;
     }
 }

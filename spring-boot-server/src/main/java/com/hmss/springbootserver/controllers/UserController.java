@@ -4,6 +4,7 @@ import com.hmss.springbootserver.DTOs.doctor.*;
 import com.hmss.springbootserver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,54 +23,49 @@ public class UserController {
     }
 
     @GetMapping("/getDoctorsById/{ids}")
-    @CrossOrigin(origins = "*")
     public List<DoctorDTO> getDoctorsById(@PathVariable ("ids") List<Long> ids){
         return this.userService.getDoctorsById(ids);
     }
 
     @GetMapping("/getDoctorsSuggestionInfo/{ids}")
-    @CrossOrigin(origins = "*")
     public List<DoctorSuggestionInfoDTO> getDoctorsSuggestionInfo(@PathVariable ("ids") List<Long> ids){
         return this.userService.getDoctorsSuggestionInfo(ids);
     }
 
     @GetMapping("/getHospitalDoctorsWithSpeciality/{hospitalId}")
-    @CrossOrigin(origins = "*")
     public List<DoctorWithUserAndSpecialityDTO> getHospitalDoctorsWithSpeciality(@PathVariable ("hospitalId") Long hospitalId){
         return this.userService.getHospitalDoctorsWithSpeciality(hospitalId);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/createDoctor")
-    @CrossOrigin(origins = "*")
     public ResponseEntity<Object> createDoctor(@RequestBody CreateDoctorRequestDTO createDoctorRequest){
         return this.userService.createDoctor(createDoctorRequest);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/deleteDoctor/{id}")
-    @CrossOrigin(origins = "*")
     public ResponseEntity<Object> deleteDoctor(@PathVariable("id") Long id){
         return this.userService.deleteDoctor(id);
     }
 
     @GetMapping("/getDoctorProfile/{doctorId}")
-    @CrossOrigin(origins = "*")
     public ResponseEntity<Object> getDoctorProfile(@PathVariable ("doctorId") Long doctorId){
         return this.userService.getDoctorProfile(doctorId);
     }
 
     @GetMapping("/getPatientProfile/{patientId}")
-    @CrossOrigin(origins = "*")
     public ResponseEntity<Object> getPatientProfile(@PathVariable ("patientId") Long patientId){
         return this.userService.getPatientProfile(patientId);
     }
+
     @GetMapping("/getPatientBio/{patientId}")
-    @CrossOrigin(origins = "*")
     public ResponseEntity<Object> getPatientBio(@PathVariable ("patientId") Long patientId){
         return this.userService.getPatientBio(patientId);
     }
 
+    @PreAuthorize("hasRole('DOCTOR')")
     @PutMapping("/updateDoctorProfile/{doctorId}")
-    @CrossOrigin(origins = "*")
     public ResponseEntity<Object> updateDoctorProfile(@PathVariable("doctorId") Long doctorId,
                                                       @RequestParam(value="profileImage",required = false) MultipartFile profileImage,
                                                       @RequestParam("university") String university,
@@ -77,8 +73,8 @@ public class UserController {
         return this.userService.updateDoctorProfile(doctorId,profileImage,university,description);
     }
 
+    @PreAuthorize("hasRole('PATIENT')")
     @PutMapping("/updatePatientProfile/{patientId}")
-    @CrossOrigin(origins = "*")
     public ResponseEntity<Object> updatePatientProfile(@PathVariable("patientId") Long patientId,
                                                        @RequestParam("firstName") String firstName,
                                                        @RequestParam("lastName") String lastName,
@@ -95,7 +91,6 @@ public class UserController {
     }
 
     @PostMapping("/getSearchedDoctors")
-    @CrossOrigin(origins = "*")
     public List<DoctorSearchDTO> getSearchedDoctors(@RequestBody SearchDataRequest data){
         Long specialityId = data.getSpecialityId();
         String name = Objects.equals(data.getName(), "") ? null:data.getName();

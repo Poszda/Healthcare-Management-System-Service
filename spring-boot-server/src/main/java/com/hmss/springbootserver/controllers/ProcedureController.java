@@ -15,8 +15,8 @@ public class ProcedureController {
     public ProcedureController(ProcedureService procedureService) {
         this.procedureService = procedureService;
     }
+
     @GetMapping("/getProceduresIdsByHospitalId/{hospitalId}")
-    @CrossOrigin(origins = "*")
     public List<Long> getProceduresIdsByHospitalId(@PathVariable("hospitalId") Long hospitalId){
         return this.procedureService.getProceduresIdsByHospitalId(hospitalId);
     }

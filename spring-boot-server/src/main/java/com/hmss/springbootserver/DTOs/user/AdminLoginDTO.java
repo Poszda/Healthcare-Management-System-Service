@@ -9,7 +9,21 @@ public class AdminLoginDTO {
     private String lastName;
     private String email;
     private UserType userType;
+    private String jwtToken;
     private AdminWithHospitalDTO admin;
+
+    public AdminLoginDTO() {
+    }
+
+    public AdminLoginDTO(Long id, String firstName, String lastName, String email, UserType userType, String jwtToken, AdminWithHospitalDTO admin) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.userType = userType;
+        this.jwtToken = jwtToken;
+        this.admin = admin;
+    }
 
     public Long getId() {
         return id;
@@ -57,5 +71,13 @@ public class AdminLoginDTO {
 
     public void setAdmin(AdminWithHospitalDTO admin) {
         this.admin = admin;
+    }
+
+    public String getJwtToken() {
+        return jwtToken;
+    }
+
+    public void setJwtToken(String jwtToken) {
+        this.jwtToken = jwtToken;
     }
 }

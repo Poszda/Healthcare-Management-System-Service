@@ -1,4 +1,4 @@
-package com.hmss.springbootserver.DTOs;
+package com.hmss.springbootserver.DTOs.user;
 
 //@Getter
 //@Setter

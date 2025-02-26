@@ -13,6 +13,7 @@ import com.hmss.springbootserver.utils.models.projections.DoctorSearchProjection
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +36,7 @@ public class UserService {
     private final MedicationRepository medicationRepository;
     private final FileMetadataRepository fileMetadataRepository;
     private final FileService fileService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserService(DoctorRepository doctorRepository, PatientRepository patientRepository, AdminRepository adminRepository,
@@ -43,7 +45,7 @@ public class UserService {
                        UserRepository userRepository,
                        DiagnosticRepository diagnosticRepository,
                        MedicationRepository medicationRepository,
-                       FileMetadataRepository fileMetadataRepository, FileService fileService) {
+                       FileMetadataRepository fileMetadataRepository, FileService fileService, PasswordEncoder passwordEncoder) {
         this.doctorRepository = doctorRepository;
         this.patientRepository = patientRepository;
         this.adminRepository = adminRepository;
@@ -54,6 +56,7 @@ public class UserService {
         this.medicationRepository = medicationRepository;
         this.fileMetadataRepository = fileMetadataRepository;
         this.fileService = fileService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<DoctorDTO> getDoctorsById(List<Long> ids){
@@ -88,7 +91,7 @@ public class UserService {
 
         user.setUserType(UserType.DOCTOR);
         user.setEmail(createDoctorRequest.getEmail());
-        user.setPassword(createDoctorRequest.getPassword());
+        user.setPassword(passwordEncoder.encode(createDoctorRequest.getPassword()));
         user.setFirstName(createDoctorRequest.getFirstName());
         user.setLastName(createDoctorRequest.getLastName());
         doctor.setUser(user);
