@@ -9,6 +9,7 @@ export interface LoginData{
     lastName: string;
     email: string;
     userType: UserType;
+    jwtToken: string;
     patient?:Patient;
     doctor?: Doctor;
     admin?: Admin;

@@ -28,10 +28,13 @@ export class AuthService {
     return this.user?.userType.toLocaleLowerCase();
   }
 
+  getToken() {
+    return this.user?.jwtToken;
+  }
+
   isAuthenticated() {
-    //if (this.user) return true
-    //return false;
-    return true;
+    if (this.user) return true
+    return false;
   }
 
   signUp(form: SignUpForm) {
@@ -43,7 +46,7 @@ export class AuthService {
   }
 
   handleLogin(result : LoginData){
-    this.clearUser(); // clear localstorage
+    this.clearUser();
     const [user, userDetails] = this.parseLoginData(result);
     this.user = user;
     localStorage.setItem('user', JSON.stringify(this.user));
@@ -57,7 +60,8 @@ export class AuthService {
       firstName: loginData.firstName,
       lastName: loginData.lastName,
       email: loginData.email,
-      userType: loginData.userType
+      userType: loginData.userType,
+      jwtToken: loginData.jwtToken
     }
     let userTypeData;
     if (loginData.userType === UserType.Patient) userTypeData = loginData.patient;
