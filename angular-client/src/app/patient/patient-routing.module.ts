@@ -14,7 +14,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'appointments', component: AppointmentsComponent },
       { path: 'prescriptions', component: PrescriptionsComponent },
-      { path: 'account', component: AccountProfileComponent }, //de ce ma lasa?? nu trebuia sa fie invizbil in modulul asta?
+      { path: 'account', component: AccountProfileComponent },
       { path:'doctors/:id', component: DoctorProfileComponent},
     ]
   }

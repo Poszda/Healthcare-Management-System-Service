@@ -11,7 +11,7 @@ const routes: Routes = [
     { path: '', redirectTo:'dashboard',pathMatch:'prefix'},
     {path:'dashboard', component:DashboardComponent},
     {path:'appointments', component: AppointmentsComponent},
-    {path:'account', component: AccountProfileComponent}, // de ce ma lasa sa import NothingHereComponent?? nu trebuia sa fie invizbil in modulul asta?
+    {path:'account', component: AccountProfileComponent},
     {path:'patients/:id', component: PatientProfileComponent},
   ]}
 ];

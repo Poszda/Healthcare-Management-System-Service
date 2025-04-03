@@ -18,8 +18,8 @@ export class OverallstatusWidgetComponent implements OnInit,OnChanges {
 
 
   options = {
-    responsive : true, // seems that is not needed
-    maintainAspectRatio: false, // seems that is not needed even if should
+    responsive : true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         labels: {

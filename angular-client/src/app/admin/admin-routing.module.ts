@@ -10,7 +10,7 @@ const routes: Routes = [
     { path: '', redirectTo:'stats',pathMatch:'prefix'},
     {path:'stats', component: StatsComponent},
     {path:'manage', component: ManageComponent},
-    {path:'account', component: NothingHereComponent}, //de ce ma lasa?? nu trebuia sa fie invizbil in modulul asta?
+    {path:'account', component: NothingHereComponent},
   ]}
 ];
 
