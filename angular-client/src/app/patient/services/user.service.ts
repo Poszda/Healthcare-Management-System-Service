@@ -6,10 +6,12 @@ import { Patient } from 'src/app/core/models/patient.model';
 import { DoctorSearch } from '../models/doctor-search.model';
 import { DoctorSuggestionInfo } from '../models/doctor-suggestion-info.model';
 import { PatientBio } from '../models/patient-bio.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class UserService {
 
+  private baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
   getPatientIdFromLocalStorage() : number | null{
@@ -21,15 +23,15 @@ export class UserService {
   }
 
   getPatientBio(patientId : number){
-    return this.http.get<PatientBio>(`http://localhost:8080/api/users/getPatientBio/${patientId}`);
+    return this.http.get<PatientBio>(`${this.baseUrl}/api/users/getPatientBio/${patientId}`);
   }
 
   getDoctorsById(ids : number[]){
-    return this.http.get<any>(`http://localhost:8080/api/users/getDoctorsById/${ids}`);
+    return this.http.get<any>(`${this.baseUrl}/api/users/getDoctorsById/${ids}`);
   }
 
   getDoctorsSuggestionInfo(ids : number[]){
-    return this.http.get<DoctorSuggestionInfo[]>(`http://localhost:8080/api/users/getDoctorsSuggestionInfo/${ids}`);
+    return this.http.get<DoctorSuggestionInfo[]>(`${this.baseUrl}/api/users/getDoctorsSuggestionInfo/${ids}`);
   }
 
   updatePatientProfile(patientId : number,data : any){
@@ -43,11 +45,11 @@ export class UserService {
     formData.append('birthDate',data.birthDate != null ? moment(data.birthDate).format('YYYY-MM-DD'):'')
     formData.append('profileImage',data.profileImage != null ?data.profileImage:'')
 
-   return this.http.put<any>(`http://localhost:8080/api/users/updatePatientProfile/${patientId}`,formData);
+   return this.http.put<any>(`${this.baseUrl}/api/users/updatePatientProfile/${patientId}`,formData);
   }
 
   getSearchedDoctors(data : any){
-    return this.http.post<DoctorSearch[]>(`http://localhost:8080/api/users/getSearchedDoctors`,data);
+    return this.http.post<DoctorSearch[]>(`${this.baseUrl}/api/users/getSearchedDoctors`,data);
   }
   
 }

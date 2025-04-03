@@ -1,38 +1,41 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { newDoctor } from '../models/new-doctor.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class HospitalManagementService {
 
+  private baseUrl = environment.apiUrl;
+
   constructor(private http : HttpClient) { }
 
   getHospitalSpecialities(hospitalId : number){
-    return this.http.get<any>(`http://localhost:8080/api/specialities/getHospitalSpecialities/${hospitalId}`);
+    return this.http.get<any>(`${this.baseUrl}/api/specialities/getHospitalSpecialities/${hospitalId}`);
   }
 
   getSpecialitiesWithProcedures(){
-    return this.http.get<any>(`http://localhost:8080/api/specialities/getSpecialitiesWithProcedures`);
+    return this.http.get<any>(`${this.baseUrl}/api/specialities/getSpecialitiesWithProcedures`);
   }
 
   getProceduresIdsByHospitalId(hospitalId : number){
-    return this.http.get<any>(`http://localhost:8080/api/procedures/getProceduresIdsByHospitalId/${hospitalId}`);
+    return this.http.get<any>(`${this.baseUrl}/api/procedures/getProceduresIdsByHospitalId/${hospitalId}`);
   }
 
   getDoctorsTableData(hospitalId : number){
-    return this.http.get<any>(`http://localhost:8080/api/users/getHospitalDoctorsWithSpeciality/${hospitalId}`);
+    return this.http.get<any>(`${this.baseUrl}/api/users/getHospitalDoctorsWithSpeciality/${hospitalId}`);
   }
 
   saveHospitalProcedures(hospitalId : number, proceduresIds : number[]){
-    return this.http.post(`http://localhost:8080/api/hospitals/saveHospitalProcedures/${hospitalId}`,proceduresIds,{ responseType: 'text' });
+    return this.http.post(`${this.baseUrl}/api/hospitals/saveHospitalProcedures/${hospitalId}`,proceduresIds,{ responseType: 'text' });
   }
   
   createDoctor(doctor : newDoctor){
-    return this.http.post(`http://localhost:8080/api/users/createDoctor`,doctor);
+    return this.http.post(`${this.baseUrl}/api/users/createDoctor`,doctor);
   }
 
   deleteDoctor(doctorId : number){
-    return this.http.delete(`http://localhost:8080/api/users/deleteDoctor/${doctorId}`);
+    return this.http.delete(`${this.baseUrl}/api/users/deleteDoctor/${doctorId}`);
   }
 
   getHospitalFromLocalStorage(){

@@ -59,7 +59,6 @@ import { UploadFileComponent } from './components/upload-file/upload-file.compon
     RouterModule, 
     FormsModule,
     ReactiveFormsModule,
-
     ChartModule, //prime ng
     CalendarModule,
     InputTextModule,
@@ -77,15 +76,15 @@ import { UploadFileComponent } from './components/upload-file/upload-file.compon
     RadioButtonModule,
   ],
   exports:[
-    FormsModule, //??
-    ReactiveFormsModule, //?
+    FormsModule,
+    ReactiveFormsModule,
     NavbarComponent,
     WidgetDotContainerComponent,
     WidgetLinkContainerComponent,
     WidgetSimpleContainerComponent,
     AppointmentsWidgetComponent,
-    ChartModule,// should? it could but meh
-    MatDialogModule, // should?
+    ChartModule,
+    MatDialogModule,
     CalendarModule,
     InputTextModule,
     InputTextareaModule,

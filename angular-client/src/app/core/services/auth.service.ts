@@ -9,12 +9,14 @@ import { Doctor } from '../models/doctor.model';
 import { Admin } from '../models/admin.model';
 import { LoginForm } from '../pages/authentication/models/login-form.model';
 import { SignUpForm } from '../pages/authentication/models/signup-form.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  private baseUrl = environment.apiUrl;
   private user: User | null | undefined;
   constructor(private http: HttpClient, private router: Router) {
     this.autoLogin();
@@ -38,11 +40,11 @@ export class AuthService {
   }
 
   signUp(form: SignUpForm) {
-    return this.http.post<LoginData>("http://localhost:8080/api/auth/signup", form);
+    return this.http.post<LoginData>(`${this.baseUrl}/api/auth/signup`, form);
   }
 
   login(form: LoginForm) {
-    return this.http.post<LoginData>("http://localhost:8080/api/auth/login", form); //maybe use rxjs in the future
+    return this.http.post<LoginData>(`${this.baseUrl}/api/auth/login`, form); //maybe use rxjs in the future
   }
 
   handleLogin(result : LoginData){
