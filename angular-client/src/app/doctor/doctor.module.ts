@@ -12,7 +12,7 @@ import { AppointmentsTableComponent } from './components/appointments/appointmen
 import { AppointmentsService } from './services/appointments.service';
 import { StatisticsService } from './services/statistics.service';
 import { DoctorService } from './services/doctor.service';
-import {LayoutModule} from '@angular/cdk/layout';
+import { LayoutModule } from '@angular/cdk/layout';
 import { DiagnosticFormComponent } from './components/appointments/diagnostic-form/diagnostic-form.component';
 import { ProcedureTrendsWidgetComponent } from './components/dashboard/procedure-trends-widget/procedure-trends-widget.component';
 
@@ -38,10 +38,10 @@ import { EditProfileFormComponent } from './components/account-profile/edit-prof
         SharedModule,
         LayoutModule
     ],
-    providers:[
+    providers: [
         AppointmentsService,
         StatisticsService,
         DoctorService
-      ]
+    ]
 })
 export class DoctorModule { }

@@ -34,6 +34,7 @@ import { ProfileTreatmentsHistoryComponent } from './components/profile-treatmen
 import {RadioButtonModule} from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
+import { NothingHereComponent } from './pages/nothing-here/nothing-here.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { UploadFileComponent } from './components/upload-file/upload-file.compon
     ProfileMedicalHistoryComponent,
     ProfileTreatmentsHistoryComponent,
     UploadFileComponent,
+    NothingHereComponent
   ],
   imports: [
     CommonModule,
@@ -106,7 +108,8 @@ import { UploadFileComponent } from './components/upload-file/upload-file.compon
     ProfileInformationCardComponent,
     ProfileMedicalHistoryComponent,
     ProfileTreatmentsHistoryComponent,
-    UploadFileComponent
+    UploadFileComponent,
+    NothingHereComponent
   ]
 })
 export class SharedModule { }

@@ -7,8 +7,8 @@ import { LoginData } from '../models/login-data.model';
 import { Patient } from '../models/patient.model';
 import { Doctor } from '../models/doctor.model';
 import { Admin } from '../models/admin.model';
-import { LoginForm } from '../pages/authentication/models/login-form.model';
-import { SignUpForm } from '../pages/authentication/models/signup-form.model';
+import { LoginForm } from '../models/login-form.model';
+import { SignUpForm } from '../models/signup-form.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

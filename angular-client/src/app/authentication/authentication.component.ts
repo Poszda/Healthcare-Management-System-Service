@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { SignUpForm } from './models/signup-form.model';
-import { LoginForm } from './models/login-form.model';
+import { AuthService } from '../core/services/auth.service';
+import { SignUpForm } from '../core/models/signup-form.model';
+import { LoginForm } from '../core/models/login-form.model';
 import { MessageService } from 'primeng/api';
 
 

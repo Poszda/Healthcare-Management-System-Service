@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { SignUpForm } from 'src/app/core/pages/authentication/models/signup-form.model';
+import { SignUpForm } from '../../../core/models/signup-form.model';
 import { passwordMatch} from 'src/app/shared/utils/validators/password-match.validator';
 
 @Component({
