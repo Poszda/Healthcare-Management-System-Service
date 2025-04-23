@@ -24,7 +24,7 @@ export class AppointmentsService {
   }
 
   createAppointment(appointment : NewAppointment){
-    return this.http.post<NewAppointment>("${this.baseUrl}/api/appointments/createAppointment", appointment);
+    return this.http.post<NewAppointment>(`${this.baseUrl}/api/appointments/createAppointment`, appointment);
   }
 
   getAppointmentsCards(patientId : number){

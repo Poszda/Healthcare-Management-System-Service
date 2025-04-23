@@ -11,6 +11,7 @@
     border-radius: 5px;
     background-color: white;
     height: 500px;
+    box-shadow: rgba(156, 154, 154, 0.09) 0px 3px 12px;
 }
 
 .doctors-table{ 

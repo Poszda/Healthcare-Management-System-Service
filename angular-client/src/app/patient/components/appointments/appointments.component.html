@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 style="color:var(--color3);font-size: 24px; margin-bottom: 15px;">Future Appointments</h1>
+    <h1 style="color:var(--color3);font-size: 20px; margin-bottom: 15px;">Future Appointments</h1>
     <div class="appointments">
         <div class='appointment-button'>
             <div class='btn' (click)="openForm()">
@@ -8,7 +8,7 @@
         </div>
         <app-appointment-card (deleteAppointment)="onDeleteAppointment($event)" [appointment]="futureAppointment"  *ngFor="let futureAppointment of futureAppointments"></app-appointment-card>
     </div>
-    <h1 style="color:var(--color3);font-size: 24px; margin-top:15px;margin-bottom: 15px;">Past Appointments</h1>
+    <h1 style="color:var(--color3);font-size: 20px; margin-top:15px;margin-bottom: 15px;">Past Appointments</h1>
     <div class="appointments">
         <app-appointment-card [appointment]="pastAppointment" *ngFor="let pastAppointment of pastAppointments"></app-appointment-card>
     </div>

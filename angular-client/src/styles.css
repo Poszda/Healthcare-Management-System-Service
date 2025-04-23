@@ -3,19 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 :root {
-    /*     --color1: #6320ee;
-    --color2 : #211a1d;
-    --color3: #8075ff;
-    --color4: #505863; 
-    --coolor5: #F5F5F5*/
     --color1: #6D71F9;
     --color2: #54C1FB;
     --color3: #272848;
     --color4: #f7f8fc;
-    /* EEF0F8 f7f8fc*/
     --color5: #FFFFFF;
     --color6: black;
-
     --color7: #ff7070;
 
     /* secondary */
@@ -64,7 +57,6 @@ button[disabled] {
     color: black;
     border: 1px solid #ced4da;
     border-radius: 6px;
-    /* nicer if 5 */
     padding-left: 10px;
     padding-right: 10px;
     outline: none;
@@ -73,9 +65,7 @@ button[disabled] {
 
 .basic-input {
     height: 41px;
-    /* nicer if 45 */
 }
-
 
 /* BUTTONS */
 .basic-button {
@@ -90,6 +80,11 @@ button[disabled] {
 
 .basic-button.primary {
     background-color: var(--color1);
+    color: white;
+}
+
+.basic-button.secondary {
+    background-color: var(--color2);
     color: white;
 }
 
@@ -119,12 +114,6 @@ button[disabled] {
 .round-button.less-purple {
     background-color: var(--secondaryColor1);
 }
-
-/* input.p-inputtext:enabled:focus {
-    outline:none;
-    box-shadow: none;
-    border-color: var(--color1);
-} */
 
 /* ICONS */
 

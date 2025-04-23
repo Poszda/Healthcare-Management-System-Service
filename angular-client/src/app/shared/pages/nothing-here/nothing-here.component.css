@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--color1);
+  color: var(--color5);
+  text-align: center;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#notfound-img{
+  max-width: 450px; 
+  width: 100%;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+}

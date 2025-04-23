@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nothing-here',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NothingHereComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,private authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  navigate(){
+    const route = this.authService.getUserRoute()? this.authService.getUserRoute()! : 'authentication';
+    this.router.navigateByUrl(route);
   }
 
 }

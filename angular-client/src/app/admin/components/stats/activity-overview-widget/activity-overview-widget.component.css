@@ -13,6 +13,7 @@
     background-color: white;
     justify-content: space-between;
     flex-grow: 1;
+    box-shadow: rgba(156, 154, 154, 0.09) 0px 3px 12px;
 }
 
 .icon-cover {

@@ -1,5 +1,12 @@
 <div class="container">
-    <div class="prescriptions-list">
+    <div class="prescriptions-list" *ngIf="diagnostics && diagnostics.length > 0; else notice">
         <app-prescription-card *ngFor="let diagnostic of diagnostics" [diagnostic]="diagnostic" class="card" (seeMore)="openPrescriptionDialog(diagnostic)"></app-prescription-card>
     </div>
+    <ng-template #notice>
+        <div class="notice">
+            <img id='nodiagnostics-img' src="assets/icons/nodiagnostics.png"/>
+            <h1 class="title">No prescriptions yet</h1>
+            <p class="subtitle">You have no prescriptions yet.</p>
+        </div>
+    </ng-template>
 </div>

@@ -108,9 +108,8 @@
     .diagnostic-section{
         max-height: auto;
         overflow: visible;
-    }
-    .appointment-section{
-        background-color: transparent;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 }
 @media only screen and (max-width: 480px) {

@@ -4,6 +4,7 @@
     padding: 30px;
     border-radius: 5px;
     background-color: white;
+    box-shadow: rgba(156, 154, 154, 0.09) 0px 3px 12px;
 }
 .head{
     margin-bottom: 15px;
