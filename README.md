@@ -13,7 +13,7 @@ With tools like social-media-inspired medical profiles, smart appointment schedu
 
 ###  🚀 **Features by User Type**
 
-#### 🧑‍⚕️**Patients**
+#### 👲**Patients**
 
 - **Smart Appointment Booking**: Schedule appointments across various medical centers, filtered by location, clinic, doctor, and date. A built-in algorithm suggests available time slots by analyzing doctor availability in real-time.
 - **Medical Records access**: View prescriptions and medical reviews issued by doctors, including treatments and any prescribed medications.
@@ -31,7 +31,7 @@ With tools like social-media-inspired medical profiles, smart appointment schedu
     - Patient demographic distribution (age groups)
     - Most frequently performed procedures in recent months
 
-####  🏥 **Admins (Hospital Managers)**
+####  🧑‍💼 **Admins (Hospital Managers)**
 
 - **Comprehensive Statistics**:
 	- Monthly revenue trends across the medical center
