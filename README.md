@@ -1,5 +1,6 @@
 
 A web-based management system designed for large healthcare organizations with multiple medical centers (hospitals, clinics, etc.). It supports three distinct user roles—**Patients**, **Doctors**, and **Hospital Managers**—each with tailored features for their specific needs.
+
 With tools like social-media-inspired medical profiles, smart appointment scheduling and role-based access, the platform helps users manage their health information, appointments, and medical records efficiently. Doctors can access analytics and patient data to improve decision-making, while manager have control over the clinical and operational aspects of the medical centers.
 ### ✨**Key Highlights**
 
