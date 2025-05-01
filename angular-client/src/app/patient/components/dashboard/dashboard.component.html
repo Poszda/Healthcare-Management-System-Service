@@ -6,7 +6,7 @@
             <app-prescriptions-widget class="prescriptions" [diagnostics]="diagnostics" (seeMore)="openDiagnosticDialog($event)"></app-prescriptions-widget>
         </div>
         <div class="right">
-            <app-appointments-widget title="Next Appointments" [appointments]="todayNextAppointments" [displayDate]="true" type="patient"></app-appointments-widget>
+            <app-appointments-widget title="Next Appointments" [appointments]="nextAppointments" [displayDate]="true" type="patient"></app-appointments-widget>
         </div>
     </div>
 </div>

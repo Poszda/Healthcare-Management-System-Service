@@ -111,8 +111,8 @@ public class StatisticsService {
         LocalDate startDate = LocalDate.now().minusMonths(5).withDayOfMonth(1);
         LocalDate endDate  = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
         List<DoctorPatientsVisitsProjection> youngsters = this.patientRepository.countDoctorPatientsVisitsLast6Months(doctorId,startDate,endDate,0,25);
-        List<DoctorPatientsVisitsProjection> adults = this.patientRepository.countDoctorPatientsVisitsLast6Months(doctorId,startDate,endDate,25,65);
-        List<DoctorPatientsVisitsProjection> elders = this.patientRepository.countDoctorPatientsVisitsLast6Months(doctorId,startDate,endDate,65,150);
+        List<DoctorPatientsVisitsProjection> adults = this.patientRepository.countDoctorPatientsVisitsLast6Months(doctorId,startDate,endDate,26,55);
+        List<DoctorPatientsVisitsProjection> elders = this.patientRepository.countDoctorPatientsVisitsLast6Months(doctorId,startDate,endDate,56,150);
 
         //don t need to bother with years since we can have only appointments
         //from last year to the current year on this 6 months statistic

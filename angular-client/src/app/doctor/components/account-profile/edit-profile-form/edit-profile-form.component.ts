@@ -21,7 +21,6 @@ export class EditProfileFormComponent{
   });
 
   edit() {
-    console.log(this.form.getRawValue())
     this.form.get('description')
     this.dialogRef.close(this.form.getRawValue())
   }

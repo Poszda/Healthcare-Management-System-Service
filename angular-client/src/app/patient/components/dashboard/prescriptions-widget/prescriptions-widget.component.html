@@ -4,6 +4,6 @@
             <app-prescription-card class="widget-card" *ngFor="let diagnostic of diagnostics" [diagnostic]="diagnostic"
                 (seeMore)="openExtendedDiagnostic(diagnostic)"></app-prescription-card>
         </ng-container>
-        <ng-template #notice><p class="notice">No diagnostics found</p></ng-template>
+        <ng-template #notice><p class="notice">No prescriptions found</p></ng-template>
     </div>
 </app-widget-link-container>

@@ -37,21 +37,27 @@ export class AppointmentsComponent implements OnInit {
   }
 
   transformAppointmentData(res: DoctorAppointment[]): DoctorAppointmentTabelData[] {
-    const result = res.map(el => {
-      const appointment: DoctorAppointmentTabelData = {
-        id: el.id,
-        date: el.date,
-        time: this.getInterval(el.time, el.duration),
-        procedureName: el.procedureName,
-        patientId: el.patientId,
-        name: el.firstName + ' ' + el.lastName,
-        phone: el.phone,
-        age: el.age,
-        status: el.status,
-        profileImage: el.profileImage
-      }
-      return appointment
-    })
+    const result = res
+      .sort((a, b) => {
+        const dateTimeA = new Date(`${a.date}T${a.time}`);
+        const dateTimeB = new Date(`${b.date}T${b.time}`);
+        return dateTimeB.getTime() - dateTimeA.getTime(); // most recent first
+      })
+      .map(el => {
+        const appointment: DoctorAppointmentTabelData = {
+          id: el.id,
+          date: el.date,
+          time: this.getInterval(el.time, el.duration),
+          procedureName: el.procedureName,
+          patientId: el.patientId,
+          name: el.firstName + ' ' + el.lastName,
+          phone: el.phone,
+          age: el.age,
+          status: el.status,
+          profileImage: el.profileImage
+        }
+        return appointment
+      })
 
     return result;
   }

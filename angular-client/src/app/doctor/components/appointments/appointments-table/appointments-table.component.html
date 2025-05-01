@@ -21,7 +21,7 @@
                         <p-calendar [style]="{'width':'100%'}" [appendTo]="'body'" [showButtonBar]="true"
                             [maxDate]="maxDate" [minDate]="minDate" selectionMode="range" [readonlyInput]="true"
                             placeholder="Select period" [(ngModel)]="filter.period"
-                            (ngModelChange)="filterAppointments()"></p-calendar>
+                            (ngModelChange)="filterAppointments()" dateFormat="mm/dd/yy"></p-calendar>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     </div>
                 </td>
                 <td>{{ appointment.procedureName }}</td>
-                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.date | date: 'MM/dd/yyyy' }}</td>
                 <td>{{ appointment.time }}</td>
                 <td>{{ appointment.phone }}</td>
                 <td>

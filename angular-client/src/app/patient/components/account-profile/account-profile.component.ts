@@ -56,7 +56,7 @@ export class AccountProfileComponent implements OnInit{
 
     obtainSummary(data : any){
       const list : string[] = [
-        `${moment().diff(moment(data.patient.birthDate),'years')} years, ${'Male'}`,
+        `${moment().diff(moment(data.patient.birthDate),'years')} years`,
       ]
 
       const result : ProfileSummary = {

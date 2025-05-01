@@ -75,7 +75,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             response.getWriter().write("The JWT signature is invalid");
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // 500 for general errors
-            response.getWriter().write("An unknown error occurred while processing the JWT");
+            response.getWriter().write("An unknown error occurred");
         }
     }
 }

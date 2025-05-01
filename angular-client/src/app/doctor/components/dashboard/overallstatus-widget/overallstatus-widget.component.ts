@@ -106,7 +106,6 @@ export class OverallstatusWidgetComponent implements OnInit,OnChanges {
       this.updateChart()
     }
     if(changes['appointmentsStatus']){
-      console.log(this.appointmentsStatus)
       this.appointmentsStatus.forEach(el => {
         if(el.status === AppointmentStatus.UPCOMING) this.upcoming = el.counter
         if(el.status === AppointmentStatus.IN_PROGRESS) this.inProgress = el.counter

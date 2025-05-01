@@ -17,7 +17,7 @@ import { PatientBio } from '../../models/patient-bio.model';
 })
 export class DashboardComponent implements OnInit {
   patientId: number = 0;
-  todayNextAppointments : AppointmentNext[] = []
+  nextAppointments : AppointmentNext[] = []
   patient : PatientBio | undefined;
   diagnostics : DiagnosticExtended[] = [];
   constructor(private appointmentsService : AppointmentsService, private userService : UserService, private specialitiesService : SpecialitiesService, private dialog : MatDialog) { }
@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
   getNextAppointments(){
     this.appointmentsService.getNextAppointments(this.patientId).subscribe(
       res => {
-        this.todayNextAppointments = res.slice(0,10)
+        this.nextAppointments = res.slice(0,10)
       },
       err => {
         console.log(err)

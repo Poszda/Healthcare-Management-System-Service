@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StatisticsService } from '../../services/statistics.service';
 import { DoctorService } from '../../services/doctor.service';
 import { TodayProgramStatistic } from '../../models/today-program-statistic.model';
@@ -65,7 +65,6 @@ export class DashboardComponent implements OnInit {
   getPatientsVisitsByAgeGroup() {
     this.statisticsService.getPatientsVisitsByAgeGroup(this.doctorId).subscribe(
       res => {
-        console.log(res)
         this.patientsVisitsStatistic = this.transformToAgeStatistic(res);
       },
       err => {
@@ -76,7 +75,7 @@ export class DashboardComponent implements OnInit {
 
   transformToAgeStatistic(data : PatientsVisitsByAgeGroup[]){
     const months = data.map(el => el.month);
-    const ageGroups = ["0 - 25 yrs", "25 - 65 yrs","65+ yrs"]
+    const ageGroups = ["0 - 25 yrs", "26 - 55 yrs","56+ yrs"]
     const youngPatients = data.map(el => el.youngPatients)
     const adultPatients = data.map(el => el.adultPatients)
     const oldPatients = data.map(el => el.oldPatients)
@@ -104,7 +103,6 @@ export class DashboardComponent implements OnInit {
   getDoctorInterventionsByProcedure() {
     this.statisticsService.getDoctorInterventionsByProcedure(this.doctorId).subscribe(
       res => {
-        console.log(res)
         this.procedureTrends = this.obtainTopThreeInterventions(res);
       },
       err => {

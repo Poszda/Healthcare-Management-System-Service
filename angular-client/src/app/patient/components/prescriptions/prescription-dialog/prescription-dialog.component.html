@@ -27,7 +27,7 @@
 
                 <div class="reviewed">
                     <p class="subtitle">Reviewed at</p>
-                    <p>{{diagnostic.createdAt}}</p>
+                    <p>{{diagnostic.createdAt | date: 'MM/dd/yyyy'}}</p>
                 </div>
             </div>
             <div class="diagnostic-section">
@@ -46,7 +46,7 @@
                             <div class="img-box"><img class="icon-small" src="assets/icons/capsule-white.png" alt=""></div>
                             <div class="line-text">
                                 <p class="name">{{medication.name}}</p>
-                                <p class="subtitle">{{medication.numberOfDays}} days ,{{medication.dose}} pills</p>
+                                <p class="subtitle">{{medication.numberOfDays}} days, {{medication.dose}}</p>
                             </div>
                         </div>
                     </div>

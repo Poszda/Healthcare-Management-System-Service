@@ -35,7 +35,7 @@ export class PrescriptionsComponent implements OnInit,OnDestroy{
   getDiagnostics(){
     this.appointmentsService.getDiagnostics(this.userService.getPatientIdFromLocalStorage()!).subscribe(
       res =>{
-        this.diagnostics = res;
+        this.diagnostics = res.sort((a : any, b : any) =>  new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       },
       err =>{
         console.log(err)
