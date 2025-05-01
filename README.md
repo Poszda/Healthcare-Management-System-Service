@@ -1,7 +1,7 @@
 
 A web-based management system designed for large healthcare organizations with multiple medical centers (hospitals, clinics, etc.). It supports three distinct user roles—**Patients**, **Doctors**, and **Hospital Managers**—each with tailored features for their specific needs.
 With tools like social-media-inspired medical profiles, smart appointment scheduling and role-based access, the platform helps users manage their health information, appointments, and medical records efficiently. Doctors can access analytics and patient data to improve decision-making, while manager have control over the clinical and operational aspects of the medical centers.
-### ✨**Key Highlights
+### ✨**Key Highlights**
 
 - **Social-media-inspired medical profiles** – profiles that make use of practical social media-like features for both patients and doctors allowing for streamlined personal data management and enhanced discoverability of medical professionals.
 - **Scheduling System** – Algorithm that enables patients to self-schedule appointments based on their preferences eliminating the need for manual approval
