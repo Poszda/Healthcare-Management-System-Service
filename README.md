@@ -1,7 +1,7 @@
 
 A web-based management system designed for large healthcare organizations with multiple medical centers (hospitals, clinics, etc.). It supports three distinct user roles—**Patients**, **Doctors**, and **Hospital Managers**—each with tailored features for their specific needs.
 
-With tools like social-media-inspired medical profiles, smart appointment scheduling and role-based access, the platform helps users manage their health information, appointments, and medical records efficiently. Doctors can access analytics and patient data to improve decision-making, while manager have control over the clinical and operational aspects of the medical centers.
+With tools like social-media-inspired medical profiles, smart appointment scheduling and role-based access, the platform helps users manage their health information, appointments, and medical records efficiently. Doctors can access analytics and patient data to improve decision-making, while managers have control over the clinical and operational aspects of the medical centers.
 
 > 🎯 **Curious what the app looks like?**  
 [Jump to Application Demo ↓](#application-demo) to browse videos showcasing key features and user experiences.
@@ -13,8 +13,9 @@ With tools like social-media-inspired medical profiles, smart appointment schedu
 - **Scheduling System** – Algorithm that enables patients to self-schedule appointments based on their preferences eliminating the need for manual approval
 - **Role-Based Access** – Custom dashboards and features tailored for Patients, Doctors, and Hospital Managers (Admins).
 - **Smart Medical Records** – Auto-updated medical history and treatment history based on clinical reviews.
-- **Advanced Analytics** – Real-time data visualizations for both clinical and operational performance.
+- **Analytics** – Data visualizations for both clinical and operational performance.
 - **User Profile Management** – Editable personal and contact information for users.
+- **Optimized Performance with Lazy Loading** – Only the parts of the app relevant to the current user are loaded, reducing loading time and ensuring better efficiency.
 
 ## 🚀 **Features by User Type**
 
