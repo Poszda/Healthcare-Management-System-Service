@@ -3,7 +3,8 @@ A web-based management system designed for large healthcare organizations with m
 
 With tools like social-media-inspired medical profiles, smart appointment scheduling and role-based access, the platform helps users manage their health information, appointments, and medical records efficiently. Doctors can access analytics and patient data to improve decision-making, while manager have control over the clinical and operational aspects of the medical centers.
 
-[testing link](#testing-things)
+> 🎯 **Curious what the app looks like?**  
+[Jump to Project Visuals & GIFs ↓](#project-visuals--gifs) to browse interface screenshots and GIFs illustrating the core design and user experience.
 
 
 ## ✨**Key Highlights**
@@ -43,4 +44,5 @@ With tools like social-media-inspired medical profiles, smart appointment schedu
 - **Clinical Configuration**: Ability to add new specialties and procedures as needed across the network.
 - **Medical Staff Management**: Create and assign doctors to specific specialties and clinics, ensuring proper staff allocation.
 
-## 🚀Testing Things
+## 💡Project Visuals & Gifs
+Here you'll find a collection of images and GIFs showing the application's user interfaces, core features and workflows for Patients, Doctors, and Admins.
