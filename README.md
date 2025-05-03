@@ -15,7 +15,7 @@ With tools like social-media-inspired medical profiles, smart appointment schedu
 - **Smart Medical Records** – Auto-updated medical history and treatment history based on clinical reviews.
 - **Analytics** – Data visualizations for both clinical and operational performance.
 - **User Profile Management** – Editable personal and contact information for users.
-- **Optimized Performance with Lazy Loading** – Only the parts of the app relevant to the current user are loaded, reducing loading time and ensuring better efficiency.
+- **Optimized Performance with Lazy Loading** – Only the parts of the app relevant to the current user are loaded, reducing overall loading time.
 
 ## 🚀 **Features by User Type**
 
