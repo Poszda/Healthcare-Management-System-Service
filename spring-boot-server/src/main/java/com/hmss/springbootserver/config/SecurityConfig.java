@@ -38,7 +38,13 @@ public class SecurityConfig {
                 .cors()
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/signup", "/api/auth/login", "/files/**").permitAll()  // Allow public access
+                .requestMatchers(
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html",
+                        "/api/auth/signup",
+                        "/api/auth/login",
+                        "/files/**").permitAll()  // Allow public access
                 .anyRequest().authenticated()  // All other requests require authentication
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
