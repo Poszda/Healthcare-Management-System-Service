@@ -1,17 +1,17 @@
 package com.hmss.springbootserver.DTOs.doctor;
 
-public class UpdatedDoctorProfile {
+public class UpdatedDoctorProfileDTO {
     private String university;
     private String description;
     private String profileImage;
 
-    public UpdatedDoctorProfile(String university, String description, String profileImage) {
+    public UpdatedDoctorProfileDTO(String university, String description, String profileImage) {
         this.university = university;
         this.description = description;
         this.profileImage = profileImage;
     }
 
-    public UpdatedDoctorProfile() {
+    public UpdatedDoctorProfileDTO() {
     }
 
     public String getUniversity() {

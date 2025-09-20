@@ -5,6 +5,10 @@ import com.hmss.springbootserver.DTOs.user.SignUpRequestDTO;
 import com.hmss.springbootserver.DTOs.user.AdminLoginDTO;
 import com.hmss.springbootserver.DTOs.user.DoctorLoginDTO;
 import com.hmss.springbootserver.DTOs.user.PatientLoginDTO;
+import com.hmss.springbootserver.exceptions.EmailAlreadyInUseException;
+import com.hmss.springbootserver.exceptions.IncorrectPasswordException;
+import com.hmss.springbootserver.exceptions.PasswordsNotMatchingException;
+import com.hmss.springbootserver.exceptions.ResourceNotFoundException;
 import com.hmss.springbootserver.security.JwtService;
 import com.hmss.springbootserver.entities.Patient;
 import com.hmss.springbootserver.entities.User;
@@ -14,8 +18,6 @@ import com.hmss.springbootserver.mappers.DoctorMapper;
 import com.hmss.springbootserver.mappers.PatientMapper;
 import com.hmss.springbootserver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -35,13 +37,13 @@ public class AuthService {
         this.jwtService = jwtService;
     }
 
-    public ResponseEntity<Object> login(LoginRequestDTO loginRequest){
+    public Object login(LoginRequestDTO loginRequest){
         Optional<User> user = userRepository.findByEmail(loginRequest.getEmail());
         if (user.isPresent()){
             User foundUser = user.get();
             if (passwordEncoder.matches(loginRequest.getPassword(), foundUser.getPassword())){
                 if (foundUser.getUserType() == UserType.PATIENT) {
-                    var x = new PatientLoginDTO(
+                    PatientLoginDTO patient = new PatientLoginDTO(
                             foundUser.getId(),
                             foundUser.getFirstName(),
                             foundUser.getLastName(),
@@ -50,10 +52,10 @@ public class AuthService {
                             jwtService.generateToken(foundUser.getEmail()),
                             PatientMapper.INSTANCE.toPatientDTO(foundUser.getPatient())
                     );
-                    return new ResponseEntity<>(x, HttpStatus.OK);
+                    return patient;
                 }
                 else if (foundUser.getUserType() == UserType.DOCTOR) {
-                    var x = new DoctorLoginDTO(
+                    DoctorLoginDTO doctor = new DoctorLoginDTO(
                             foundUser.getId(),
                             foundUser.getFirstName(),
                             foundUser.getLastName(),
@@ -62,10 +64,10 @@ public class AuthService {
                             jwtService.generateToken(foundUser.getEmail()),
                             DoctorMapper.INSTANCE.toDoctorDTO(foundUser.getDoctor())
                     );
-                    return new ResponseEntity<>(x, HttpStatus.OK);
+                    return doctor;
                 }
                 else if (foundUser.getUserType() == UserType.ADMIN) {
-                    var x = new AdminLoginDTO(
+                    AdminLoginDTO admin = new AdminLoginDTO(
                             foundUser.getId(),
                             foundUser.getFirstName(),
                             foundUser.getLastName(),
@@ -74,27 +76,27 @@ public class AuthService {
                             jwtService.generateToken(foundUser.getEmail()),
                             AdminMapper.INSTANCE.toAdminWithHospitalDTO(foundUser.getAdmin())
                     );
-                    return new ResponseEntity<>(x, HttpStatus.OK);
+                    return admin;
                 }
                 else{
-                    return new ResponseEntity<>("User not found",HttpStatus.NOT_FOUND);
+                    throw new ResourceNotFoundException("User not found");
                 }
             }
             else{
-                return new ResponseEntity<>("Incorrect password",HttpStatus.UNAUTHORIZED);
+                throw new IncorrectPasswordException("Incorrect password");
             }
         }
         else{
-            return new ResponseEntity<>("User not found",HttpStatus.NOT_FOUND);
+            throw new ResourceNotFoundException("User not found");
         }
     }
 
-    public ResponseEntity<Object> signUp(SignUpRequestDTO signUpRequest){
+    public void signUp(SignUpRequestDTO signUpRequest){
         if(this.userRepository.findByEmail(signUpRequest.getEmail()).isPresent()){
-            return new ResponseEntity<>("Email already exist",HttpStatus.CONFLICT);
+            throw new EmailAlreadyInUseException("Email already in use");
         }
         if(!Objects.equals(signUpRequest.getPassword(),signUpRequest.getRePassword())){
-            return new ResponseEntity<>("Passwords does not match",HttpStatus.BAD_REQUEST);
+            throw new PasswordsNotMatchingException("Passwords does not match");
         }
         User user = new User();
         Patient patient = new Patient();
@@ -108,7 +110,5 @@ public class AuthService {
         patient.setUser(user);
 
         userRepository.save(user);
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

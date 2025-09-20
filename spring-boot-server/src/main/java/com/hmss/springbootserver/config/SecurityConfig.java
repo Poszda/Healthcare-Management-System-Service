@@ -42,6 +42,7 @@ public class SecurityConfig {
                         "/v3/api-docs/**",
                         "/swagger-ui/**",
                         "/swagger-ui.html",
+                        "/error",
                         "/api/auth/signup",
                         "/api/auth/login",
                         "/files/**").permitAll()  // Allow public access

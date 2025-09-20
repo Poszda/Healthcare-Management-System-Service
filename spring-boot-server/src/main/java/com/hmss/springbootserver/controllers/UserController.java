@@ -1,8 +1,11 @@
 package com.hmss.springbootserver.controllers;
 
 import com.hmss.springbootserver.DTOs.doctor.*;
+import com.hmss.springbootserver.DTOs.patient.PatientBioDTO;
+import com.hmss.springbootserver.DTOs.patient.PatientProfileDTO;
 import com.hmss.springbootserver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -23,54 +26,55 @@ public class UserController {
     }
 
     @GetMapping("/getDoctorsById/{ids}")
-    public List<DoctorDTO> getDoctorsById(@PathVariable ("ids") List<Long> ids){
-        return this.userService.getDoctorsById(ids);
+    public ResponseEntity<List<DoctorDTO>> getDoctorsById(@PathVariable("ids") List<Long> ids){
+        return new ResponseEntity<>(this.userService.getDoctorsById(ids), HttpStatus.OK);
     }
 
     @GetMapping("/getDoctorsSuggestionInfo/{ids}")
-    public List<DoctorSuggestionInfoDTO> getDoctorsSuggestionInfo(@PathVariable ("ids") List<Long> ids){
-        return this.userService.getDoctorsSuggestionInfo(ids);
+    public ResponseEntity<List<DoctorSuggestionInfoDTO>> getDoctorsSuggestionInfo(@PathVariable("ids") List<Long> ids){
+        return new ResponseEntity<>(this.userService.getDoctorsSuggestionInfo(ids), HttpStatus.OK);
     }
 
     @GetMapping("/getHospitalDoctorsWithSpeciality/{hospitalId}")
-    public List<DoctorWithUserAndSpecialityDTO> getHospitalDoctorsWithSpeciality(@PathVariable ("hospitalId") Long hospitalId){
-        return this.userService.getHospitalDoctorsWithSpeciality(hospitalId);
+    public ResponseEntity<List<DoctorWithUserAndSpecialityDTO>> getHospitalDoctorsWithSpeciality(@PathVariable("hospitalId") Long hospitalId){
+        return new ResponseEntity<>(this.userService.getHospitalDoctorsWithSpeciality(hospitalId), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/createDoctor")
-    public ResponseEntity<Object> createDoctor(@RequestBody CreateDoctorRequestDTO createDoctorRequest){
-        return this.userService.createDoctor(createDoctorRequest);
+    public ResponseEntity<DoctorDTO> createDoctor(@RequestBody CreateDoctorRequestDTO createDoctorRequest){
+        return new ResponseEntity<>(this.userService.createDoctor(createDoctorRequest), HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/deleteDoctor/{id}")
     public ResponseEntity<Object> deleteDoctor(@PathVariable("id") Long id){
-        return this.userService.deleteDoctor(id);
+        this.userService.deleteDoctor(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/getDoctorProfile/{doctorId}")
-    public ResponseEntity<Object> getDoctorProfile(@PathVariable ("doctorId") Long doctorId){
-        return this.userService.getDoctorProfile(doctorId);
+    public ResponseEntity<DoctorProfileDTO> getDoctorProfile(@PathVariable ("doctorId") Long doctorId){
+        return new ResponseEntity<>(this.userService.getDoctorProfile(doctorId), HttpStatus.OK);
     }
 
     @GetMapping("/getPatientProfile/{patientId}")
-    public ResponseEntity<Object> getPatientProfile(@PathVariable ("patientId") Long patientId){
-        return this.userService.getPatientProfile(patientId);
+    public ResponseEntity<PatientProfileDTO> getPatientProfile(@PathVariable ("patientId") Long patientId){
+        return new ResponseEntity<>(this.userService.getPatientProfile(patientId), HttpStatus.OK);
     }
 
     @GetMapping("/getPatientBio/{patientId}")
-    public ResponseEntity<Object> getPatientBio(@PathVariable ("patientId") Long patientId){
-        return this.userService.getPatientBio(patientId);
+    public ResponseEntity<PatientBioDTO> getPatientBio(@PathVariable ("patientId") Long patientId){
+        return new ResponseEntity<>(this.userService.getPatientBio(patientId), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('DOCTOR')")
     @PutMapping("/updateDoctorProfile/{doctorId}")
-    public ResponseEntity<Object> updateDoctorProfile(@PathVariable("doctorId") Long doctorId,
-                                                      @RequestParam(value="profileImage",required = false) MultipartFile profileImage,
-                                                      @RequestParam("university") String university,
-                                                      @RequestParam("description") String description){
-        return this.userService.updateDoctorProfile(doctorId,profileImage,university,description);
+    public ResponseEntity<UpdatedDoctorProfileDTO> updateDoctorProfile(@PathVariable("doctorId") Long doctorId,
+                                                                       @RequestParam(value="profileImage",required = false) MultipartFile profileImage,
+                                                                       @RequestParam("university") String university,
+                                                                       @RequestParam("description") String description){
+        return new ResponseEntity<>(this.userService.updateDoctorProfile(doctorId, profileImage, university, description), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('PATIENT')")
@@ -87,15 +91,15 @@ public class UserController {
 
         Integer height = heightStr.equals("") ? null : Integer.valueOf(heightStr);
         Integer weight = weightStr.equals("") ? null : Integer.valueOf(weightStr);
-        return this.userService.updatePatientProfile(patientId,firstName,lastName,height,weight,bloodType,phone,birthDate,profileImage);
+        this.userService.updatePatientProfile(patientId,firstName,lastName,height,weight,bloodType,phone,birthDate,profileImage);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/getSearchedDoctors")
-    public List<DoctorSearchDTO> getSearchedDoctors(@RequestBody SearchDataRequest data){
+    public ResponseEntity<List<DoctorSearchDTO>> getSearchedDoctors(@RequestBody SearchDataRequestDTO data){
         Long specialityId = data.getSpecialityId();
-        String name = Objects.equals(data.getName(), "") ? null:data.getName();
-        return this.userService.getSearchedDoctors(name,specialityId);
+        String name = Objects.equals(data.getName(), "") ? null : data.getName();
+        return new ResponseEntity<>(this.userService.getSearchedDoctors(name, specialityId), HttpStatus.OK);
     }
-
 
 }

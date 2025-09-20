@@ -42,7 +42,7 @@ public class StatisticsService {
         this.procedureRepository = procedureRepository;
     }
 
-    public Object getTodayProgram(Long doctorId) {
+    public TodayProgramDTO getTodayProgram(Long doctorId) {
         Optional<Doctor> doctorOptional = this.doctorRepository.findById(doctorId);
         if(doctorOptional.isEmpty()) return null;
 

@@ -27,8 +27,9 @@ export class AuthenticationComponent implements OnInit {
         this.authService.handleLogin(res);
       },
       err =>{
+        console.log(err);
         if (err.status !== 0){ //if backend works
-          this.showError(err.error);
+          this.showError(err.error.error);
         }
         else{
           this.showError("Something went wrong")
@@ -45,7 +46,7 @@ export class AuthenticationComponent implements OnInit {
       },
       err =>{
         if (err.status !== 0){ //if backend works
-          this.showError(err.error);
+          this.showError(err.error.error);
         }
         else{
           this.showError("Something went wrong")

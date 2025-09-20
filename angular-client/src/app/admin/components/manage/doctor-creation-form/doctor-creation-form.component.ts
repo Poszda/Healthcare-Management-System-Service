@@ -54,8 +54,7 @@ export class DoctorCreationFormComponent implements OnInit{
       },
       err =>{
         console.log(err)
-        if('error' in err && typeof err.error === "string") this.alertService.showError(err.error)
-        else this.alertService.showError('Something went wrong')
+        this.alertService.showError('Could not create doctor. Something went wrong')
       }
     )
   }

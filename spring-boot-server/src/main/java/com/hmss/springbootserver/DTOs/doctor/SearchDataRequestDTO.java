@@ -1,6 +1,6 @@
 package com.hmss.springbootserver.DTOs.doctor;
 
-public class SearchDataRequest {
+public class SearchDataRequestDTO {
     String name;
     Long specialityId;
 

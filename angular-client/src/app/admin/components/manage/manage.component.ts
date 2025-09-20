@@ -91,8 +91,7 @@ export class ManageComponent implements OnInit {
         this.alertService.showSuccess("Available hospital's procedures were successfully changed");
       },
       err =>{
-        if('error' in err && typeof err.error === "string") this.alertService.showError(err.error)
-        else this.alertService.showError('Something went wrong')
+        this.alertService.showError('Failed to save hospital procedures');
       }
     );
   }

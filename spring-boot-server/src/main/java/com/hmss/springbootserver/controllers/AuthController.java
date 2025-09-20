@@ -5,6 +5,7 @@ import com.hmss.springbootserver.DTOs.user.SignUpRequestDTO;
 import com.hmss.springbootserver.repositories.UserRepository;
 import com.hmss.springbootserver.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +22,13 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody LoginRequestDTO loginRequest){
-        return this.authService.login(loginRequest);
+        Object userDTO = this.authService.login(loginRequest);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
     @PostMapping("/signup")
     public ResponseEntity<Object> signUp(@RequestBody SignUpRequestDTO signUpRequest){
-        return this.authService.signUp(signUpRequest);
+        this.authService.signUp(signUpRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

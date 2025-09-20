@@ -32,7 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
         () => {},
         (err: any) => { 
           if (err) {
-            if (err.status === 401) {
+            if (err?.error?.status === 401) {
               console.warn('Session expired. Please login again.', 'danger');
               this.authService.logout();
             }

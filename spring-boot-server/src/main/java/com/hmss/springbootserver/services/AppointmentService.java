@@ -3,6 +3,7 @@ package com.hmss.springbootserver.services;
 import com.hmss.springbootserver.DTOs.appointments.*;
 import com.hmss.springbootserver.entities.*;
 import com.hmss.springbootserver.enums.AppointmentStatus;
+import com.hmss.springbootserver.exceptions.ResourceNotFoundException;
 import com.hmss.springbootserver.mappers.AppointmentMapper;
 import com.hmss.springbootserver.mappers.DoctorMapper;
 import com.hmss.springbootserver.mappers.HospitalMapper;
@@ -15,8 +16,6 @@ import com.hmss.springbootserver.utils.models.projections.AppointmentNextProject
 import com.hmss.springbootserver.utils.models.projections.DoctorAppointmentProjection;
 import com.hmss.springbootserver.utils.models.projections.DoctorProgramProjection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -76,18 +75,18 @@ public class AppointmentService {
         return result;
     }
 
-    public ResponseEntity<Object> createAppointment(CreateAppointmentRequestDTO appointment){
+    public CreateAppointmentRequestDTO createAppointment(CreateAppointmentRequestDTO appointment){
         Appointment newAppointment = new Appointment();
         Optional<Doctor> doctorOptional = doctorRepository.findById(appointment.getDoctorId());
         Optional<Patient> patientOptional = patientRepository.findById(appointment.getPatientId());
         Optional<Procedure> procedureOptional = procedureRepository.findById(appointment.getProcedureId());
 
         if(doctorOptional.isEmpty())
-            return new ResponseEntity<>("Doctor not found", HttpStatus.NOT_FOUND);
+            throw new ResourceNotFoundException("Doctor not found");
         if(patientOptional.isEmpty())
-            return new ResponseEntity<>("Patient not found", HttpStatus.NOT_FOUND);
+            throw new ResourceNotFoundException("Patient not found");
         if(procedureOptional.isEmpty())
-            return new ResponseEntity<>("Procedure not found", HttpStatus.NOT_FOUND);
+            throw new ResourceNotFoundException("Procedure not found");
 
         Doctor doctor = doctorOptional.get();
         Patient patient = patientOptional.get();
@@ -100,21 +99,17 @@ public class AppointmentService {
         newAppointment.setPatient(patient);
         newAppointment.setProcedure(procedure);
 
-        Appointment result = appointmentRepository.save(newAppointment);
-        if(result == null) return new ResponseEntity<>("Something bad happend", HttpStatus.INTERNAL_SERVER_ERROR);
-        return new ResponseEntity<>(appointment,HttpStatus.CREATED);
+        appointmentRepository.save(newAppointment);
+        return appointment;
     }
-    public ResponseEntity<String> deleteAppointment(Long id) {
+    public void deleteAppointment(Long id) {
+        if (!appointmentRepository.existsById(id)){
+            throw new ResourceNotFoundException("Appointment deletion failed");
+        }
         this.appointmentRepository.deleteById(id);
-        if(appointmentRepository.findById(id).isEmpty()){
-            return new ResponseEntity<>("Appointment successfully deleted", HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity<>(" Appointment deletion failed", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
-    public Object getAvailableAppointments(List<Long>doctorIds,Long procedureId, LocalDateTime startDate, LocalDateTime endDate){
+    public List<DoctorAvailableHoursDTO> getAvailableAppointments(List<Long>doctorIds, Long procedureId, LocalDateTime startDate, LocalDateTime endDate){
         var appointmentsList = this.appointmentRepository.findAppointmentsByDoctorsInAPeriod(doctorIds,startDate,endDate);
         var doctorsList  = this.doctorRepository.findDoctorsPrograms(doctorIds);
         var procedureDuration = this.procedureRepository.findDurationById(procedureId);
@@ -123,7 +118,7 @@ public class AppointmentService {
         HashMap<Long, DoctorProgramSimplified> programMap = mapDoctorsProgram(doctorsList);
         Long numberOfDays = DAYS.between(startDate.toLocalDate(),endDate.toLocalDate()) + 1;
 
-        List<DoctorAvailableHours> doctorsAvailableHours = new ArrayList<>();
+        List<DoctorAvailableHoursDTO> doctorsAvailableHours = new ArrayList<>();
         for (Long id: doctorIds) {
             System.out.println("NEXT DOCTOR: \n");
             List<AvailableHours> availableHours = new ArrayList<>();
@@ -152,7 +147,7 @@ public class AppointmentService {
                 availableHours.add(new AvailableHours(dayCopy,hours));
                 day = day.plusDays(1);
             }
-            doctorsAvailableHours.add(new DoctorAvailableHours(id,availableHours));
+            doctorsAvailableHours.add(new DoctorAvailableHoursDTO(id,availableHours));
         }
         return doctorsAvailableHours;
     }
@@ -258,11 +253,9 @@ public class AppointmentService {
         return doctorAppointments;
     }
 
-    public ResponseEntity<Object> createDiagnostic(CreateDiagnosticRequestDTO diagnostic) {
+    public void createDiagnostic(CreateDiagnosticRequestDTO diagnostic) {
         Optional<Appointment> appointmentOptional = appointmentRepository.findById(diagnostic.getAppointmentId());
-        if(appointmentOptional.isEmpty())
-            return new ResponseEntity<>("Appointment not found", HttpStatus.NOT_FOUND);
-
+        if(appointmentOptional.isEmpty()) throw new ResourceNotFoundException("Appointment not found");
         Appointment appointment = appointmentOptional.get();
         Diagnostic newDiagnostic = new Diagnostic();
 
@@ -275,8 +268,6 @@ public class AppointmentService {
             newDiagnostic.addMedication(m);
         }
         this.diagnosticRepository.save(newDiagnostic);
-
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     public List<PatientDiagnosticExtendedDTO> getPatientDiagnostics(Long patientId) {

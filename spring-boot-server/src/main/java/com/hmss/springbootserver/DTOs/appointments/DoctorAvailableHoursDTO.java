@@ -2,14 +2,14 @@ package com.hmss.springbootserver.DTOs.appointments;
 
 import java.util.List;
 
-public class DoctorAvailableHours {
+public class DoctorAvailableHoursDTO {
     Long doctorId;
     List<AvailableHours> dates;
 
-    public DoctorAvailableHours() {
+    public DoctorAvailableHoursDTO() {
     }
 
-    public DoctorAvailableHours(Long doctorId, List<AvailableHours> dates) {
+    public DoctorAvailableHoursDTO(Long doctorId, List<AvailableHours> dates) {
         this.doctorId = doctorId;
         this.dates = dates;
     }

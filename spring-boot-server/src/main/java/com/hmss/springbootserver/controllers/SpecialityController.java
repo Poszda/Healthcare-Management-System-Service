@@ -4,6 +4,8 @@ import com.hmss.springbootserver.DTOs.speciality.SpecialityDTO;
 import com.hmss.springbootserver.DTOs.speciality.SpecialityWithProceduresDTO;
 import com.hmss.springbootserver.services.SpecialityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
@@ -22,19 +24,19 @@ public class SpecialityController {
     }
 
     @GetMapping("/getSpecialities")
-    public List<SpecialityDTO> getSpecialities(Authentication authentication) {
-        var x = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
-        return this.specialityService.getSpecialities();
+    public ResponseEntity<List<SpecialityDTO>> getSpecialities(Authentication authentication) {
+//        var x = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
+        return new ResponseEntity<>(this.specialityService.getSpecialities(), HttpStatus.OK);
     }
 
     @GetMapping("/getSpecialitiesWithProcedures")
-    public List<SpecialityWithProceduresDTO> getSpecialitiesWithProcedures() {
-        return this.specialityService.getSpecialitiesWithProcedures();
+    public ResponseEntity<List<SpecialityWithProceduresDTO>> getSpecialitiesWithProcedures() {
+        return new ResponseEntity<>(this.specialityService.getSpecialitiesWithProcedures(), HttpStatus.OK);
     }
 
     @GetMapping("/getHospitalSpecialities/{hospitalId}")
-    public List<SpecialityDTO> getHospitalSpecialities(@PathVariable Long hospitalId) {
-        return this.specialityService.getHospitalSpecialities(hospitalId);
+    public ResponseEntity<List<SpecialityDTO>> getHospitalSpecialities(@PathVariable Long hospitalId) {
+        return new ResponseEntity<>(this.specialityService.getHospitalSpecialities(hospitalId), HttpStatus.OK);
     }
+
 }
