@@ -20,7 +20,7 @@ export class AppointmentsService {
   }
 
   getDoctorsAvailableHours(req : any){
-    return this.http.get<DoctorsAvailableHours[]>(`${this.baseUrl}/api/appointments/getAvailableAppointments/${req.doctorsIds}/${req.procedureId}/${req.startDate}/${req.endDate}`);
+    return this.http.get<DoctorsAvailableHours[]>(`${this.baseUrl}/api/appointments/getAvailableAppointments?doctorIds=${req.doctorsIds}&procedureId=${req.procedureId}&startDate=${req.startDate}&endDate=${req.endDate}`);
   }
 
   createAppointment(appointment : NewAppointment){

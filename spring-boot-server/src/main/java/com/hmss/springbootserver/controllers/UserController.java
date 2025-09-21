@@ -4,6 +4,7 @@ import com.hmss.springbootserver.DTOs.doctor.*;
 import com.hmss.springbootserver.DTOs.patient.PatientBioDTO;
 import com.hmss.springbootserver.DTOs.patient.PatientProfileDTO;
 import com.hmss.springbootserver.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +43,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/createDoctor")
-    public ResponseEntity<DoctorDTO> createDoctor(@RequestBody CreateDoctorRequestDTO createDoctorRequest){
+    public ResponseEntity<DoctorDTO> createDoctor(@Valid @RequestBody CreateDoctorRequestDTO createDoctorRequest){
         return new ResponseEntity<>(this.userService.createDoctor(createDoctorRequest), HttpStatus.CREATED);
     }
 
@@ -96,7 +97,7 @@ public class UserController {
     }
 
     @PostMapping("/getSearchedDoctors")
-    public ResponseEntity<List<DoctorSearchDTO>> getSearchedDoctors(@RequestBody SearchDataRequestDTO data){
+    public ResponseEntity<List<DoctorSearchDTO>> getSearchedDoctors(@Valid @RequestBody SearchDataRequestDTO data){
         Long specialityId = data.getSpecialityId();
         String name = Objects.equals(data.getName(), "") ? null : data.getName();
         return new ResponseEntity<>(this.userService.getSearchedDoctors(name, specialityId), HttpStatus.OK);

@@ -1,9 +1,12 @@
 package com.hmss.springbootserver.DTOs.appointments;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.List;
 
 public class CreateDiagnosticRequestDTO {
     private Long appointmentId;
+    @NotBlank(message = "Diagnostic is required.")
     private String diagnostic;
     private String description;
     private List<MedicationDTO> medications;

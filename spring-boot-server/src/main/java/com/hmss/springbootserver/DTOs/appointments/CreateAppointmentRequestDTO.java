@@ -1,13 +1,20 @@
 package com.hmss.springbootserver.DTOs.appointments;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class CreateAppointmentRequestDTO {
+    @NotNull(message = "Date is required.")
     private LocalDate date;
+    @NotNull(message = "Time is required.")
     private LocalTime time;
+    @NotNull(message = "Procedure ID is required.")
     private Long procedureId;
+    @NotNull(message = "Doctor ID is required.")
     private Long doctorId;
+    @NotNull(message = "Patient ID is required.")
     private Long patientId;
 
 

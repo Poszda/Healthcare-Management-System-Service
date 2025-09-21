@@ -2,6 +2,7 @@ package com.hmss.springbootserver.controllers;
 
 import com.hmss.springbootserver.DTOs.appointments.*;
 import com.hmss.springbootserver.services.AppointmentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -27,18 +28,18 @@ public class AppointmentController {
         return new ResponseEntity<>(this.appointmentService.getAppointmentOptionals(counties,procedureId), HttpStatus.OK);
     }
 
-    @GetMapping("/getAvailableAppointments/{ids}/{procedureId}/{startDate}/{endDate}")
-    public List<DoctorAvailableHoursDTO> getAvailableAppointments(@PathVariable("ids") List<Long> ids,
-                                                                  @PathVariable("procedureId") long procedureId,
-                                                                  @PathVariable("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
-                                                                  @PathVariable("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
-        return this.appointmentService.getAvailableAppointments(ids,procedureId,startDate,endDate);
+    @GetMapping("/getAvailableAppointments")
+    public ResponseEntity<List<DoctorAvailableHoursDTO>> getAvailableAppointments(
+            @RequestParam List<Long> doctorIds,
+            @RequestParam long procedureId,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+        return new ResponseEntity<>(this.appointmentService.getAvailableAppointments(doctorIds, procedureId, startDate, endDate), HttpStatus.OK);
     }
 
     @PostMapping("/createAppointment")
-    public ResponseEntity<CreateAppointmentRequestDTO> createAppointment(@RequestBody CreateAppointmentRequestDTO appointment){
-        var app = this.appointmentService.createAppointment(appointment);
-        return new ResponseEntity<>(app, HttpStatus.CREATED);
+    public ResponseEntity<CreateAppointmentRequestDTO> createAppointment(@Valid @RequestBody CreateAppointmentRequestDTO appointment){
+        return new ResponseEntity<>(this.appointmentService.createAppointment(appointment), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/deleteAppointment/{id}")
@@ -60,7 +61,7 @@ public class AppointmentController {
 
     @PreAuthorize("hasRole('DOCTOR')")
     @PostMapping("/createDiagnostic")
-    public ResponseEntity<Object> createDiagnostic(@RequestBody CreateDiagnosticRequestDTO appointment){
+    public ResponseEntity<Object> createDiagnostic(@Valid @RequestBody CreateDiagnosticRequestDTO appointment){
         this.appointmentService.createDiagnostic(appointment);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

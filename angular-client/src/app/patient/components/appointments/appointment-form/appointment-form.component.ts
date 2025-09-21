@@ -122,8 +122,8 @@ export class AppointmentFormComponent implements OnInit {
       doctorsIds = optionalForm.doctors
     }
     const req = {
-      startDate: moment(manadatoryForm.startDate).format(),
-      endDate:moment(manadatoryForm.endDate).hour(23).minute(59).format(),
+      startDate: moment(manadatoryForm.startDate).format("YYYY-MM-DDTHH:mm:ss"),
+      endDate: moment(manadatoryForm.endDate).hour(23).minute(59).format("YYYY-MM-DDTHH:mm:ss"),
       doctorsIds:doctorsIds,
       procedureId:manadatoryForm.procedure
     }

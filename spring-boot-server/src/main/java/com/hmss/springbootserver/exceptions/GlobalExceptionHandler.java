@@ -1,11 +1,14 @@
 package com.hmss.springbootserver.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -37,7 +40,28 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(FileStorageException.class)
     public ResponseEntity<ErrorResponseDTO> handleFileStorageException(FileStorageException exception, WebRequest request){
         ErrorResponseDTO errorResponse = new ErrorResponseDTO(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR, LocalDateTime.now(), request.getDescription(false));
-        return new ResponseEntity<ErrorResponseDTO>(errorResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<ErrorResponseDTO>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponseDTO> handleValidationExceptions(MethodArgumentNotValidException exception, WebRequest request) {
+        List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
+
+        String errorMessages = "Errors (" + fieldErrors.size() + "): " +
+                fieldErrors.stream()
+                        .map(FieldError::getDefaultMessage)
+                        .toList();
+
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(
+                errorMessages,
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST,
+                LocalDateTime.now(),
+                request.getDescription(false)
+        );
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
 
 }

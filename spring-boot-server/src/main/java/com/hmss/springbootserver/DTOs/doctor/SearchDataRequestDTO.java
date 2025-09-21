@@ -1,7 +1,12 @@
 package com.hmss.springbootserver.DTOs.doctor;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class SearchDataRequestDTO {
+    @NotBlank(message = "Doctor name is required.")
     String name;
+    @NotNull(message = "Speciality ID is required.")
     Long specialityId;
 
     public String getName() {
